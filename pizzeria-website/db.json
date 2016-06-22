@@ -1,0 +1,20 @@
+{
+  "pizzas": [
+    {
+      "nom": "Royale",
+      "code": "royale",
+      "prix": 12,
+      "categorie": "VIANDE",
+      "imageUrl":"http://placehold.it/150x150",
+      "id": 1
+    },
+    {
+      "nom": "Marguerita",
+      "code": "marguerita",
+      "prix": 15,
+      "categorie": "VIANDE",
+      "imageUrl":"http://placehold.it/150x150",
+      "id": 2
+    }
+  ]
+}
