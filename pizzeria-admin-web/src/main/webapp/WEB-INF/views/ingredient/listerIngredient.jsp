@@ -26,7 +26,7 @@
 			<td>
 				<div class="row">
 					<div class="col-md-6">
-						Ref. ${ingredient.id}
+						Ref. ${ingredient.code}
 						<br> <b>${ingredient.name}</b>
 					</div>
 					<div class="col-md-6">

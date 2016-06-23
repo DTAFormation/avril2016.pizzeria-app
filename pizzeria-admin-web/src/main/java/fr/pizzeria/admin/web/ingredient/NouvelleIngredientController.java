@@ -44,16 +44,13 @@ public class NouvelleIngredientController extends HttpServlet {
       this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
     } else {
       Ingredient ingredientSansId = new Ingredient(code, nom);
-      try {
-    	  ingredientService.findOneIngredient(code);
-    	  //cas NOK
+      if (ingredientService.saveIngredient(ingredientSansId)) {
+    	  resp.sendRedirect(req.getContextPath()+"/ingredients/list");
+      }
+      else {
     	  req.setAttribute("msgErreur", "Un autre ingrédient a déjà ce code");
     	  req.setAttribute("ingredient", new Ingredient());
           this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
-      }catch (NoResultException | EJBException e) {
-    	  // Cas OK
-    	  ingredientService.saveIngredient(ingredientSansId);
-          resp.sendRedirect(req.getContextPath()+"/ingredients/list");
       }
     	  
     }
