@@ -2,8 +2,9 @@ import angular from 'angular'
 import ngRoute from 'angular-route'
 import PizzaModule from './pizza'
 import navbar from './navbar'
+import PanierModule from './panier'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, ngRoute])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, ngRoute])
     .config(function ($routeProvider) {
       $routeProvider
           .when('/pizzas', {
@@ -16,6 +17,6 @@ angular.module('pizzeria-website', [PizzaModule, navbar, ngRoute])
             templateUrl: 'home/home.html'
           })
           .otherwise('/home')
-    });
+    })
 
 angular.bootstrap(document, ['pizzeria-website'])
