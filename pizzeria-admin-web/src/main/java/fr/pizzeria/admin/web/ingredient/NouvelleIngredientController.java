@@ -40,7 +40,7 @@ public class NouvelleIngredientController extends HttpServlet {
     } else {
       Ingredient ingredientSansId = new Ingredient(code, nom);
       ingredientService.saveIngredient(ingredientSansId);
-      resp.sendRedirect(req.getContextPath()+"/ingredient/list");
+      resp.sendRedirect(req.getContextPath()+"/ingredients/list");
     }
   }
 
