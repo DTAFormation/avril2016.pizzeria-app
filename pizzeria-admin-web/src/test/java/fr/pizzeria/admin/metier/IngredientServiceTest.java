@@ -55,7 +55,7 @@ public class IngredientServiceTest {
 	}
 	
 	@Test
-	public void creerClient() {		
+	public void creerIngredient() {		
 		LOG.info("Etant donne un objet ingredient");		
 		Ingredient ingredient = new Ingredient("CHA","champignon");
 		
@@ -67,7 +67,7 @@ public class IngredientServiceTest {
 	}
 	
 	@Test
-	public void supprimerClient() {		
+	public void supprimerIngredient() {		
 		LOG.info("Etant donne un objet ingredient");		
 
 		Ingredient ingredient = new Ingredient("CHA","champignon");
@@ -84,7 +84,7 @@ public class IngredientServiceTest {
 	}
 	
 	@Test
-	public void supprimerClientVerifModifIsActive() {		
+	public void supprimerIngredientVerifModifIsActive() {		
 		LOG.info("Etant donne un objet ingredient");		
 		Ingredient ingredient = new Ingredient("CHA","champignon");
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
