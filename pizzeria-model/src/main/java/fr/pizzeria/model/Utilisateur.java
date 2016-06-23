@@ -16,7 +16,6 @@ public class Utilisateur {
 	private String prenom;
 	private String email;
 	private String motDePasse;
-	private Boolean efface;
 	
 	
 	
@@ -27,7 +26,7 @@ public class Utilisateur {
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
-		this.efface = false;
+
 	}
 	public Utilisateur(String nom, String prenom, String email, String motDePasse) {
 		super();
@@ -35,7 +34,7 @@ public class Utilisateur {
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
-		this.efface = false;
+
 	}
 	public Utilisateur() {
 		super();
@@ -71,12 +70,7 @@ public class Utilisateur {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	public Boolean getEfface() {
-		return efface;
-	}
-	public void setEfface(Boolean efface) {
-		this.efface = efface;
-	}
+
 	
 	
 
