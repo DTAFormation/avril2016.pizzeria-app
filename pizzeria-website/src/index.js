@@ -7,9 +7,7 @@ angular.module('pizzeria-website', [PizzaModule, navbar, ngRoute])
     .config(function ($routeProvider) {
       $routeProvider
           .when('/pizzas', {
-            templateUrl: 'pizza/pizza-list.html',
-            controller: 'PizzaListController',
-            controllerAs: 'ctrl'
+            templateUrl: 'pizza/pizza-list.html'
           })
           .when('/about', {
             templateUrl: 'about/about.html'

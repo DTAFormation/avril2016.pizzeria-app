@@ -1,14 +1,14 @@
-<table ng-show="ctrl.listePizzas" class="table table-striped" id="listePizza">
-  <thead>
-  <tr>
-    <th class="text-center">Image</th>
-    <th class="text-center">Nom</th>
-    <th class="text-center">Prix</th>
-  </tr>
-  <tr class="text-center" ng-repeat="pizza in ctrl.listePizzas">
-    <td><img ng-src="{{pizza.imageUrl}}"></td>
-    <td>{{ pizza.nom }}</td>
-    <td>{{ pizza.prix }}</td>
-  </tr>
-  </thead>
-</table>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-2">
+      <h1>Liste des pizzas</h1>
+      <p>Bienvenue sur la liste de nos pizza.</p> 
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <pizza-list ></pizza-list>
+  </div>
+</div>
