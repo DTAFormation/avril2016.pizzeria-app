@@ -23,7 +23,7 @@ public class UtilisateurService {
   }
 
   public void updateUtilisateur(String email, Utilisateur utilisateurAvecId) {
-    findOneUtilisateur(email); // vérifie qu'un utilisateur est présente
+    findOneUtilisateur(email); // vérifie qu'un utilisateur est présent
     em.merge(utilisateurAvecId);
   }
 
