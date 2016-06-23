@@ -17,6 +17,6 @@ angular.module('pizzeria-website', [PizzaModule, ngRoute])
             templateUrl: 'home/home.html'
           })
           .otherwise('/home')
-    });
+    })
 
 angular.bootstrap(document, ['pizzeria-website'])
