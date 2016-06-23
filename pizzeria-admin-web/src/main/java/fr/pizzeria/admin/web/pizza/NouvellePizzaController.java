@@ -45,7 +45,7 @@ public class NouvellePizzaController extends HttpServlet {
       Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.VIANDE);
       pizzaSansId.setUrlImage(urlImage);
       pizzaService.savePizza(pizzaSansId);
-      resp.sendRedirect("/pizzas/list");
+      resp.sendRedirect(req.getContextPath()+"/pizzas/list");
     }
   }
 
