@@ -28,8 +28,9 @@ public class IngredientService {
 	}
 
 	public void updateIngredient(String code, Ingredient ingredientAvecCode) {
-		findOneIngredient(code); // vérifie qu'une pizza est présente
-		em.merge(ingredientAvecCode);
+		Ingredient ing = findOneIngredient(code); // vérifie qu'une pizza est présente
+		ing.setName(ingredientAvecCode.getName());
+		em.merge(ing);
 	}
 
 	public void saveIngredient(Ingredient ingredientSansId) {

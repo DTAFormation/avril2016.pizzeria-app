@@ -67,17 +67,27 @@ public class IngredientServiceTest {
 	}
 	
 	@Test
-	public void supprimerIngredient() {		
+	public void updateIngredient() {		
 		LOG.info("Etant donne un objet ingredient");		
 
 		Ingredient ingredient = new Ingredient("CHA","champignon");
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
-
-		service.deleteIngredient("CHA");
 		
+		// Vérification des donnée de base
+		LOG.info("Insertion de l'objet");
+		service.saveIngredient(ingredient);
+		assertTrue(ingredient.isActif());
+		assertEquals(ingredient.getName(), "champignon");
+		
+		
+		Ingredient ingredientAvecCode = new Ingredient("CHA", "des champignon");
+		service.updateIngredient("CHA", ingredientAvecCode);
+		
+		// Vérification des nouvelle données
 		LOG.info("Alors 'ingredient' a ete modifie");
+		assertEquals(ingredient.getName(), "des champignon");
 		verify(em).merge(ingredient);
 		
 		LOG.info("FIN");
@@ -90,7 +100,11 @@ public class IngredientServiceTest {
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
-
+		
+		LOG.info("Insertion de l'objet");
+		service.saveIngredient(ingredient);
+		assertTrue(ingredient.isActif());
+		
 		service.deleteIngredient("CHA");
 		
 		LOG.info("Alors 'ingredient' a ete modifie et is Active est modifié à false");
