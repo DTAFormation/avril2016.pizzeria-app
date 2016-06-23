@@ -1,8 +1,8 @@
 package fr.pizzeria.admin.web.utilisateur;
 
-import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.admin.metier.UtilisateurService;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ public class ListerUtilisateurController extends HttpServlet {
 
   private static final Logger LOG = Logger.getLogger(ListerUtilisateurController.class.getName());
 
-  private static final String VUE_LISTER_UTILISATEURS = "/WEB-INF/views/pizzas/listerUtilisateurs.jsp";
+  private static final String VUE_LISTER_UTILISATEURS = "/WEB-INF/views/utilisateurs/listerUtilisateurs.jsp";
   private static final String ACTION_EDITER = "editer";
   private static final String ACTION_SUPPRIMER = "supprimer";
 
@@ -30,6 +30,7 @@ public class ListerUtilisateurController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+	  LOG.log(Level.INFO, "Entrée page liste users");
     req.setAttribute("listeUtilisateurs", this.utilisateurService.findAll());
     RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_UTILISATEURS);
     dispatcher.forward(req, resp);

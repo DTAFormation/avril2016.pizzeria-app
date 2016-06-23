@@ -19,7 +19,7 @@ public class EditerUtilisateurController extends HttpServlet {
             .getLogger(EditerUtilisateurController.class.getName());
 
     public static final String URL = "/utilisateurs/edit";
-    private static final String VUE_EDITER_UTILISATEUR = "/WEB-INF/views/pizzas/editerUtilisateur.jsp";
+    private static final String VUE_EDITER_UTILISATEUR = "/WEB-INF/views/utilisateurs/editerUtilisateur.jsp";
 
     @Inject
     private UtilisateurService utilisateurService;

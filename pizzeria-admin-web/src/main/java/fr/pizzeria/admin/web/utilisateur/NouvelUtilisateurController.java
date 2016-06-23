@@ -15,7 +15,7 @@ import java.io.IOException;
 public class NouvelUtilisateurController extends HttpServlet {
 
   public static final String URL = "/utilisateurs/new";
-  private static final String VUE_NOUVEL_UTILISATEUR = "/WEB-INF/views/pizzas/editerUtilisateur.jsp";
+  private static final String VUE_NOUVEL_UTILISATEUR = "/WEB-INF/views/utilisateurs/editerUtilisateur.jsp";
   @Inject
   private UtilisateurService utilisateurService;
 
