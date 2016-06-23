@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.model.Ingredient;
 
-@WebServlet("/ingredient/new")
+@WebServlet("/ingredients/new")
 public class NouvelleIngredientController extends HttpServlet {
 
-  public static final String URL = "/ingredient/new";
+  public static final String URL = "/ingredients/new";
   private static final String VUE_NOUVELLE_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
   @Inject
   private IngredientService ingredientService;
