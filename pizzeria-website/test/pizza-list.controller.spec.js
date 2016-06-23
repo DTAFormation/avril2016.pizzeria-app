@@ -4,9 +4,9 @@ describe('Test du PizzaListController', function () {
 
   beforeEach(angular.mock.module('pizzeria-website'));
 
-  beforeEach(angular.mock.inject(function ($rootScope, $controller, $httpBackend) {
+  beforeEach(angular.mock.inject(function ($rootScope, $componentController, $httpBackend) {
     const scope = $rootScope.$new();
-    ctrl = $controller("PizzaListController as ctrl", {$scope: scope});
+    ctrl = $componentController("pizzaList", {$scope: scope});
     http = $httpBackend;
   }));
 

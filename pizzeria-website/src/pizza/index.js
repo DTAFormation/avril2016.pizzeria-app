@@ -1,8 +1,8 @@
 import angular from 'angular';
-import { PizzaListController } from './pizza-list.controller';
+import { PizzaListComponent } from './pizza-list.component';
 import { PizzasService } from '../shared/service/pizza.service';
 
 export default angular.module('pizzeria.pizza', [])
-    .controller('PizzaListController', PizzaListController)
+    .component('pizzaList', PizzaListComponent)
     .service('PizzasService', PizzasService)
     .name;
