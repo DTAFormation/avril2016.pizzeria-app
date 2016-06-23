@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet("/utilisateurs/new")
 public class NouvelUtilisateurController extends HttpServlet {
@@ -42,7 +44,10 @@ public class NouvelUtilisateurController extends HttpServlet {
 	    req.setAttribute("msgErreur", "Les mots de passe sont différents !");
 	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
 	} else {
-		Utilisateur utilisateurSansId = new Utilisateur(nom, prenom, email, motDePasse);
+		
+		String mdpEncode = encode(motDePasse);
+		
+		Utilisateur utilisateurSansId = new Utilisateur(nom, prenom, email, mdpEncode);
 		utilisateurService.saveUtilisateur(utilisateurSansId);;
 		resp.sendRedirect(this.getServletContext().getContextPath() + "/utilisateurs/list");
 	} 
@@ -51,4 +56,35 @@ public class NouvelUtilisateurController extends HttpServlet {
   protected boolean isBlank(String param) {
     return param == null || param.isEmpty();
   }
+  
+  protected static String encode(String password)
+  {
+      byte[] uniqueKey = password.getBytes();
+      byte[] hash      = null;
+
+      try
+      {
+          hash = MessageDigest.getInstance("MD5").digest(uniqueKey);
+      }
+      catch (NoSuchAlgorithmException e)
+      {
+          throw new Error("No MD5 support in this VM.");
+      }
+
+      StringBuilder hashString = new StringBuilder();
+      for (int i = 0; i < hash.length; i++)
+      {
+          String hex = Integer.toHexString(hash[i]);
+          if (hex.length() == 1)
+          {
+              hashString.append('0');
+              hashString.append(hex.charAt(hex.length() - 1));
+          }
+          else
+              hashString.append(hex.substring(hex.length() - 2));
+      }
+      return hashString.toString();
+  }
+  
+  
 }
