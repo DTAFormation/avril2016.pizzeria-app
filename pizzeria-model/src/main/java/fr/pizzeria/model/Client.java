@@ -16,23 +16,48 @@ public class Client {
 	private String prenom;
 	private String email;
 	private String motDePasse;
+	private boolean isActive = true;
+	private String adresse;
+	private String telephone;
+	private java.util.Date derniereModification = new java.util.Date();
 	
 	
-	
-	public Client(Integer id, String nom, String prenom, String email, String motDePasse) {
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public java.util.Date getDerniereModification() {
+		return derniereModification;
+	}
+	public void setDerniereModification(java.util.Date derniereModification) {
+		this.derniereModification = derniereModification;
+	}
+	public Client(Integer id, String nom, String prenom, String email, String motDePasse, String adresse, String telephone) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
+		this.adresse = adresse;
+		this.telephone = telephone;
 	}
-	public Client(String nom, String prenom, String email, String motDePasse) {
+	public Client(String nom, String prenom, String email, String motDePasse, String adresse, String telephone) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
+		this.adresse = adresse;
+		this.telephone = telephone;
 	}
 	public Client() {
 		super();
@@ -67,6 +92,12 @@ public class Client {
 	}
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 	
