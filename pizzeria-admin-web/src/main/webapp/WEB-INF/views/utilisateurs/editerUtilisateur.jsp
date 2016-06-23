@@ -7,7 +7,7 @@
 </jsp:include>
 <body class="container">
 
-	<h1><c:out value="${ (utilisateur != null && utilisateur.id != null) ? 'Editer l'utilisateur' : 'Créer un utilisateur' }"/></h1>
+	<h1><c:out value="${ (utilisateur != null && utilisateur.id != null) ? 'Editer utilisateur' : 'Créer un utilisateur' }"/></h1>
 
 	<c:if test="${!empty msgErreur}">
 		<div class="alert alert-danger" role="alert">${msgErreur}</div>
@@ -38,12 +38,20 @@
 		        <label for="email">Email</label>
 		        <input type="email" class="form-control" id="email" name="email">
 		    </div>
+		    
 		
 		    <div class="form-group">
 		        <label for="motDePasse">Mot de passe</label> <input type="password"
 		                                                            class="form-control" name="motDePasse"
 		                                                            id="motDePasse"
-		                                                            value="">
+		                                                            value=""
+		                                                            required>
+		    </div>
+		    
+		    <div class="form-group">
+		        <label for="confirmationMotDePasse">Confirmation Mot de passe</label> 
+		        <input type="password" class="form-control" name="confirmationMotDePasse"
+		                 id="confirmationMotDePasse" value="" required>
 		    </div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>

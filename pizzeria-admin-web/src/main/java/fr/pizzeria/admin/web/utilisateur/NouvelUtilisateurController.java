@@ -33,15 +33,19 @@ public class NouvelUtilisateurController extends HttpServlet {
     String prenom = req.getParameter("prenom");
     String email = req.getParameter("email");
     String motDePasse = req.getParameter("motDePasse");
+    String confirmationMotDePasse = req.getParameter("confirmationMotDePasse");
 
-    if (isBlank(email) || isBlank(motDePasse)) {
-      req.setAttribute("msgErreur", "L'email et le mot de passe sont obligatoires !");
-      this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
-    } else {
-      Utilisateur utilisateurSansId = new Utilisateur(nom, prenom, email, motDePasse);
-      utilisateurService.saveUtilisateur(utilisateurSansId);;
-      resp.sendRedirect("/utilisateurs/list");
-    }
+    if (isBlank(email) || isBlank(motDePasse) || isBlank(confirmationMotDePasse)) {
+	    req.setAttribute("msgErreur", "L'email et le mot de passe sont obligatoires !");
+	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
+	} else if (!(motDePasse.equals(confirmationMotDePasse))) {
+	    req.setAttribute("msgErreur", "Les mots de passe sont différents !");
+	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
+	} else {
+		Utilisateur utilisateurSansId = new Utilisateur(nom, prenom, email, motDePasse);
+		utilisateurService.saveUtilisateur(utilisateurSansId);;
+		resp.sendRedirect(this.getServletContext().getContextPath() + "/utilisateurs/list");
+	} 
   }
 
   protected boolean isBlank(String param) {
