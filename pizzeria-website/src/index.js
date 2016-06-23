@@ -1,8 +1,9 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
 import PizzaModule from './pizza'
+import navbar from './navbar'
 
-angular.module('pizzeria-website', [PizzaModule, ngRoute])
+angular.module('pizzeria-website', [PizzaModule, navbar, ngRoute])
     .config(function ($routeProvider) {
       $routeProvider
           .when('/pizzas', {
