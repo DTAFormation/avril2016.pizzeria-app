@@ -79,7 +79,7 @@ public class EditerIngredientController extends HttpServlet {
 
             ingredientService.updateIngredient(code, ingredientAvecCode);
             resp.sendRedirect(req.getContextPath()
-                    + "/ingredient/list");
+                    + "/ingredients/list");
         }
     }
 

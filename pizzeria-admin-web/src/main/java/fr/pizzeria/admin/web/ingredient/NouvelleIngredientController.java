@@ -2,12 +2,16 @@ package fr.pizzeria.admin.web.ingredient;
 
 import java.io.IOException;
 
+import javax.ejb.EJBException;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.hamcrest.core.IsNull;
 
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.model.Ingredient;
@@ -33,14 +37,25 @@ public class NouvelleIngredientController extends HttpServlet {
       throws ServletException, IOException {
     String nom = req.getParameter("name");
     String code = req.getParameter("code");
-
+    
     if (isBlank(nom) || isBlank(code)) {
       req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
+      req.setAttribute("ingredient", new Ingredient());
       this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
     } else {
       Ingredient ingredientSansId = new Ingredient(code, nom);
-      ingredientService.saveIngredient(ingredientSansId);
-      resp.sendRedirect(req.getContextPath()+"/ingredients/list");
+      try {
+    	  ingredientService.findOneIngredient(code);
+    	  //cas NOK
+    	  req.setAttribute("msgErreur", "Un autre ingrédient a déjà ce code");
+    	  req.setAttribute("ingredient", new Ingredient());
+          this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
+      }catch (NoResultException | EJBException e) {
+    	  // Cas OK
+    	  ingredientService.saveIngredient(ingredientSansId);
+          resp.sendRedirect(req.getContextPath()+"/ingredients/list");
+      }
+    	  
     }
   }
 
