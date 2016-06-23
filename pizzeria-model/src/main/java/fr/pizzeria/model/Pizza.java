@@ -42,6 +42,14 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
+	private boolean delFlag = false; 
+	public boolean isDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(boolean delFlag) {
+		this.delFlag = delFlag;
+	}
 
 	public Pizza() {
 		// implémentation par défaut
