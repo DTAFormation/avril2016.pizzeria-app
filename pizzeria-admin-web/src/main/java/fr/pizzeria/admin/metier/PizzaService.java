@@ -33,7 +33,10 @@ public class PizzaService {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 	}
-
+	public List<Pizza> isCodeTaken(String code) {
+		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
+				.setParameter("code", code).getResultList();
+	}
 	public void updatePizza(String code, Pizza pizzaAvecId) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
 		p.setDelFlag(true);
