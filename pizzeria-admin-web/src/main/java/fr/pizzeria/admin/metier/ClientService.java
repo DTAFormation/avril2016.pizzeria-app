@@ -1,6 +1,8 @@
 package fr.pizzeria.admin.metier;
 
 import fr.pizzeria.model.Client;
+
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,6 +13,7 @@ public class ClientService {
 
   @PersistenceContext protected EntityManager em;
 
+  
 
   public List<Client> findAll() {
     return em.createQuery("select c from Client c where isActive = 1", Client.class).getResultList();
@@ -24,12 +27,10 @@ public class ClientService {
 
   public void updateClient(String email, Client clientAvecId) {
 	  findOneClient(email); // vérifie qu'un client est présent
-	  clientAvecId.setDerniereModification(new java.util.Date());
     em.merge(clientAvecId);
   }
 
   public void saveClient(Client clientSansId) {
-	  clientSansId.setDerniereModification(new java.util.Date());
     em.persist(clientSansId);
   }
 
@@ -37,7 +38,6 @@ public class ClientService {
     Client c = findOneClient(email);
     if(c != null){
     	c.setActive(false);
-    	c.setDerniereModification(new java.util.Date());
     	em.merge(c);
     }
 	  

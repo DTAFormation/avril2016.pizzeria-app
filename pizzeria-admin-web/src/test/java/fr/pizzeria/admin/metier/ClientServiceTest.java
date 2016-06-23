@@ -1,10 +1,9 @@
 package fr.pizzeria.admin.metier;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -46,23 +45,6 @@ public class ClientServiceTest {
 		
 		LOG.info("Alors 'client' a ete persiste");
 		verify(em).persist(client);
-		//System.out.println(client.getEmail()+" "+client.getDerniereModification());
-		
-		LOG.info("FIN");
-	}
-	
-	@Test
-	public void creerClientVerifModifDate() {		
-		LOG.info("Etant donne un objet Client");		
-		Client client = new Client("test","test","test@test.fr","1541604","10 av aa","00000000");
-		String dateCreation = client.getDerniereModification().toString();
-		LOG.info("Lorsque ejb.saveClient(client)");
-		service.saveClient(client);
-		
-		LOG.info("Alors 'client' a ete persiste");
-		verify(em).persist(client);
-		assertTrue(client.getDerniereModification().toString().equals(dateCreation));
-		
 		LOG.info("FIN");
 	}
 	

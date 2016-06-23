@@ -1,9 +1,13 @@
 package fr.pizzeria.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +23,7 @@ public class Client {
 	private boolean isActive = true;
 	private String adresse;
 	private String telephone;
-	private java.util.Date derniereModification = new java.util.Date();
+	private Date derniereModification;
 	
 	
 	public String getAdresse() {
@@ -34,10 +38,10 @@ public class Client {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public java.util.Date getDerniereModification() {
+	public Date getDerniereModification() {
 		return derniereModification;
 	}
-	public void setDerniereModification(java.util.Date derniereModification) {
+	public void setDerniereModification(Date derniereModification) {
 		this.derniereModification = derniereModification;
 	}
 	public Client(Integer id, String nom, String prenom, String email, String motDePasse, String adresse, String telephone) {
@@ -100,6 +104,10 @@ public class Client {
 		this.isActive = isActive;
 	}
 	
-	
+	@PrePersist
+	@PreUpdate
+	public void onPersist() {
+		this.derniereModification = new Date();
+	}
 
 }
