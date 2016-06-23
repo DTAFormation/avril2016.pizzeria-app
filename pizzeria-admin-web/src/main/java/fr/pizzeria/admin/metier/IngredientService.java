@@ -41,4 +41,8 @@ public class IngredientService {
 		ing.setActif(false);
 		em.merge(ing);
 	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 }
