@@ -1,5 +1,3 @@
-// import { Commande } from '../model/commande'
-
 const COMMANDE_RESOURCE_URL = 'http://localhost:8080/commandes'
 
 export class CommandesService {
