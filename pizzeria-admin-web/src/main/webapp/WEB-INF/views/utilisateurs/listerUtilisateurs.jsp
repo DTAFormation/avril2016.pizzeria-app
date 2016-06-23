@@ -35,7 +35,7 @@
 						<a href="<c:url value="/utilisateurs/edit?email=${utilisateur.email}"/>" class="btn btn-primary">Editer</a>
 						<br>
 						<form method="POST">
-							<input type="hidden" name="code" value="${utilisateur.email}">
+							<input type="hidden" name="email" value="${utilisateur.email}">
 							<input type="hidden" name="action" value="supprimer">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
