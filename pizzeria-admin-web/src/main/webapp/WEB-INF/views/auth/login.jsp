@@ -12,6 +12,9 @@
 <c:if test="${msgErreur != null}">
     <div class="alert alert-danger" role="alert">${msgErreur}</div>
 </c:if>
+<div style="text-align:center;" id="logo">
+	<img alt="logo" src="static/images/logo-pizzeria.png">
+</div>
 <h1>Connexion</h1>
 <form method="POST">
 
