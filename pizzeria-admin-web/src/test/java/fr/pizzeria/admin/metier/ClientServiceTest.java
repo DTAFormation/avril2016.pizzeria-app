@@ -1,6 +1,8 @@
 package fr.pizzeria.admin.metier;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 
@@ -44,7 +46,22 @@ public class ClientServiceTest {
 		
 		LOG.info("Alors 'client' a ete persiste");
 		verify(em).persist(client);
-		System.out.println(client.getEmail()+" "+client.getDerniereModification());
+		//System.out.println(client.getEmail()+" "+client.getDerniereModification());
+		
+		LOG.info("FIN");
+	}
+	
+	@Test
+	public void creerClientVerifModifDate() {		
+		LOG.info("Etant donne un objet Client");		
+		Client client = new Client("test","test","test@test.fr","1541604","10 av aa","00000000");
+		String dateCreation = client.getDerniereModification().toString();
+		LOG.info("Lorsque ejb.saveClient(client)");
+		service.saveClient(client);
+		
+		LOG.info("Alors 'client' a ete persiste");
+		verify(em).persist(client);
+		assertTrue(client.getDerniereModification().toString().equals(dateCreation));
 		
 		LOG.info("FIN");
 	}
@@ -56,14 +73,28 @@ public class ClientServiceTest {
 		when(em.createQuery("select c from Client c where p.email=:email and isActive = 1", Client.class)).thenReturn(query);
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(client);
-		//client.setActive(false);
 		LOG.info("Lorsque ejb.deleteClient(client)");
 		service.deleteClient("test@test.fr");
 		
-		LOG.info("Alors 'article' a ete persiste");
+		LOG.info("Alors 'client' a ete modifie");
 		verify(em).merge(client);
-		System.out.println(client.getEmail()+" "+client.getDerniereModification()+""+client.isActive());
 		
+		LOG.info("FIN");
+	}
+	
+	@Test
+	public void supprimerClientVerifModifIsActive() {		
+		LOG.info("Etant donne un objet Client");		
+		Client client = new Client(1,"test","test","test@test.fr","1541604","10 av aa","00000000");
+		when(em.createQuery("select c from Client c where p.email=:email and isActive = 1", Client.class)).thenReturn(query);
+		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(client);
+		LOG.info("Lorsque ejb.deleteClient(client)");
+		service.deleteClient("test@test.fr");
+		
+		LOG.info("Alors 'client' a ete modifie et is Active est modifié à false");
+		verify(em).merge(client);
+		assertFalse(client.isActive());
 		LOG.info("FIN");
 	}
 	
