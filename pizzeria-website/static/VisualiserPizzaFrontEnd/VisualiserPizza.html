@@ -1,0 +1,65 @@
+ <!-- Lors qu'on accède à la page, pouvoir visualiser toutes les informations d'une pizza qui sont : 
+le nom, l'image, le prix, les ingrédients, la catégorie (viande, sans viande, poisson).
+Ajouter un bouton "Retour" permettant de revenir sur la liste de pizzas.
+Accéder à la page de détail depuis la liste de pizza (via un lien sur la ligne de la pizza associée). -->
+<!DOCTYPE html>
+<html>
+  <head>
+  	<LINK rel="stylesheet" href="fond.css">
+	<meta charset="UTF-8" />	
+    <title>Visualiser le détail d'une pizza</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  </head>
+<body>
+	<h2> Pizza : Reine </h2>
+	<br>
+	<button type="button" class="btn btn-danger" OnClick="./List des pizzas.html">Retour à la list</button>
+</br>
+
+	<!-- <a href="./AjouterPizza.html">Ajout</a> / <a href="./accueil.html">Retour à l'accueil</a> -->
+<br>
+
+	<table width=50%>
+	<thead>
+		<tr>
+			<th align=left ></th>
+			<th align=left>Id</th>
+			<th align=left>Nom</th>
+			<th align=left>Prix</th>
+			<th align=left>Catégorie</th>
+			
+			<th align=left>Ingrédients</th>
+			<th colspan=2></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php
+
+  $cnx = mysql_connect( "localhost:8889", "root", "root" ) or die(mysql_error());
+  $db  = mysql_select_db( "pizzeria" );
+  $sql = mysql_real_escape_string("SELECT * FROM pizza");
+  mysql_query("SET NAMES 'utf8'");
+  $reponse = mysql_query($sql, $cnx) or die( mysql_error() );
+  
+  while ($donnees=mysql_fetch_array($reponse))
+  {
+?>
+    <tr>
+    	<td><img src="C:\projet-pizzeria\VisualiserPizzaFrontEnd\Pizza_Reine.jpg" height="300" width="300" class="img-rounded"></td>
+    	<td><?php echo $donnees["id"]; ?></td>
+    	<td><?php echo $donnees["nom"]; ?></td>
+    	<td><?php echo $donnees["prix"]; ?></td>
+    	<td><?php echo $donnees["catégorie"]; ?></td>
+    	
+    	<td><?php echo $donnees["ingrédients"]; ?></td>
+    	<td><button type="button" class="btn btn-primary">Personnaliser</button></td>
+    	<td><button type="button" class="btn btn-success">Commander</button></td>
+	</tr>
+<?php
+}
+?>
+	</tbody>
+</table>
+</body>
+</html>
