@@ -7,6 +7,9 @@
 		<class>fr.pizzeria.model.Client</class>
 		<class>fr.pizzeria.model.Livreur</class>
 		<class>fr.pizzeria.model.Ingredient</class>
+		<properties>
+			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+		</properties>
 	
 	
 	</persistence-unit>
