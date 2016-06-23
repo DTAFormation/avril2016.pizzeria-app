@@ -12,6 +12,14 @@ public class PizzaService {
 	@PersistenceContext
 	protected EntityManager em;
 
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	/**
 	 * on recupere toutes les pizzas actives (delflag =0 )
 	 * 
@@ -28,10 +36,9 @@ public class PizzaService {
 
 	public void updatePizza(String code, Pizza pizzaAvecId) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
-		// if(p != null)
 		p.setDelFlag(true);
-		em.merge(p);
 		pizzaAvecId.setId(null);
+		em.merge(p);
 		em.persist(pizzaAvecId);
 	}
 
