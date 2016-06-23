@@ -44,7 +44,7 @@
 		        <label for="motDePasse">Mot de passe</label> <input type="password"
 		                                                            class="form-control" name="motDePasse"
 		                                                            id="motDePasse"
-		                                                            value=""
+		                                                            value="${utilisateur.motDePasse}"
 		                                                            required>
 		    </div>
 		    
