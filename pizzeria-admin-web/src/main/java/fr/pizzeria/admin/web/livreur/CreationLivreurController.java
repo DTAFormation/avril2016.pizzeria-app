@@ -51,11 +51,12 @@ public class CreationLivreurController extends HttpServlet {
 		}
 		else
 		{
-			try {
-				livreurService.findLivreur(nom, prenom);
+		 if(livreurService.findLivreur(nom, prenom)!= 0)	
+		 {
 				req.setAttribute("msgErreur", "Ce livreur est déjà présent en base");
 				this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
-			} catch (Exception nr) {
+		}
+		 else{
 				Livreur newLivreur = new Livreur(nom, prenom);
 				livreurService.saveLivreur(newLivreur);
 				resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
