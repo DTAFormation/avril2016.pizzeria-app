@@ -13,6 +13,11 @@ angular.module('pizzeria-website', [PizzaModule, ngRoute])
           .when('/about', {
             templateUrl: 'about/about.html'
           })
+           .when('/connexion', {
+            templateUrl: 'se-connecter.html',
+            controller: 'ConnexionController',
+            controllerAs: 'ctrl'
+          })
           .when('/home', {
             templateUrl: 'home/home.html'
           })
