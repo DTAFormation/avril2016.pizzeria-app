@@ -1,13 +1,14 @@
-import { Pizza } from '../shared/model/pizza'
 import { Commande } from '../shared/model/commande'
 
 export class CommandeNewController {
-
   constructor (commandesService, panierService, $localStorage, $location) {
     this.commandesService = commandesService
     this.panierService = panierService
     this.$localStorage = $localStorage
     this.$location = $location
+    if (!this.$localStorage.client) {
+      $location.path('/connexion')
+    }
     this.total = 0
     this.panier = this.panierService.findAllPizzas()
     Object.keys(this.panier).forEach(key => {
@@ -34,7 +35,7 @@ export class CommandeNewController {
     return this.commandesService.addOne(commande)
       .then(data => {
         this.panierService.deleteAllPizzas()
-        this.$location.path('/commandes')
+        this.$location.path('/commandes/' + this.$localStorage.client.id)
         return data
       })
   }
