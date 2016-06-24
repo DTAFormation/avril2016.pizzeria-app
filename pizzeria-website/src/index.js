@@ -29,6 +29,11 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
         controller: 'ConnexionController',
         controllerAs: 'ctrl'
       })
+      .when('/inscription', {
+        templateUrl: 'inscription/inscription.html',
+        controller: 'InscriptionController',
+        controllerAs: '$ctrl'
+      })
       .when('/about', {
         templateUrl: 'about/about.html'
       })
