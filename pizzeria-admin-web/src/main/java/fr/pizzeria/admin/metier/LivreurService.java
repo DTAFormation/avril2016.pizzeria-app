@@ -51,5 +51,8 @@ public class LivreurService {
 		        .setParameter("prenom",prenom)
 		        .getResultList();
 		  }
+		public void setEm(EntityManager em) {
+			this.em = em;
+		}
   
 }
