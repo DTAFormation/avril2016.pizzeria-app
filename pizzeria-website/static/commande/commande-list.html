@@ -1,0 +1,31 @@
+<table ng-show="ctrl.listeCommandes" class="col-md-12 table-striped table-condensed cf" id="listeCommandes">
+  <thead>
+    <tr>
+      <th class="text-center" rowspan="2">Numéro commande</th>
+      <th class="text-center" rowspan="2">Statut</th>
+      <th class="text-center" colspan="2">Pizzas</th>
+      <th class="text-center" rowspan="2">Prix total</th>
+    </tr>
+    <tr>
+      <th class="text-center">Nom</th>
+      <th class="text-center">Prix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" ng-repeat="commande in ctrl.listeCommandes">
+      <td>{{ commande.numeroCommande }}</td>
+      <td>{{ commande.statut }}</td>
+      <td>
+        <ul style="list-style-type: none" ng-repeat="pizza in commande.pizzas">
+          <li>{{ pizza.nom }}</li>
+        </ul>
+      </td>
+      <td>
+        <ul style="list-style-type: none" ng-repeat="pizza in commande.pizzas">
+          <li>{{ pizza.prix }} €</li>
+        </ul>
+      </td>
+      <td>{{ commande.calculPrixTotal() }} €</td>
+    </tr>
+  </tbody>
+</table>

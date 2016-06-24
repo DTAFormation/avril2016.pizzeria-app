@@ -27,5 +27,4 @@ public class ClientResource {
 	public Client saveClient(@RequestBody Client client) {
 		return clientDao.save(client);
 	}
-	
 }
