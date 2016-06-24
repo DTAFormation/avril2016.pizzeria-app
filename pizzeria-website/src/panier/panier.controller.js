@@ -2,35 +2,32 @@ import { Pizza } from '../shared/model/pizza'
 
 export class PanierController {
 
-  constructor ($localStorage) {
+  constructor (PanierService, $localStorage) {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
-    // TEMPORAIRE : contenu en dur, remplacer avec données en stockage local
     this.$localStorage = $localStorage
-    this.contenu = this.$localStorage.panier
+    this.PanierService = PanierService
+    this.contenu = this.PanierService.$localStorage.panier
 
-    // TEMPORAIRE
+
+    // TEMPORAIRE : contenu en dur, remplacer avec données en stockage local
     this.contenu = [
       { 'pizza': new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 },
       { 'pizza': new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 3 },
       { 'pizza': new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
       { 'pizza': new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
     ]
+    this.$localStorage.panier = this.contenu
+    /*
     this.$localStorage.panier = {}
     for (var i = 0; i < this.contenu.length; i++) {
-      this.$localStorage.panier[this.contenu[i].id] = this.contenu[i]
+      this.PanierService.addPizza(this.contenu[i].pizza)
+      //this.$localStorage.panier[this.contenu[i].id] = this.contenu[i]
     }
+    */
   }
 
-  deletePizza (codePizza) {
-    console.log('delete ', codePizza)
-    for (var i = 0; i < this.contenu.length; i++) {
-      // temporaire;
-      if (this.contenu[i].pizza.code === codePizza) {
-        this.contenu.splice(i, 1)
-        this.panierService.deletePizza(codePizza)
-        break
-      }
-    }
+  isEmpty () {
+    return Object.keys(this.contenu).length === 0
   }
 
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
