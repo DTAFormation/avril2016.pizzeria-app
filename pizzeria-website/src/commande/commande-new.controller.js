@@ -34,6 +34,7 @@ export class CommandeNewController {
       .then(data => {
         this.panierService.deleteAllPizzas()
         this.$location.path('/')
+        return data
       })
   }
 }
