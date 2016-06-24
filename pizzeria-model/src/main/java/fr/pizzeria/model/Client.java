@@ -22,6 +22,30 @@ public class Client {
 	private String adresse;
 	private String telephone;
 	private Date derniereModification;
+	
+	
+	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+	}
+
+	public Client(String nom, String prenom, String email, String adresse, String telephone) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+	}
+
+	public Client() {
+		super();
+	}
 
 	public String getAdresse() {
 		return adresse;
@@ -47,29 +71,7 @@ public class Client {
 		this.derniereModification = derniereModification;
 	}
 
-	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.adresse = adresse;
-		this.telephone = telephone;
-	}
-
-	public Client(String nom, String prenom, String email, String adresse, String telephone) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.adresse = adresse;
-		this.telephone = telephone;
-	}
-
-	public Client() {
-		super();
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}

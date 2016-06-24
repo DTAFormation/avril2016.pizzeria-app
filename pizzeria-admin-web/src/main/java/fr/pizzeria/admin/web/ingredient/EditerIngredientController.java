@@ -1,7 +1,9 @@
-package fr.pizzeria.admin.web.pizza;
+package fr.pizzeria.admin.web.ingredient;
 
+import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Pizza;
 
 import javax.inject.Inject;
@@ -14,17 +16,17 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.logging.Logger;
 
-@WebServlet("/pizzas/edit")
-public class EditerPizzaController extends HttpServlet {
+@WebServlet("/ingredient/edit")
+public class EditerIngredientController extends HttpServlet {
 
     private static final Logger LOG = Logger
-            .getLogger(EditerPizzaController.class.getName());
+            .getLogger(EditerIngredientController.class.getName());
 
-    public static final String URL = "/pizzas/edit";
-    private static final String VUE_EDITER_PIZZA = "/WEB-INF/views/pizzas/editerPizza.jsp";
+    public static final String URL = "/ingredient/edit";
+    private static final String VUE_EDITER_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
 
     @Inject
-    private PizzaService pizzaService;
+    private IngredientService ingredientService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,28 +37,28 @@ public class EditerPizzaController extends HttpServlet {
             resp.setStatus(400); // Bad Request
             req.setAttribute("msgErreur",
                     "Code obligatoire pour editer une pizza");
-            this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA)
+            this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
                     .forward(req, resp);
         } else {
 
-            Pizza pizza = this.pizzaService.findOnePizza(code);
-            if (pizza == null) {
-                sendErrorPizzaInconnue(req, resp);
+            Ingredient ingredient = this.ingredientService.findOneIngredient(code);
+            if (ingredient == null) {
+            	sendErrorIngredientInconnue(req, resp);
             } else {
-                req.setAttribute("pizza", pizza);
+                req.setAttribute("ingredient", ingredient);
                 this.getServletContext()
-                        .getRequestDispatcher(VUE_EDITER_PIZZA)
+                        .getRequestDispatcher(VUE_EDITER_INGREDIENT)
                         .forward(req, resp);
             }
         }
 
     }
 
-    private void sendErrorPizzaInconnue(HttpServletRequest req,
+    private void sendErrorIngredientInconnue(HttpServletRequest req,
                                         HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(400); // Bad Request
-        req.setAttribute("msgErreur", "Code pizza inconnu");
-        this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA)
+        req.setAttribute("msgErreur", "Code ingredient inconnu");
+        this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
                 .forward(req, resp);
     }
 
@@ -65,22 +67,19 @@ public class EditerPizzaController extends HttpServlet {
             throws ServletException, IOException {
         String id = req.getParameter("id");
         String code = req.getParameter("code");
-        String nom = req.getParameter("nom");
-        String urlImage = req.getParameter("urlImage");
-        String prix = req.getParameter("prix");
-        String categorie = req.getParameter("categorie");
+        String nom = req.getParameter("name");
 
-        if (isBlank(nom) || isBlank(urlImage) || isBlank(prix)) {
-            req.setAttribute("pizza", this.pizzaService.findOnePizza(code));
+        if (isBlank(nom) || isBlank(code)) {
+            req.setAttribute("ingredient", this.ingredientService.findOneIngredient(code));
             req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
-            this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA)
+            this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
                     .forward(req, resp);
         } else {
-            Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.VIANDE, urlImage);
+            Ingredient ingredientAvecCode = new Ingredient(Integer.valueOf(id), code, nom);
 
-            pizzaService.updatePizza(code, pizzaAvecId);
-            resp.sendRedirect(this.getServletContext().getContextPath()
-                    + "/pizzas/list");
+            ingredientService.updateIngredient(code, ingredientAvecCode);
+            resp.sendRedirect(req.getContextPath()
+                    + "/ingredient/list");
         }
     }
 
