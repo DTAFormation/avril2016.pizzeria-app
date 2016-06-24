@@ -10,6 +10,10 @@ export class PanierController {
     this.contenu = this.PanierService.$localStorage.panier
   }
 
+  isEmpty () {
+    return Object.keys(this.contenu).length === 0
+  }
+
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
   getTraductionPizza (pizza, langue) {
     // TEMPORAIRE ; remplacer par les données de traductions associées à la valeur langue

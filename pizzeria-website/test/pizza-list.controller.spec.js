@@ -1,3 +1,5 @@
+import { Pizza } from '../src/shared/model/pizza'
+
 describe('Test du PizzaListController', function () {
   var ctrl
   var http
@@ -7,6 +9,7 @@ describe('Test du PizzaListController', function () {
   beforeEach(angular.mock.inject(function ($rootScope, $componentController, $httpBackend) {
     const scope = $rootScope.$new();
     ctrl = $componentController("pizzaList", {$scope: scope});
+    ctrl.panierService.deleteAllPizzas()
     http = $httpBackend;
   }))
 
@@ -25,6 +28,35 @@ describe('Test du PizzaListController', function () {
         .finally(done)
 
     http.flush()
+  })
+
+  it('should save a pizza in localStorage', function() {
+    var pizza = new Pizza({
+      'nom': 'Royale',
+      'code': 'royale',
+      'prix': 12,
+      'categorie': 'VIANDE',
+      'urlImage': 'http://placehold.it/150x150',
+      'id': 1
+    })
+    ctrl.addPizza(pizza)
+    var panier = ctrl.panierService.findAllPizzas()
+    expect(panier[1].quantite).toEqual(1)
+  })
+
+  it('should increase quantity', function() {
+    var pizza = new Pizza({
+      'nom': 'Royale',
+      'code': 'royale',
+      'prix': 12,
+      'categorie': 'VIANDE',
+      'urlImage': 'http://placehold.it/150x150',
+      'id': 1
+    })
+    ctrl.addPizza(pizza)
+    ctrl.addPizza(pizza)
+    var panier = ctrl.panierService.findAllPizzas()
+    expect(panier[1].quantite).toEqual(2)
   })
 
 })

@@ -1,6 +1,7 @@
 export class PanierService {
   constructor ($localStorage) {
     this.$localStorage = $localStorage
+    if(!this.$localStorage.panier) this.$localStorage.panier = {}
   }
   addPizza (pizza) {
     var panier = this.findAllPizzas()
@@ -10,15 +11,14 @@ export class PanierService {
   }
 
   deletePizza (pizza) {
-    var panier = this.findAllPizza()
-    panier[pizza.id] = undefined
+    console.log('it should delete one pizza')
   }
 
   deleteAllPizzas () {
-    this.$localStorage.panier = ''
+    this.$localStorage.panier = {}
   }
 
   findAllPizzas () {
-    return this.$localStorage.panier || {}
+    return this.$localStorage.panier
   }
 }
