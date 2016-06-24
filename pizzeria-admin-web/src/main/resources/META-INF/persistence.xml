@@ -9,7 +9,6 @@
 		<class>fr.pizzeria.model.Ingredient</class>
 		<properties>
 			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>
 	
 	

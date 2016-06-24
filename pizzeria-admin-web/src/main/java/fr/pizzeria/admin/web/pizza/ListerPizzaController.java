@@ -29,7 +29,7 @@ public class ListerPizzaController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    req.setAttribute("listePizzas", this.pizzaService.findAll());
+    req.setAttribute("listePizzas", this.pizzaService.findAllWithIngredient());
     RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_PIZZAS);
     dispatcher.forward(req, resp);
   }

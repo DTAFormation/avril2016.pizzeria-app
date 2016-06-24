@@ -27,7 +27,7 @@
 			<td><img src="${pizza.urlImage}"></td>
 			<td>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						Ref. ${pizza.id}
 						<br> <b>${pizza.nom}</b>
 						<br>${pizza.prix}€
@@ -35,7 +35,15 @@
 						<br>
 						
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
+						<label>Ingredients</label>
+						<ul>
+							<c:forEach var="ingredient" items="${pizza.ingredients}">
+							<li>${ingredient.name}</li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="col-md-4">
 						<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
 						<br>
 						<form method="POST">

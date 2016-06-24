@@ -2,6 +2,7 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -46,11 +47,12 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
-	@OneToMany
+	
+	@ManyToMany
 	@JoinTable(name = "pizza_ingredient", 
 	joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-	private List<Ingredient> ingredients;
+	private List<Ingredient> ingredients = new ArrayList<>();
 	
 	private boolean delFlag = false; 
 
@@ -93,11 +95,11 @@ public class Pizza {
 		this.delFlag = delFlag;
 	}
 
-	public void addAllIngredients(List<Ingredient> nouveauxIngredients) {
+	public void setIngredients(List<Ingredient> nouveauxIngredients) {
 		this.ingredients = nouveauxIngredients;
 	}
 	
-	public List<Ingredient> getAllIngredient() {
+	public List<Ingredient> getIngredients() {
 		return this.ingredients;
 	}
 	
