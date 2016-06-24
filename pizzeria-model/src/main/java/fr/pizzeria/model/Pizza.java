@@ -51,6 +51,8 @@ public class Pizza {
 	joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), 
 	inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
 	private List<Ingredient> ingredients;
+	
+	private boolean delFlag = false; 
 
 	public Pizza() {
 		// implémentation par défaut
@@ -81,6 +83,14 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.id = id;
 		this.ingredients = ingredients;
+	}
+	
+	public boolean isDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(boolean delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	public void addAllIngredients(List<Ingredient> nouveauxIngredients) {
