@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,10 @@
 </jsp:include>
 <body class="container">
 
-	<h1><c:out value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }"/></h1>
+	<h1>
+		<c:out
+			value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }" />
+	</h1>
 
 	<c:if test="${!empty msgErreur}">
 		<div class="alert alert-danger" role="alert">${msgErreur}</div>
@@ -37,10 +41,38 @@
 				<label for="prix">Prix</label> <input type="text"
 					class="form-control" name="prix" id="prix" value="${pizza.prix}">
 			</div>
-
+			<div class="form-group">
+				<div class="col-md-6 col-lg-6">
+					<label for="ingredient">liste ingredients</label>
+					<ul id="pizzaIngredient" class="list-group">
+					</ul>
+				</div>
+				<div class="col-md-6 col-lg-6">
+					<label for="ingredients">liste de tout les ingredients</label>
+					<ul id="allIngredient" class="list-group">
+						<c:forEach var="ingredients" items="${listeIngredient}">
+							<li id="li-${ingredients.code}" onclick="addIngredient('${ingredients.code}', '${ ingredients.name }')" class="list-group-item">${ ingredients.name }</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
 		</form>
 	</c:if>
+	<script type="text/javascript">
+		function addIngredient(code, name) {
+			var html = '<li id="ingredient-'+code+'" class="list-group-item">'+name+'<input type="text" name="ingredient" value="'+code+'" hidden></li>';
+			if(!document.getElementById('ingredient-'+code)) {
+				$("#pizzaIngredient").append(html);
+			}else{
+				alert('cette ingredient est déjà présent sur cette pizza');
+			}
+		}
+		document.getElementById('pizzaIngredient')
+		  .addEventListener('click', function (evt) {
+			  $("#"+evt.srcElement.attributes[0].nodeValue).remove();
+		  }, false)
+	</script>
 
 </body>
 </html>
