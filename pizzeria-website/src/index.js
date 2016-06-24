@@ -1,11 +1,12 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
 import PizzaModule from './pizza'
+import InscriptionModule from './inscription'
 import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeModule, ngRoute])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ngRoute])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -21,6 +22,11 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeM
       })
       .when('/home', {
         templateUrl: 'home/home.html'
+      })
+      .when('/inscription', {
+        templateUrl: 'inscription/inscription.html',
+        controller: 'InscriptionController',
+        controllerAs: '$ctrl'
       })
       .otherwise('/home')
   })
