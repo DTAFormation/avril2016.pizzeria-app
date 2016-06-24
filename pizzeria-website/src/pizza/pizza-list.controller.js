@@ -1,7 +1,8 @@
 export class PizzaListController {
 
-  constructor (pizzasService) {
+  constructor (pizzasService, panierService) {
     this.pizzasService = pizzasService
+    this.panierService = panierService
     this.ordering = 'nom'
     this.findAllPizzas()
   }

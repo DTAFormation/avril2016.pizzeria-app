@@ -1,5 +1,6 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
+import ngStorage from 'ngstorage'
 import PizzaModule from './pizza'
 import InscriptionModule from './inscription'
 import CommandeModule from './commande'
