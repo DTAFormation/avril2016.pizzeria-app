@@ -22,3 +22,5 @@ export class PanierController {
   }
 
 }
+
+PanierController.$inject = ['PanierService']
