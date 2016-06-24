@@ -39,10 +39,19 @@ public class NouvelUtilisateurController extends HttpServlet {
 
     if (isBlank(email) || isBlank(motDePasse) || isBlank(confirmationMotDePasse)) {
 	    req.setAttribute("msgErreur", "L'email et le mot de passe sont obligatoires !");
+	    req.setAttribute("utilisateur", new Utilisateur());
 	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
+	    
 	} else if (!(motDePasse.equals(confirmationMotDePasse))) {
 	    req.setAttribute("msgErreur", "Les mots de passe sont différents !");
+	    req.setAttribute("utilisateur", new Utilisateur());
 	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
+	    
+	} else if (!utilisateurService.isEmailTaken(email).isEmpty()) {
+	    req.setAttribute("msgErreur", "L'email "+ email + " existe déjà dans la base de données !");
+	    req.setAttribute("utilisateur", new Utilisateur());
+	    this.getServletContext().getRequestDispatcher(VUE_NOUVEL_UTILISATEUR).forward(req, resp);
+	    
 	} else {
 		
 		String mdpEncode = encode(motDePasse);

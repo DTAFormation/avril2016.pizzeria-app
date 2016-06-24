@@ -21,6 +21,11 @@ public class UtilisateurService {
         .setParameter("email", email)
         .getSingleResult();
   }
+  
+  public List<Utilisateur> isEmailTaken(String email) {
+	    return em.createQuery("select u from Utilisateur u where u.email=:email", Utilisateur.class)
+	            .setParameter("email", email).getResultList();
+	}
 
   public void updateUtilisateur(String email, Utilisateur utilisateurAvecId) {
     findOneUtilisateur(email); // vérifie qu'un utilisateur est présent
@@ -28,7 +33,7 @@ public class UtilisateurService {
   }
 
   public void saveUtilisateur(Utilisateur utilisateurSansId) {
-    em.persist(utilisateurSansId);
+	em.persist(utilisateurSansId);
   }
 
   public void deleteUtilisateur(String email) {
