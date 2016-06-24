@@ -33,7 +33,7 @@ export class CommandeNewController {
     return this.commandesService.addOne(commande)
       .then(data => {
         this.panierService.deleteAllPizzas()
-        this.$location.path('/')
+        this.$location.path('/commandes')
         return data
       })
   }
