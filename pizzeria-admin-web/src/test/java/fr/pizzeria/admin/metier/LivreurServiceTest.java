@@ -121,14 +121,19 @@ public class LivreurServiceTest {
 
 		String nom = "Bovin";
 		String prenom = "José";
+		List<Livreur> livreurs= new ArrayList<>();
+		Livreur livreur1=new Livreur(nom,prenom);
+		Livreur livreur2=new Livreur("toto",prenom);
+		livreurs.add(livreur1);
+		livreurs.add(livreur2);
 		when(em.createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class))
 				.thenReturn(query);
 		when(query.setParameter("nom", nom)).thenReturn(query);
 		when(query.setParameter("prenom", prenom)).thenReturn(query);
-		when(query.getMaxResults()).thenReturn(10);
+		when(query.getResultList()).thenReturn(livreurs);
 
-		int resultat = service.findLivreur(nom, prenom);
-		assertEquals(10, resultat);
+		int resultat = service.findLivreur(nom, prenom).size();
+		assertEquals(2, resultat);
 		
 		verify(em).createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class);
 		verify(query).setParameter("nom", nom);
