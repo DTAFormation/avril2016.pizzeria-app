@@ -68,12 +68,21 @@ public class EditerUtilisateurController extends HttpServlet {
         String nom = req.getParameter("nom");
         String prenom = req.getParameter("prenom");
         String motDePasse = req.getParameter("motDePasse");
+        String confirmationMotDePasse = req.getParameter("confirmationMotDePasse");
 
         if (isBlank(email) || isBlank(motDePasse)) {
             req.setAttribute("utilisateur", this.utilisateurService.findOneUtilisateur(email));
             req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
+//            req.setAttribute("utilisateur", new Utilisateur(nom, prenom, email, motDePasse));
             this.getServletContext().getRequestDispatcher(VUE_EDITER_UTILISATEUR)
                     .forward(req, resp);
+        
+        } else if (!(motDePasse.equals(confirmationMotDePasse))) {
+    	    req.setAttribute("msgErreur", "Les mots de passe sont différents !");
+    	    req.setAttribute("utilisateur", this.utilisateurService.findOneUtilisateur(email));
+    	    this.getServletContext().getRequestDispatcher(VUE_EDITER_UTILISATEUR)
+            		.forward(req, resp);
+    	    
         } else {
         	
         	String mdpEncode = encode(motDePasse);

@@ -9,6 +9,7 @@
 
 <body class="container">
 	<h1>Liste des utilisateurs</h1>
+	<br>
 	<a class="btn btn-primary" href="new">Nouvel Utilisateur</a>
 	<br>
 	<c:if test="${msg != null}">
@@ -17,8 +18,11 @@
 
 	<table class="table">
 		<tr>
-			<td>Image</td>
-			<td>Informations</td>
+			<td>Nom</td>
+			<td>Prénom</td>
+			<td>Email</td>
+			<td></td>
+			<td></td>
 			<td></td>
 		</tr>
 
@@ -26,24 +30,51 @@
 		<tr>
 			<td>
 				<div class="row">
-					<div class="col-md-6">
-						Ref. ${utilisateur.id}
-						<br> <b>${utilisateur.nom}</b><br>${utilisateur.prenom}<br>
-						<br> <b>${utilisateur.email}</b>
+					<div class="col-md-2">
+						<b>${utilisateur.nom}</b>
 					</div>
-					<div class="col-md-6">
+				</div>
+			</td>
+			
+			<td>
+				<div class="row">
+					<div class="col-md-2">
+						<b>${utilisateur.prenom}</b>
+					</div>
+				</div>
+			</td>
+			
+			<td>
+				<div class="row">
+					<div class="col-md-2">
+						<b>${utilisateur.email}</b>
+					</div>
+				</div>
+			</td>
+			
+			<td>
+				<div class="row">
+					<div class="col-md-2">
 						<a href="<c:url value="/utilisateurs/edit?email=${utilisateur.email}"/>" class="btn btn-primary">Editer</a>
 						<br>
+						<%-- <form method="POST">
+							<input type="hidden" name="email" value="${utilisateur.email}">
+							<input type="hidden" name="action" value="supprimer">
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</form> --%>
+					</div>
+				</div>
+			</td>
+			
+			<td>
+				<div class="row">
+					<div class="col-md-2">
+						<%-- <a href="<c:url value="/utilisateurs/edit?email=${utilisateur.email}"/>" class="btn btn-primary">Editer</a>
+						<br> --%>
 						<form method="POST">
 							<input type="hidden" name="email" value="${utilisateur.email}">
 							<input type="hidden" name="action" value="supprimer">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-						<form method="POST">
-							<input type="hidden" name="id" value="${utilisateur.id}">
-							<input type="hidden" name="action" value="inconnu">
-							<button type="submit" class="btn btn-danger">Action
-								inconnue</button>
 						</form>
 					</div>
 				</div>

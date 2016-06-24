@@ -17,12 +17,12 @@
 	<c:if test="${utilisateur != null}">
 		<form method="POST">
 
-			<c:if test="${utilisateur.id != null}">
+			 <c:if test="${utilisateur.id != null}">
 				<div class="form-group">
-					<label for="id">Id</label> <input type="text" class="form-control"
-						id="id" name="id" value="${utilisateur.id}" readonly>
+					 <input type="hidden" class="form-control"
+						id="id" name="id" value="${utilisateur.id}" >
 				</div>
-			</c:if>
+			</c:if> 
 
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
@@ -34,17 +34,32 @@
 					id="prenom" name="prenom" value="${utilisateur.prenom}">
 			</div>
 			
+			<c:choose>
+			    <c:when test="${utilisateur.id != null}">
+			        <div class="form-group">
+				        <label for="email">Email</label>
+				        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" readonly>
+				    </div>
+			    </c:when>    
+			    <c:otherwise>
+			        <div class="form-group">
+				        <label for="email">Email</label>
+				        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" required>
+				    </div>
+			    </c:otherwise>
+			</c:choose>
+			
+			<%-- 
 			<div class="form-group">
 		        <label for="email">Email</label>
 		        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" required>
 		    </div>
-		    
+		     --%>
 		
 		    <div class="form-group">
 		        <label for="motDePasse">Mot de passe</label> <input type="password"
 		                                                            class="form-control" name="motDePasse"
-		                                                            id="motDePasse"
-		                                                            value="${utilisateur.motDePasse}"
+		                                                            id="motDePasse"  
 		                                                            required>
 		    </div>
 		    
@@ -55,6 +70,7 @@
 		    </div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">Annuler</a>
 		</form>
 	</c:if>
 
