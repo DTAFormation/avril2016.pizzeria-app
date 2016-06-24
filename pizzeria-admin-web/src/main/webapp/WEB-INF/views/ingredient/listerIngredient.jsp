@@ -20,29 +20,29 @@
 			<td>Id</td>
 			<td>Nom</td>
 			<td></td>
+			<td></td>
 		</tr>
 
 		<c:forEach var="ingredient" items="${listeIngredients}">
-		<tr>
-			<td>
-				${ingredient.id}
-			</td>
-			<td>
-				${ingredient.name}
-			</td>
-			<td>
-				<a href="<c:url value="/ingredient/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a>
-				<br>
-				<form method="POST">
-					<input type="hidden" name="code" value="${ingredient.code}">
-					<input type="hidden" name="action" value="supprimer">
-					<button type="submit" class="btn btn-danger">Supprimer</button>
-				</form>
-			</td>
-		</tr>
+			<tr>
+				<td>
+					${ingredient.id}
+				</td>
+				<td>
+					${ingredient.name}
+				</td>
+				<td>			
+					<a href="<c:url value="/ingredient/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			
+				</td>
+				<td>
+					<form method="POST">
+						<input type="hidden" name="code" value="${ingredient.code}">
+						<input type="hidden" name="action" value="supprimer">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</td>
+			</tr>
 		</c:forEach>
-
-	
 
 	</table>
 </body>

@@ -25,6 +25,7 @@
 			<td>Telephone</td>
 			<td>Adresse</td>
 			<td></td>
+			<td></td>
 		</tr>
 
 		<c:forEach var="client" items="${listeClients}">
@@ -52,7 +53,8 @@
 			</td>
 			<td>
 				<a href="<c:url value="/clients/edit?email=${client.email}"/>" class="btn btn-primary">Editer</a>
-				<br>
+			</td>
+			<td>
 				<form method="POST">
 					<input type="hidden" name="email" value="${client.email}">
 					<input type="hidden" name="action" value="supprimer">

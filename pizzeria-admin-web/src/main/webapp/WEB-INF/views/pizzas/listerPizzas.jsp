@@ -23,6 +23,7 @@
 			<td>Prix</td>
 			<td>Code</td>
 			<td></td>
+			<td></td>
 		</tr>
 
 		<c:forEach var="pizza" items="${listePizzas}">
@@ -42,13 +43,14 @@
 				</td>
 				<td>
 					<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
-					<br>
+				</td>
+				<td>
 					<form method="POST">
 						<input type="hidden" name="code" value="${pizza.code}">
 						<input type="hidden" name="action" value="supprimer">
 						<button type="submit" class="btn btn-danger">Supprimer</button>
 					</form>
-				</td>
+				</td>			
 			</tr>
 		</c:forEach>
 	</table>
