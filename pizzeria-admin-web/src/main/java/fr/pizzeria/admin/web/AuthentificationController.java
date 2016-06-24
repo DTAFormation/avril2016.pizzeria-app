@@ -33,7 +33,7 @@ public class AuthentificationController extends HttpServlet {
 
 		if (EMAIL.equals(email) && MOTDEPASSE.equals(motDePasse)) {
 			req.getSession(true).setAttribute(AUTH_EMAIL, email);
-			resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
+			resp.sendRedirect(this.getServletContext().getContextPath() + "/pizzas/list");
 		} else {
 			req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
 			this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);

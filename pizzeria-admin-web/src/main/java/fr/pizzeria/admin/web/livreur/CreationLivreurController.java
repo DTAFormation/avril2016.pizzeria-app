@@ -51,7 +51,7 @@ public class CreationLivreurController extends HttpServlet {
 		}
 		else
 		{
-		 if(livreurService.findLivreur(nom, prenom)!= 0)	
+		 if(livreurService.findLivreur(nom, prenom).size()> 0)	
 		 {
 				req.setAttribute("msgErreur", "Ce livreur est déjà présent en base");
 				this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);

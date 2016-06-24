@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						 ${livreur.id}
-						<br> <b>${livreur.nom}${livreur.prenom}
+						<br> ${livreur.nom} ${livreur.prenom}
 						<br>
 					</div>
 					<div class="col-md-6">

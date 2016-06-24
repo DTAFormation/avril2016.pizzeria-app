@@ -24,12 +24,12 @@
 			</c:if>
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
-					id="nom" name="nom" value="${livreur.nom}">
+					id="nom" name="nom" value="${livreur.nom}"required>
 			</div>
 			<div class="form-group">
 				<label for="prenom">Prénom</label> <input type="text"
 					class="form-control" name="prenom" id="prenom"
-					value="${livreur.prenom}">
+					value="${livreur.prenom}"required>
 			</div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>

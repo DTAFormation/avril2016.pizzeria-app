@@ -43,13 +43,13 @@ public class LivreurService {
 	    em.merge(livreur);
 	}
 	
-	  public int findLivreur(String nom, String prenom) {
+	  public List<Livreur> findLivreur(String nom, String prenom) {
 	
 
 		    return em.createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class)
 		        .setParameter("nom",nom )
 		        .setParameter("prenom",prenom)
-		        .getMaxResults();
+		        .getResultList();
 		  }
   
 }
