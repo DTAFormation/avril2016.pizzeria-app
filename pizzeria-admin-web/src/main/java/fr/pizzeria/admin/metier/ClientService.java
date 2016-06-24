@@ -23,9 +23,12 @@ public class ClientService {
 				.setParameter("email", email).getSingleResult();
 	}
 
-	public void updateClient(String email, Client clientAvecId) {
-		findOneClient(email); // vérifie qu'un client est présent
-		em.merge(clientAvecId);
+	public void updateClient(String oldEmail, Client clientAvecId) {
+		Client oldClient = findOneClient(oldEmail); // vérifie qu'une pizza est présente
+		oldClient.setActive(false);
+		clientAvecId.setId(null);
+		em.merge(oldClient);
+		em.persist(clientAvecId);
 	}
 
 	public void saveClient(Client clientSansId) {
@@ -43,6 +46,10 @@ public class ClientService {
 
 	public void setEm(EntityManager em2) {
 		this.em = em2;
+	}
 
+	public List<Client> isEmailTaken(String email) {
+		return em.createQuery("select c from Client c where c.email=:email and isActive=1", Client.class).setParameter("email", email)
+				.getResultList();
 	}
 }

@@ -1,8 +1,13 @@
 package fr.pizzeria.admin.metier;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -35,7 +40,52 @@ public class ClientServiceTest {
 	}
 
 	@Test
-	public void creerClient() {
+	public void testFindAll() {
+		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
+		Client c2 = new Client("test2", "test2", "test@test.fr", "10 av aa", "00000000");
+		List<Client> lClients = new ArrayList<>();
+		service.saveClient(c1);
+		service.saveClient(c2);
+		when(em.createQuery("select c from Client c where isActive = 1", Client.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(lClients);
+		List<Client> lFindAll = service.findAll();
+		assertEquals(lFindAll.size(), lClients.size());
+	}
+
+	@Test
+	public void testFindOneClient() {
+
+		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
+		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
+				.thenReturn(query);
+		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(c1);
+
+		Client c2 = service.findOneClient("test@test.fr");
+		assertTrue(c1.equals(c2));
+	}
+
+	@Test
+	public void testUpdateClient() {
+
+		LOG.info("Etant donne un objet client");
+		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
+		Client c2 = new Client("test", "test", "test22@test.fr", "10 av aa", "00000000");
+		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
+				.thenReturn(query);
+		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(c1);
+		service.updateClient("test@test.fr", c2);
+		LOG.info("Alors 'pizza' a ete persiste");
+		verify(em).merge(c1);
+		verify(em).persist(c2);
+
+		assertFalse(c1.isActive());
+		LOG.info("FIN");
+	}
+
+	@Test
+	public void testSaveClient() {
 		LOG.info("Etant donne un objet Client");
 		Client client = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
 
@@ -48,7 +98,7 @@ public class ClientServiceTest {
 	}
 
 	@Test
-	public void supprimerClient() {
+	public void testDeleteClient() {
 		LOG.info("Etant donne un objet Client");
 		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
 		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
@@ -65,7 +115,7 @@ public class ClientServiceTest {
 	}
 
 	@Test
-	public void supprimerClientVerifModifIsActive() {
+	public void testDeleteClientVerifModifIsActive() {
 		LOG.info("Etant donne un objet Client");
 		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
 		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
