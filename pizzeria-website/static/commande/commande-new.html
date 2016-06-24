@@ -1,28 +1,34 @@
-<table ng-show="ctrl.panier" class="table table-striped" id="panier">
-  <thead>
-    <tr>
-      <th class="text-left" width="50px">Image</th>
-      <th class="text-center">Nom</th>
-      <th class="text-center">Prix unitaire</th>
-      <th class="text-center">Quantité</th>
-      <th class="text-center">Prix</th>
-    </tr>
-    <tr ng-repeat="obj in ctrl.panier">
-      <td class="text-left"><img ng-src="{{ obj.pizza.urlImage }}" height="50px"></td>
-      <td class="text-center">{{ obj.pizza.nom }}</td>
-      <td class="text-center">{{ obj.pizza.prix }} €</td>
-      <td class="text-center">{{ obj.quantite }}</td>
-      <td class="text-center">{{ obj.pizza.prix * obj.quantite }} €</td>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th colspan="4" class="text-right">Total :</th>
-      <th class="text-center">{{ ctrl.total }} €</th>
-    </tr>
-  </tfoot>
-</table>
-<button class="btn btn-primary" ng-click="ctrl.confirm = true">Valider la commande</button>
+<div ng-show="ctrl.panier && ctrl.panier.length">
+  <table class="table table-striped" id="panier">
+    <thead>
+      <tr>
+        <th class="text-left" width="50px">Image</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prix unitaire</th>
+        <th class="text-center">Quantité</th>
+        <th class="text-center">Prix</th>
+      </tr>
+      <tr ng-repeat="obj in ctrl.panier">
+        <td class="text-left"><img ng-src="{{ obj.pizza.urlImage }}" height="50px"></td>
+        <td class="text-center">{{ obj.pizza.nom }}</td>
+        <td class="text-center">{{ obj.pizza.prix }} €</td>
+        <td class="text-center">{{ obj.quantite }}</td>
+        <td class="text-center">{{ obj.pizza.prix * obj.quantite }} €</td>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th colspan="4" class="text-right">Total :</th>
+        <th class="text-center">{{ ctrl.total }} €</th>
+      </tr>
+    </tfoot>
+  </table>
+  <button class="btn btn-primary" ng-click="ctrl.confirm = true">Valider la commande</button>
+</div>
+
+<div ng-show="!ctrl.panier || !ctrl.panier.length">
+  <h2>Le panier est vide</h2>
+</div>
 
 <div class="modal-dialog" ng-if="ctrl.confirm">
   <div class="modal-content">
