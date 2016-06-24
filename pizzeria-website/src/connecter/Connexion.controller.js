@@ -1,22 +1,24 @@
 export class ConnexionController {
 
-  constructor(ConnexionService,$localStorage) {
- this.$localStorage = $localStorage
- this.ConnexionService= ConnexionService
-    // this.commandesService = commandesService;
-    // this.$routeParams = $routeParams
-    // this.findAllCommandes();
+  constructor(ConnexionService, $localStorage, $location) {
+    this.ConnexionService = ConnexionService
+    this.$localStorage = $localStorage
+    this.$location = $location
   }
 
-connexionClient (form) {
+  connexionClient(form) {
     if (form.$invalid) return
-    console.log('enter connexionClient controller', form)
-    this.ConnexionService.getClient(this.client.id)
-      .then(() => {
-        console.log('this :', this)
-        // this.$location.path('/')
+    this.ConnexionService.login(this.client)
+      .then(client => {
+        if (client) {
+          this.$localStorage.client = client
+          this.$location.path('/')
+          console.log('connecté')
+        } else {
+          console.log('echec connexion')
+        }
       })
   }
 }
 
-ConnexionController.$inject = [ 'ConnexionService','$localStorage'];
+ConnexionController.$inject = ['ConnexionService', '$localStorage', '$location'];

@@ -1,42 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Page Login</title>
-  <link rel="stylesheet" href="styles/se-connecter.css">
-</head>
-
-<body background="images/fond-page.jpg">
+<div style="background-image: url('../images/fond-page.jpg');">
   <div class="login-page">
     <div class="form">
-      <!--<form class="register-form">
-
-        <input type="text" placeholder="adresse mail" />
-        <input type="password" placeholder="mot de passe" />
-        <input type="text" placeholder="email" />
-        <button>Créer</button>
-        <p class="message">Déjà enregistré? <a href="#">Log In</a></p>
-      </form>-->
-
-        <form name="login-form" ng-submit="$ctrl.connexionClient(login-form)" novalidate>
-        <input type="text" placeholder="adresse mail" />
-        <input type="password" placeholder="mot de passe" />
-
-        <div class="bouton">
-          <p>
-            <a href="#">Log in</a>
-          </p>
-        </div>
-
-
-        <!--<button type="button" class="login">Login</button>-->
-        <p class="message">Pas encore enregistré? <a href="#">Créer un compte</a></p>
+      <form name="loginForm" ng-submit="ctrl.connexionClient(loginForm)" novalidate>
+        <input ng-model="ctrl.client.email" type="text" name="email" placeholder="adresse mail" required />
+        <input ng-model="ctrl.client.motDePasse" type="password" name="motDePasse" placeholder="mot de passe" required />
+        <button type="submit" class="btn btn-warning col-xs-12">Log in</button>
+        <p class="message">Pas encore enregistré? <a href="#/inscription">Créer un compte</a></p>
       </form>
     </div>
   </div>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="connecter/index.js"></script>
-</body>
-
-</html>
+</div>
