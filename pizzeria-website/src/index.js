@@ -1,6 +1,8 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
 import PizzaModule from './pizza'
+import InscriptionModule from './inscription'
+import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
 

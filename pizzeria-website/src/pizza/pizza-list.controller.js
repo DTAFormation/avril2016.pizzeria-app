@@ -6,6 +6,10 @@ export class PizzaListController {
     this.findAllPizzas()
   }
 
+  addPizza (pizza) {
+    this.panierService.addPizza(pizza)
+  }
+
   findAllPizzas () {
     const ctrl = this
     return this.pizzasService.findAllPizzas()
@@ -18,4 +22,4 @@ export class PizzaListController {
   }
 }
 
-PizzaListController.$inject = ['PizzasService']
+PizzaListController.$inject = ['PizzasService','PanierService']
