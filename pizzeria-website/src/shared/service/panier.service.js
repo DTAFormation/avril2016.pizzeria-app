@@ -16,7 +16,7 @@ export class PanierService {
   }
 
   deleteAllPizzas () {
-    this.$localStorage.panier = ''
+    this.$localStorage.panier = {}
   }
 
   findAllPizzas () {
