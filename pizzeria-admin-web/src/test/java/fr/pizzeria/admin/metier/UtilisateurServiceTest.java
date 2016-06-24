@@ -3,11 +3,9 @@ package fr.pizzeria.admin.metier;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -102,17 +100,18 @@ public class UtilisateurServiceTest {
 		// Mise à jour de l'utilisateur
 		user.setNom("Deviluke");
 		user.setPrenom("Lala Satalin");
+		when(em.createQuery("select u from Utilisateur u where u.email=:email", Utilisateur.class)).thenReturn(query);
+		when(query.setParameter("email", "lala-satalin.deviluke@deviluke.dl")).thenReturn(query);
+		when(query.getSingleResult()).thenReturn(user);
+		
 		
 		userService.updateUtilisateur(user.getEmail(), user);
 		verify(em).merge(user);
 		
 		// Vérification de la mise à jour
-		when(em.createQuery("select u from Utilisateur u where u.email=:email", Utilisateur.class)).thenReturn(query);
-		when(query.setParameter("email", "lala-satalin.deviluke@deviluke.dl")).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(user);
 		
 		Utilisateur utilisateurCorrect =  new Utilisateur("Deviluke", "Lala Satalin", "lala-satalin.deviluke@deviluke.dl", "La+Sa-De!");
-		assertEquals(user, utilisateurCorrect);
+		assertTrue(user.equals(utilisateurCorrect));
 	}
 	
 	@Test
@@ -137,15 +136,49 @@ public class UtilisateurServiceTest {
 	@Test
 	public void testFindAll() {
 		// création des utilisateurs
-		List<Utilisateur> utilisateurs =  new ArrayList();
-		utilisateurs.add(new Utilisateur("Deviluke", "Lala Satalin", "lala-satalin.deviluke@deviluke.dl", "La+Sa-De!"));
-		utilisateurs.add(new Utilisateur("Uzumaki", "Naruto", "naruto.uzumaki@konoha.hi", "Nindo"));
-		utilisateurs.add(new Utilisateur("Abc", "Xyz", "abc.xyz@def.gh", "I!j+K-l"));
+		List<Utilisateur> utilisateurs =  new ArrayList<Utilisateur>();
+		Utilisateur u1 = new Utilisateur("Deviluke", "Lala Satalin", "lala-satalin.deviluke@deviluke.dl", "La+Sa-De!");
+		Utilisateur u2 = new Utilisateur("Uzumaki", "Naruto", "naruto.uzumaki@konoha.hi", "Nindo");
+		Utilisateur u3 = new Utilisateur("Abc", "Xyz", "abc.xyz@def.gh", "I!j+K-l");
+		utilisateurs.add(u1);
+		utilisateurs.add(u2);
+		utilisateurs.add(u3);
 		
 		for(Utilisateur user : utilisateurs) {
 			userService.saveUtilisateur(user);
 			verify(em).persist(user);
 		}
+		
+		Integer cardinal = utilisateurs.size();
+		Object[] utilisateursInitiaux = utilisateurs.toArray();
+		
+		/*
+		 *  Test taille des listes suivantes :
+		 *   celle créée à la main
+		 *   la liste obtenue via la requête SQL
+		 */
+		when(em.createQuery("select u from Utilisateur u", Utilisateur.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(utilisateurs);
+		
+		Integer nbUtilisateurs = query.getResultList().size();
+		Object[] utilisateursTrouves = query.getResultList().toArray();
+		assertEquals(cardinal, nbUtilisateurs);
+		assertArrayEquals(utilisateursInitiaux, utilisateursTrouves);
+		
+		
+		/*
+		 *  Comparaison de la taille des listes suivantes :
+		 *   celle créée à la main
+		 *   la liste obtenue via la méthode findAll()
+		 */
+		userService.findAll();
+		Integer taille = userService.findAll().size();
+		Object[] utilisateursEnregistres = userService.findAll().toArray();
+		assertEquals(cardinal, taille);
+		assertArrayEquals(utilisateursInitiaux, utilisateursEnregistres);
+		
+		
+		
 		
 	}
 
