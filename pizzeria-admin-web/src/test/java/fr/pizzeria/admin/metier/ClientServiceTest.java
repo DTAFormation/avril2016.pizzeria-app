@@ -110,23 +110,6 @@ public class ClientServiceTest {
 
 		LOG.info("Alors 'client' a ete modifie");
 		verify(em).merge(client);
-
-		LOG.info("FIN");
-	}
-
-	@Test
-	public void testDeleteClientVerifModifIsActive() {
-		LOG.info("Etant donne un objet Client");
-		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
-		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
-				.thenReturn(query);
-		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(client);
-		LOG.info("Lorsque ejb.deleteClient(client)");
-		service.deleteClient("test@test.fr");
-
-		LOG.info("Alors 'client' a ete modifie et is Active est modifié à false");
-		verify(em).merge(client);
 		assertFalse(client.isActive());
 		LOG.info("FIN");
 	}

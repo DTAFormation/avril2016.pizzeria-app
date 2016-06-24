@@ -44,14 +44,14 @@
 					value="${client.email}" required> 
 					
 			</div>
+			<c:if test="${!empty msgErreur}">
+				<div class="alert alert-danger" role="alert">${msgErreur}</div>
+			</c:if>
 			<div class="form-group">
 				<label for="telephone">Telephone</label> <input type="tel"
 					pattern="\d*" class="form-control" name="telephone" id="telephone"
 					value="${client.telephone}" required>
-			</div>
-			<c:if test="${!empty msgErreur}">
-				<div class="alert alert-danger" role="alert">${msgErreur}</div>
-			</c:if>
+			</div>	
 			<div class="form-group">
 				<label for="adresse">Adresse</label>
 				<textarea rows="10" cols="50" class="form-control" name="adresse"
