@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebFilter("/*")
 public class AuthentificationFilter implements Filter {
 
-  private static final String[] NO_FILTER_URL = {"/api", "/login", "/static"};
+  private static final String[] NO_FILTER_URL = {"/api", "/login", "/static", "/commandes/list", "/commandes/new"};
 
   @Override
   public void destroy() {

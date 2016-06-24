@@ -6,10 +6,11 @@
 		<class>fr.pizzeria.model.Commande</class>
 		<class>fr.pizzeria.model.Client</class>
 		<class>fr.pizzeria.model.Livreur</class>
-		<properties>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-		</properties>
+		<class>fr.pizzeria.model.CommandePizza</class>
+		<class>fr.pizzeria.model.CommandePizzaId</class>
 	
-	
+<!-- 		<properties> -->
+<!-- 			<property name="hibernate.show_sql" value="true"/> -->
+<!-- 		</properties> -->
 	</persistence-unit>
 </persistence>
