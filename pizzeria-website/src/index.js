@@ -19,6 +19,11 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
         controller: 'CommandeNewController',
         controllerAs: 'ctrl'
       })
+      .when('/commandes/:id?', {
+        templateUrl: 'commande/commande-list.html',
+        controller: 'CommandeListController',
+        controllerAs: 'ctrl'
+      })
       .when('/connexion', {
         templateUrl: 'se-connecter.html',
         controller: 'ConnexionController',
