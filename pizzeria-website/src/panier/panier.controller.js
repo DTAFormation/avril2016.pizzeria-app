@@ -2,32 +2,27 @@ import { Pizza } from '../shared/model/pizza'
 
 export class PanierController {
 
-  constructor (PanierService, $localStorage) {
+  constructor (PanierService) {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
-    this.$localStorage = $localStorage
     this.PanierService = PanierService
     this.contenu = this.PanierService.$localStorage.panier
 
-
-    // TEMPORAIRE : contenu en dur, remplacer avec données en stockage local
-    this.contenu = [
-      { 'pizza': new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 },
-      { 'pizza': new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 3 },
-      { 'pizza': new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
-      { 'pizza': new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
-    ]
-    this.$localStorage.panier = this.contenu
-    /*
-    this.$localStorage.panier = {}
-    for (var i = 0; i < this.contenu.length; i++) {
-      this.PanierService.addPizza(this.contenu[i].pizza)
-      //this.$localStorage.panier[this.contenu[i].id] = this.contenu[i]
+    // DEBUG, décommenter pour activer - Contenu en dur défini lors de chaque rechargement de page.
+    // Utile pour obtenir un panier pré-rempli pour tester l'affichage et les opérations nécessitant un panier déjà rempli.
+    this.PanierService.$localStorage.panier = {
+      '1': { 'pizza': new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 },
+      '2': { 'pizza': new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 3 },
+      '3': { 'pizza': new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
+      '4': { 'pizza': new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
     }
-    */
   }
 
   isEmpty () {
     return Object.keys(this.contenu).length === 0
+  }
+
+  deletePizza (pizza) {
+    this.PanierService.deletePizza(pizza)
   }
 
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
