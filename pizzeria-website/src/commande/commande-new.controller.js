@@ -7,6 +7,7 @@ export class CommandeNewController {
     this.commandesService = commandesService
     this.$location = $location
     this.total = 0
+    // TEMPORAIRE ; remplacer par les données du local storage
     this.panier = [
       {'pizza': new Pizza({ 'id': 2, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150' }), 'quantite': 1},
       {'pizza': new Pizza({ 'id': 2, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150' }), 'quantite': 2},
