@@ -167,5 +167,4 @@ public class Pizza {
 		Pizza rhs = (Pizza) obj;
 		return new EqualsBuilder().append(code, rhs.code).isEquals();
 	}
-
 }
