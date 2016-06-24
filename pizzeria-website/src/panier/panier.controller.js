@@ -2,7 +2,9 @@ import { Pizza } from '../shared/model/pizza'
 
 export class PanierController {
 
-  constructor () {
+  constructor (panierService) {
+    this.panierService = panierService
+
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
     // TEMPORAIRE : contenu en dur, remplacer avec données en stockage local
     this.contenu = [
@@ -11,12 +13,16 @@ export class PanierController {
       { 'pizza': new Pizza({'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
       { 'pizza': new Pizza({'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
     ]
+    
+    this.panierService.addPizza(this.contenu[0].pizza)
   }
 
   supprimerPizza (codePizza) {
     for (var i = 0; i < this.contenu.length; i++) {
+      // temporaire;
       if (this.contenu[i].pizza.code === codePizza) {
         this.contenu.splice(i, 1)
+        this.panierService.remove(codePizza)
         break
       }
     }
@@ -35,3 +41,5 @@ export class PanierController {
   }
 
 }
+
+PanierController.$inject = ['PanierService']
