@@ -29,8 +29,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						Ref. ${pizza.id}
-						<br> <b>${pizza.nom}</b><br>${pizza.prix}
-						€<br>
+						<br> <b>${pizza.nom}</b>
+						<br>${pizza.prix}€
+						<br> <b>CODE : ${pizza.code}</b>
+						<br>
+						
 					</div>
 					<div class="col-md-6">
 						<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
@@ -40,12 +43,7 @@
 							<input type="hidden" name="action" value="supprimer">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
-						<form method="POST">
-							<input type="hidden" name="id" value="${pizza.id}">
-							<input type="hidden" name="action" value="inconnu">
-							<button type="submit" class="btn btn-danger">Action
-								inconnue</button>
-						</form>
+						
 					</div>
 				</div>
 			</td>
@@ -53,7 +51,6 @@
 		</c:forEach>
 
 	
-
 	</table>
 </body>
 </html>
