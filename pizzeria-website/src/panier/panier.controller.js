@@ -28,6 +28,14 @@ export class PanierController {
     this.PanierService.deletePizza(pizza)
   }
 
+  clear () {
+    this.PanierService.deleteAllPizzas()
+  }
+
+  size () {
+    return this.PanierService.size()
+  }
+
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
   getTraductionPizza (pizza, langue) {
     // TEMPORAIRE ; remplacer par les données de traductions associées à la valeur langue

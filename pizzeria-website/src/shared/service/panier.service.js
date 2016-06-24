@@ -16,6 +16,7 @@ export class PanierService {
     delete panier[pizza.id]
   }
 
+  // TODO : changer le nom (voir raison dans findAllPizzas() )
   deleteAllPizzas () {
     this.$localStorage.panier = {}
   }
@@ -23,5 +24,9 @@ export class PanierService {
   // TODO : changer de nom vers "getPanier" (on ne récupère pas des pizzas mais une liste d'objets avec une pizza ET une quantité)
   findAllPizzas () {
     return this.$localStorage.panier
+  }
+
+  size () {
+    return Object.keys(findAllPizzas()).length
   }
 }
