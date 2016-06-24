@@ -1,17 +1,17 @@
 export class CommandeListController {
 
-  constructor(commandesService, $routeParams, $location) {
-    this.commandesService = commandesService;
+  constructor(commandesService, $routeParams, $location, $localStorage) {
+    this.commandesService = commandesService
     this.$routeParams = $routeParams
     this.$location = $location
+    if (!$localStorage.client){
+      $location.path('/connexion')
+    }
     this.findAllCommandes()
   }
 
   findAllCommandes() {
-    const ctrl = this;
-    if (!this.$routeParams.id) {
-      this.$location.path('/home')
-    } else {
+    const ctrl = this
     return this.commandesService.findAllCommandesClient(this.$routeParams.id)
       .then(data => {
         ctrl.listeCommandes = [];
@@ -19,8 +19,7 @@ export class CommandeListController {
           ctrl.listeCommandes.push(item)
         })
       })
-    }
   }
 }
 
-CommandeListController.$inject = ['CommandesService', '$routeParams', '$location'];
+CommandeListController.$inject = ['CommandesService', '$routeParams', '$location', '$localStorage'];
