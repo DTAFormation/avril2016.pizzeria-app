@@ -27,4 +27,4 @@ export class PizzaListController {
   }
 }
 
-PizzaListController.$inject = ['PizzasService', '$q', 'PanierService']
+PizzaListController.$inject = ['PizzasService','PanierService']
