@@ -1,9 +1,10 @@
 export class Pizza {
-  constructor ({code, nom, prix, categorie, urlImage}) {
+  constructor ({id, code, nom, prix, categorie, urlImage}) {
+    this.id = id
     this.code = code
     this.nom = nom
     this.prix = prix
     this.categorie = categorie
-    this.imageUrl = urlImage
+    this.urlImage = urlImage
   }
 }
