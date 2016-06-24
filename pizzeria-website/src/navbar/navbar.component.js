@@ -14,6 +14,7 @@ export const navbarComponent = {
         <li ng-class="{active : $ctrl.isActive('/commandes')}" role="presentation"><a href="#/commandes/{{ $ctrl.clientId }}">Vos Commandes</a></li>
         <li ng-class="{active : $ctrl.isActive('/about')}" role="presentation"><a href="#/about">A propos</a></li>
         <li ng-class="{active : $ctrl.isActive('/inscription')}" role="presentation"><a href="#/inscription">Inscription</a></li>
+        <li ng-class="{active : $ctrl.isActive('/connexion')}" role="presentation"><a href="#/connexion">Connexion</a></li>
       </ul>
     </div>
   </nav>

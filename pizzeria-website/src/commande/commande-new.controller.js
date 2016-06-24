@@ -3,9 +3,10 @@ import { Commande } from '../shared/model/commande'
 
 export class CommandeNewController {
 
-  constructor (commandesService, panierService, $location) {
+  constructor (commandesService, panierService, $localStorage, $location) {
     this.commandesService = commandesService
     this.panierService = panierService
+    this.$localStorage = $localStorage
     this.$location = $location
     this.total = 0
     this.panier = this.panierService.findAllPizzas()
@@ -26,7 +27,7 @@ export class CommandeNewController {
       dateCommande: new Date().getTime(),
       statut: 'NON_TRAITE',
       livreur: null,
-      client: null,
+      client: this.$localStorage.client,
       pizzas: pizzas
     })
 
@@ -39,4 +40,4 @@ export class CommandeNewController {
   }
 }
 
-CommandeNewController.$inject = ['CommandesService', 'PanierService', '$location']
+CommandeNewController.$inject = ['CommandesService', 'PanierService', '$localStorage', '$location']

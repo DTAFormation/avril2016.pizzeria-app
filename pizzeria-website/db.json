@@ -15,6 +15,14 @@
       "categorie": "VIANDE",
       "urlImage":"http://placehold.it/150x150",
       "id": 2
+    },
+    {
+      "nom": "Reine",
+      "code": "reine",
+      "prix": 14,
+      "categorie": "VIANDE",
+      "imageUrl":"http://placehold.it/150x150",
+      "id": 1
     }
   ]
 }

@@ -26,6 +26,5 @@ public class ClientResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public Client saveClient(@RequestBody Client client) {
 		return clientDao.save(client);
-
 	}
 }
