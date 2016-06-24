@@ -18,39 +18,39 @@
 	<table class="table">
 		<tr>
 			<td>Image</td>
-			<td>Informations</td>
+			<td>Id</td>
+			<td>Nom</td>
+			<td>Prix</td>
+			<td>Code</td>
 			<td></td>
 		</tr>
 
 		<c:forEach var="pizza" items="${listePizzas}">
-		<tr>
-			<td><img src="${pizza.urlImage}"></td>
-			<td>
-				<div class="row">
-					<div class="col-md-6">
-						Ref. ${pizza.id}
-						<br> <b>${pizza.nom}</b>
-						<br>${pizza.prix}€
-						<br> <b>CODE : ${pizza.code}</b>
-						<br>
-						
-					</div>
-					<div class="col-md-6">
-						<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
-						<br>
-						<form method="POST">
-							<input type="hidden" name="code" value="${pizza.code}">
-							<input type="hidden" name="action" value="supprimer">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-						
-					</div>
-				</div>
-			</td>
-		</tr>
+			<tr>
+				<td><img src="${pizza.urlImage}"></td>
+				<td>
+					${pizza.id}	
+				</td>
+				<td>
+					${pizza.nom}
+				</td>
+				<td>
+					${pizza.prix}€
+				</td>
+				<td>
+					${pizza.code}
+				</td>
+				<td>
+					<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
+					<br>
+					<form method="POST">
+						<input type="hidden" name="code" value="${pizza.code}">
+						<input type="hidden" name="action" value="supprimer">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</td>
+			</tr>
 		</c:forEach>
-
-	
 	</table>
 </body>
 </html>

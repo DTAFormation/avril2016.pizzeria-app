@@ -51,6 +51,7 @@
 			</div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<a href="<c:url value="/pizzas/list"></c:url>"type="button">Retour</a>
 		</form>
 	</c:if>
 

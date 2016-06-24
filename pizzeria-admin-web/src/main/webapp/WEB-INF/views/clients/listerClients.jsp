@@ -17,37 +17,47 @@
 
 	<table class="table">
 		<tr>
-			<td>Informations</td>
+			<td>Id</td>
+			<td>Dernière modif</td>
+			<td>Nom</td>
+			<td>Prenom</td>
+			<td>Email</td>
+			<td>Telephone</td>
+			<td>Adresse</td>
 			<td></td>
 		</tr>
 
 		<c:forEach var="client" items="${listeClients}">
 		<tr>
 			<td>
-				<div class="row">
-					<div class="col-md-6">
-						 ${client.id} ${client.derniereModification}
-						<br> <b>${client.nom}</b> ${client.prenom}
-						<br> ${client.email} ${client.telephone}<br /> ${client.adresse}
-					</div>
-					<div class="col-md-6">
-						<a href="<c:url value="/clients/edit?email=${client.email}"/>" class="btn btn-primary">Editer</a>
-						<br>
-						<form method="POST">
-							<input type="hidden" name="email" value="${client.email}">
-							<input type="hidden" name="action" value="supprimer">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-						<form method="POST">
-							<input type="hidden" name="id" value="${client.id}">
-							<input type="hidden" name="action" value="inconnu">
-							<button type="submit" class="btn btn-danger">Action
-								inconnue</button>
-						</form>
-					</div>
-				</div>
+				${client.id}
 			</td>
 			<td>
+				${client.derniereModification}
+			</td>
+			<td>
+				${client.nom}
+			</td>
+			<td>
+				${client.prenom}
+			</td>
+			<td>
+				${client.email}
+			</td>
+			<td>
+				${client.telephone}
+			</td>
+			<td>
+				 ${client.adresse}
+			</td>
+			<td>
+				<a href="<c:url value="/clients/edit?email=${client.email}"/>" class="btn btn-primary">Editer</a>
+				<br>
+				<form method="POST">
+					<input type="hidden" name="email" value="${client.email}">
+					<input type="hidden" name="action" value="supprimer">
+					<button type="submit" class="btn btn-danger">Supprimer</button>
+				</form>
 			</td>
 		</tr>
 		</c:forEach>
