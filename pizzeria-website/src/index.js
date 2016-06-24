@@ -1,12 +1,13 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
+import ngStorage from 'ngstorage'
 import PizzaModule from './pizza'
 import InscriptionModule from './inscription'
 import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ngRoute])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ngRoute, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -30,5 +31,8 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
       })
       .otherwise('/home')
   })
+  .controller('Ctrl', function (
+    $localStorage
+  ) {})
 
 angular.bootstrap(document, ['pizzeria-website'])

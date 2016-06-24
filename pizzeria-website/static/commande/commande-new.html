@@ -1,25 +1,42 @@
-<table ng-show="ctrl.panier" class="table table-striped" id="panier">
+<div>
+  <table class="table table-striped" id="panier">
     <thead>
-        <tr>
-            <th class="text-left" width="50px">Image</th>
-            <th class="text-center">Nom</th>
-            <th class="text-center">Prix unitaire</th>
-            <th class="text-center">Quantité</th>
-            <th class="text-center">Prix</th>
-        </tr>
-        <tr ng-repeat="obj in ctrl.panier">
-            <td class="text-left"><img ng-src="{{ obj.pizza.imageUrl }}" height="50px"></td>
-            <td class="text-center">{{ obj.pizza.nom }}</td>
-            <td class="text-center">{{ obj.pizza.prix }} €</td>
-            <td class="text-center">{{ obj.quantite }}</td>
-            <td class="text-center">{{ obj.pizza.prix * obj.quantite }} €</td>
-        </tr>
+      <tr>
+        <th class="text-left" width="50px">Image</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Prix unitaire</th>
+        <th class="text-center">Quantité</th>
+        <th class="text-center">Prix</th>
+      </tr>
+      <tr ng-repeat="obj in ctrl.panier">
+        <td class="text-left"><img ng-src="{{ obj.pizza.urlImage }}" height="50px"></td>
+        <td class="text-center">{{ obj.pizza.nom }}</td>
+        <td class="text-center">{{ obj.pizza.prix }} €</td>
+        <td class="text-center">{{ obj.quantite }}</td>
+        <td class="text-center">{{ obj.pizza.prix * obj.quantite }} €</td>
+      </tr>
     </thead>
     <tfoot>
-        <tr>
-            <th colspan="4" class="text-right">Total :</th>
-            <th class="text-center">{{ ctrl.total }} €</th>
-        </tr>
+      <tr>
+        <th colspan="4" class="text-right">Total :</th>
+        <th class="text-center">{{ ctrl.total }} €</th>
+      </tr>
     </tfoot>
-</table>
-<button class="btn btn-success pull-right">Valider la commande</button>
+  </table>
+  <button class="btn btn-primary" ng-if="ctrl.total" ng-click="ctrl.confirm = true">Valider la commande</button>
+</div>
+
+<div class="modal-dialog" ng-if="ctrl.confirm">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Valider la commande</h4>
+    </div>
+    <div class="modal-body">
+      <p>Une fois la commande validée, elle ne peux plus être modifiée.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
+      <button type="button" class="btn btn-danger" ng-click="ctrl.confirm = false">Annuler</button>
+    </div>
+  </div>
+</div>
