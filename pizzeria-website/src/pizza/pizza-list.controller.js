@@ -10,8 +10,6 @@ export class PizzaListController {
   }
 
   addPizza (pizza) {
-    console.log(this.panierService)
-    console.log(this.pizzasService)
     this.panierService.addPizza(pizza)
   }
 

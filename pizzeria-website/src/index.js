@@ -20,9 +20,7 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, ngRoute, 
       .otherwise('/home')
   })
   .controller('Ctrl', function (
-    $scope,
-    $localStorage,
-    $sessionStorage
+    $localStorage
   ) { });
 
 angular.bootstrap(document, ['pizzeria-website'])
