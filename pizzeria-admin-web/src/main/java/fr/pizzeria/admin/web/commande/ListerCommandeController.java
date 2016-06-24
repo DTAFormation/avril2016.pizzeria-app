@@ -22,7 +22,7 @@ import fr.pizzeria.model.Commande;
 public class ListerCommandeController extends HttpServlet {
 
 	  private static final Logger LOG = Logger.getLogger(ListerCommandeController.class.getName());
-	  private static final String VUE_LISTER_COMMANDES = "/WEB-INF/views/commandes/lister.jsp";
+	  private static final String VUE_LISTER_COMMANDES = "/WEB-INF/views/commandes/listerCommandes.jsp";
 
 	  @Inject private CommandeService commandeService;
 

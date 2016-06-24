@@ -31,7 +31,7 @@ import fr.pizzeria.model.StatutCommande;
 public class NouvelleCommandeController extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(NouvelleCommandeController.class.getName());
-	private static final String VUE_NOUVELLE_COMMANDE = "/WEB-INF/views/commandes/editer.jsp";
+	private static final String VUE_NOUVELLE_COMMANDE = "/WEB-INF/views/commandes/editerCommande.jsp";
 
 	@Inject private CommandeService commandeService;
 	@Inject private PizzaService pizzaService;

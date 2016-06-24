@@ -32,7 +32,7 @@
 			<label for="statut">Statut</label>
 			<select name="statut" id="statut" class="form-control">
 				<c:forEach var="statut" items="${statuts}">
-					<option value="${statut}">${statut}</option>
+					<option value="${statut}" <c:if test="${commande.statut == statut}">selected</c:if>>${statut}</option>
 				</c:forEach>
 			</select>
 		</div>
