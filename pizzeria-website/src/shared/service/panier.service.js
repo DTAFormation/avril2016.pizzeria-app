@@ -11,8 +11,7 @@ export class PanierService {
   }
 
   deletePizza (pizza) {
-    var panier = this.findAllPizza()
-    panier[pizza.id] = undefined
+    console.log('it should delete one pizza')
   }
 
   deleteAllPizzas () {
