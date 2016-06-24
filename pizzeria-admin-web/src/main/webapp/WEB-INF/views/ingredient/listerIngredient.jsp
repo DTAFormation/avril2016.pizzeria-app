@@ -26,11 +26,11 @@
 			<td>
 				<div class="row">
 					<div class="col-md-6">
-						Ref. ${ingredient.id}
+						Ref. ${ingredient.code}
 						<br> <b>${ingredient.name}</b>
 					</div>
 					<div class="col-md-6">
-						<a href="<c:url value="/ingredient/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a>
+						<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a>
 						<br>
 						<form method="POST">
 							<input type="hidden" name="code" value="${ingredient.code}">

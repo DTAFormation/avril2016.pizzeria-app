@@ -16,13 +16,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.logging.Logger;
 
-@WebServlet("/ingredient/edit")
+@WebServlet("/ingredients/edit")
 public class EditerIngredientController extends HttpServlet {
 
     private static final Logger LOG = Logger
             .getLogger(EditerIngredientController.class.getName());
 
-    public static final String URL = "/ingredient/edit";
+    public static final String URL = "/ingredients/edit";
     private static final String VUE_EDITER_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
 
     @Inject
@@ -79,7 +79,7 @@ public class EditerIngredientController extends HttpServlet {
 
             ingredientService.updateIngredient(code, ingredientAvecCode);
             resp.sendRedirect(req.getContextPath()
-                    + "/ingredient/list");
+                    + "/ingredients/list");
         }
     }
 

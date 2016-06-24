@@ -24,10 +24,18 @@
 				</div>
 			</c:if>
 			
-			<div class="form-group">
+			<c:if test="${ingredient.id != null}">
+				<div class="form-group">
+				<label for="code">Code</label> <input type="text" class="form-control"
+					id="code" name="code" value="${ingredient.code}" readonly required>
+				</div>
+			</c:if>
+			<c:if test="${ingredient.id == null}">
+				<div class="form-group">
 				<label for="code">Code</label> <input type="text" class="form-control"
 					id="code" name="code" value="${ingredient.code}" required>
-			</div>
+				</div>
+			</c:if>
 			<div class="form-group">
 				<label for="name">Nom</label> <input type="text" class="form-control"
 					id="name" name="name" value="${ingredient.name}" required>
