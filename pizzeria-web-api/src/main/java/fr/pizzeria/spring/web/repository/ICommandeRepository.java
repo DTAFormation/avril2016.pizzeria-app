@@ -2,10 +2,12 @@ package fr.pizzeria.spring.web.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
 
-public interface ICommandeRepository {
-	List<Commande> findByClient(Client client);
+public interface ICommandeRepository extends JpaRepository<Commande,Integer>{
+	List<Commande> findByClient(Client clientId);
 
 }
