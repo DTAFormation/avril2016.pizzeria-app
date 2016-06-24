@@ -17,4 +17,5 @@ export const navbarComponent = {
     </div>
   </nav>
   `
+  //Ligne 14 dans l'url remplacé "/5" par "/{clientId}"
 }
