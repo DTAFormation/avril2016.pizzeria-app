@@ -31,17 +31,17 @@
     <div>
         <!--Nom-->
         <label for="Nom">Nom :</label>
-        <input ng-model="$ctrl.client.Nom" ng-model-options="{ updateOn : 'blur' }" name="Nom" type="text" class="form-control" id="Nom">
+        <input ng-model="$ctrl.client.nom" ng-model-options="{ updateOn : 'blur' }" name="Nom" type="text" class="form-control" id="Nom">
 
         <label for="Prenom">Prenom :</label>
         <!--Prenom-->
-        <input ng-model="$ctrl.client.Prenom" ng-model-options="{ updateOn : 'blur' }" name="Prenom" type="text" class="form-control"
+        <input ng-model="$ctrl.client.prenom" ng-model-options="{ updateOn : 'blur' }" name="Prenom" type="text" class="form-control"
             id="Prenom">
     </div>
 
     <div>
+        <!--Sexe-->
         <label for="sexe">Sexe :</label>
-        <!--Prenom-->
         <input type="radio" name="sexe" ng-model="$ctrl.client.sexe" value="male" /> male
         <input type="radio" name="sexe" ng-model="$ctrl.client.sexe" value="female" /> female <br>
         <label for="date">Date de naissance :</label>
@@ -80,6 +80,6 @@
 
 
 
-    <!--<pre>{{inscriptionClientForm | json}}</pre>-->
+    <pre>{{inscriptionClientForm | json}}</pre>
 
 </form>
