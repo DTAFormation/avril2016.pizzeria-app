@@ -177,4 +177,5 @@ public class Client {
 	public void setNumeroTel(String numeroTel) {
 		this.numeroTel = numeroTel;
 	}
+}
 	

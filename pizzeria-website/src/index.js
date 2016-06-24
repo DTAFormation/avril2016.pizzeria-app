@@ -18,16 +18,11 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeM
         controller: 'CommandeNewController',
         controllerAs: 'ctrl'
       })
-      .when('/commandes', {
-            templateUrl: 'commande/commande-list.html',
-            controller: 'CommandeListController',
-            controllerAs: 'ctrl'
-          })
-          .when('/commandes/:id?', {
-            templateUrl: 'commande/commande-list.html',
-            controller: 'CommandeListController',
-            controllerAs: 'ctrl'
-         })
+      .when('/commandes/:id?', {
+        templateUrl: 'commande/commande-list.html',
+        controller: 'CommandeListController',
+        controllerAs: 'ctrl'
+      })
       .when('/about', {
         templateUrl: 'about/about.html'
       })

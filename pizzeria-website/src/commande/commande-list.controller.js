@@ -9,7 +9,9 @@ export class CommandeListController {
 
   findAllCommandes() {
     const ctrl = this;
-    console.log("ctrl : ", ctrl)
+    if (!this.$routeParams.id) {
+      this.$location.path('/home')
+    } else {
     return this.commandesService.findAllCommandesClient(this.$routeParams.id)
       .then(data => {
         ctrl.listeCommandes = [];
@@ -17,6 +19,7 @@ export class CommandeListController {
           ctrl.listeCommandes.push(item)
         })
       })
+    }
   }
 }
 

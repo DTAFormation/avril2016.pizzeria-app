@@ -11,12 +11,11 @@ export const navbarComponent = {
       <ul class="nav navbar-nav">
         <li ng-class="{active : $ctrl.isActive('/home')}"><a href="#/">Accueil</a></li>
         <li ng-class="{active : $ctrl.isActive('/pizzas')}" role="presentation"><a href="#/pizzas">Nos Pizzas</a></li>
-        <li ng-class="{active : $ctrl.isActive('/commandes')}" role="presentation"><a href="#/commandes">Vos Commandes</a></li>
+        <li ng-class="{active : $ctrl.isActive('/commandes')}" role="presentation"><a href="#/commandes/{{ $ctrl.clientId }}">Vos Commandes</a></li>
         <li ng-class="{active : $ctrl.isActive('/about')}" role="presentation"><a href="#/about">A propos</a></li>
         <li ng-class="{active : $ctrl.isActive('/inscription')}" role="presentation"><a href="#/inscription">Inscription</a></li>
       </ul>
     </div>
   </nav>
   `
-  //Ligne 14 dans l'url remplacé "/5" par "/{clientId}"
 }
