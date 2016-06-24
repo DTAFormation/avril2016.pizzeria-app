@@ -55,25 +55,45 @@
 			<label for="client">Client</label>
 			<select name="client" id="client" class="form-control">
 				<c:forEach var="client" items="${clients}">
-					<option value="${client.id}">${client.prenom} ${client.nom}</option>
+					<option value="${client.id}" <c:if test="${commande.client.id == client.id}">selected</c:if>>${client.prenom} ${client.nom}</option>
 				</c:forEach>
 			</select>
 		</div>
 		
-		<div class="form-group">
-			<label>Pizzas</label>
-			<c:forEach var="pizza" items="${pizzas}">
-				<div class="row">
-					<div class="col-md-2">
-						<span style="display:block; margin-top:5px">${pizza.nom}</span>
-					</div>
-					<div class="col-md-1">
-						<input type="number" class="form-control" name="${pizza.code}" value="0" min="0" ">
-					</div>
+		<c:choose>
+			<c:when test="${ (commande != null && commande.id != null) }">
+				<div class="form-group">
+					<label>Pizzas</label>
+					<c:forEach var="pizzaCmd" items="${commande.pizzas}">
+						<div class="row">
+							<div class="col-md-2">
+								<span style="display:block; margin-top:5px">${pizzaCmd.pizza.nom}</span>
+							</div>
+							<div class="col-md-1">
+								<input type="number" class="form-control" name="${pizzaCmd.pizza.code}" value="${pizzaCmd.quantite}" min="0">
+							</div>
+						</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
-
+			</c:when>
+			
+			<c:otherwise>
+				<div class="form-group">
+					<label>Pizzas</label>
+					<c:forEach var="pizza" items="${pizzas}">
+						<div class="row">
+							<div class="col-md-2">
+								<span style="display:block; margin-top:5px">${pizza.nom}</span>
+							</div>
+							<div class="col-md-1">
+								<input type="number" class="form-control" name="${pizza.code}" value="0" min="0">
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		
 		<button type="submit" class="btn btn-primary">Valider</button>
 	</form>
 </body>

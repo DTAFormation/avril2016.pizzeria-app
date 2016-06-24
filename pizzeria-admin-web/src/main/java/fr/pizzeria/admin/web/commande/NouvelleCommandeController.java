@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.Client;
@@ -35,10 +36,11 @@ public class NouvelleCommandeController extends HttpServlet {
 
 	@Inject private CommandeService commandeService;
 	@Inject private PizzaService pizzaService;
+	@Inject private ClientService clientService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO: utiliser livreurService.findAll => seulement les livreurs disponiles
+		// TODO: utiliser livreurService.findAll => seulement les livreurs disponibles
 		List<Livreur> livreursDisponibles = new ArrayList<>();
 		Livreur l1 = new Livreur();
 		l1.setId(1);
@@ -51,18 +53,7 @@ public class NouvelleCommandeController extends HttpServlet {
 		livreursDisponibles.add(l1);
 		livreursDisponibles.add(l2);
 
-		// TODO: utiliser clientService.findAll
-		List<Client> clients = new ArrayList<>();
-		Client c1 = new Client();
-		c1.setId(1);
-		c1.setPrenom("John");
-		c1.setNom("Doe");
-		Client c2 = new Client();
-		c2.setId(2);
-		c2.setPrenom("Dale");
-		c2.setNom("Cooper");
-		clients.add(c1);
-		clients.add(c2);
+		List<Client> clients = clientService.findAll();
 
 		Commande commande = new Commande();
 		commande.setDateCommande(Calendar.getInstance());
@@ -115,11 +106,9 @@ public class NouvelleCommandeController extends HttpServlet {
 			List<Pizza> allPizzas = pizzaService.findAll();
 			allPizzas.forEach(p -> {
 				int qte = Integer.parseInt(req.getParameter(p.getCode()));
-				if (qte > 0) {
-					commandeSansId.addPizza(p, qte);
-				}
+				commandeSansId.addPizza(p, qte);
 			});
-			commandeService.updateCommande(commandeSansId.getNumeroCommande(), commandeSansId);;
+			commandeService.updateCommande(commandeSansId.getNumeroCommande(), commandeSansId);
 			
 			// Redirection
 			resp.sendRedirect(req.getContextPath() + "/commandes/list");
