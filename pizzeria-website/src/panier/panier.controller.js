@@ -2,11 +2,12 @@ import { Pizza } from '../shared/model/pizza'
 
 export class PanierController {
 
-  constructor ($localStorage) {
+  constructor (PanierService,$localStorage) {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
     // TEMPORAIRE : contenu en dur, remplacer avec données en stockage local
     this.$localStorage = $localStorage
-    this.contenu = this.$localStorage.panier
+    this.PanierService = PanierService
+    this.contenu = this.PanierService.$localStorage.panier
   }
 
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
