@@ -10,12 +10,13 @@ export class PanierService {
   }
 
   deletePizza (pizza) {
+    console.log('delete:', pizza)
     var panier = this.findAllPizza()
     panier[pizza.id] = undefined
   }
 
   deleteAllPizzas () {
-    this.$localStorage.panier = ''
+    this.$localStorage.panier = undefined
   }
 
   findAllPizzas () {
