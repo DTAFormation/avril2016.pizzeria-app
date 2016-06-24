@@ -1,4 +1,4 @@
-<div ng-show="ctrl.panier && ctrl.panier.length">
+<div>
   <table class="table table-striped" id="panier">
     <thead>
       <tr>
@@ -23,11 +23,7 @@
       </tr>
     </tfoot>
   </table>
-  <button class="btn btn-primary" ng-click="ctrl.confirm = true">Valider la commande</button>
-</div>
-
-<div ng-show="!ctrl.panier || !ctrl.panier.length">
-  <h2>Le panier est vide</h2>
+  <button class="btn btn-primary" ng-if="ctrl.total" ng-click="ctrl.confirm = true">Valider la commande</button>
 </div>
 
 <div class="modal-dialog" ng-if="ctrl.confirm">
