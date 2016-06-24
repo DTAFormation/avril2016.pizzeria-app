@@ -45,6 +45,7 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
+	private boolean delFlag = false; 
 	
 	@OneToMany(mappedBy = "pizza")
 	private List<CommandePizza> commandes = new ArrayList<>();
@@ -122,6 +123,14 @@ public class Pizza {
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+	
+	public boolean isDelFlag() {
+		return delFlag;
+	}
+	
+	public void setDelFlag(boolean delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	@Override
