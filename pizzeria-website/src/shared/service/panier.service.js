@@ -1,6 +1,7 @@
 export class PanierService {
   constructor ($localStorage) {
     this.$localStorage = $localStorage
+    if(!this.$localStorage.panier) this.$localStorage.panier = {}
   }
   addPizza (pizza) {
     var panier = this.findAllPizzas()
@@ -19,6 +20,6 @@ export class PanierService {
   }
 
   findAllPizzas () {
-    return this.$localStorage.panier || {}
+    return this.$localStorage.panier
   }
 }
