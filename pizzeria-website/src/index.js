@@ -26,8 +26,7 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeM
       .otherwise('/home')
   })
   .controller('Ctrl', function (
-
     $localStorage
-  ) { });
+  ) { })
 
 angular.bootstrap(document, ['pizzeria-website'])
