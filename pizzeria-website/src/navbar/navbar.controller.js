@@ -1,9 +1,9 @@
 export class NavbarController {
-  constructor ($location, $localStorage) {
+  constructor($location, $localStorage) {
+    this.$localStorage = $localStorage
     this.isActive = function (viewLocation) {
       return !$location.path().indexOf(viewLocation)
     }
-    if ($localStorage.client) this.clientId = $localStorage.client.id
   }
 }
 
