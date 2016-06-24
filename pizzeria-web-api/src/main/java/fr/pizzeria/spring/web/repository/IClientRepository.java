@@ -7,4 +7,6 @@ import fr.pizzeria.model.Pizza;
 
 public interface IClientRepository extends JpaRepository<Client,Integer> {
 
+    Client findByEmailAndMotDePasse(String email, String motDePasse);
+
 }
