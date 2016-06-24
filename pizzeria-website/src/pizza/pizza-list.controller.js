@@ -1,18 +1,9 @@
-import { PanierService } from '../shared/service/panier.service'
-
 export class PizzaListController {
 
-  constructor (pizzasService, panierService) {
-    this.panierService = panierService
+  constructor (pizzasService) {
     this.pizzasService = pizzasService
     this.ordering = 'nom'
     this.findAllPizzas()
-  }
-
-  addPizza (pizza) {
-    console.log(this.panierService)
-    console.log(this.pizzasService)
-    this.panierService.addPizza(pizza)
   }
 
   findAllPizzas () {
@@ -27,4 +18,4 @@ export class PizzaListController {
   }
 }
 
-PizzaListController.$inject = ['PizzasService', '$q', 'PanierService']
+PizzaListController.$inject = ['PizzasService']
