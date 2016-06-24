@@ -16,7 +16,7 @@ describe('Test du PizzaListController', function () {
       'code': 'royale',
       'prix': 12,
       'categorie': 'VIANDE',
-      'imageUrl': 'http://placehold.it/150x150',
+      'urlImage': 'http://placehold.it/150x150',
       'id': 1
     }])
 
