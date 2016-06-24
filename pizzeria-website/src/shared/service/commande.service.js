@@ -17,4 +17,9 @@ export class CommandesService {
       .then(response => response.data)
       .then(commandes => commandes.map(commande => new Commande(commande)));
   }
+
+  addOne (commande) {
+    return this.$http.post(COMMANDE_RESOURCE_URL, commande)
+      .then(response => response.data)
+  }
 }

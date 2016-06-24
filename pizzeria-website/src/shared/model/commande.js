@@ -1,5 +1,6 @@
 export class Commande {
-  constructor ({numeroCommande, statut, dateCommande, livreur, client, pizzas}) {
+  constructor ({id, numeroCommande, statut, dateCommande, livreur, client, pizzas}) {
+    this.id = id
     this.numeroCommande = numeroCommande
     this.statut = statut
     this.dateCommande = dateCommande

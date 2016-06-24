@@ -24,9 +24,6 @@ public class Client {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dateNaissance;
 	private String adresseNum;
-	
-	
-
 	private String adresseRue;
 	private String adresseDetail;
 	private String adresseCodePostal;
@@ -50,6 +47,26 @@ public class Client {
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
+	}
+
+
+	public Client(Integer id, String nom, String prenom, String email, String motDePasse, String sexe,
+			Calendar dateNaissance, String adresseNum, String adresseRue, String adresseDetail,
+			String adresseCodePostal, String adresseVille, String numeroTel) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.sexe = sexe;
+		this.dateNaissance = dateNaissance;
+		this.adresseNum = adresseNum;
+		this.adresseRue = adresseRue;
+		this.adresseDetail = adresseDetail;
+		this.adresseCodePostal = adresseCodePostal;
+		this.adresseVille = adresseVille;
+		this.numeroTel = numeroTel;
 	}
 
 	public Client() {
@@ -161,6 +178,3 @@ public class Client {
 		this.numeroTel = numeroTel;
 	}
 	
-	
-
-}

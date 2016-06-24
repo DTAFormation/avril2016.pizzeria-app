@@ -1,5 +1,5 @@
 export class Client {
-	constructor ({id, nom, prenom, email, motDePasse, sexe, dateNaissance, adresseNum, adresseDetail, adresseCodePostal, adresseVille, numeroTel}) {
+  constructor ({id, nom, prenom, email, motDePasse, sexe, dateNaissance, adresseNum, adresseRue, adresseDetail, adresseCodePostal, adresseVille, numeroTel}) {
     this.id = id
     this.nom = nom
     this.prenom = prenom
@@ -8,6 +8,7 @@ export class Client {
     this.sexe = sexe
     this.dateNaissance = dateNaissance
     this.adresseNum = adresseNum
+    this.adresseRue = adresseRue
     this.adresseDetail = adresseDetail
     this.adresseCodePostal = adresseCodePostal
     this.adresseVille = adresseVille

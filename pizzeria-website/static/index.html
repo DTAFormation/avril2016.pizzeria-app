@@ -6,12 +6,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 
-<body>
+<body class="container-fluid">
   <navbar-component></navbar-component>
   <div class="row">
-    <div class="col-md-12" ng-view>
-    </div>
+    <div class="col-md-12" ng-view></div>
   </div>
+
+  <panier-component></panier-component>
+
   <script src="build.js"></script>
 </body>
 
