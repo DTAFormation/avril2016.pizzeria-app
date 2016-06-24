@@ -3,25 +3,22 @@ import { Commande } from '../shared/model/commande'
 
 export class CommandeNewController {
 
-  constructor (commandesService, $location) {
+  constructor (commandesService, panierService, $location) {
     this.commandesService = commandesService
+    this.panierService = panierService
     this.$location = $location
     this.total = 0
-    this.panier = [
-      {'pizza': new Pizza({ 'id': 2, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150' }), 'quantite': 1},
-      {'pizza': new Pizza({ 'id': 2, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150' }), 'quantite': 2},
-      {'pizza': new Pizza({ 'id': 2, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150' }), 'quantite': 1}
-    ]
-    this.panier.forEach(obj => {
-      this.total += obj.pizza.prix * obj.quantite
+    this.panier = this.panierService.findAllPizzas()
+    Object.keys(this.panier).forEach(key => {
+      this.total += this.panier[key].pizza.prix * this.panier[key].quantite
     })
   }
 
   validate () {
     let pizzas = []
-    this.panier.forEach(obj => {
-      for (let i = 0; i < obj.quantite; i++) {
-        pizzas.push(obj.pizza)
+    Object.keys(this.panier).forEach(key => {
+      for (let i = 0; i < this.panier[key].quantite; i++) {
+        pizzas.push(this.panier[key].pizza)
       }
     })
     let commande = new Commande({
@@ -35,9 +32,10 @@ export class CommandeNewController {
 
     return this.commandesService.addOne(commande)
       .then(data => {
+        this.panierService.deleteAllPizzas()
         this.$location.path('/')
       })
   }
 }
 
-CommandeNewController.$inject = ['CommandesService', '$location']
+CommandeNewController.$inject = ['CommandesService', 'PanierService', '$location']
