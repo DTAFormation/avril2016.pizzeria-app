@@ -1,3 +1,5 @@
+import { Pizza } from 'pizza'
+
 describe('Test du PizzaListController', function () {
   var ctrl
   var http
@@ -25,6 +27,19 @@ describe('Test du PizzaListController', function () {
         .finally(done)
 
     http.flush()
+  })
+
+  it('should save a pizza in localStorage', function() {
+    var pizza = new Pizza({
+      'nom': 'Royale',
+      'code': 'royale',
+      'prix': 12,
+      'categorie': 'VIANDE',
+      'urlImage': 'http://placehold.it/150x150',
+      'id': 1
+    })
+    ctrl.addPizza(pizza)
+    expect(crtl.panierService.findAllPizzas().toEqual(pizza))
   })
 
 })

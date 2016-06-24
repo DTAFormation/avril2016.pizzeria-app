@@ -8,7 +8,10 @@ export class PanierController {
     this.$localStorage = $localStorage
     this.PanierService = PanierService
     this.contenu = this.PanierService.$localStorage.panier
-    this.isEmpty = Object.keys(this.contenu).length
+  }
+
+  isEmpty () {
+    return Object.keys(this.contenu).length === 0
   }
 
   // remarque : juste une idée pour le multilangue (ne fonctionne pas)
