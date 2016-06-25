@@ -40,7 +40,10 @@ public class NouvelleCommandeController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO: utiliser livreurService.findAll => seulement les livreurs disponibles
+		// Définition des attributs par défaut
+
+		// TODO: utiliser livreurService.findAll => seulement les livreurs
+		// disponibles
 		List<Livreur> livreursDisponibles = new ArrayList<>();
 		Livreur l1 = new Livreur();
 		l1.setId(1);
@@ -53,18 +56,19 @@ public class NouvelleCommandeController extends HttpServlet {
 		livreursDisponibles.add(l1);
 		livreursDisponibles.add(l2);
 
+		List<Pizza> pizzas = pizzaService.findAll();
 		List<Client> clients = clientService.findAll();
+		StatutCommande[] statuts = StatutCommande.values();
 
 		Commande commande = new Commande();
 		commande.setDateCommande(Calendar.getInstance());
-
-		StatutCommande[] statuts = StatutCommande.values();
 
 		req.setAttribute("commande", commande);
 		req.setAttribute("statuts", statuts);
 		req.setAttribute("livreurs", livreursDisponibles);
 		req.setAttribute("clients", clients);
-		req.setAttribute("pizzas", pizzaService.findAll());
+		req.setAttribute("pizzas", pizzas);
+
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE);
 		dispatcher.forward(req, resp);
 	}
@@ -76,12 +80,21 @@ public class NouvelleCommandeController extends HttpServlet {
 		String dateParam = req.getParameter("date");
 		String livreurIdParam = req.getParameter("livreur");
 		String clientIdParam = req.getParameter("client");
-		
-		if (isBlank(numeroParam) || isBlank(statutParam) || isBlank(dateParam) || isBlank(livreurIdParam) || isBlank(clientIdParam)) {
+
+		if (isBlank(numeroParam) || isBlank(statutParam) || isBlank(dateParam) || isBlank(livreurIdParam)
+				|| isBlank(clientIdParam)) {
+			
 			req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE).forward(req, resp);
+
+		} else if (commandeService.isCodeTaken(numeroParam) > 0) {
+			
+			req.setAttribute("msgErreur", "Le numéro de commande existe déjà !");
+			req.setAttribute("commande", new Commande());
+			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE).forward(req, resp);
+			
 		} else {
-			// Traitement des params
+			// Traitement des paramètres
 			StatutCommande statut = StatutCommande.valueOf(statutParam);
 
 			Calendar date = Calendar.getInstance();
@@ -89,27 +102,30 @@ public class NouvelleCommandeController extends HttpServlet {
 			try {
 				date.setTime(sdf.parse(req.getParameter("date")));
 			} catch (ParseException e) {
-				e.printStackTrace();
+				throw new IllegalArgumentException("Format de la date incorrect !");
 			}
 
-			int livreurId = Integer.parseInt(req.getParameter("livreur"));
-			int clientId = Integer.parseInt(req.getParameter("client"));
+			int livreurId = Integer.parseInt(livreurIdParam);
 			Livreur l = new Livreur();
 			l.setId(livreurId);
+
+			int clientId = Integer.parseInt(clientIdParam);
 			Client c = new Client();
 			c.setId(clientId);
 
+			// Enregistrement de la commande
 			Commande commandeSansId = new Commande(numeroParam, statut, date, l, c);
 			commandeService.saveCommande(commandeSansId);
-			
+
 			// Ajout des pizzas
+			// TODO: uniquement celles dont qte > 0
 			List<Pizza> allPizzas = pizzaService.findAll();
 			allPizzas.forEach(p -> {
 				int qte = Integer.parseInt(req.getParameter(p.getCode()));
 				commandeSansId.addPizza(p, qte);
 			});
 			commandeService.updateCommande(commandeSansId.getNumeroCommande(), commandeSansId);
-			
+
 			// Redirection
 			resp.sendRedirect(req.getContextPath() + "/commandes/list");
 		}

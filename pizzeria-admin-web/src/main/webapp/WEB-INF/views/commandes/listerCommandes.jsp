@@ -29,7 +29,7 @@
 		<c:forEach var="commande" items="${listeCommandes}">
 		<tr>
 			<td>${commande.numeroCommande}</td>
-			<td>${commande.statut}</td>
+			<td>${commande.statut.libelle}</td>
 			<td><fmt:formatDate value="${commande.dateCommande.time}" type="both" dateStyle="short" timeStyle="short" /></td>
 			<td>${commande.livreur.prenom} ${commande.livreur.nom}</td>
 			<td>${commande.client.prenom} ${commande.client.nom}</td>

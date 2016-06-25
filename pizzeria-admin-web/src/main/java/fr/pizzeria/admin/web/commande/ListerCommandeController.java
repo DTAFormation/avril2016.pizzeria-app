@@ -23,6 +23,7 @@ public class ListerCommandeController extends HttpServlet {
 
 	  private static final Logger LOG = Logger.getLogger(ListerCommandeController.class.getName());
 	  private static final String VUE_LISTER_COMMANDES = "/WEB-INF/views/commandes/listerCommandes.jsp";
+	  private static final String ACTION_SUPPRIMER = "supprimer";
 
 	  @Inject private CommandeService commandeService;
 
@@ -31,8 +32,31 @@ public class ListerCommandeController extends HttpServlet {
 	      throws ServletException, IOException {
 		  
 		List<Commande> commandes = this.commandeService.findAll();
+		
 	    req.setAttribute("listeCommandes", commandes);
 	    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_COMMANDES);
 	    dispatcher.forward(req, resp);
+	  }
+	  
+	  @Override
+	  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	      throws ServletException, IOException {
+		  
+	    String action = req.getParameter("action"); // supprimer
+	    String code = req.getParameter("code"); // numero de la commande
+
+	    switch (action) {
+	      case ACTION_SUPPRIMER:
+	        commandeService.deleteCommande(code);
+	        req.setAttribute("msg", "La commande " + code + " a été supprimée");
+	        doGet(req, resp);
+	        break;
+	        
+	      default:
+	        req.setAttribute("msg", "Action inconnue");
+	        resp.setStatus(400);
+	        doGet(req, resp);
+	        break;
+	    }
 	  }
 }

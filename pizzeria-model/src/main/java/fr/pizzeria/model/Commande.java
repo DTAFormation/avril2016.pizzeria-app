@@ -38,6 +38,8 @@ public class Commande {
 	@ManyToOne
 	private Client client;
 	
+	private boolean delFlag = false; 
+	
 	@OneToMany(mappedBy = "commande", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<CommandePizza> pizzas = new ArrayList<>();
 	
@@ -108,6 +110,14 @@ public class Commande {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	
+	public boolean isDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(boolean delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	public List<CommandePizza> getPizzas() {
