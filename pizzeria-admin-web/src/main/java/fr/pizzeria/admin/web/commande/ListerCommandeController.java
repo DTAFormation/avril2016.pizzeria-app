@@ -25,7 +25,8 @@ public class ListerCommandeController extends HttpServlet {
 	  private static final String VUE_LISTER_COMMANDES = "/WEB-INF/views/commandes/listerCommandes.jsp";
 	  private static final String ACTION_SUPPRIMER = "supprimer";
 
-	  @Inject private CommandeService commandeService;
+	  @Inject 
+	  private CommandeService commandeService;
 
 	  @Override
 	  protected void doGet(HttpServletRequest req, HttpServletResponse resp)

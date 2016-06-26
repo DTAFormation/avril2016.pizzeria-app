@@ -12,10 +12,10 @@ import javax.persistence.Table;
 @IdClass(CommandePizzaId.class)
 public class CommandePizza {
 	@Id
-	private int commandeId;
+	private Integer commandeId;
 	
 	@Id
-	private int pizzaId;
+	private Integer pizzaId;
 	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "commande_id", referencedColumnName = "id")

@@ -56,8 +56,10 @@
 			<label for="livreur">Livreur</label> <select name="livreur"
 				id="livreur" class="form-control">
 				<c:forEach var="livreur" items="${livreurs}">
-					<option value="${livreur.id}">${livreur.prenom}
-						${livreur.nom}</option>
+					<option value="${livreur.id}"
+						<c:if test="${commande.livreur.id == livreur.id}">selected</c:if>>
+						${livreur.prenom} ${livreur.nom}
+					</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -67,8 +69,9 @@
 				class="form-control">
 				<c:forEach var="client" items="${clients}">
 					<option value="${client.id}"
-						<c:if test="${commande.client.id == client.id}">selected</c:if>>${client.prenom}
-						${client.nom}</option>
+						<c:if test="${commande.client.id == client.id}">selected</c:if>>
+						${client.prenom} ${client.nom}
+					</option>
 				</c:forEach>
 			</select>
 		</div>

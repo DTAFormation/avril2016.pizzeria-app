@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
+import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
@@ -34,28 +35,22 @@ public class NouvelleCommandeController extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(NouvelleCommandeController.class.getName());
 	private static final String VUE_NOUVELLE_COMMANDE = "/WEB-INF/views/commandes/editerCommande.jsp";
 
-	@Inject private CommandeService commandeService;
-	@Inject private PizzaService pizzaService;
-	@Inject private ClientService clientService;
+	@Inject 
+	private CommandeService commandeService;
+	
+	@Inject 
+	private PizzaService pizzaService;
+	
+	@Inject 
+	private ClientService clientService;
+	
+	@Inject
+	private LivreurService livreurService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Définition des attributs par défaut
-
-		// TODO: utiliser livreurService.findAll => seulement les livreurs
-		// disponibles
-		List<Livreur> livreursDisponibles = new ArrayList<>();
-		Livreur l1 = new Livreur();
-		l1.setId(1);
-		l1.setPrenom("Bob");
-		l1.setNom("Legros");
-		Livreur l2 = new Livreur();
-		l2.setId(2);
-		l2.setPrenom("Jim");
-		l2.setNom("Marshall");
-		livreursDisponibles.add(l1);
-		livreursDisponibles.add(l2);
-
+		List<Livreur> livreursDisponibles = livreurService.findAll();
 		List<Pizza> pizzas = pizzaService.findAll();
 		List<Client> clients = clientService.findAll();
 		StatutCommande[] statuts = StatutCommande.values();

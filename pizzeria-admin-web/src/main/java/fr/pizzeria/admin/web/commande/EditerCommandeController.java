@@ -3,7 +3,6 @@ package fr.pizzeria.admin.web.commande;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
+import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
@@ -32,9 +32,17 @@ public class EditerCommandeController extends HttpServlet {
 	public static final String URL = "/commandes/edit";
 	private static final String VUE_EDITER_COMMANDE = "/WEB-INF/views/commandes/editerCommande.jsp";
 
-	@Inject private CommandeService commandeService;
-	@Inject private PizzaService pizzaService;
-	@Inject private ClientService clientService;
+	@Inject 
+	private CommandeService commandeService;
+	
+	@Inject 
+	private PizzaService pizzaService;
+	
+	@Inject 
+	private ClientService clientService;
+	
+	@Inject
+	private LivreurService livreurService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,38 +53,25 @@ public class EditerCommandeController extends HttpServlet {
 			resp.setStatus(400); // Bad Request
 			req.setAttribute("msgErreur", "Code obligatoire pour editer une commande");
 			this.getServletContext().getRequestDispatcher(VUE_EDITER_COMMANDE).forward(req, resp);
+			
 		} else {
 			Commande commande = this.commandeService.findOneCommande(code);
+			
 			if (commande == null) {
 				sendErrorCommandeInconnue(req, resp);
 			} else {
-				// TODO: utiliser livreurService.findAll => seulement les
-				// livreurs disponibles
-				List<Livreur> livreursDisponibles = new ArrayList<>();
-				Livreur l1 = new Livreur();
-				l1.setId(1);
-				l1.setPrenom("Bob");
-				l1.setNom("Legros");
-				Livreur l2 = new Livreur();
-				l2.setId(2);
-				l2.setPrenom("Jim");
-				l2.setNom("Marshall");
-				livreursDisponibles.add(l1);
-				livreursDisponibles.add(l2);
-
-				// TODO: utiliser clientService.findAll
+				List<Livreur> livreursDisponibles = livreurService.findAll();
 				List<Client> clients = clientService.findAll();
-
 				StatutCommande[] statuts = StatutCommande.values();
 
 				req.setAttribute("commande", commande);
 				req.setAttribute("statuts", statuts);
 				req.setAttribute("livreurs", livreursDisponibles);
 				req.setAttribute("clients", clients);
+				
 				this.getServletContext().getRequestDispatcher(VUE_EDITER_COMMANDE).forward(req, resp);
 			}
 		}
-
 	}
 
 	private void sendErrorCommandeInconnue(HttpServletRequest req, HttpServletResponse resp)
@@ -116,9 +111,10 @@ public class EditerCommandeController extends HttpServlet {
 			}
 
 			int livreurId = Integer.parseInt(req.getParameter("livreur"));
-			int clientId = Integer.parseInt(req.getParameter("client"));
 			Livreur l = new Livreur();
 			l.setId(livreurId);
+			
+			int clientId = Integer.parseInt(req.getParameter("client"));
 			Client c = new Client();
 			c.setId(clientId);
 
@@ -143,5 +139,4 @@ public class EditerCommandeController extends HttpServlet {
 	protected boolean isBlank(String param) {
 		return param == null || param.isEmpty();
 	}
-
 }
