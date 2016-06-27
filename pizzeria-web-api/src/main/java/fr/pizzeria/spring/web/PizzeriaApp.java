@@ -25,8 +25,8 @@ public class PizzeriaApp {
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurerAdapter() {
       @Override
-      public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*");
+      public void addCorsMappings(CorsRegistry registry) {// "GET","POST",
+        registry.addMapping("/**").allowedOrigins("*").allowedMethods("PUT", "DELETE");
       }
     };
   }
