@@ -8,6 +8,9 @@
 
 </jsp:include>
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Client" name="page" />
+	</jsp:include>
 	<h1>
 		<c:out
 			value="${ (client != null && client.id != null) ? 'Editer le client' : 'Créer un client' }" />
@@ -59,6 +62,7 @@
 			</div>
 			<input type="hidden" name="oldEmail" value="${client.email}" />
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<a href="<c:url value="/clients/list"></c:url>"type="button">Retour</a>
 		</form>
 	</c:if>
 

@@ -7,7 +7,9 @@
 	<jsp:param value="Page Editer Pizza" name="title" />
 </jsp:include>
 <body class="container">
-
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Pizza" name="page" />
+	</jsp:include>
 	<h1>
 		<c:out
 			value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }" />
@@ -75,6 +77,7 @@
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<a href="<c:url value="/pizzas/list"></c:url>"type="button">Retour</a>
 		</form>
 	</c:if>
 	<script type="text/javascript">
