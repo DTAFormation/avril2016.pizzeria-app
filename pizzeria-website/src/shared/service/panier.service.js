@@ -1,8 +1,9 @@
 export class PanierService {
   constructor ($localStorage) {
     this.$localStorage = $localStorage
-    if(!this.$localStorage.panier) this.$localStorage.panier = {}
+    if (!this.$localStorage.panier) this.$localStorage.panier = {}
   }
+
   addPizza (pizza) {
     var panier = this.findAllPizzas()
     if (panier[pizza.id]) panier[pizza.id]['quantite']++
@@ -10,15 +11,23 @@ export class PanierService {
     this.$localStorage.panier = panier
   }
 
-  deletePizza (pizza) {
-    console.log('it should delete one pizza')
+  deletePizza (id) {
+    var panier = this.findAllPizzas()
+    delete panier[id]
+    this.$localStorage.panier = panier
   }
 
+  // TODO : changer le nom (voir raison dans findAllPizzas() )
   deleteAllPizzas () {
     this.$localStorage.panier = {}
   }
 
+  // TODO : changer de nom vers "getPanier" (on ne récupère pas des pizzas mais une liste d'objets avec une pizza ET une quantité)
   findAllPizzas () {
     return this.$localStorage.panier
+  }
+
+  size () {
+    return Object.keys(this.findAllPizzas()).length
   }
 }
