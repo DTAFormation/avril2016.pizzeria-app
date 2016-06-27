@@ -2,6 +2,7 @@ package fr.pizzeria.admin.listener;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import fr.pizzeria.admin.metier.ClientService;
+import fr.pizzeria.admin.metier.CommandeService;
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.admin.metier.PizzaService;
@@ -22,6 +24,7 @@ import fr.pizzeria.model.Commande;
 import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Livreur;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.model.StatutCommande;
 import fr.pizzeria.model.Utilisateur;
 
 @WebListener
@@ -42,7 +45,13 @@ public class ApplicationListener implements ServletContextListener {
 	@Inject
 	IngredientService ingredientService;
 	
+	@Inject 
+	CommandeService commandeService;
+	
 	private Map<String, Ingredient> ingredients = new HashMap<>();
+	private List<Livreur> livreurs = new ArrayList<>();
+	private List<Client> clients = new ArrayList<>();
+	private List<Pizza> pizzas = new ArrayList<>();
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
@@ -52,6 +61,7 @@ public class ApplicationListener implements ServletContextListener {
 		initLivreurs();
 		initUtilisateurs();
 		initIngredients();
+		initCommandes();
 	}
 
 	@Override
@@ -80,8 +90,6 @@ public class ApplicationListener implements ServletContextListener {
 	}
 	
 	private void initPizzas() {
-		List<Pizza> pizzas = new ArrayList<>();
-		
 		Pizza p1 = new Pizza("MAR", "Margherita", new BigDecimal(12.50), CategoriePizza.SANS_VIANDE);
 		p1.addIngredient(ingredients.get("CHA"));
 		p1.addIngredient(ingredients.get("MOZ"));
@@ -120,8 +128,6 @@ public class ApplicationListener implements ServletContextListener {
 	}
 	
 	private void initClients() {
-		List<Client> clients = new ArrayList<>();
-		
 		clients.add(new Client("LeStalker", "Bob", "bobs@gmail.com", "5 rue lamer", "0612134565"));
 		clients.add(new Client("Rodriguez", "Robert", "polor@gmail.com", "18 rue pueblo", "0712134565"));
 		clients.add(new Client("HoldTheDoor", "Hodor", "dalec@gmail.com", "15 bd des anglais", "0612145565"));
@@ -144,8 +150,6 @@ public class ApplicationListener implements ServletContextListener {
 	}
 	
 	private void initLivreurs() {
-		List<Livreur> livreurs = new ArrayList<>();
-		
 		livreurs.add(new Livreur("Hollande", "François"));
 		livreurs.add(new Livreur("Cameron", "David"));
 		livreurs.add(new Livreur("Targaryen", "Daenerys"));
@@ -155,9 +159,28 @@ public class ApplicationListener implements ServletContextListener {
 		});
 	}
 	
-	private void initCommande() {
-//		List<Commande> commandes = new ArrayList<>();
-//		
-//		commandes.add(new Commande());
+	private void initCommandes() {
+		List<Commande> commandes = new ArrayList<>();
+		Commande c1 = new Commande("CMD1", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreurs.get(0), clients.get(0));
+		Commande c2 = new Commande("CMD2", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreurs.get(1), clients.get(1));
+		Commande c3 = new Commande("CMD3", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreurs.get(2), clients.get(2));
+		commandes.add(c1);
+		commandes.add(c2);
+		commandes.add(c3);
+
+		commandes.forEach(c -> {
+			commandeService.saveCommande(c);
+		});
+		
+		c1.addPizza(pizzas.get(0), 2);
+		c1.addPizza(pizzas.get(1), 3);
+		c2.addPizza(pizzas.get(1), 5);
+		c2.addPizza(pizzas.get(2), 1);
+		c2.addPizza(pizzas.get(3), 2);
+		c3.addPizza(pizzas.get(2), 2);
+		
+		commandes.forEach(c -> {
+			commandeService.updateCommande(c.getNumeroCommande(), c);
+		});
 	}
 }
