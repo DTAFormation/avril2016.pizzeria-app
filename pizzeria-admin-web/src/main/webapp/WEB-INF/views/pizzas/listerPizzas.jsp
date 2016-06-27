@@ -43,11 +43,7 @@
 							<input type="hidden" name="action" value="supprimer">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
-						<form method="POST">
-							<input type="hidden" name="id" value="${pizza.id}">
-							<input type="hidden" name="action" value="inconnu">
-							<button type="submit" class="btn btn-danger">Action
-								inconnue</button>
+						
 						</form>
 					</div>
 				</div>
