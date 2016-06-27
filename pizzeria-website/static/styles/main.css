@@ -3,9 +3,6 @@ body {
   height: 800px;
   width: 800px;
 }
-
-
-P { text-align: center }
 H1 { text-align: center;
 font-style: italic; }
 aside { text-align: center;
@@ -16,6 +13,6 @@ img {
   text-align: center ;
   width:700px;
    height:500px;
-  }
+}
 
 
