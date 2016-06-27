@@ -142,4 +142,20 @@ describe('Test: PanierController', function () {
     ctrl.decrementPizza(pizza.id)
     expect(ctrl.size()).toEqual(0)
   })
+
+  // vidage du panier
+  it('should clean the basket', function () {
+    ctrl.addPizza(new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+    ctrl.addPizza(new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+    ctrl.addPizza(new Pizza({'id': 8, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+    ctrl.addPizza(new Pizza({'id': 13, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+
+    if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
+    expect(ctrl.size()).toEqual(4)
+
+    // vide le panier
+    if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
+    ctrl.deleteAllPizzas()
+    expect(ctrl.size()).toEqual(0)
+  })
 })
