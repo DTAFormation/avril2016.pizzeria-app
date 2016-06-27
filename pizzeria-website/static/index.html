@@ -2,7 +2,8 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="styles/se-connecter.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://getbootstrap.com/examples/sticky-footer/sticky-footer.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
     crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -11,11 +12,15 @@
 <body class="container-fluid">
   <navbar-component></navbar-component>
   <div class="row">
-    <div class="col-md-12" ng-view></div>
+    <div class="col-xs-10" ng-view></div>
+    <panier-component></panier-component>
   </div>
 
-  <panier-component></panier-component>
-
+  <footer class="footer">
+    <div class="container-fluid">
+      <a href="#/about">Informations sur la pizzeria</a>
+    </div>
+  </footer>
   <script src="build.js"></script>
 </body>
 

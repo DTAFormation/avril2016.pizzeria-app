@@ -51,6 +51,15 @@ public class Pizza {
 		// implémentation par défaut
 	}
 
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat, String description) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = cat;
+		this.description = description;
+	}
+
 	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
 		this();
 		this.code = code;
@@ -59,13 +68,16 @@ public class Pizza {
 		this.categorie = cat;
 	}
 
-	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage,
+			String description) {
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = categorie;
 		this.urlImage = urlImage;
 		this.id = id;
+		this.description = description;
+
 	}
 
 	public Integer getId() {
