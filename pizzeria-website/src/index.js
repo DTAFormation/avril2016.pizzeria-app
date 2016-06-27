@@ -7,13 +7,17 @@ import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
 import ConnexionModule from './connecter'
-import {PizzaController} from './pizza/pizza.controller'
 
 angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, ngRoute, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
         templateUrl: 'pizza/pizza-list.html'
+      })
+      .when('/pizzas/:code?',{
+        templateUrl:'visual-pizza.html',
+        controller:'PizzaController',
+        controllerAs: 'ctrl'
       })
       .when('/commandes/new', {
         templateUrl: 'commande/commande-new.html',
@@ -30,11 +34,6 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
       })
       .when('/home', {
         templateUrl: 'home/home.html'
-      })
-      .when('/pizzas/:code?',{
-        templateUrl:'visual-pizza.html',
-        controller:'PizzaController',
-        controllerAs: 'ctrl'
       })
       .otherwise('/home')
   })
