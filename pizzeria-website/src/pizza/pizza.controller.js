@@ -1,28 +1,25 @@
-import {Pizza} from '../shared/model/pizza.js'
+import { Pizza } from '../shared/model/pizza.js'
 
 export class PizzaController {
 
-  constructor(pizzasService, panierService, $routeParams) {
+  constructor (pizzasService, panierService, $routeParams) {
     this.pizzasService = pizzasService
     this.panierService = panierService
 
-    console.log('verif')
     this.ordering = 'nom'
     this.findAllPizzas()
     this.$routeParams = $routeParams
     this.findPizza()
       .then(response => {
-        console.log(response)
         this.pizza = new Pizza(response)
       })
   }
 
-  addPizza(pizza) {
+  addPizza (pizza) {
     this.panierService.addPizza(pizza)
   }
 
-
-  findAllPizzas() {
+  findAllPizzas () {
     const ctrl = this
     return this.pizzasService.findAllPizzas()
       .then(data => {
@@ -32,7 +29,7 @@ export class PizzaController {
         })
       })
   }
-  findPizza() {
+  findPizza () {
     const ctrl = this
     return this.pizzasService.findOne(this.$routeParams.code)
 
