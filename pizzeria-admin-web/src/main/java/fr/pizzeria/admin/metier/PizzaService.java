@@ -29,11 +29,11 @@ public class PizzaService {
 	public List<Pizza> findAll() {
 		return em.createQuery("select p from Pizza p where delFlag = 0", Pizza.class).getResultList();
 	}
-	
+
 	public List<Pizza> findAllWithIngredient() {
 		List<Pizza> pizzas = em.createQuery("select p from Pizza p where delFlag = 0", Pizza.class).getResultList();
 		for (Pizza pizza : pizzas) {
-			if(pizza.getIngredients().iterator().hasNext()) {
+			if (pizza.getIngredients().iterator().hasNext()) {
 				pizza.getIngredients().iterator().next();
 			}
 		}
@@ -44,21 +44,22 @@ public class PizzaService {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 	}
-	
+
 	public Pizza findOnePizzaWithIngredients(String code) {
 		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 		// simulation de recupération des ingrédients (requetes)
-		if(pizza.getIngredients().iterator().hasNext()) {
+		if (pizza.getIngredients().iterator().hasNext()) {
 			pizza.getIngredients().iterator().next();
 		}
 		return pizza;
 	}
-	
+
 	public List<Pizza> isCodeTaken(String code) {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getResultList();
 	}
+
 	public void updatePizza(String code, Pizza pizzaAvecId) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
 		p.setDelFlag(true);
@@ -75,5 +76,11 @@ public class PizzaService {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
 		p.setDelFlag(true);
 		em.merge(p);
+	}
+
+	public void envoyeEmail() {
+
+		EMailService email = new EMailService();
+		email.send("aatonyoz@gmail.com", "fgsdf", "dfsdqg");
 	}
 }
