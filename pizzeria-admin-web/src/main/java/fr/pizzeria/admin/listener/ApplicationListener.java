@@ -60,7 +60,6 @@ public class ApplicationListener implements ServletContextListener {
 		initClients();
 		initLivreurs();
 		initUtilisateurs();
-		initIngredients();
 		initCommandes();
 	}
 
@@ -140,9 +139,9 @@ public class ApplicationListener implements ServletContextListener {
 	private void initUtilisateurs() {
 		List<Utilisateur> utilisateurs = new ArrayList<>();
 		
-		utilisateurs.add(new Utilisateur("De Monmirail", "Basil", "basildm@gmail.com", "admin"));
-		utilisateurs.add(new Utilisateur("Montjoie", "Octave", "octavem@gmail.com", "admin"));
-		utilisateurs.add(new Utilisateur("admin", "admin", "admin@gmail.com", "admin"));
+		utilisateurs.add(new Utilisateur("De Monmirail", "Basil", "basildm@gmail.com", utilisateurService.encode("admin")));
+		utilisateurs.add(new Utilisateur("Montjoie", "Octave", "octavem@gmail.com", utilisateurService.encode("admin")));
+		utilisateurs.add(new Utilisateur("admin", "admin", "admin@gmail.com", utilisateurService.encode("admin")));
 	
 		utilisateurs.forEach(u -> {
 			utilisateurService.saveUtilisateur(u);
