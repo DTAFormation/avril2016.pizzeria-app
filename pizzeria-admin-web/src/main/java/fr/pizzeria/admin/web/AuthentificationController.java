@@ -15,19 +15,19 @@ import fr.pizzeria.model.Utilisateur;
 
 @WebServlet("/login")
 public class AuthentificationController extends HttpServlet {
-	
+
 	public static final String URL = "/login";
 
 	private static final String VUE_LOGIN = "/WEB-INF/views/auth/login.jsp";
 
 	public static final String AUTH_EMAIL = "auth_email";
-	
+
 	@Inject
-	UtilisateurService  userService;
+	UtilisateurService userService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
+		req.getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 
 	}
 
@@ -40,15 +40,23 @@ public class AuthentificationController extends HttpServlet {
 			utilisateur = userService.findOneUtilisateur(email);
 			if (utilisateur.getMotDePasse().equals(userService.encode(motDePasse))) {
 				req.getSession(true).setAttribute(AUTH_EMAIL, email);
-				resp.sendRedirect(this.getServletContext().getContextPath() + "/pizzas/list");
+				resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 			} else {
 				req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
-				this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
+				req.getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 			}
-		}catch(EJBException e) {
+		} catch (EJBException e) {
 			req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
-			this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
+			req.getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 		}
+	}
+
+	/**
+	 * utiliser pour les test
+	 * @param userService
+	 */
+	public void setUserService(UtilisateurService userService) {
+		this.userService = userService;
 	}
 
 }
