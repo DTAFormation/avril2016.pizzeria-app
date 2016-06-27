@@ -1,17 +1,16 @@
 <!-- TODO - Renommer en panier.component.html -->
-<div style="border: 1px solid black; padding: 15px;">
+<div class="container-fluid" style="border: 1px solid black; padding: 15px;">
   <h2>Panier</h2>
 
   <p ng-if="$ctrl.isEmpty()" style="width: 100%; height: 200px; overflow-y: auto; font-style: italic;">Panier vide</p>
 
   <ul class="list-group" ng-if="!$ctrl.isEmpty()" style="width: 100%; height: 200px; overflow-y: auto;">
     <li class="list-group-item" ng-repeat="ligne in $ctrl.contenu track by $index">
-      <a href class="btn btn-danger" ng-click="$ctrl.deletePizza(ligne.pizza.id)">X</a>
-      {{ ligne.pizza.nom }}
+      <a href class="btn btn-danger" ng-click="$ctrl.deletePizza(ligne.pizza.id)">X</a> {{ ligne.pizza.nom }}
       <span class="badge">
-	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.incrementPizza(ligne.pizza.code)">-</a>
+	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.decrementPizza(ligne.pizza.id)">-</a>
 	      {{ ligne.quantite }}
-	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.decrementPizza(ligne.pizza.code)">+</a>
+	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.incrementPizza(ligne.pizza.id)">+</a>
       </span>
     </li>
   </ul>

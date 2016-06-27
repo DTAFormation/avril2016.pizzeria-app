@@ -17,6 +17,23 @@ export class PanierService {
     this.$localStorage.panier = panier
   }
 
+  incrementPizza (id) {
+    var panier = this.findAllPizzas()
+    if (panier[id]) panier[id]['quantite']++
+    this.$localStorage.panier = panier
+  }
+
+  decrementPizza (id) {
+    var panier = this.findAllPizzas()
+    if (panier[id]) {
+      panier[id]['quantite']--
+      if (panier[id]['quantite'] === 0) {
+        this.deletePizza(id)
+      }
+    }
+    this.$localStorage.panier = panier
+  }
+
   // TODO : changer le nom (voir raison dans findAllPizzas() )
   deleteAllPizzas () {
     this.$localStorage.panier = {}
