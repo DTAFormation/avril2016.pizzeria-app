@@ -35,7 +35,6 @@ describe('Test: PanierController', function () {
     expect(ctrl.size()).toEqual(1)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
 
-
     ctrl.addPizza(new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
     expect(ctrl.size()).toEqual(2)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
@@ -65,12 +64,11 @@ describe('Test: PanierController', function () {
     }
     expect(somme).toEqual(4)
 
-
-    // insertion d'une pizza différente, mais ayant un identifiant déjà pris : exception (cas qui ne devrait pas se produire)
-    // DÉSACTIVÉ - addPizza ne vérifie pas encore si la pizza fournie est identique ou non à celle ayant le même id
-    // expect(() => {
-    //   ctrl.addPizza(new Pizza({'id': 2, 'code': 'fausse_marguerita', 'nom': 'Fausse margherita', 'prix': 20, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
-    // }).toThrow()
+  // insertion d'une pizza différente, mais ayant un identifiant déjà pris : exception (cas qui ne devrait pas se produire)
+  // DÉSACTIVÉ - addPizza ne vérifie pas encore si la pizza fournie est identique ou non à celle ayant le même id
+  // expect(() => {
+  //   ctrl.addPizza(new Pizza({'id': 2, 'code': 'fausse_marguerita', 'nom': 'Fausse margherita', 'prix': 20, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+  // }).toThrow()
   })
 
   // suppression d'une pizza du panier
@@ -97,5 +95,51 @@ describe('Test: PanierController', function () {
     if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
     ctrl.deletePizza(8)
     expect(ctrl.size()).toEqual(2)
+  })
+
+  // incrementation d'une pizza du panier
+  it('should increment an item from the basket', function () {
+    let pizza = new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'})
+    ctrl.addPizza(pizza)
+
+    let panier = ctrl.findAllPizzas()
+
+    if (VERBOSE) console.log('panier[pizza.id].pizza === ', panier[pizza.id].pizza)
+    expect(panier[pizza.id].pizza).toEqual(pizza)
+
+    // incremente 1 item
+    if (VERBOSE) console.log('panier[pizza.id].quantite === ', panier[pizza.id].quantite)
+    ctrl.incrementPizza(pizza.id)
+    expect(panier[pizza.id].quantite).toEqual(2)
+
+    // incremente encore une fois
+    if (VERBOSE) console.log('panier[pizza.id].quantite === ', panier[pizza.id].quantite)
+    ctrl.incrementPizza(pizza.id)
+    expect(panier[pizza.id].quantite).toEqual(3)
+  })
+
+  // décrementation d'une pizza du panier
+  it('should decrement an item from the basket', function () {
+    let pizza = new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'})
+    ctrl.addPizza(pizza)
+
+    let panier = ctrl.findAllPizzas()
+
+    if (VERBOSE) console.log('panier[pizza.id].pizza === ', panier[pizza.id].pizza)
+    expect(ctrl.size()).toEqual(1)
+    expect(panier[pizza.id].pizza).toEqual(pizza)
+    ctrl.incrementPizza(pizza.id)
+    expect(panier[pizza.id].quantite).toEqual(2)
+
+    // decrement 1 item
+    if (VERBOSE) console.log('panier[pizza.id].quantite === ', panier[pizza.id].quantite)
+    ctrl.decrementPizza(pizza.id)
+    expect(ctrl.size()).toEqual(1)
+    expect(panier[pizza.id].quantite).toEqual(1)
+
+    // decrement encore une fois et tombe a 0, supprime la ligne
+    if (VERBOSE) console.log('panier[pizza.id].quantite === ', panier[pizza.id].quantite)
+    ctrl.decrementPizza(pizza.id)
+    expect(ctrl.size()).toEqual(0)
   })
 })

@@ -7,10 +7,10 @@ describe('Test du PizzaListController', function () {
   beforeEach(angular.mock.module('pizzeria-website'))
 
   beforeEach(angular.mock.inject(function ($rootScope, $componentController, $httpBackend) {
-    const scope = $rootScope.$new();
-    ctrl = $componentController("pizzaList", {$scope: scope});
+    const scope = $rootScope.$new()
+    ctrl = $componentController('pizzaList', {$scope: scope})
     ctrl.panierService.deleteAllPizzas()
-    http = $httpBackend;
+    http = $httpBackend
   }))
 
   it('should load pizzas', function (done) {
@@ -24,13 +24,13 @@ describe('Test du PizzaListController', function () {
     }])
 
     ctrl.findAllPizzas()
-        .then(() => expect(ctrl.listePizzas.length).toEqual(1))
-        .finally(done)
+      .then(() => expect(ctrl.listePizzas.length).toEqual(1))
+      .finally(done)
 
     http.flush()
   })
 
-  it('should save a pizza in localStorage', function() {
+  it('should save a pizza in localStorage', function () {
     var pizza = new Pizza({
       'nom': 'Royale',
       'code': 'royale',
@@ -44,7 +44,7 @@ describe('Test du PizzaListController', function () {
     expect(panier[1].quantite).toEqual(1)
   })
 
-  it('should increase quantity', function() {
+  it('should increase quantity', function () {
     var pizza = new Pizza({
       'nom': 'Royale',
       'code': 'royale',
@@ -58,5 +58,4 @@ describe('Test du PizzaListController', function () {
     var panier = ctrl.panierService.findAllPizzas()
     expect(panier[1].quantite).toEqual(2)
   })
-
 })

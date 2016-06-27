@@ -7,19 +7,19 @@ export class PanierController {
     this.PanierService = PanierService
     this.contenu = this.PanierService.$localStorage.panier
 
-    // DEBUG - Décommenter/recommenter cette section pour activer/désactiver, ainsi que l'import au début du fichier.
-    // Contenu en dur du panier défini lors de chaque rechargement de page, et qui écrase le contenu en stockage.
-    // Utile pour obtenir un panier pré-rempli pour tester l'affichage et les opérations nécessitant un panier déjà rempli.
-    // -----------------------------
-    // this.contenu = {
-    //   '1': { 'pizza': new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 },
-    //   '2': { 'pizza': new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 3 },
-    //   '3': { 'pizza': new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
-    //   '4': { 'pizza': new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
-    // }
-    // this.PanierService.$localStorage.panier = this.contenu
-    // -----------------------------
-    // FIN DEBUG
+  // DEBUG - Décommenter/recommenter cette section pour activer/désactiver, ainsi que l'import au début du fichier.
+  // Contenu en dur du panier défini lors de chaque rechargement de page, et qui écrase le contenu en stockage.
+  // Utile pour obtenir un panier pré-rempli pour tester l'affichage et les opérations nécessitant un panier déjà rempli.
+  // -----------------------------
+  // this.contenu = {
+  //   '1': { 'pizza': new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 },
+  //   '2': { 'pizza': new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 3 },
+  //   '3': { 'pizza': new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 4 },
+  //   '4': { 'pizza': new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}), 'quantite': 1 }
+  // }
+  // this.PanierService.$localStorage.panier = this.contenu
+  // -----------------------------
+  // FIN DEBUG
   }
 
   isEmpty () {
@@ -32,6 +32,14 @@ export class PanierController {
 
   deletePizza (pizza) {
     this.PanierService.deletePizza(pizza)
+  }
+
+  incrementPizza (pizza) {
+    this.PanierService.incrementPizza(pizza)
+  }
+
+  decrementPizza (pizza) {
+    this.PanierService.decrementPizza(pizza)
   }
 
   findAllPizzas () {

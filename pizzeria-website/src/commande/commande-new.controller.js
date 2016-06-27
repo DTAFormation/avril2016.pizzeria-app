@@ -11,9 +11,23 @@ export class CommandeNewController {
     }
     this.total = 0
     this.panier = this.panierService.findAllPizzas()
+    this.calcTotalPrice()
+  }
+
+  calcTotalPrice () {
     Object.keys(this.panier).forEach(key => {
       this.total += this.panier[key].pizza.prix * this.panier[key].quantite
     })
+  }
+
+  incrementPizza (pizza) {
+    this.panierService.incrementPizza(pizza)
+    this.calcTotalPrice()
+  }
+
+  decrementPizza (pizza) {
+    this.panierService.decrementPizza(pizza)
+    this.calcTotalPrice()
   }
 
   validate () {
