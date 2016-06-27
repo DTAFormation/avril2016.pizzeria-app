@@ -26,6 +26,8 @@ describe('Test: PanierController', function () {
 
   // insertion de pizzas dans le panier
   it('should insert pizzas in the basket', function () {
+    var contenuPanier
+
     expect(ctrl.size()).toEqual(0)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
 
@@ -33,9 +35,13 @@ describe('Test: PanierController', function () {
     expect(ctrl.size()).toEqual(1)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
 
+
     ctrl.addPizza(new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
     expect(ctrl.size()).toEqual(2)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
+
+    contenuPanier = ctrl.findAllPizzas()
+    expect(contenuPanier[2].quantite).toEqual(1)
 
     // identifiant non séquentiel (1 et 2 déjà pris, prendre quelque chose de non adjacent)
     ctrl.addPizza(new Pizza({'id': 19, 'code': 'bolognaise', 'nom': 'Bolognaise', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
@@ -46,6 +52,19 @@ describe('Test: PanierController', function () {
     ctrl.addPizza(new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
     expect(ctrl.size()).toEqual(3)
     if (VERBOSE) console.log('ctrl.size() === ' + ctrl.size())
+
+    // ajouter test pour quantité pizza d'un type dans ctrl
+    contenuPanier = ctrl.findAllPizzas()
+    expect(contenuPanier[2].quantite).toEqual(2)
+
+    // tester la quantité totale des pizzas tous types confondus
+    var keys = Object.keys(contenuPanier)
+    var somme = 0
+    for (var i = 0; i < keys.length; i++) {
+      somme += contenuPanier[keys[i]].quantite
+    }
+    expect(somme).toEqual(4)
+
 
     // insertion d'une pizza différente, mais ayant un identifiant déjà pris : exception (cas qui ne devrait pas se produire)
     // DÉSACTIVÉ - addPizza ne vérifie pas encore si la pizza fournie est identique ou non à celle ayant le même id
@@ -58,25 +77,25 @@ describe('Test: PanierController', function () {
   it('should delete an item from the basket', function () {
     ctrl.addPizza(new Pizza({'id': 1, 'code': 'royale', 'nom': 'Royale', 'prix': 12, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
     ctrl.addPizza(new Pizza({'id': 2, 'code': 'marguerita', 'nom': 'Margherita', 'prix': 15, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
-    ctrl.addPizza(new Pizza({'id': 3, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
-    ctrl.addPizza(new Pizza({'id': 4, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
-    
+    ctrl.addPizza(new Pizza({'id': 8, 'code': 'savoyarde', 'nom': 'Savoyarde', 'prix': 14, 'categorie': 'VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+    ctrl.addPizza(new Pizza({'id': 13, 'code': '4fromages', 'nom': '4 fromages', 'prix': 10, 'categorie': 'SANS_VIANDE', 'urlImage': 'http://placehold.it/150x150'}))
+
     if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
     expect(ctrl.size()).toEqual(4)
-    
+
     // supprime 1 item
     if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
     ctrl.deletePizza(1)
     expect(ctrl.size()).toEqual(3)
-    
+
     // item déjà supprimé : toujours autant d'items
     if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
     ctrl.deletePizza(1)
     expect(ctrl.size()).toEqual(3)
-    
+
     // item déjà supprimé : toujours autant d'items
     if (VERBOSE) console.log('ctrl.size() === ', ctrl.size())
-    ctrl.deletePizza(3)
+    ctrl.deletePizza(8)
     expect(ctrl.size()).toEqual(2)
   })
 })
