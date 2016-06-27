@@ -3,10 +3,10 @@
 // })
 
 import angular from 'angular'
-import { ConnexionController } from './Connexion.controller'
+import { ModificationDonneesCompteController } from './modificationDonneesCompte.controller'
 import { ClientService } from '../shared/service/client.service'
 
-export default angular.module('pizzeria.connexion', [])
-  .controller('ConnexionController', ConnexionController)
+export default angular.module('pizzeria.modificationDonneesCompte', [])
+  .controller('ModificationDonneesCompteController', ModificationDonneesCompteController)
   .service('ClientService', ClientService)
   .name

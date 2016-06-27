@@ -1,16 +1,17 @@
 export class ConnexionController {
 
-  constructor(ConnexionService, $localStorage, $location) {
-    this.ConnexionService = ConnexionService
+  constructor (ClientService, $localStorage, $location) {
+    this.ClientService = ClientService
     this.$localStorage = $localStorage
     this.$location = $location
   }
 
-  connexionClient(form) {
+  connexionClient (form) {
     if (form.$invalid) return
-    this.ConnexionService.login(this.client)
+    this.ClientService.login(this.client)
       .then(client => {
         if (client) {
+          console.log('client recu par la BDD', client)
           this.$localStorage.client = client
           this.$location.path('/')
           console.log('connecté')
@@ -21,4 +22,4 @@ export class ConnexionController {
   }
 }
 
-ConnexionController.$inject = ['ConnexionService', '$localStorage', '$location'];
+ConnexionController.$inject = ['ClientService', '$localStorage', '$location']

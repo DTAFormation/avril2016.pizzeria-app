@@ -25,8 +25,6 @@
             class="form-control" id="motDePasseBis">
         <p class="text-danger" ng-if="inscriptionClientForm.motDePasseBis.$invalid && inscriptionClientForm.motDePasseBis.$touched ">Valider le mot de passe</p>
         <p class="text-danger" ng-if="!(inscriptionClientForm.motDePasse.$modelValue == inscriptionClientForm.motDePasseBis.$modelValue) ">Mot de passe different</p>
-        <!--<pre>{{inscriptionClientForm.motDePasse.$modelValue | json}}</pre>-->
-        <!--<pre>{{inscriptionClientForm.motDePasseBis.$modelValue | json}}</pre>-->
     </div>
     <div>
         <!--Nom-->
@@ -66,12 +64,6 @@
     </div>
 
 
-
-
-
-
-
-
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Enregistrer</button>
         <a ng-href="#/" type="button" class="btn">Annuler</a>
@@ -80,6 +72,5 @@
 
 
 
-    <pre>{{inscriptionClientForm | json}}</pre>
 
 </form>
