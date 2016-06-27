@@ -55,8 +55,10 @@ public class NouvellePizzaController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 		} else {
 			Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.VIANDE);
-			for (String ingredient : ingredients) {
-				pizzaSansId.addIngredient(ingredientService.findOneIngredient(ingredient));
+			if ( ingredients != null ) {
+				for (String ingredient : ingredients) {
+					pizzaSansId.addIngredient(ingredientService.findOneIngredient(ingredient));
+				}
 			}
 			pizzaSansId.setUrlImage(urlImage);
 			pizzaService.savePizza(pizzaSansId);
