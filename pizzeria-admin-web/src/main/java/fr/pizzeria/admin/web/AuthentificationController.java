@@ -2,11 +2,16 @@ package fr.pizzeria.admin.web;
 
 import java.io.IOException;
 
+import javax.ejb.EJBException;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.pizzeria.admin.metier.UtilisateurService;
+import fr.pizzeria.model.Utilisateur;
 
 @WebServlet("/login")
 public class AuthentificationController extends HttpServlet {
@@ -17,8 +22,8 @@ public class AuthentificationController extends HttpServlet {
 
 	public static final String AUTH_EMAIL = "auth_email";
 	
-	private static final String EMAIL = "admin@pizzeria.fr";
-	private static final String MOTDEPASSE = "admin";
+	@Inject
+	UtilisateurService  userService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,11 +35,17 @@ public class AuthentificationController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String motDePasse = req.getParameter("motDePasse");
-
-		if (EMAIL.equals(email) && MOTDEPASSE.equals(motDePasse)) {
-			req.getSession(true).setAttribute(AUTH_EMAIL, email);
-			resp.sendRedirect(this.getServletContext().getContextPath() + "/pizzas/list");
-		} else {
+		Utilisateur utilisateur;
+		try {
+			utilisateur = userService.findOneUtilisateur(email);
+			if (utilisateur.getMotDePasse().equals(userService.encode(motDePasse))) {
+				req.getSession(true).setAttribute(AUTH_EMAIL, email);
+				resp.sendRedirect(this.getServletContext().getContextPath() + "/pizzas/list");
+			} else {
+				req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
+				this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
+			}
+		}catch(EJBException e) {
 			req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
 			this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 		}
