@@ -22,6 +22,7 @@
 			<td>Nom</td>
 			<td>Prix</td>
 			<td>Code</td>
+			<td>Ingredients</td>
 			<td></td>
 			<td></td>
 		</tr>
@@ -29,28 +30,26 @@
 		<c:forEach var="pizza" items="${listePizzas}">
 			<tr>
 				<td><img src="${pizza.urlImage}"></td>
+				<td>${pizza.id}</td>
+				<td>${pizza.nom}</td>
+				<td>${pizza.prix}€</td>
+				<td>${pizza.code}</td>
 				<td>
-					${pizza.id}	
+					<ul>
+						<c:forEach var="ingredient" items="${pizza.ingredients}">
+							<li>${ingredient.name}</li>
+						</c:forEach>
+					</ul>
 				</td>
-				<td>
-					${pizza.nom}
-				</td>
-				<td>
-					${pizza.prix}€
-				</td>
-				<td>
-					${pizza.code}
-				</td>
-				<td>
-					<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
-				</td>
+				<td><a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>"
+					class="btn btn-primary">Editer</a></td>
 				<td>
 					<form method="POST">
-						<input type="hidden" name="code" value="${pizza.code}">
-						<input type="hidden" name="action" value="supprimer">
+						<input type="hidden" name="code" value="${pizza.code}"> <input
+							type="hidden" name="action" value="supprimer">
 						<button type="submit" class="btn btn-danger">Supprimer</button>
 					</form>
-				</td>			
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

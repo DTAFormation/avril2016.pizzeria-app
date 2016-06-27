@@ -1,5 +1,6 @@
 package fr.pizzeria.admin.metier;
 
+import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Pizza;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -28,11 +29,32 @@ public class PizzaService {
 	public List<Pizza> findAll() {
 		return em.createQuery("select p from Pizza p where delFlag = 0", Pizza.class).getResultList();
 	}
+	
+	public List<Pizza> findAllWithIngredient() {
+		List<Pizza> pizzas = em.createQuery("select p from Pizza p where delFlag = 0", Pizza.class).getResultList();
+		for (Pizza pizza : pizzas) {
+			if(pizza.getIngredients().iterator().hasNext()) {
+				pizza.getIngredients().iterator().next();
+			}
+		}
+		return pizzas;
+	}
 
 	public Pizza findOnePizza(String code) {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 	}
+	
+	public Pizza findOnePizzaWithIngredients(String code) {
+		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
+				.setParameter("code", code).getSingleResult();
+		// simulation de recupération des ingrédients (requetes)
+		if(pizza.getIngredients().iterator().hasNext()) {
+			pizza.getIngredients().iterator().next();
+		}
+		return pizza;
+	}
+	
 	public List<Pizza> isCodeTaken(String code) {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getResultList();

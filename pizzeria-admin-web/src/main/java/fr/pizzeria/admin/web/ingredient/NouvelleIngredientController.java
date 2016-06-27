@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.model.Ingredient;
 
-@WebServlet("/ingredient/new")
+@WebServlet("/ingredients/new")
 public class NouvelleIngredientController extends HttpServlet {
 
-  public static final String URL = "/ingredient/new";
+  public static final String URL = "/ingredients/new";
   private static final String VUE_NOUVELLE_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
   @Inject
   private IngredientService ingredientService;
@@ -25,6 +25,7 @@ public class NouvelleIngredientController extends HttpServlet {
       throws ServletException, IOException {
     req.setAttribute("ingredient", new Ingredient());
     req.setAttribute("titre", "Créer un ingredient");
+    req.setAttribute("Referer", req.getHeader("Referer"));
     this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
   }
 
@@ -33,14 +34,23 @@ public class NouvelleIngredientController extends HttpServlet {
       throws ServletException, IOException {
     String nom = req.getParameter("name");
     String code = req.getParameter("code");
-
+    String referer = req.getParameter("Referer");
+    
     if (isBlank(nom) || isBlank(code)) {
       req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
+      req.setAttribute("ingredient", new Ingredient());
       this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
     } else {
       Ingredient ingredientSansId = new Ingredient(code, nom);
-      ingredientService.saveIngredient(ingredientSansId);
-      resp.sendRedirect(req.getContextPath()+"/ingredient/list");
+      if (ingredientService.saveIngredient(ingredientSansId)) {
+    	  resp.sendRedirect(referer);
+      }
+      else {
+    	  req.setAttribute("msgErreur", "Un autre ingrédient a déjà ce code");
+    	  req.setAttribute("ingredient", new Ingredient());
+          this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
+      }
+    	  
     }
   }
 
