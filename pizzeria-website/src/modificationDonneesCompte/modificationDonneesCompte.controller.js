@@ -9,10 +9,8 @@ export class ModificationDonneesCompteController {
 
   updateClient (form) {
     if (form.$invalid) return
-    console.log('enter update client controller', form)
     this.ClientService.updateClient(this.client)
       .then(() => {
-        console.log('this :', this)
         this.$location.path('/')
       })
   }

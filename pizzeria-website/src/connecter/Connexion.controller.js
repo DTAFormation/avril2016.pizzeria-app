@@ -11,12 +11,8 @@ export class ConnexionController {
     this.ClientService.login(this.client)
       .then(client => {
         if (client) {
-          console.log('client recu par la BDD', client)
           this.$localStorage.client = client
           this.$location.path('/')
-          console.log('connecté')
-        } else {
-          console.log('echec connexion')
         }
       })
   }

@@ -10,12 +10,10 @@ export class ClientService {
   }
 
   saveClient (client) {
-    console.log('enter save client service', client)
     return this.$http.post(CLIENT_RESOURCE_URL, client)
   }
 
   updateClient (client) {
-    console.log('enter update client service', client)
     return this.$http.put(CLIENT_RESOURCE_URL, client)
   }
 

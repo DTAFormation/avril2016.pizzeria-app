@@ -8,10 +8,8 @@ export class InscriptionController {
 
   saveClient (form) {
     if (form.$invalid) return
-    console.log('enter save client controller', form)
     this.ClientService.saveClient(this.client)
       .then(() => {
-        console.log('this :', this)
         this.$location.path('/')
       })
   }
