@@ -32,11 +32,6 @@ public class CommandeResource {
 
 	  return commandeDao.findByClient(cl);
   	}
-  
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Commande> listAllCommandes() {
-		return commandeDao.findAll();
-	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Commande addCommande(@RequestBody Commande commande) {

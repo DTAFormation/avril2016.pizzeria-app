@@ -14,10 +14,11 @@ export class CommandeListController {
     const ctrl = this
     return this.commandesService.findAllCommandesClient(this.$routeParams.id)
       .then(data => {
-        ctrl.listeCommandes = [];
+        ctrl.listeCommandes = []
         data.forEach((item) => {
           ctrl.listeCommandes.push(item)
         })
+        return data
       })
   }
 }
