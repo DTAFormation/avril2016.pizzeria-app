@@ -8,8 +8,9 @@ import navbar from './navbar'
 import PanierModule from './panier'
 import ConnexionModule from './connecter'
 import DeconnexionModule from './deconnexion'
+import ModificationDonneesCompte from './modificationDonneesCompte'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, DeconnexionModule, ngRoute, 'ngStorage'])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, DeconnexionModule, ngRoute, ModificationDonneesCompte, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -26,7 +27,7 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
         controllerAs: 'ctrl'
       })
       .when('/connexion', {
-        templateUrl: 'se-connecter.html',
+        templateUrl: 'client/se-connecter.html',
         controller: 'ConnexionController',
         controllerAs: 'ctrl'
       })
@@ -36,8 +37,13 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
         controllerAs: 'ctrl'
       })
       .when('/inscription', {
-        templateUrl: 'inscription/inscription.html',
+        templateUrl: 'client/inscription.html',
         controller: 'InscriptionController',
+        controllerAs: '$ctrl'
+      })
+      .when('/modificationDonneesCompte', {
+        templateUrl: 'client/modificationDonneesCompte.html',
+        controller: 'ModificationDonneesCompteController',
         controllerAs: '$ctrl'
       })
       .when('/about', {
