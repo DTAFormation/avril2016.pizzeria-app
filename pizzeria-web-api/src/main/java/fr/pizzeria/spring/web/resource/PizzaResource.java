@@ -24,4 +24,5 @@ public class PizzaResource {
 		return pizzaDao.findAll();
 	}
 
+	
 }
