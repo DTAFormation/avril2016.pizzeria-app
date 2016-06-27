@@ -7,7 +7,9 @@
 	<jsp:param value="Page Editer Pizza" name="title" />
 </jsp:include>
 <body class="container">
-
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Pizza" name="page" />
+	</jsp:include>
 	<h1>
 		<c:out
 			value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }" />

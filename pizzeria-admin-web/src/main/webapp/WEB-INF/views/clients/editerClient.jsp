@@ -8,6 +8,9 @@
 
 </jsp:include>
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Client" name="page" />
+	</jsp:include>
 	<h1>
 		<c:out
 			value="${ (client != null && client.id != null) ? 'Editer le client' : 'Créer un client' }" />

@@ -9,6 +9,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Commande" name="page" />
+	</jsp:include>
 	<h1>Liste des commandes</h1>
 	<a class="btn btn-primary" href="new">Nouvelle Commande</a>
 	<br><br>

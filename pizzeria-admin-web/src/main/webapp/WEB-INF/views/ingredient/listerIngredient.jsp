@@ -8,6 +8,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Ingredient" name="page" />
+	</jsp:include>
 	<h1>Liste des ingredients</h1>
 	<a class="btn btn-primary" href="new">Nouvel ingredient</a>
 	<br>
