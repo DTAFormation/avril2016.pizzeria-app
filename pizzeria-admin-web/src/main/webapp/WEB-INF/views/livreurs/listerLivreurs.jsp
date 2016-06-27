@@ -8,8 +8,8 @@
 </jsp:include>
 
 <body class="container">
-	<h1>Liste des pizzas</h1>
-	<a class="btn btn-primary" href="new">Nouvelle Pizza</a>
+	<h1>Liste des livreurs</h1>
+	<a href="<c:url value="/livreurs/newlivreur"/>" class="btn btn-primary">Nouveau Livreur</a>
 	<br>
 	<c:if test="${msg != null}">
 		<div class="alert alert-danger" role="alert">${msg}</div>
@@ -22,36 +22,28 @@
 			<td></td>
 		</tr>
 
-		<c:forEach var="pizza" items="${listePizzas}">
+		<c:forEach var="livreur" items="${listeLivreurs}">
 		<tr>
-			<td><img src="${pizza.urlImage}"></td>
 			<td>
 				<div class="row">
 					<div class="col-md-6">
-						Ref. ${pizza.id}
-						<br> <b>${pizza.nom}</b>
-						<br>${pizza.prix}€
-						<br> <b>CODE : ${pizza.code}</b>
+						 ${livreur.id}
+						<br> ${livreur.nom} ${livreur.prenom}
 						<br>
-						
 					</div>
 					<div class="col-md-6">
-						<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
+						<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Editer</a>
 						<br>
 						<form method="POST">
-							<input type="hidden" name="code" value="${pizza.code}">
+							<input type="hidden" name="id" value="${livreur.id}">
 							<input type="hidden" name="action" value="supprimer">
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
-						
-
 					</div>
 				</div>
 			</td>
 		</tr>
 		</c:forEach>
-
-	
 	</table>
 </body>
 </html>
