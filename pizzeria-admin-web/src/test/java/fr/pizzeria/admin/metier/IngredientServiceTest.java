@@ -1,12 +1,15 @@
 package fr.pizzeria.admin.metier;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.junit.Before;
@@ -58,6 +61,10 @@ public class IngredientServiceTest {
 	public void creerIngredient() {		
 		LOG.info("Etant donne un objet ingredient");		
 		Ingredient ingredient = new Ingredient("CHA","champignon");
+		
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+		when(query.setParameter("code", "CHA")).thenReturn(query);
+		when(query.getSingleResult()).thenThrow(NoResultException.class);
 		
 		service.saveIngredient(ingredient);
 		
