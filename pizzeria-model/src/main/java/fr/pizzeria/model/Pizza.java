@@ -33,7 +33,7 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ToString
-	private String code;
+	public String code;
 	@ToString(uppercase = true)
 	private String nom;
 	@ToString

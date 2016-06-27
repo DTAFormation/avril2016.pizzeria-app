@@ -1,11 +1,19 @@
 export class Commande {
-  constructor ({id, numeroCommande, dateCommande, statut, livreur, client, pizzas}) {
+  constructor ({id, numeroCommande, statut, dateCommande, livreur, client, pizzas}) {
     this.id = id
     this.numeroCommande = numeroCommande
-    this.dateCommande = dateCommande
     this.statut = statut
+    this.dateCommande = dateCommande
     this.livreur = livreur
     this.client = client
     this.pizzas = pizzas
+  }
+
+  calculPrixTotal () {
+    let prixTotal = 0
+    this.pizzas.forEach(pizza => {
+      prixTotal += pizza.prix
+    })
+    return prixTotal
   }
 }

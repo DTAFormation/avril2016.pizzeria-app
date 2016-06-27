@@ -6,8 +6,9 @@ import InscriptionModule from './inscription'
 import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
+import ConnexionModule from './connecter'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeModule, ngRoute, 'ngStorage'])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, ngRoute, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -17,6 +18,21 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, CommandeM
         templateUrl: 'commande/commande-new.html',
         controller: 'CommandeNewController',
         controllerAs: 'ctrl'
+      })
+      .when('/commandes/:id?', {
+        templateUrl: 'commande/commande-list.html',
+        controller: 'CommandeListController',
+        controllerAs: 'ctrl'
+      })
+      .when('/connexion', {
+        templateUrl: 'se-connecter.html',
+        controller: 'ConnexionController',
+        controllerAs: 'ctrl'
+      })
+      .when('/inscription', {
+        templateUrl: 'inscription/inscription.html',
+        controller: 'InscriptionController',
+        controllerAs: '$ctrl'
       })
       .when('/about', {
         templateUrl: 'about/about.html'
