@@ -9,12 +9,12 @@ export class CommandeNewController {
     if (!this.$localStorage.client) {
       $location.path('/connexion')
     }
-    this.total = 0
     this.panier = this.panierService.findAllPizzas()
     this.calcTotalPrice()
   }
 
   calcTotalPrice () {
+    this.total = 0
     Object.keys(this.panier).forEach(key => {
       this.total += this.panier[key].pizza.prix * this.panier[key].quantite
     })
