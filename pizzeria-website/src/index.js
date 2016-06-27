@@ -17,7 +17,7 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
         templateUrl: 'pizza/pizza-list.html'
       })
       .when('/pizzas/:code?',{
-        templateUrl:'visual-pizza.html',
+        templateUrl:'pizza/visual-pizza.html',
         controller:'PizzaController',
         controllerAs: 'ctrl'
       })

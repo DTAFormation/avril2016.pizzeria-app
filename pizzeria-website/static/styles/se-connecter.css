@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-body {
-  background-image: url("images/fond-page.jpg");
-}
-
 .login-page {
   width: 360px;
   padding: 8% 0 0;

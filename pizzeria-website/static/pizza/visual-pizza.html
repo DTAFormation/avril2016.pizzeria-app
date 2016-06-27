@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="styles/main.css">
+<a href="#/pizzas"><button type="submit" class="btn btn-danger ">Retour à la liste</button></a>
+
+<h1>{{ ctrl.pizza.nom }}</h1>
+<img ng-src="{{ctrl.pizza.urlImage}}">
+<br></br><br></br>
+
+<section>
+  <aside>
+    <h3>{{ctrl.pizza.description}}</h3>
+  </aside>
+  <br></br>
+  <article>
+
+    <h3> Prix: {{ ctrl.pizza.prix }}€ </h3>
+    <h3> Categorie:{{ ctrl.pizza.categorie }} </h3>
+
+  </article>
+</section>
+
+<!--
+    Bouton à rajouter quand la gestion des pizzas personnalisées sera effective
+    <a>
+      <td><button type="button" class="btn btn-primary">Personnaliser</button></td>
+  </a>-->
+
+<button ng-click="ctrl.addPizza(ctrl.pizza)" type="button" class="btn btn-success">Ajouter</button>
