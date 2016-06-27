@@ -8,7 +8,7 @@ export class ConnexionController {
 
   connexionClient (form) {
     if (form.$invalid) return
-    this.ClientService.login(this.client)
+    return this.ClientService.login(this.client)
       .then(client => {
         if (client) {
           this.$localStorage.client = client
