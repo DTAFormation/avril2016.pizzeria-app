@@ -1,6 +1,7 @@
 package fr.pizzeria.admin.web.utilisateur;
 
 import fr.pizzeria.admin.metier.UtilisateurService;
+import fr.pizzeria.admin.web.AuthentificationController;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -51,9 +54,21 @@ public class ListerUtilisateurController extends HttpServlet {
             + email);
         break;
       case ACTION_SUPPRIMER:
-    	utilisateurService.deleteUtilisateur(email);
-        req.setAttribute("msg", "L'utilisateur dont l'email est " + email + " a été supprimé");
-        doGet(req, resp);
+    	String emailAuthentifie = (String) req.getSession().getAttribute(AuthentificationController.AUTH_EMAIL);
+    	
+    	if (!emailAuthentifie.equals(email)) {
+    		utilisateurService.deleteUtilisateur(email);
+            req.setAttribute("msg", "L'utilisateur dont l'email est " + email + " a été supprimé");
+            doGet(req, resp);
+		} else {
+			req.setAttribute("msg", "Suppression impossible : c'est votre email !");
+			resp.setStatus(400);
+            doGet(req, resp);
+		}
+    	
+//    	utilisateurService.deleteUtilisateur(email);
+//        req.setAttribute("msg", "L'utilisateur dont l'email est " + email + " a été supprimé");
+//        doGet(req, resp);
         break;
       default:
         req.setAttribute("msg", "Action inconnue");

@@ -57,12 +57,12 @@ public class PizzaServiceTest {
 		when(query.getSingleResult()).thenReturn(p);
 
 		Pizza p2 = service.findOnePizza("test");
-		/*
+		
 		assertEquals(p.getCode(),p2.getCode());
 		assertEquals(p.getCategorie(),p2.getCategorie());
 		assertEquals(p.getPrix(),p2.getPrix());
 		assertEquals(p.getNom(),p.getNom());
-*/
+
 	}
 
 	@Test
