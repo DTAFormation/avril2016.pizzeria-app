@@ -30,7 +30,7 @@ public class ListerUtilisateurController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-	  LOG.log(Level.INFO, "Entrée page liste users");
+//	  LOG.log(Level.INFO, "Entrée page liste users");
     req.setAttribute("listeUtilisateurs", this.utilisateurService.findAll());
     RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_UTILISATEURS);
     dispatcher.forward(req, resp);
