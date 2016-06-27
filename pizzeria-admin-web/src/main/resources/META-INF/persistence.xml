@@ -8,6 +8,7 @@
 		<class>fr.pizzeria.model.Livreur</class>
 		<class>fr.pizzeria.model.CommandePizza</class>
 		<class>fr.pizzeria.model.CommandePizzaId</class>
+		<class>fr.pizzeria.model.Utilisateur</class>
 		<class>fr.pizzeria.model.Ingredient</class>
 		
 		<properties>

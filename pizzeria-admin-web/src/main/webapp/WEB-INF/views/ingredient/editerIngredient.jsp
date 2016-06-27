@@ -40,7 +40,7 @@
 				<label for="name">Nom</label> <input type="text" class="form-control"
 					id="name" name="name" value="${ingredient.name}" required>
 			</div>
-
+			<input name="Referer" type="texte" value="${Referer}" hidden>
 			<button type="submit" class="btn btn-primary">Valider</button>
 		</form>
 	</c:if>

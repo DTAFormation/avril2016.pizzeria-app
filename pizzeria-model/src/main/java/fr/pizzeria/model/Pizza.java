@@ -16,7 +16,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -45,10 +47,14 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
-	private boolean delFlag = false; 
 	
-	@OneToMany(mappedBy = "pizza")
-	private List<CommandePizza> commandes = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "pizza_ingredient", 
+	joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), 
+	inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+	private List<Ingredient> ingredients = new ArrayList<>();
+	
+	private boolean delFlag = false; 
 
 	public Pizza() {
 		// implémentation par défaut
@@ -70,7 +76,41 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.id = id;
 	}
+	
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, List<Ingredient> ingredients) {
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.urlImage = urlImage;
+		this.id = id;
+		this.ingredients = ingredients;
+	}
+	
+	public boolean isDelFlag() {
+		return delFlag;
+	}
 
+	public void setDelFlag(boolean delFlag) {
+		this.delFlag = delFlag;
+	}
+
+	public void setIngredients(List<Ingredient> nouveauxIngredients) {
+		this.ingredients = nouveauxIngredients;
+	}
+	
+	public List<Ingredient> getIngredients() {
+		return this.ingredients;
+	}
+	
+	public void addIngredient(Ingredient newIngredient) {
+		this.ingredients.add(newIngredient);
+	}
+	
+	public boolean deleteIngredient(Ingredient delIngredient) {
+		return this.ingredients.remove(delIngredient);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -124,14 +164,6 @@ public class Pizza {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
-	
-	public boolean isDelFlag() {
-		return delFlag;
-	}
-	
-	public void setDelFlag(boolean delFlag) {
-		this.delFlag = delFlag;
-	}
 
 	@Override
 	public String toString() {
@@ -172,7 +204,7 @@ public class Pizza {
 			return false;
 		}
 		Pizza rhs = (Pizza) obj;
-		return new EqualsBuilder().append(code, rhs.code).isEquals();
+		return new EqualsBuilder().append(code, rhs.code).append(id, rhs.id).isEquals();
 	}
 
 }

@@ -1,8 +1,7 @@
 package fr.pizzeria.admin.web.pizza;
 
-import fr.pizzeria.admin.metier.PizzaService;
-import fr.pizzeria.model.CategoriePizza;
-import fr.pizzeria.model.Pizza;
+import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -10,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.math.BigDecimal;
+
+import fr.pizzeria.admin.metier.IngredientService;
+import fr.pizzeria.admin.metier.PizzaService;
+import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Pizza;
 
 @WebServlet("/pizzas/new")
 public class NouvellePizzaController extends HttpServlet {
@@ -20,10 +22,13 @@ public class NouvellePizzaController extends HttpServlet {
 	private static final String VUE_NOUVELLE_PIZZA = "/WEB-INF/views/pizzas/editerPizza.jsp";
 	@Inject
 	private PizzaService pizzaService;
+	@Inject
+	private IngredientService ingredientService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("pizza", new Pizza());
+		req.setAttribute("listeIngredient", ingredientService.findAll());
 		this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 	}
 
@@ -33,6 +38,8 @@ public class NouvellePizzaController extends HttpServlet {
 		String urlImage = req.getParameter("urlImage");
 		String prix = req.getParameter("prix");
 		String code = req.getParameter("code");
+		String[] ingredients = req.getParameterValues("ingredient");
+
 		// TODO Ajouter le support de la catégorie
 		// String categorie = req.getParameter("categorie");
 
@@ -48,10 +55,31 @@ public class NouvellePizzaController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 		} else {
 			Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.VIANDE);
+			if ( ingredients != null ) {
+				for (String ingredient : ingredients) {
+					pizzaSansId.addIngredient(ingredientService.findOneIngredient(ingredient));
+				}
+			}
 			pizzaSansId.setUrlImage(urlImage);
 			pizzaService.savePizza(pizzaSansId);
 			resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 		}
+	}
+	
+	/**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setPizzaService(PizzaService pizzaService) {
+		this.pizzaService = pizzaService;
+	}
+
+	/**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setIngredientService(IngredientService ingredientService) {
+		this.ingredientService = ingredientService;
 	}
 
 	protected boolean isBlank(String param) {
