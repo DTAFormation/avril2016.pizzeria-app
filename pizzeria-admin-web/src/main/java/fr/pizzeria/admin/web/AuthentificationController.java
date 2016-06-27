@@ -39,5 +39,5 @@ public class AuthentificationController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 		}
 	}
-
+	
 }
