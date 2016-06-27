@@ -12,7 +12,10 @@
         <td class="text-left"><img ng-src="{{ obj.pizza.urlImage }}" height="50px"></td>
         <td class="text-center">{{ obj.pizza.nom }}</td>
         <td class="text-center">{{ obj.pizza.prix }} €</td>
-        <td class="text-center">{{ obj.quantite }}</td>
+        <td class="text-center">
+          <a href class="btn btn-xs btn-info" ng-click="ctrl.decrementPizza(obj.pizza.id)">-</a> {{ obj.quantite }}
+          <a href class="btn btn-xs btn-info" ng-click="ctrl.incrementPizza(obj.pizza.id)">+</a>
+        </td>
         <td class="text-center">{{ obj.pizza.prix * obj.quantite }} €</td>
       </tr>
     </thead>

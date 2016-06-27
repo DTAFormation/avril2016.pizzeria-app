@@ -30,5 +30,4 @@ public class PizzaResource {
 	public Pizza findPizzas(@PathVariable String code) {
 		return pizzaDao.findByCode(code);
 	}
-
 }
