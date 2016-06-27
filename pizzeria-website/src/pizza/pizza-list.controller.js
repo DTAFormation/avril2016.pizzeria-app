@@ -3,7 +3,7 @@ export class PizzaListController {
   constructor (pizzasService, panierService) {
     this.pizzasService = pizzasService
     this.panierService = panierService
-    this.ordering = 'nom'
+    this.ordering = 'id'
     this.findAllPizzas()
   }
 
@@ -23,4 +23,4 @@ export class PizzaListController {
   }
 }
 
-PizzaListController.$inject = ['PizzasService','PanierService']
+PizzaListController.$inject = ['PizzasService', 'PanierService']

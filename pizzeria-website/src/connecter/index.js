@@ -1,8 +1,8 @@
 import angular from 'angular'
-import { ConnexionController } from './connexion.controller'
-import { ConnexionService } from '../shared/service/connexion.service'
+import { ConnexionController } from './Connexion.controller'
+import { ClientService } from '../shared/service/client.service'
 
 export default angular.module('pizzeria.connexion', [])
   .controller('ConnexionController', ConnexionController)
-  .service('ConnexionService', ConnexionService)
+  .service('ClientService', ClientService)
   .name
