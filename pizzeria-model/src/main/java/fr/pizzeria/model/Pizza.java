@@ -204,7 +204,7 @@ public class Pizza {
 			return false;
 		}
 		Pizza rhs = (Pizza) obj;
-		return new EqualsBuilder().append(code, rhs.code).isEquals();
+		return new EqualsBuilder().append(code, rhs.code).append(id, rhs.id).isEquals();
 	}
 
 }

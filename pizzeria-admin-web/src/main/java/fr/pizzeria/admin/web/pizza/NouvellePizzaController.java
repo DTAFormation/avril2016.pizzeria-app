@@ -1,10 +1,7 @@
 package fr.pizzeria.admin.web.pizza;
 
-import fr.pizzeria.admin.metier.IngredientService;
-import fr.pizzeria.admin.metier.PizzaService;
-import fr.pizzeria.model.CategoriePizza;
-import fr.pizzeria.model.Ingredient;
-import fr.pizzeria.model.Pizza;
+import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -13,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import fr.pizzeria.admin.metier.IngredientService;
+import fr.pizzeria.admin.metier.PizzaService;
+import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Pizza;
 
 @WebServlet("/pizzas/new")
 public class NouvellePizzaController extends HttpServlet {
@@ -66,6 +62,22 @@ public class NouvellePizzaController extends HttpServlet {
 			pizzaService.savePizza(pizzaSansId);
 			resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 		}
+	}
+	
+	/**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setPizzaService(PizzaService pizzaService) {
+		this.pizzaService = pizzaService;
+	}
+
+	/**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setIngredientService(IngredientService ingredientService) {
+		this.ingredientService = ingredientService;
 	}
 
 	protected boolean isBlank(String param) {

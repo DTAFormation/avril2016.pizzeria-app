@@ -86,11 +86,27 @@ public class EditerPizzaController extends HttpServlet {
             	pizzaAvecId.addIngredient(ingredientService.findOneIngredient(ingredient));
 			}
             pizzaService.updatePizza(code, pizzaAvecId);
-            resp.sendRedirect(this.getServletContext().getContextPath()
+            resp.sendRedirect(req.getContextPath()
                     + "/pizzas/list");
         }
     }
 
+    /**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setPizzaService(PizzaService pizzaService) {
+		this.pizzaService = pizzaService;
+	}
+
+	/**
+	 * setter utiliser lors des tests du controller
+	 * @param pizzaService
+	 */
+	public void setIngredientService(IngredientService ingredientService) {
+		this.ingredientService = ingredientService;
+	}
+    
     protected boolean isBlank(String param) {
         return param == null || param.isEmpty();
     }
