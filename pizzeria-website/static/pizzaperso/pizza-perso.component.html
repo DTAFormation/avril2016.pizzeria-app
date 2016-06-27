@@ -1,0 +1,26 @@
+<div class="row">
+  <div class ="col-xs-6">
+    <h2>Ingrédients disponibles</h2>
+    <ul class= "list-group">
+      <li ng-repeat="ingredient in $ctrl.ingredients track by $index" ng-click="$ctrl.onAddIngredient(ingredient)" ng-mouseenter="$ctrl.onHoverIngredient($index)" ng-mouseleave="$ctrl.onLeaveIngredient($index)" ng-style="$ctrl.bghover[$index]" class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">{{ ingredient.nom }}</div>
+          <div class="col-xs-2">{{ ingredient.prix }} €</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-6">
+    <h2>Votre pizza</h2>
+    <input type="text" class="form-control" placeholder="Nom">
+    <ul class= "list-group">
+      <li ng-repeat="ingredient in $ctrl.pizzaIngredients track by $index" ng-click="$ctrl.onRemoveIngredient(ingredient)" class="list-group-item">
+        <div class="row">
+          <div class="col-xs-10">{{ ingredient.nom }}</div>
+          <div class="col-xs-2">{{ ingredient.prix }} €</div>
+        </div>
+      </li>
+    </ul>
+    <button type="submit" class="btn btn-success">Valider</button>
+  </div>
+</div>

@@ -9,8 +9,9 @@ import PanierModule from './panier'
 import ConnexionModule from './connecter'
 import DeconnexionModule from './deconnexion'
 import ModificationDonneesCompte from './modificationDonneesCompte'
+import PizzaPersoModule from './pizzaperso'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, DeconnexionModule, ngRoute, ModificationDonneesCompte, 'ngStorage'])
+angular.module('pizzeria-website', [PizzaModule, PizzaPersoModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, DeconnexionModule, ngRoute, ModificationDonneesCompte, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -51,6 +52,9 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
       })
       .when('/home', {
         templateUrl: 'home/home.html'
+      })
+      .when('/perso', {
+        templateUrl: 'pizzaperso/pizza-perso.html'
       })
       .otherwise('/home')
   })
