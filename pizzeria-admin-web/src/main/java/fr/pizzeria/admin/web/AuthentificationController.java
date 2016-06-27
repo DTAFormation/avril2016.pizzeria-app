@@ -39,5 +39,10 @@ public class AuthentificationController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward(req, resp);
 		}
 	}
-
+	
+	@Override
+	protected void doDelete (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			req.getSession(true).setAttribute(AUTH_EMAIL, null);
+			//resp.sendRedirect(this.getServletContext().getContextPath() + "/login");
+	}
 }

@@ -8,7 +8,10 @@
 </jsp:include>
 
 <body class="container">
- <%@include file="../layout/menu.jsp" %>
+ 
+ <jsp:include page="../layout/menu.jsp">
+	<jsp:param value="Pizza" name="page" />
+</jsp:include>
 	<h1>Liste des pizzas</h1>
 	<a class="btn btn-primary" href="new">Nouvelle Pizza</a>
 	<br>
