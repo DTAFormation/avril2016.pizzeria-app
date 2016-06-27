@@ -1,12 +1,8 @@
-// $('.message a').click(function(){
-//    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-// });
-
-import angular from 'angular';
-import { ConnexionController } from './Connexion.controller';
-import { ConnexionService } from '../shared/service/connexion.service';
+import angular from 'angular'
+import { ConnexionController } from './Connexion.controller'
+import { ClientService } from '../shared/service/client.service'
 
 export default angular.module('pizzeria.connexion', [])
-    .controller('ConnexionController', ConnexionController)
-    .service('ConnexionService', ConnexionService)
-    .name;
+  .controller('ConnexionController', ConnexionController)
+  .service('ClientService', ClientService)
+  .name

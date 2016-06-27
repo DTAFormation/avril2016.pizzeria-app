@@ -1,4 +1,5 @@
 import { Commande } from '../src/shared/model/commande'
+import { Client } from '../src/shared/model/client'
 
 describe('Test du CommandeNewController', function () {
   var ctrl
@@ -6,10 +7,11 @@ describe('Test du CommandeNewController', function () {
 
   beforeEach(angular.mock.module('pizzeria-website'))
 
-  beforeEach(angular.mock.inject(function ($rootScope, $controller, $httpBackend) {
+  beforeEach(angular.mock.inject(function ($rootScope, $controller, $httpBackend, $localStorage) {
     const scope = $rootScope.$new()
     ctrl = $controller('CommandeNewController', {$scope: scope})
     http = $httpBackend
+    $localStorage.client = new Client({id: 1})
   }))
 
   it('should save commande', function (done) {

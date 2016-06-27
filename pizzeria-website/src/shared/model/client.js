@@ -1,4 +1,4 @@
-export class Pizza {
+export class Client {
   constructor ({id, nom, prenom, email, motDePasse, sexe, dateNaissance, adresseNum, adresseRue, adresseDetail, adresseCodePostal, adresseVille, numeroTel}) {
     this.id = id
     this.nom = nom

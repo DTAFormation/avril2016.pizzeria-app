@@ -1,8 +1,8 @@
 import angular from 'angular'
 import { InscriptionController } from './inscription.controller'
-import { InscriptionService } from '../shared/service/inscription.service'
+import { ClientService } from '../shared/service/client.service'
 
 export default angular.module('pizzeria.inscription', [])
   .controller('InscriptionController', InscriptionController)
-  .service('InscriptionService', InscriptionService)
+  .service('ClientService', ClientService)
   .name

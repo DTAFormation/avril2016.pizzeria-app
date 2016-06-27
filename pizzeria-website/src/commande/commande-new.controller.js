@@ -1,17 +1,33 @@
-import { Pizza } from '../shared/model/pizza'
 import { Commande } from '../shared/model/commande'
 
 export class CommandeNewController {
-
-  constructor (commandesService, panierService, $location) {
+  constructor (commandesService, panierService, $localStorage, $location) {
     this.commandesService = commandesService
     this.panierService = panierService
+    this.$localStorage = $localStorage
     this.$location = $location
+    if (!this.$localStorage.client) {
+      $location.path('/connexion')
+    }
     this.total = 0
     this.panier = this.panierService.findAllPizzas()
+    this.calcTotalPrice()
+  }
+
+  calcTotalPrice () {
     Object.keys(this.panier).forEach(key => {
       this.total += this.panier[key].pizza.prix * this.panier[key].quantite
     })
+  }
+
+  incrementPizza (pizza) {
+    this.panierService.incrementPizza(pizza)
+    this.calcTotalPrice()
+  }
+
+  decrementPizza (pizza) {
+    this.panierService.decrementPizza(pizza)
+    this.calcTotalPrice()
   }
 
   validate () {
@@ -26,17 +42,17 @@ export class CommandeNewController {
       dateCommande: new Date().getTime(),
       statut: 'NON_TRAITE',
       livreur: null,
-      client: null,
+      client: this.$localStorage.client,
       pizzas: pizzas
     })
 
     return this.commandesService.addOne(commande)
       .then(data => {
         this.panierService.deleteAllPizzas()
-        this.$location.path('/commandes')
+        this.$location.path('/commandes/' + (this.$localStorage.client) ? (this.$localStorage.client.id) : (''))
         return data
       })
   }
 }
 
-CommandeNewController.$inject = ['CommandesService', 'PanierService', '$location']
+CommandeNewController.$inject = ['CommandesService', 'PanierService', '$localStorage', '$location']
