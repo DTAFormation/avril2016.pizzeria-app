@@ -6,7 +6,7 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid row">
 		<div class="navbar-header col-xs-2 ">
-			<a class="navbar-brand" href="#">WebSiteName</a>
+			<a class="navbar-brand" href="#">The best Pizzeria</a>
 		</div>
 		<ul class="nav navbar-nav col-xs-8 ">
 			<li><a href="#">Home</a></li>
