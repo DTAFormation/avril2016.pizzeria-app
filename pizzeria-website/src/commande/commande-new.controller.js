@@ -35,7 +35,7 @@ export class CommandeNewController {
     return this.commandesService.addOne(commande)
       .then(data => {
         this.panierService.deleteAllPizzas()
-        this.$location.path('/commandes/' + this.$localStorage.client.id)
+        this.$location.path('/commandes/' + (this.$localStorage.client) ? (this.$localStorage.client.id) : (''))
         return data
       })
   }

@@ -1,14 +1,13 @@
 export class ConnexionController {
-
-  constructor(ConnexionService, $localStorage, $location) {
+  constructor (ConnexionService, $localStorage, $location) {
     this.ConnexionService = ConnexionService
     this.$localStorage = $localStorage
     this.$location = $location
   }
 
-  connexionClient(form) {
+  connexionClient (form) {
     if (form.$invalid) return
-    this.ConnexionService.login(this.client)
+    return this.ConnexionService.login(this.client)
       .then(client => {
         if (client) {
           this.$localStorage.client = client
@@ -21,4 +20,4 @@ export class ConnexionController {
   }
 }
 
-ConnexionController.$inject = ['ConnexionService', '$localStorage', '$location'];
+ConnexionController.$inject = ['ConnexionService', '$localStorage', '$location']

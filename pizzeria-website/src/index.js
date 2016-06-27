@@ -7,8 +7,9 @@ import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
 import ConnexionModule from './connecter'
+import DeconnexionModule from './deconnexion'
 
-angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, ngRoute, 'ngStorage'])
+angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, InscriptionModule, CommandeModule, ConnexionModule, DeconnexionModule, ngRoute, 'ngStorage'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/pizzas', {
@@ -27,6 +28,11 @@ angular.module('pizzeria-website', [PizzaModule, navbar, PanierModule, Inscripti
       .when('/connexion', {
         templateUrl: 'se-connecter.html',
         controller: 'ConnexionController',
+        controllerAs: 'ctrl'
+      })
+      .when('/deconnexion', {
+        template: '',
+        controller: 'DeconnexionController',
         controllerAs: 'ctrl'
       })
       .when('/inscription', {
