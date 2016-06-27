@@ -59,16 +59,12 @@ public class ListerUtilisateurController extends HttpServlet {
     	if (!emailAuthentifie.equals(email)) {
     		utilisateurService.deleteUtilisateur(email);
             req.setAttribute("msg", "L'utilisateur dont l'email est " + email + " a été supprimé");
-            doGet(req, resp);
 		} else {
 			req.setAttribute("msg", "Suppression impossible : c'est votre email !");
 			resp.setStatus(400);
-            doGet(req, resp);
 		}
     	
-//    	utilisateurService.deleteUtilisateur(email);
-//        req.setAttribute("msg", "L'utilisateur dont l'email est " + email + " a été supprimé");
-//        doGet(req, resp);
+        doGet(req, resp);
         break;
       default:
         req.setAttribute("msg", "Action inconnue");
