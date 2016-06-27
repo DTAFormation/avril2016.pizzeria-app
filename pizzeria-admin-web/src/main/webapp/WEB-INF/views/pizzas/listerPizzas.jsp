@@ -44,6 +44,7 @@
 							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
 						
+
 					</div>
 				</div>
 			</td>
