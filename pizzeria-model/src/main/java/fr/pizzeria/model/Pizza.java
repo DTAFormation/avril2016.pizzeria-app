@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 public class Pizza {
-	
+
 	private final static Map<String, String> FORMAT = new HashMap<String, String>();
 	private final static String AUTRE_FORMAT = "(%s)";
 
@@ -42,26 +42,31 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
+	private String description;
 
 	public Pizza() {
 		// implémentation par défaut
 	}
 
-	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat, String description) {
 		this();
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = cat;
+		this.description = description;
 	}
 
-	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage,
+			String description) {
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = categorie;
 		this.urlImage = urlImage;
 		this.id = id;
+		this.description = description;
+
 	}
 
 	public Integer getId() {
@@ -97,7 +102,6 @@ public class Pizza {
 		return prix;
 	}
 
-
 	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
@@ -118,10 +122,19 @@ public class Pizza {
 		this.urlImage = urlImage;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
-		return Arrays.asList(this.getClass().getDeclaredFields()).stream().filter(field -> field.getAnnotation(ToString.class) != null)
-				.map(getValeurDuChamp()).collect(Collectors.joining(" "));
+		return Arrays.asList(this.getClass().getDeclaredFields()).stream()
+				.filter(field -> field.getAnnotation(ToString.class) != null).map(getValeurDuChamp())
+				.collect(Collectors.joining(" "));
 	}
 
 	private Function<? super Field, ? extends String> getValeurDuChamp() {
@@ -129,7 +142,8 @@ public class Pizza {
 
 			String resultat = "";
 			try {
-				resultat = field.getAnnotation(ToString.class).uppercase() ? field.get(this).toString().toUpperCase() : field.get(this).toString();
+				resultat = field.getAnnotation(ToString.class).uppercase() ? field.get(this).toString().toUpperCase()
+						: field.get(this).toString();
 			} catch (SecurityException | IllegalArgumentException | IllegalAccessException e1) {
 				e1.printStackTrace();
 			}
