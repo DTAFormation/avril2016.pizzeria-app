@@ -46,12 +46,11 @@
 		</div>
 
 		<div class="form-group">
-			<label for="date">Date</label> <input type="text"
+			<label for="date">Date</label> <input type="datetime-local"
 				class="form-control" name="date" id="date"
-				value="<fmt:formatDate value="${commande.dateCommande.time}" type="both" dateStyle="short" timeStyle="short" />"
+				value="<fmt:formatDate value="${commande.dateCommande.time}" pattern="yyyy-MM-dd"/>T<fmt:formatDate value="${commande.dateCommande.time}" pattern="HH:mm"/>"
 				required>
 		</div>
-
 		<div class="form-group">
 			<label for="livreur">Livreur</label> <select name="livreur"
 				id="livreur" class="form-control">

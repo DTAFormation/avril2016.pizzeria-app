@@ -103,18 +103,19 @@ public class EditerCommandeController extends HttpServlet {
 			StatutCommande statut = StatutCommande.valueOf(statutParam);
 
 			Calendar date = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
+			dateParam = dateParam.replace('T', ' ');
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			try {
-				date.setTime(sdf.parse(req.getParameter("date")));
+				date.setTime(sdf.parse(dateParam));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 
-			int livreurId = Integer.parseInt(req.getParameter("livreur"));
+			int livreurId = Integer.parseInt(livreurIdParam);
 			Livreur l = new Livreur();
 			l.setId(livreurId);
 			
-			int clientId = Integer.parseInt(req.getParameter("client"));
+			int clientId = Integer.parseInt(clientIdParam);
 			Client c = new Client();
 			c.setId(clientId);
 

@@ -83,19 +83,31 @@ public class NouvelleCommandeController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE).forward(req, resp);
 
 		} else if (commandeService.isCodeTaken(numeroParam) > 0) {
+			List<Livreur> livreursDisponibles = livreurService.findAll();
+			List<Pizza> pizzas = pizzaService.findAll();
+			List<Client> clients = clientService.findAll();
+			StatutCommande[] statuts = StatutCommande.values();
+			
+			Commande commande = new Commande();
+			commande.setDateCommande(Calendar.getInstance());
 			
 			req.setAttribute("msgErreur", "Le numéro de commande existe déjà !");
-			req.setAttribute("commande", new Commande());
+			req.setAttribute("commande", commande);
+			req.setAttribute("statuts", statuts);
+			req.setAttribute("livreurs", livreursDisponibles);
+			req.setAttribute("clients", clients);
+			req.setAttribute("pizzas", pizzas);
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE).forward(req, resp);
 			
 		} else {
 			// Traitement des paramètres
 			StatutCommande statut = StatutCommande.valueOf(statutParam);
-
+			
+			dateParam = dateParam.replace('T', ' ');
 			Calendar date = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			try {
-				date.setTime(sdf.parse(req.getParameter("date")));
+				date.setTime(sdf.parse(dateParam));
 			} catch (ParseException e) {
 				throw new IllegalArgumentException("Format de la date incorrect !");
 			}
