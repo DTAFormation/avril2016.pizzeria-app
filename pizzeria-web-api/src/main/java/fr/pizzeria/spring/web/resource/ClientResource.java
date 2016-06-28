@@ -26,7 +26,14 @@ public class ClientResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Client saveClient(@RequestBody Client client) {
-		return clientDao.save(client);
+		
+		try {
+			return clientDao.save(client);
+
+		} catch (Exception e) {
+		}
+		return null;
+		
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)

@@ -79,6 +79,15 @@ public class Pizza {
 		this.description = description;
 
 	}
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.urlImage = urlImage;
+		this.id = id;
+
+	}
 
 	public Integer getId() {
 		return id;
