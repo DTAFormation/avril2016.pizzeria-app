@@ -35,7 +35,7 @@
 					${ingredient.name}
 				</td>
 				<td>			
-					<a href="<c:url value="/ingredient/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			
+					<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			
 				</td>
 				<td>
 					<form method="POST">
