@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
 
-public interface ICommandeRepository extends JpaRepository<Commande,Integer>{
+public interface ICommandeRepository extends JpaRepository<Commande, Integer> {
 	List<Commande> findByClient(Client clientId);
 
 }

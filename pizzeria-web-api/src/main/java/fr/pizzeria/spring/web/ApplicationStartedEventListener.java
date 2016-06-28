@@ -7,8 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Pizza;
@@ -31,13 +29,13 @@ public class ApplicationStartedEventListener {
 		clients.add(new Client("Perchaud", "Samuel", "test@gmail.com", "aaa"));
 		clients.add(new Client("Momo", "Antonin", "testos@gmail.com", "bbb"));
 		clients.forEach(p -> {
-		try {
-			clientDao.save(p);
+			try {
+				clientDao.save(p);
 
-		} catch (Exception e) {
-		}
-		 });
-		
+			} catch (Exception e) {
+			}
+		});
+
 	}
 
 	public void initPizzas(IPizzaRepository pizzaDao) {
@@ -51,12 +49,12 @@ public class ApplicationStartedEventListener {
 		pizzas.add(new Pizza("Rei", "Reine", new BigDecimal("12.00"), CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("Cho", "Chorizo", new BigDecimal("12.00"), CategoriePizza.VIANDE));
 		pizzas.forEach(p -> {
-		try {
-			pizzaDao.save(p);
+			try {
+				pizzaDao.save(p);
 
-		} catch (Exception e) {
-		}
-		 });
+			} catch (Exception e) {
+			}
+		});
 	}
 
 }
