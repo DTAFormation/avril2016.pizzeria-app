@@ -5,6 +5,9 @@ export class ModificationDonneesCompteController {
     this.$location = $location
     this.$localStorage = $localStorage
     this.client = this.$localStorage.client
+    if (!this.$localStorage.client) {
+      $location.path('/connexion')
+    }
   }
 
   updateClient (form) {
