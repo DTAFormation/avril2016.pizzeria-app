@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row">
   <div class="col-xs-10">
     <table class="table table-striped" id="listePizza">
@@ -20,3 +21,30 @@
   <div class="col-xs-2">
     <panier-component></panier-component>
   </div>
+=======
+<table class="table table-striped" id="listePizza">
+  <thead>
+    <tr>
+      <th class="text-center">Image</th>
+      <th class="text-center">Nom</th>
+      <th class="text-center">Categorie</th>
+      <th class="text-center">Prix</th>
+      <th></th>
+    </tr>
+    <tr class="text-center" ng-repeat="pizza in $ctrl.listePizzas">
+      <td>
+        <a href="#/pizzas/{{ pizza.code }}"><img ng-src="{{pizza.urlImage}}" width="80" height="60"></a>
+      </td>
+      <td>
+        <a href="#/pizzas/{{ pizza.code }}">{{ pizza.nom }}</a>
+      </td>
+      <td>{{ pizza.categorie }}</td>
+      <td>{{ pizza.prix }} €</td>
+      <td>
+        <a ng-click="$ctrl.addPizza(pizza)" class="btn btn-primary ">Ajouter au panier</a>
+        <a href="#/pizzas/{{ pizza.code }}" class="btn btn-warning ">Visualiser</a>
+      </td>
+    </tr>
+  </thead>
+</table>
+>>>>>>> refs/remotes/origin/master-website

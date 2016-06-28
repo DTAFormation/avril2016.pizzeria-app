@@ -40,5 +40,6 @@ public class PizzeriaApp {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(PizzeriaApp.class);
+		
 	}
 }

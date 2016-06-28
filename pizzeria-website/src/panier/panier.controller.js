@@ -42,6 +42,10 @@ export class PanierController {
     this.PanierService.decrementPizza(pizza)
   }
 
+  deleteAllPizzas () {
+    return this.PanierService.deleteAllPizzas()
+  }
+
   findAllPizzas () {
     return this.PanierService.findAllPizzas()
   }

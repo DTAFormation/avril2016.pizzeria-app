@@ -6,7 +6,7 @@ import InscriptionModule from './inscription'
 import CommandeModule from './commande'
 import navbar from './navbar'
 import PanierModule from './panier'
-import ConnexionModule from './connecter'
+import ConnexionModule from './connexion'
 import DeconnexionModule from './deconnexion'
 import ModificationDonneesCompte from './modificationDonneesCompte'
 import PizzaPersoModule from './pizzaperso'
@@ -16,6 +16,11 @@ angular.module('pizzeria-website', [PizzaModule, PizzaPersoModule, navbar, Panie
     $routeProvider
       .when('/pizzas', {
         templateUrl: 'pizza/pizza-list.html'
+      })
+      .when('/pizzas/:code?', {
+        templateUrl: 'pizza/visual-pizza.html',
+        controller: 'PizzaController',
+        controllerAs: 'ctrl'
       })
       .when('/commandes/new', {
         templateUrl: 'commande/commande-new.html',
@@ -28,7 +33,7 @@ angular.module('pizzeria-website', [PizzaModule, PizzaPersoModule, navbar, Panie
         controllerAs: 'ctrl'
       })
       .when('/connexion', {
-        templateUrl: 'client/se-connecter.html',
+        templateUrl: 'client/connexion.html',
         controller: 'ConnexionController',
         controllerAs: 'ctrl'
       })
