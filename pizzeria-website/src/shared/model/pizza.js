@@ -1,9 +1,5 @@
 export class Pizza {
-<<<<<<< HEAD
-  constructor ({id = 0, code, nom, prix, categorie, urlImage}) {
-=======
-  constructor ({id, code, nom, prix, categorie, urlImage, description}) {
->>>>>>> refs/remotes/origin/master-website
+  constructor ({id = 0, code, nom, prix, categorie, urlImage, description}) {
     this.id = id
     this.code = code
     this.nom = nom

@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-<div class="row">
-  <div class="col-xs-10">
-    <table class="table table-striped" id="listePizza">
-      <thead>
-        <tr>
-          <th class="text-center">Image</th>
-          <th class="text-center">Nom</th>
-          <th class="text-center">Categorie</th>
-          <th class="text-center">Prix</th>
-        </tr>
-        <tr ng-click="$ctrl.addPizza(pizza)" class="text-center" ng-repeat="pizza in $ctrl.listePizzas">
-          <td><img ng-src="{{pizza.urlImage}}"></td>
-          <td>{{ pizza.nom }}</td>
-          <td>{{ pizza.categorie }}</td>
-          <td>{{ pizza.prix }} €</td>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="col-xs-2">
-    <panier-component></panier-component>
-  </div>
-=======
 <table class="table table-striped" id="listePizza">
   <thead>
     <tr>
@@ -47,4 +23,3 @@
     </tr>
   </thead>
 </table>
->>>>>>> refs/remotes/origin/master-website
