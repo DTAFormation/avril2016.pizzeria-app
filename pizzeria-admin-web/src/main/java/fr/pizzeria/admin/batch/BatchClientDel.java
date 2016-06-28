@@ -13,14 +13,15 @@ public class BatchClientDel   {
 	private ClientService cs;
 	
 		   public BatchClientDel(){
+		         System.out.println("___constructeur du batch____");
 
 		   }
-		   @Schedule(second ="0")
+		   @Schedule(minute="*")
 		   public void batch() {
 		    try {
-
+		    	 System.out.println("debut de la tache planifier");
 		         cs.hardDeleteClients();
-
+		         System.out.println("le batch est passé");
 		            } catch (Exception e) {
 
 		        System.out.println("error running thread " + e.getMessage());
