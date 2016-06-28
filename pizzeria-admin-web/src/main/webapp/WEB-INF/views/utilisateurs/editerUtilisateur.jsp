@@ -72,7 +72,7 @@
 		    </div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">Annuler</a>
+			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">retour</a>
 		</form>
 	</c:if>
 
