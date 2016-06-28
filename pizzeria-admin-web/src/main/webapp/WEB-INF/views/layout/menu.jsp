@@ -6,10 +6,9 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid row">
 		<div class="navbar-header col-xs-2 ">
-			<a class="navbar-brand" href="#">The best Pizzeria</a>
+			<span class="navbar-brand" href="#">The best Pizzeria</span>
 		</div>
 		<ul class="nav navbar-nav col-xs-8 ">
-			<li><a href="#">Home</a></li>
 			<li <c:if test="${'Commande' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/commandes/list">Commande</a></li>
 			<li <c:if test="${'Pizza' == param.page}"> class="active"</c:if>><a
