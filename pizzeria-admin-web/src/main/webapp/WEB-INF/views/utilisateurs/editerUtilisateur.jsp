@@ -6,7 +6,9 @@
 	<jsp:param value="Page Editer Utilisateur" name="title" />
 </jsp:include>
 <body class="container">
-
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Utilisateur" name="page" />
+	</jsp:include>
 	<h1><c:out value="${ (utilisateur != null && utilisateur.id != null) ? 'Editer utilisateur' : 'Créer un utilisateur' }"/></h1>
 
 	<c:if test="${!empty msgErreur}">
@@ -70,7 +72,7 @@
 		    </div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">Annuler</a>
+			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">retour</a>
 		</form>
 	</c:if>
 

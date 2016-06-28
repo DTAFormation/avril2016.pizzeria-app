@@ -11,6 +11,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Commande" name="page" />
+	</jsp:include>
 	<c:set var="editPage"
 		value="${ (commande != null && commande.id != null) }" />
 
@@ -111,6 +114,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-primary">Valider</button>
+		<a href="<c:url value="/commandes/list"></c:url>" class="btn btn-primary">Retour</a>
 	</form>
 </body>
 </html>
