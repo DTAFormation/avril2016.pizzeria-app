@@ -16,7 +16,7 @@ import fr.pizzeria.admin.web.pizza.EditerPizzaController;
 /**
  * Contrôleur de la page Liste des ingredients.
  */
-@WebServlet("/ingredient/list")
+@WebServlet("/ingredients/list")
 public class ListerIngredientController extends HttpServlet{
 
 	private static final String VUE_LISTER_INGREDIENT = "/WEB-INF/views/ingredient/listerIngredient.jsp";

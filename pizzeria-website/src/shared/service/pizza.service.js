@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/ust-006-harmonisation
 import {Pizza} from '../model/pizza.js';
 
 const PIZZA_RESOURCE_URL = 'http://localhost:8080/pizzas';
@@ -19,6 +22,7 @@ export class PizzasService {
         .then(response => response.data);
   }
 }
+<<<<<<< HEAD
 =======
 import {Pizza} from '../model/pizza.js'
 
@@ -41,3 +45,5 @@ export class PizzasService {
   }
 }
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> origin/ust-006-harmonisation

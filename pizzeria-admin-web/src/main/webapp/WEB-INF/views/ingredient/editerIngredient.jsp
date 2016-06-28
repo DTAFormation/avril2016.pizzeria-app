@@ -6,6 +6,9 @@
 	<jsp:param value="Page Editer Ingredient" name="title" />
 </jsp:include>
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Ingredient" name="page" />
+	</jsp:include>
 
 	<h1><c:out value="${ titre }"/></h1>
 
@@ -34,7 +37,7 @@
 			</div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/ingredient/list"></c:url>"type="button">Retour</a>
+			<a href="<c:url value="/ingredients/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
 

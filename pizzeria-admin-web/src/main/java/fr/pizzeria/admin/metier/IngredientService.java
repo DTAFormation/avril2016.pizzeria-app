@@ -2,8 +2,10 @@ package fr.pizzeria.admin.metier;
 
 import java.util.List;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import fr.pizzeria.model.Ingredient;
@@ -33,8 +35,14 @@ public class IngredientService {
 		em.merge(ing);
 	}
 
-	public void saveIngredient(Ingredient ingredientSansId) {
-		em.persist(ingredientSansId);
+	public boolean saveIngredient(Ingredient ingredientSansId) {
+		try {
+			findOneIngredient(ingredientSansId.getCode());
+			return false;
+		}catch(NoResultException | EJBException e) {
+			em.persist(ingredientSansId);
+			return true;
+		}
 	}
 
 	public void deleteIngredient(String code) {

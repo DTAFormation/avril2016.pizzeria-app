@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/ust-006-harmonisation
 export class Pizza {
   constructor ({code, nom, prix, categorie, urlImage}) {
     this.code = code;
@@ -7,6 +10,7 @@ export class Pizza {
     this.categorie = categorie;
     this.imageUrl = urlImage;
   }
+<<<<<<< HEAD
 }
 =======
 export class Pizza {
@@ -19,3 +23,6 @@ export class Pizza {
   }
 }
 >>>>>>> refs/remotes/origin/master
+=======
+}
+>>>>>>> origin/ust-006-harmonisation

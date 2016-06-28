@@ -17,13 +17,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.model.Client;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientServiceTest {
-	private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(ClientServiceTest.class);
 
 	@Mock
 	private EntityManager em;
@@ -68,7 +66,6 @@ public class ClientServiceTest {
 	@Test
 	public void testUpdateClient() {
 
-		LOG.info("Etant donne un objet client");
 		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
 		Client c2 = new Client("test", "test", "test22@test.fr", "10 av aa", "00000000");
 		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
@@ -76,42 +73,32 @@ public class ClientServiceTest {
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(c1);
 		service.updateClient("test@test.fr", c2);
-		LOG.info("Alors 'pizza' a ete persiste");
 		verify(em).merge(c1);
 		verify(em).persist(c2);
 
 		assertFalse(c1.isActive());
-		LOG.info("FIN");
 	}
 
 	@Test
 	public void testSaveClient() {
-		LOG.info("Etant donne un objet Client");
 		Client client = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
 
-		LOG.info("Lorsque ejb.saveClient(client)");
 		service.saveClient(client);
 
-		LOG.info("Alors 'client' a ete persiste");
 		verify(em).persist(client);
-		LOG.info("FIN");
 	}
 
 	@Test
 	public void testDeleteClient() {
-		LOG.info("Etant donne un objet Client");
 		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
 		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
 				.thenReturn(query);
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(client);
-		LOG.info("Lorsque ejb.deleteClient(client)");
 		service.deleteClient("test@test.fr");
 
-		LOG.info("Alors 'client' a ete modifie");
 		verify(em).merge(client);
 		assertFalse(client.isActive());
-		LOG.info("FIN");
 	}
 
 }

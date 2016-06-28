@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <table ng-show="ctrl.listePizzas" class="table table-striped" id="listePizza">
   <thead>
   <tr>
@@ -29,3 +30,19 @@
   </div>
 </div>
 >>>>>>> refs/remotes/origin/master
+=======
+<table ng-show="ctrl.listePizzas" class="table table-striped" id="listePizza">
+  <thead>
+  <tr>
+    <th class="text-center">Image</th>
+    <th class="text-center">Nom</th>
+    <th class="text-center">Prix</th>
+  </tr>
+  <tr class="text-center" ng-repeat="pizza in ctrl.listePizzas">
+    <td><img ng-src="{{pizza.imageUrl}}"></td>
+    <td>{{ pizza.nom }}</td>
+    <td>{{ pizza.prix }}</td>
+  </tr>
+  </thead>
+</table>
+>>>>>>> origin/ust-006-harmonisation

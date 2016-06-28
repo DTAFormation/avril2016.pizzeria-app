@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import angular from 'angular';
 import { PizzaListController } from './pizza-list.controller';
 import { PizzasService } from '../shared/service/pizza.service';
@@ -17,3 +18,13 @@ export default angular.module('pizzeria.pizza', [])
     .service('PizzasService', PizzasService)
     .name
 >>>>>>> refs/remotes/origin/master
+=======
+import angular from 'angular';
+import { PizzaListController } from './pizza-list.controller';
+import { PizzasService } from '../shared/service/pizza.service';
+
+export default angular.module('pizzeria.pizza', [])
+    .controller('PizzaListController', PizzaListController)
+    .service('PizzasService', PizzasService)
+    .name;
+>>>>>>> origin/ust-006-harmonisation
