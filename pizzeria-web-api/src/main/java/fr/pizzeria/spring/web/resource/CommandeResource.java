@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
-
 import fr.pizzeria.spring.web.repository.IClientRepository;
 import fr.pizzeria.spring.web.repository.ICommandeRepository;
-
 
 /**
  * Resource Commande.
@@ -23,15 +21,17 @@ import fr.pizzeria.spring.web.repository.ICommandeRepository;
 @RequestMapping("/commandes")
 public class CommandeResource {
 
-	@Autowired private ICommandeRepository commandeDao;
-	@Autowired private IClientRepository clientDao;
+	@Autowired
+	private ICommandeRepository commandeDao;
+	@Autowired
+	private IClientRepository clientDao;
 
-	@RequestMapping(path= "/{cId}", method = RequestMethod.GET)
+	@RequestMapping(path = "/{cId}", method = RequestMethod.GET)
 	public List<Commande> listAllCommandesClient(@PathVariable Integer cId) {
-	  Client cl = clientDao.findById(cId);
+		Client cl = clientDao.findById(cId);
 
-	  return commandeDao.findByClient(cl);
-  	}
+		return commandeDao.findByClient(cl);
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Commande addCommande(@RequestBody Commande commande) {
