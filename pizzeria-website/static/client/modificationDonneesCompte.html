@@ -15,7 +15,7 @@
         <!--Mot de passe-->
         <input ng-model="$ctrl.client.motDePasse" ng-model-options="{ updateOn : 'blur' }" required name="motDePasse" type="password"
             class="form-control" id="motDePasse">
-        <p class="text-danger" ng-if="inscriptionClientForm.motDePasse.$invalid && inscriptionClientForm.motDePasse.$touched">mot de passe obligatoire</p>
+        <p class="text-danger" ng-if="inscriptionClientForm.motDePasse.$invalid && inscriptionClientForm.motDePasse.$touched">Mot de passe obligatoire</p>
 
 
         <label for="motDePasseBis">Retaper le mot de passe :</label>
@@ -23,14 +23,14 @@
         <input ng-model="$ctrl.client.motDePasseBis" ng-model-options="{ updateOn : 'blur' }" required name="motDePasseBis" type="password"
             class="form-control" id="motDePasseBis">
         <p class="text-danger" ng-if="inscriptionClientForm.motDePasseBis.$invalid && inscriptionClientForm.motDePasseBis.$touched ">Valider le mot de passe</p>
-        <p class="text-danger" ng-if="!(inscriptionClientForm.motDePasse.$modelValue == inscriptionClientForm.motDePasseBis.$modelValue) ">Mot de passe different</p>
+        <p class="text-danger" ng-if="!(inscriptionClientForm.motDePasse.$modelValue == inscriptionClientForm.motDePasseBis.$modelValue) ">Mot de passe différent</p>
     </div>
     <div>
         <!--Nom-->
         <label for="Nom">Nom :</label>
         <input ng-model="$ctrl.client.nom" ng-model-options="{ updateOn : 'blur' }" name="Nom" type="text" class="form-control" id="Nom">
 
-        <label for="Prenom">Prenom :</label>
+        <label for="Prenom">Prénom :</label>
         <!--Prenom-->
         <input ng-model="$ctrl.client.prenom" ng-model-options="{ updateOn : 'blur' }" name="Prenom" type="text" class="form-control"
             id="Prenom">
@@ -43,20 +43,20 @@
         <input type="radio" name="sexe" ng-model="$ctrl.client.sexe" value="female" /> female <br>
         <label for="date">Date de naissance :</label>
         <input type="date" name="date" ng-model="$ctrl.client.dateNaissance"> <br>
-        <label for="numeroTel">Numero de téléphone :</label>
+        <label for="numeroTel">Numéro de téléphone :</label>
         <input type="text" ng-model="$ctrl.client.numeroTel" name="numeroTel" class="form-control">
     </div>
     <br>
     <div>
-        <label for="adresseNum">Numero de Rue :</label>
+        <label for="adresseNum">Numéro de Rue :</label>
         <input type="text" ng-model="$ctrl.client.adresseNum" name="numeroTel" class="form-control">
         <label for="adresseRue">Nom de Rue :</label>
         <input type="text" ng-model="$ctrl.client.adresseRue" name="adresseRue" class="form-control">
-        <label for="adresseDetail">adresseDetail :</label>
+        <label for="adresseDetail">Complément d'adresse :</label>
         <input type="text" ng-model="$ctrl.client.adresseDetail" name="adresseDetail" class="form-control">
-        <label for="adresseCodePostal">adresseCodePostal :</label>
+        <label for="adresseCodePostal">Code postal :</label>
         <input type="text" ng-model="$ctrl.client.adresseCodePostal" name="adresseCodePostal" class="form-control">
-        <label for="adresseVille">adresseVille :</label>
+        <label for="adresseVille">Ville :</label>
         <input type="text" ng-model="$ctrl.client.adresseVille" name="adresseVille" class="form-control">
 
         <br>
