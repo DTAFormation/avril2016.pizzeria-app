@@ -62,7 +62,7 @@
 			</div>
 			<input type="hidden" name="oldEmail" value="${client.email}" />
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/clients/list"></c:url>"type="button">Retour</a>
+			<a href="<c:url value="/clients/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
 

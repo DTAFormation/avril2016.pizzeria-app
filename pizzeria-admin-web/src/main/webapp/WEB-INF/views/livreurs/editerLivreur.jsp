@@ -36,6 +36,7 @@
 			</div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
+			<a href="<c:url value="/livreurs/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 
 </body>
