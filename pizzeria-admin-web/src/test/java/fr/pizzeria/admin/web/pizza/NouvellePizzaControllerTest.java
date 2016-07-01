@@ -28,73 +28,73 @@ import fr.pizzeria.model.Pizza;
 @RunWith(MockitoJUnitRunner.class)
 public class NouvellePizzaControllerTest {
 
-	@Mock 
+	@Mock
 	private EntityManager em;
-	
+
 	@Mock
 	private TypedQuery<Ingredient> query;
-	
+
 	@Mock
 	private TypedQuery<Pizza> pizzaQuery;
-	
+
 	@Mock
 	HttpServletRequest req;
-	
+
 	@Mock
 	HttpServletResponse resp;
 
 	private IngredientService serviceIngredient;
 	private PizzaService servicePizza;
-	
+
 	@Before
 	public void setUp() {
 		serviceIngredient = new IngredientService();
-		serviceIngredient.setEm(em);	
+		serviceIngredient.setEm(em);
 		servicePizza = new PizzaService();
 		servicePizza.setEm(em);
 	}
-	
+
 	@Test
 	public void testDoPostHttpServletRequestHttpServletResponse() throws ServletException, IOException {
-		Ingredient ingredient = new Ingredient("CHA","champignon");
-		Ingredient ingredient2 = new Ingredient("SAM","saumon");
-		Ingredient ingredient3 = new Ingredient("FRO","fromage");
-		String stringvalues[] = {"CHA", "SAM", "FRO"};
-		Pizza p = new Pizza("PEP", "peperoni", new BigDecimal(12.5) , CategoriePizza.VIANDE);
+		Ingredient ingredient = new Ingredient("CHA", "champignon");
+		Ingredient ingredient2 = new Ingredient("SAM", "saumon");
+		Ingredient ingredient3 = new Ingredient("FRO", "fromage");
+		String stringvalues[] = { "CHA", "SAM", "FRO" };
+		Pizza p = new Pizza("PEP", "peperoni", new BigDecimal(12.5), CategoriePizza.VIANDE);
 		p.setUrlImage("http://placehold.it/350x150");
 		p.addIngredient(ingredient);
 		p.addIngredient(ingredient2);
 		p.addIngredient(ingredient3);
-		
+
 		when(req.getParameter("nom")).thenReturn("peperoni");
 		when(req.getParameter("urlImage")).thenReturn("http://placehold.it/350x150");
 		when(req.getParameter("prix")).thenReturn("12.5");
 		when(req.getParameter("code")).thenReturn("PEP");
 		when(req.getParameterValues("ingredient")).thenReturn(stringvalues);
-		
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
-		
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "SAM")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient2);
-		
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "FRO")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient3);
-		
-		when(em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)).thenReturn(pizzaQuery);
+
+		when(em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)).thenReturn(pizzaQuery);
 		when(pizzaQuery.setParameter("code", "PEP")).thenReturn(pizzaQuery);
 		when(pizzaQuery.getResultList()).thenReturn(new ArrayList<Pizza>());
-		
+
 		NouvellePizzaController controllerTest = new NouvellePizzaController();
 		controllerTest.setPizzaService(servicePizza);
 		controllerTest.setIngredientService(serviceIngredient);
 		controllerTest.doPost(req, resp);
-		
+
 		verify(em).persist(p);
-		
+
 	}
 
 }

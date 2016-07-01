@@ -19,72 +19,61 @@ import java.util.logging.Logger;
 @WebServlet("/ingredients/edit")
 public class EditerIngredientController extends HttpServlet {
 
-    private static final Logger LOG = Logger
-            .getLogger(EditerIngredientController.class.getName());
+	private static final Logger LOG = Logger.getLogger(EditerIngredientController.class.getName());
 
-    public static final String URL = "/ingredients/edit";
-    private static final String VUE_EDITER_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
+	public static final String URL = "/ingredients/edit";
+	private static final String VUE_EDITER_INGREDIENT = "/WEB-INF/views/ingredient/editerIngredient.jsp";
 
-    @Inject
-    private IngredientService ingredientService;
+	@Inject
+	private IngredientService ingredientService;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String code = req.getParameter("code");
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String code = req.getParameter("code");
 
-        if (code == null || code.isEmpty()) {
-            resp.setStatus(400); // Bad Request
-            req.setAttribute("msgErreur",
-                    "Code obligatoire pour editer une pizza");
-            this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
-                    .forward(req, resp);
-        } else {
+		if (code == null || code.isEmpty()) {
+			resp.setStatus(400); // Bad Request
+			req.setAttribute("msgErreur", "Code obligatoire pour editer une pizza");
+			this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT).forward(req, resp);
+		} else {
 
-            Ingredient ingredient = this.ingredientService.findOneIngredient(code);
-            if (ingredient == null) {
-            	sendErrorIngredientInconnue(req, resp);
-            } else {
-                req.setAttribute("ingredient", ingredient);
-                this.getServletContext()
-                        .getRequestDispatcher(VUE_EDITER_INGREDIENT)
-                        .forward(req, resp);
-            }
-        }
+			Ingredient ingredient = this.ingredientService.findOneIngredient(code);
+			if (ingredient == null) {
+				sendErrorIngredientInconnue(req, resp);
+			} else {
+				req.setAttribute("ingredient", ingredient);
+				this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT).forward(req, resp);
+			}
+		}
 
-    }
+	}
 
-    private void sendErrorIngredientInconnue(HttpServletRequest req,
-                                        HttpServletResponse resp) throws ServletException, IOException {
-        resp.setStatus(400); // Bad Request
-        req.setAttribute("msgErreur", "Code ingredient inconnu");
-        this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
-                .forward(req, resp);
-    }
+	private void sendErrorIngredientInconnue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setStatus(400); // Bad Request
+		req.setAttribute("msgErreur", "Code ingredient inconnu");
+		this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT).forward(req, resp);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String code = req.getParameter("code");
-        String nom = req.getParameter("name");
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String id = req.getParameter("id");
+		String code = req.getParameter("code");
+		String nom = req.getParameter("nom");
 
-        if (isBlank(nom) || isBlank(code)) {
-            req.setAttribute("ingredient", this.ingredientService.findOneIngredient(code));
-            req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
-            this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT)
-                    .forward(req, resp);
-        } else {
-            Ingredient ingredientAvecCode = new Ingredient(Integer.valueOf(id), code, nom);
+		if (isBlank(nom) || isBlank(code)) {
+			req.setAttribute("ingredient", this.ingredientService.findOneIngredient(code));
+			req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
+			this.getServletContext().getRequestDispatcher(VUE_EDITER_INGREDIENT).forward(req, resp);
+		} else {
+			Ingredient ingredientAvecCode = new Ingredient(Integer.valueOf(id), code, nom);
 
-            ingredientService.updateIngredient(code, ingredientAvecCode);
-            resp.sendRedirect(req.getContextPath()
-                    + "/ingredients/list");
-        }
-    }
+			ingredientService.updateIngredient(code, ingredientAvecCode);
+			resp.sendRedirect(req.getContextPath() + "/ingredients/list");
+		}
+	}
 
-    protected boolean isBlank(String param) {
-        return param == null || param.isEmpty();
-    }
+	protected boolean isBlank(String param) {
+		return param == null || param.isEmpty();
+	}
 
 }

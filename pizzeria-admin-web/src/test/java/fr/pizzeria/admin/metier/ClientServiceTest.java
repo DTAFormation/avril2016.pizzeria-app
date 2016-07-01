@@ -44,7 +44,7 @@ public class ClientServiceTest {
 		List<Client> lClients = new ArrayList<>();
 		service.saveClient(c1);
 		service.saveClient(c2);
-		when(em.createQuery("select c from Client c where isActive = 1", Client.class)).thenReturn(query);
+		when(em.createQuery("select c from Client c where actif = true", Client.class)).thenReturn(query);
 		when(query.getResultList()).thenReturn(lClients);
 		List<Client> lFindAll = service.findAll();
 		assertEquals(lFindAll.size(), lClients.size());
@@ -54,7 +54,7 @@ public class ClientServiceTest {
 	public void testFindOneClient() {
 
 		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
-		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
+		when(em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class))
 				.thenReturn(query);
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(c1);
@@ -68,7 +68,7 @@ public class ClientServiceTest {
 
 		Client c1 = new Client("test", "test", "test@test.fr", "10 av aa", "00000000");
 		Client c2 = new Client("test", "test", "test22@test.fr", "10 av aa", "00000000");
-		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
+		when(em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class))
 				.thenReturn(query);
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(c1);
@@ -76,7 +76,7 @@ public class ClientServiceTest {
 		verify(em).merge(c1);
 		verify(em).persist(c2);
 
-		assertFalse(c1.isActive());
+		assertFalse(c1.isActif());
 	}
 
 	@Test
@@ -91,14 +91,14 @@ public class ClientServiceTest {
 	@Test
 	public void testDeleteClient() {
 		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
-		when(em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class))
+		when(em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class))
 				.thenReturn(query);
 		when(query.setParameter("email", "test@test.fr")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(client);
 		service.deleteClient("test@test.fr");
 
 		verify(em).merge(client);
-		assertFalse(client.isActive());
+		assertFalse(client.isActif());
 	}
 
 }

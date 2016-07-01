@@ -37,7 +37,7 @@
 				${client.id}
 			</td>
 			<td>
-				${client.derniereModification}
+				${client.dateDerniereModification}
 			</td>
 			<td>
 				${client.nom}

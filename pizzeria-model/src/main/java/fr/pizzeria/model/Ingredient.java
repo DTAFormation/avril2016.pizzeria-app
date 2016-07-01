@@ -7,27 +7,26 @@ import javax.persistence.Id;
 
 @Entity
 public class Ingredient {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String code;
-	private String name;
+	private String nom;
 	private boolean actif = true;
 
 	public Ingredient() {
 		// default construct
 	}
 
-	public Ingredient(Integer id, String code, String name) {
+	public Ingredient(Integer id, String code, String nom) {
 		this.id = id;
 		this.code = code;
-		this.name = name;
+		this.nom = nom;
 	}
 
-	public Ingredient(String code, String name) {
+	public Ingredient(String code, String nom) {
 		this.code = code;
-		this.name = name;
+		this.nom = nom;
 	}
 
 	public boolean isActif() {
@@ -54,12 +53,12 @@ public class Ingredient {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 }
