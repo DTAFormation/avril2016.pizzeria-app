@@ -40,7 +40,7 @@
 				<td>
 					<ul>
 						<c:forEach var="ingredient" items="${pizza.ingredients}">
-							<li>${ingredient.name}</li>
+							<li>${ingredient.nom}</li>
 						</c:forEach>
 					</ul>
 				</td>

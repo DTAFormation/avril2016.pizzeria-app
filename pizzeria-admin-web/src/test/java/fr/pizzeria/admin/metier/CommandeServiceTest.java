@@ -1,6 +1,5 @@
 package fr.pizzeria.admin.metier;
 
-
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,7 @@ import fr.pizzeria.model.StatutCommande;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandeServiceTest {
-	
+
 	@Mock
 	private EntityManager em;
 
@@ -46,12 +45,12 @@ public class CommandeServiceTest {
 		Client client = new Client("Travis", "Bob", "bt@gmail.com", "37 bd...", "0700000000");
 		Commande commande1 = new Commande("001", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreur, client);
 		Commande commande2 = new Commande("002", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreur, client);
-		
+
 		List<Commande> commandes = new ArrayList<>();
 		commandes.add(commande1);
 		commandes.add(commande2);
-		
-		when(em.createQuery("select c from Commande c where delFlag = 0", Commande.class)).thenReturn(query);
+
+		when(em.createQuery("select c from Commande c where supprime = false", Commande.class)).thenReturn(query);
 		when(query.getResultList()).thenReturn(commandes);
 		service.findAll();
 	}
@@ -61,8 +60,8 @@ public class CommandeServiceTest {
 		Livreur livreur = new Livreur("Doe", "John");
 		Client client = new Client("Travis", "Bob", "bt@gmail.com", "37 bd...", "0700000000");
 		Commande commande = new Commande("001", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreur, client);
-		
-		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and delFlag = 0", Commande.class)).thenReturn(query);
+
+		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and supprime = false", Commande.class)).thenReturn(query);
 		when(query.setParameter("numeroCommande", "001")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(commande);
 
@@ -75,8 +74,8 @@ public class CommandeServiceTest {
 		Client client = new Client("Travis", "Bob", "bt@gmail.com", "37 bd...", "0700000000");
 		Commande commandeOld = new Commande("001", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreur, client);
 		Commande commandeNew = new Commande(1, "001", StatutCommande.EXPEDIE, Calendar.getInstance(), livreur, client);
-		
-		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and delFlag = 0", Commande.class)).thenReturn(query);
+
+		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and supprime = false", Commande.class)).thenReturn(query);
 		when(query.setParameter("numeroCommande", "001")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(commandeOld);
 
@@ -90,7 +89,7 @@ public class CommandeServiceTest {
 		Client client = new Client("Travis", "Bob", "bt@gmail.com", "37 bd...", "0700000000");
 		Commande commande = new Commande("001", StatutCommande.NON_TRAITE, Calendar.getInstance(), livreur, client);
 		service.saveCommande(commande);
-		
+
 		verify(em).persist(commande);
 	}
 
@@ -99,13 +98,13 @@ public class CommandeServiceTest {
 		Livreur livreur = new Livreur("Doe", "John");
 		Client client = new Client("Travis", "Bob", "bt@gmail.com", "37 bd...", "0700000000");
 		Commande commande = new Commande(1, "001", StatutCommande.EXPEDIE, Calendar.getInstance(), livreur, client);
-		
-		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and delFlag = 0", Commande.class)).thenReturn(query);
+
+		when(em.createQuery("select c from Commande c where c.numeroCommande = :numeroCommande and supprime = false", Commande.class)).thenReturn(query);
 		when(query.setParameter("numeroCommande", "001")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(commande);
-		
+
 		service.deleteCommande("001");
-		assertTrue(commande.isDelFlag());
+		assertTrue(commande.isSupprime());
 		verify(em).merge(commande);
 	}
 }
