@@ -32,7 +32,7 @@
 					${ingredient.code}
 				</td>
 				<td>
-					${ingredient.name}
+					${ingredient.nom}
 				</td>
 				<td>			
 					<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			

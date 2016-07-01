@@ -17,12 +17,15 @@ public class IngredientService {
 
 	@PersistenceContext
 	protected EntityManager em;
-	
+
 	@Inject
 	private PizzaService pizzaService;
-	
+
+
+
 	/**
 	 * on récupère tout les ingredients qui sont actives (actif = true)
+	 * 
 	 * @return
 	 */
 	public List<Ingredient> findAll() {
@@ -30,13 +33,13 @@ public class IngredientService {
 	}
 
 	public Ingredient findOneIngredient(String code) {
-		return em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)
+		return em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)
 				.setParameter("code", code).getSingleResult();
 	}
 
 	public void updateIngredient(String code, Ingredient ingredientAvecCode) {
 		Ingredient ing = findOneIngredient(code); // vérifie qu'une pizza est présente
-		ing.setName(ingredientAvecCode.getName());
+		ing.setNom(ingredientAvecCode.getNom());
 		em.merge(ing);
 	}
 
@@ -44,14 +47,13 @@ public class IngredientService {
 		try {
 			findOneIngredient(ingredientSansId.getCode());
 			return false;
-		}catch(NoResultException | EJBException e) {
+		} catch (NoResultException | EJBException e) {
 			em.persist(ingredientSansId);
 			return true;
 		}
 	}
 
 	public void deleteIngredient(String code) {
-		
 		List<Pizza> listPizzas = pizzaService.findAll();
 		Ingredient ing = findOneIngredient(code);
 		
@@ -63,7 +65,7 @@ public class IngredientService {
 			listeIngredientsPizza.remove(ing);
 			pizzaService.updatePizza(pizza.getCode(), pizza);
 		}
-		
+
 		ing.setActif(false);
 		em.merge(ing);
 	}

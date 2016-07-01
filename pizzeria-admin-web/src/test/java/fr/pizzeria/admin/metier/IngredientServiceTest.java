@@ -40,8 +40,9 @@ public class IngredientServiceTest {
 	@Before
 	public void setUp() {
 		service = new IngredientService();
-		service.setEm(em);
+
 		service.setPizzaService(pizzaService);
+		service.setEm(em);		
 	}
 	
 	@Test
@@ -49,7 +50,7 @@ public class IngredientServiceTest {
 		LOG.info("Etant donne un objet ingredient");		
 
 		Ingredient ingredient = new Ingredient("CHA","champignon");
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
 
@@ -66,7 +67,7 @@ public class IngredientServiceTest {
 		LOG.info("Etant donne un objet ingredient");		
 		Ingredient ingredient = new Ingredient("CHA","champignon");
 		
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenThrow(NoResultException.class);
 		
@@ -82,7 +83,7 @@ public class IngredientServiceTest {
 		LOG.info("Etant donne un objet ingredient");		
 
 		Ingredient ingredient = new Ingredient("CHA","champignon");
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
 		
@@ -90,7 +91,7 @@ public class IngredientServiceTest {
 		LOG.info("Insertion de l'objet");
 		service.saveIngredient(ingredient);
 		assertTrue(ingredient.isActif());
-		assertEquals(ingredient.getName(), "champignon");
+		assertEquals(ingredient.getNom(), "champignon");
 		
 		
 		Ingredient ingredientAvecCode = new Ingredient("CHA", "des champignon");
@@ -98,7 +99,7 @@ public class IngredientServiceTest {
 		
 		// Vérification des nouvelle données
 		LOG.info("Alors 'ingredient' a ete modifie");
-		assertEquals(ingredient.getName(), "des champignon");
+		assertEquals(ingredient.getNom(), "des champignon");
 		verify(em).merge(ingredient);
 		
 		LOG.info("FIN");
@@ -108,7 +109,7 @@ public class IngredientServiceTest {
 	public void supprimerIngredientVerifModifIsActive() {		
 		LOG.info("Etant donne un objet ingredient");		
 		Ingredient ingredient = new Ingredient("CHA","champignon");
-		when(em.createQuery("select i from Ingredient i where i.code=:code and actif=1", Ingredient.class)).thenReturn(query);
+		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
 		

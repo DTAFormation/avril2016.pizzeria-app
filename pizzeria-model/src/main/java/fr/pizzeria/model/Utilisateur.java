@@ -8,20 +8,16 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints=
-	@UniqueConstraint(columnNames={"email"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 public class Utilisateur {
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom;
 	private String prenom;
 	private String email;
 	private String motDePasse;
-	
-	
-	
+
 	public Utilisateur(Integer id, String nom, String prenom, String email, String motDePasse) {
 		super();
 		this.id = id;
@@ -31,6 +27,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 
 	}
+
 	public Utilisateur(String nom, String prenom, String email, String motDePasse) {
 		super();
 		this.nom = nom;
@@ -39,40 +36,52 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 
 	}
+
 	public Utilisateur() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
 	public String getPrenom() {
 		return prenom;
 	}
+
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getMotDePasse() {
 		return motDePasse;
 	}
+
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,6 +93,7 @@ public class Utilisateur {
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,8 +130,5 @@ public class Utilisateur {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }

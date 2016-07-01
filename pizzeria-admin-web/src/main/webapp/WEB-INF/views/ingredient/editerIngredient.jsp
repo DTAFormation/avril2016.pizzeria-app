@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group">
 				<label for="name">Nom</label> <input type="text" class="form-control"
-					id="name" name="name" value="${ingredient.name}" required>
+					id="name" name="nom" value="${ingredient.nom}" required>
 			</div>
 			
 			<input name="Referer" type="texte" value="${Referer}" hidden>

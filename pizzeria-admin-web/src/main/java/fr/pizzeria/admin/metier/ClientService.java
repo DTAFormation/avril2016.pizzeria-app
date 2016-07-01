@@ -15,17 +15,17 @@ public class ClientService {
 	protected EntityManager em;
 
 	public List<Client> findAll() {
-		return em.createQuery("select c from Client c where isActive = 1", Client.class).getResultList();
+		return em.createQuery("select c from Client c where actif = true", Client.class).getResultList();
 	}
 
 	public Client findOneClient(String email) {
-		return em.createQuery("select c from Client c where c.email=:email and isActive = 1", Client.class)
+		return em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class)
 				.setParameter("email", email).getSingleResult();
 	}
 
 	public void updateClient(String oldEmail, Client clientAvecId) {
 		Client oldClient = findOneClient(oldEmail); // vérifie qu'une pizza est présente
-		oldClient.setActive(false);
+		oldClient.setActif(false);
 		clientAvecId.setId(null);
 		em.merge(oldClient);
 		em.persist(clientAvecId);
@@ -38,7 +38,7 @@ public class ClientService {
 	public void deleteClient(String email) {
 		Client c = findOneClient(email);
 		if (c != null) {
-			c.setActive(false);
+			c.setActif(false);
 			em.merge(c);
 		}
 
@@ -49,7 +49,7 @@ public class ClientService {
 	}
 
 	public List<Client> isEmailTaken(String email) {
-		return em.createQuery("select c from Client c where c.email=:email and isActive=1", Client.class).setParameter("email", email)
-				.getResultList();
+		return em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class)
+				.setParameter("email", email).getResultList();
 	}
 }

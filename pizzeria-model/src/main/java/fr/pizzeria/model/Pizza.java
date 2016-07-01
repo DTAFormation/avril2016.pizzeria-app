@@ -25,7 +25,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 public class Pizza {
-	
+
+
 	private final static Map<String, String> FORMAT = new HashMap<String, String>();
 	private final static String AUTRE_FORMAT = "(%s)";
 
@@ -47,14 +48,17 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
-	
+
+
 	@ManyToMany
-	@JoinTable(name = "pizza_ingredient", 
-	joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), 
-	inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+
+
+
+	@JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
 	private List<Ingredient> ingredients = new ArrayList<>();
-	
-	private boolean delFlag = false; 
+
+
+	private boolean actif = true;
 
 	public Pizza() {
 		// implémentation par défaut
@@ -76,7 +80,8 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.id = id;
 	}
-	
+
+
 	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, List<Ingredient> ingredients) {
 		this.code = code;
 		this.nom = nom;
@@ -86,31 +91,37 @@ public class Pizza {
 		this.id = id;
 		this.ingredients = ingredients;
 	}
-	
-	public boolean isDelFlag() {
-		return delFlag;
+
+
+	public boolean isActif() {
+		return actif;
 	}
 
-	public void setDelFlag(boolean delFlag) {
-		this.delFlag = delFlag;
+	public void setActif(boolean actif) {
+
+		this.actif = actif;
 	}
 
 	public void setIngredients(List<Ingredient> nouveauxIngredients) {
 		this.ingredients = nouveauxIngredients;
 	}
-	
+
+
 	public List<Ingredient> getIngredients() {
 		return this.ingredients;
 	}
-	
+
+
 	public void addIngredient(Ingredient newIngredient) {
 		this.ingredients.add(newIngredient);
 	}
-	
+
+
 	public boolean deleteIngredient(Ingredient delIngredient) {
 		return this.ingredients.remove(delIngredient);
 	}
-	
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -167,8 +178,8 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		return Arrays.asList(this.getClass().getDeclaredFields()).stream().filter(field -> field.getAnnotation(ToString.class) != null)
-				.map(getValeurDuChamp()).collect(Collectors.joining(" "));
+		return Arrays.asList(this.getClass().getDeclaredFields()).stream().filter(field -> field.getAnnotation(ToString.class) != null).map(getValeurDuChamp()).collect(Collectors.joining(" "));
+
 	}
 
 	private Function<? super Field, ? extends String> getValeurDuChamp() {
