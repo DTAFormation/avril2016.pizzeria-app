@@ -30,6 +30,7 @@ import fr.pizzeria.model.Utilisateur;
 @WebListener
 public class ApplicationListener implements ServletContextListener {
 
+	
 	@Inject 
 	PizzaService pizzaService;
 	
@@ -52,6 +53,7 @@ public class ApplicationListener implements ServletContextListener {
 	private List<Livreur> livreurs = new ArrayList<>();
 	private List<Client> clients = new ArrayList<>();
 	private List<Pizza> pizzas = new ArrayList<>();
+	
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
@@ -88,23 +90,30 @@ public class ApplicationListener implements ServletContextListener {
 		});
 	}
 	
-	private void initPizzas() {
+	private void initPizzas()  {
 		Pizza p1 = new Pizza("MAR", "Margherita", new BigDecimal(12.50), CategoriePizza.SANS_VIANDE);
+		p1.setUrlImage("/static/images/margarita.jpg");		
 		p1.addIngredient(ingredients.get("CHA"));
 		p1.addIngredient(ingredients.get("MOZ"));
 		p1.addIngredient(ingredients.get("TOM"));
 		p1.addIngredient(ingredients.get("BAS"));
 		p1.addIngredient(ingredients.get("HUI"));
 		pizzas.add(p1);
+		
+		
+	
 
 		Pizza p2 = new Pizza("REI", "Reine", new BigDecimal(14.50), CategoriePizza.VIANDE);
+		p2.setUrlImage("/static/images/reine.jpg");
 		p2.addIngredient(ingredients.get("TOM"));
 		p2.addIngredient(ingredients.get("CHA"));
 		p2.addIngredient(ingredients.get("JAM"));
 		p2.addIngredient(ingredients.get("MOZ"));
 		pizzas.add(p2);
 		
+		
 		Pizza p3 = new Pizza("FRO", "La 4 fromages", new BigDecimal(12.00), CategoriePizza.SANS_VIANDE);
+		p3.setUrlImage("/static/images/fromages.jpg");
 		p3.addIngredient(ingredients.get("TOM"));
 		p3.addIngredient(ingredients.get("CHE"));
 		p3.addIngredient(ingredients.get("COM"));
@@ -112,20 +121,24 @@ public class ApplicationListener implements ServletContextListener {
 		p3.addIngredient(ingredients.get("MOZ"));
 		p3.addIngredient(ingredients.get("BAS"));
 		pizzas.add(p3);
+	
 		
 		Pizza p4 = new Pizza("CAN", "La cannibale", new BigDecimal(12.50), CategoriePizza.VIANDE);
+		p4.setUrlImage("/static/images/cannibale.jpg");
 		p4.addIngredient(ingredients.get("BAR"));
 		p4.addIngredient(ingredients.get("MOZ"));
 		p4.addIngredient(ingredients.get("BOE"));
 		p4.addIngredient(ingredients.get("MER"));
 		p4.addIngredient(ingredients.get("POU"));
 		pizzas.add(p4);
-
+		
 		pizzas.forEach(p -> {
 			pizzaService.savePizza(p);
 		});
 	}
 	
+	
+
 	private void initClients() {
 		clients.add(new Client("LeStalker", "Bob", "bobs@gmail.com", "5 rue lamer", "0612134565"));
 		clients.add(new Client("Rodriguez", "Robert", "polor@gmail.com", "18 rue pueblo", "0712134565"));
