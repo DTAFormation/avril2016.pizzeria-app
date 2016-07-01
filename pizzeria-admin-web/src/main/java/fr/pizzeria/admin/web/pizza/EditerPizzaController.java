@@ -82,9 +82,11 @@ public class EditerPizzaController extends HttpServlet {
                     .forward(req, resp);
         } else {
             Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.VIANDE, urlImage);
-            for (String ingredient : ingredients) {
-            	pizzaAvecId.addIngredient(ingredientService.findOneIngredient(ingredient));
-			}
+            if ( ingredients != null ) {
+	            for (String ingredient : ingredients) {
+	            	pizzaAvecId.addIngredient(ingredientService.findOneIngredient(ingredient));
+				}
+            }
             pizzaService.updatePizza(code, pizzaAvecId);
             resp.sendRedirect(req.getContextPath()
                     + "/pizzas/list");

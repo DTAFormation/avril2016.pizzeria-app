@@ -8,6 +8,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Ingredient" name="page" />
+	</jsp:include>
 	<h1>Liste des ingredients</h1>
 	<a class="btn btn-primary" href="new">Nouvel ingredient</a>
 	<br>
@@ -17,33 +20,32 @@
 
 	<table class="table">
 		<tr>
-			<td>Informations</td>
+			<td>Id</td>
+			<td>Nom</td>
+			<td></td>
 			<td></td>
 		</tr>
 
 		<c:forEach var="ingredient" items="${listeIngredients}">
-		<tr>
-			<td>
-				<div class="row">
-					<div class="col-md-6">
-						Ref. ${ingredient.code}
-						<br> <b>${ingredient.name}</b>
-					</div>
-					<div class="col-md-6">
-						<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a>
-						<br>
-						<form method="POST">
-							<input type="hidden" name="code" value="${ingredient.code}">
-							<input type="hidden" name="action" value="supprimer">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-					</div>
-				</div>
-			</td>
-		</tr>
+			<tr>
+				<td>
+					${ingredient.id}
+				</td>
+				<td>
+					${ingredient.name}
+				</td>
+				<td>			
+					<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			
+				</td>
+				<td>
+					<form method="POST">
+						<input type="hidden" name="code" value="${ingredient.code}">
+						<input type="hidden" name="action" value="supprimer">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</td>
+			</tr>
 		</c:forEach>
-
-	
 
 	</table>
 </body>
