@@ -20,7 +20,7 @@ public class Client {
 	private boolean actif = true;
 	private String adresse;
 	private String telephone;
-	private Date derniereModification;
+	private Date dateDerniereModification;
 
 	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone) {
 		super();
@@ -61,12 +61,12 @@ public class Client {
 		this.telephone = telephone;
 	}
 
-	public Date getDerniereModification() {
-		return derniereModification;
+	public Date getDateDerniereModification() {
+		return dateDerniereModification;
 	}
 
-	public void setDerniereModification(Date derniereModification) {
-		this.derniereModification = derniereModification;
+	public void setDateDerniereModification(Date dateDerniereModification) {
+		this.dateDerniereModification = dateDerniereModification;
 	}
 
 	public Integer getId() {
@@ -112,7 +112,7 @@ public class Client {
 	@PrePersist
 	@PreUpdate
 	public void onPersist() {
-		this.derniereModification = new Date();
+		this.dateDerniereModification = new Date();
 	}
 
 }
