@@ -8,6 +8,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Pizza" name="page" />
+	</jsp:include>
 	<h1>Liste des pizzas</h1>
 	<a class="btn btn-primary" href="new">Nouvelle Pizza</a>
 	<br>
@@ -18,42 +21,40 @@
 	<table class="table">
 		<tr>
 			<td>Image</td>
-			<td>Informations</td>
+			<td>Id</td>
+			<td>Nom</td>
+			<td>Prix</td>
+			<td>Code</td>
+			<td>Ingredients</td>
+			<td></td>
 			<td></td>
 		</tr>
 
 		<c:forEach var="pizza" items="${listePizzas}">
-		<tr>
-			<td><img src="${pizza.urlImage}"></td>
-			<td>
-				<div class="row">
-					<div class="col-md-6">
-						Ref. ${pizza.id}
-						<br> <b>${pizza.nom}</b><br>${pizza.prix}
-						€<br>
-					</div>
-					<div class="col-md-6">
-						<a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Editer</a>
-						<br>
-						<form method="POST">
-							<input type="hidden" name="code" value="${pizza.code}">
-							<input type="hidden" name="action" value="supprimer">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
-						</form>
-						<form method="POST">
-							<input type="hidden" name="id" value="${pizza.id}">
-							<input type="hidden" name="action" value="inconnu">
-							<button type="submit" class="btn btn-danger">Action
-								inconnue</button>
-						</form>
-					</div>
-				</div>
-			</td>
-		</tr>
+			<tr>
+				<td><img src="${pizza.urlImage}"></td>
+				<td>${pizza.id}</td>
+				<td>${pizza.nom}</td>
+				<td>${pizza.prix}€</td>
+				<td>${pizza.code}</td>
+				<td>
+					<ul>
+						<c:forEach var="ingredient" items="${pizza.ingredients}">
+							<li>${ingredient.name}</li>
+						</c:forEach>
+					</ul>
+				</td>
+				<td><a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>"
+					class="btn btn-primary">Editer</a></td>
+				<td>
+					<form method="POST">
+						<input type="hidden" name="code" value="${pizza.code}"> <input
+							type="hidden" name="action" value="supprimer">
+						<button type="submit" class="btn btn-danger">Supprimer</button>
+					</form>
+				</td>
+			</tr>
 		</c:forEach>
-
-	
-
 	</table>
 </body>
 </html>
