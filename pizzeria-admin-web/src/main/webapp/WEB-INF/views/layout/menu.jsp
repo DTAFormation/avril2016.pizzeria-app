@@ -6,7 +6,6 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid row">
 		<div class="navbar-header col-xs-2 ">
-			<span class="navbar-brand" href="#">The best Pizzeria</span>
 			<a href="<%=request.getContextPath()%>/pizzas/list"><span class="navbar-brand">The best Pizzeria</span></a>
 		</div>
 		<ul class="nav navbar-nav col-xs-8 ">
