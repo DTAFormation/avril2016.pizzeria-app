@@ -74,7 +74,7 @@ public class PizzaService {
 		Pizza newPizza = pizzaAvecId.copy();
 		newPizza.setId(null);
 		em.merge(p);
-		em.persist(pizzaAvecId);
+		em.persist(newPizza);
 	}
 
 	public void savePizza(Pizza pizzaSansId) {
