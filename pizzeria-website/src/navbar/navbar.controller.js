@@ -1,5 +1,5 @@
 export class NavbarController {
-  constructor ($location, $localStorage) {
+  constructor ($location, $localStorage, $rootScope) {
     this.$localStorage = $localStorage
     this.isActive = function (viewLocation) {
       // console.log('viewLocation is ', viewLocation, '\n$location is ', $location,
@@ -9,6 +9,12 @@ export class NavbarController {
       // return !$location.path().indexOf(viewLocation)
       return $location.path().indexOf(viewLocation) !== -1
     }
+
+    $rootScope.$on('event_connected', () => {
+      console.log('event connected recu !!!!!')
+      this.logged = true
+    })
+
     if ($localStorage.client) {
       this.logged = true
     } else {
@@ -17,4 +23,4 @@ export class NavbarController {
   }
 }
 
-NavbarController.$inject = ['$location', '$localStorage']
+NavbarController.$inject = ['$location', '$localStorage', '$rootScope']
