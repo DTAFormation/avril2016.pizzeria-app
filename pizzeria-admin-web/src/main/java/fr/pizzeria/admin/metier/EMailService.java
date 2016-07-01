@@ -2,9 +2,11 @@ package fr.pizzeria.admin.metier;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,44 +24,38 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class EMailService {
 
-	@Resource(name = "java:/Email")
+	// @Resource(name = "java:/Email")
 	private Session session;
 
 	public void send(String addresses, String topic, String textMessage) {
 
-		Session session = Session.getDefaultInstance(fMailServerConfig, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("username", "password");
-			}
-		});
+		Properties prop = System.getProperties();
+		prop.put("mail.smtp.host", "aspmx.l.google.com");
+		prop.put("mail.smtp.port", "25");
+
+		Session session = Session.getDefaultInstance(prop, null);
+//		session.getProperties().put("mail.smtp.host", "aspmx.l.google.com");
+//		session.getProperties().put("mail.smtp.port", "25");
+		System.out.println(session);
+		// new javax.mail.Authenticator() {
+		// protected PasswordAuthentication getPasswordAuthentication() {
+		// return new PasswordAuthentication("username", "password");
+		// }
+		// });
 		try {
 
 			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("test@DTA.fr"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
 			message.setSubject(topic);
 			message.setText(textMessage);
-
+			message.setSentDate(new Date());
 			Transport.send(message);
 
 		} catch (MessagingException e) {
 			Logger.getLogger(EMailService.class.getName()).log(Level.WARNING, "Cannot send mail", e);
 		}
 
-	}
-	 private static Properties fMailServerConfig = new Properties();
-
-	  static {
-	    fetchConfig();
-	  }
-	  
-	private static void fetchConfig() {
-		// This file contains the javax.mail config properties mentioned above.
-		Path path = Paths.get("email");
-		try (InputStream input = Files.newInputStream(path)) {
-			fMailServerConfig.load(input);
-		} catch (IOException ex) {
-			System.err.println("Cannot open and load mail server properties file.");
-		}
 	}
 
 }

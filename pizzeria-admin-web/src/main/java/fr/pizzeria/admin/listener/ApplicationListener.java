@@ -61,6 +61,7 @@ public class ApplicationListener implements ServletContextListener {
 		initLivreurs();
 		initUtilisateurs();
 		initCommandes();
+		pizzaService.envoyeEmail();
 	}
 
 	@Override
