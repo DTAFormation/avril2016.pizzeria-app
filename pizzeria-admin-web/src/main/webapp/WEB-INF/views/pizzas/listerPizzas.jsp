@@ -32,7 +32,7 @@
 
 		<c:forEach var="pizza" items="${listePizzas}">
 			<tr>
-				<td><img src="${pizza.urlImage}"></td>
+			<td><img src="<c:url value="${pizza.urlImage}"/>" width="150" height="120"></td>
 				<td>${pizza.id}</td>
 				<td>${pizza.nom}</td>
 				<td>${pizza.prix}€</td>
