@@ -59,7 +59,7 @@
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
 							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }<input
-								type="text" ingredients.nom="ingredient" value="${ ingredients.code }"
+								type="text" name="ingredient" value="${ ingredients.code }"
 								hidden></li>
 						</c:forEach>
 					</ul>
