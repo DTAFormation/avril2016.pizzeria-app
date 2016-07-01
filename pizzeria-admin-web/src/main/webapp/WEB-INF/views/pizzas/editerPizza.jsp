@@ -49,7 +49,7 @@
 			</c:if>
 
 			<div class="form-group">
-				<label for="prix">Prix</label> <input type="text"
+				<label for="prix">Prix</label> <input type="number" min="0" step="0.01"
 					class="form-control" name="prix" id="prix" value="${pizza.prix}"
 					required>
 			</div>
