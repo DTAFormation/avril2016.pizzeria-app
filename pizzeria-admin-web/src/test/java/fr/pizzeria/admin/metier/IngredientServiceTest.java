@@ -30,6 +30,9 @@ public class IngredientServiceTest {
 	private EntityManager em;
 	
 	@Mock
+	private PizzaService pizzaService;
+	
+	@Mock
 	private TypedQuery<Ingredient> query;
 	
 	private IngredientService service;
@@ -37,7 +40,8 @@ public class IngredientServiceTest {
 	@Before
 	public void setUp() {
 		service = new IngredientService();
-		service.setEm(em);		
+		service.setEm(em);
+		service.setPizzaService(pizzaService);
 	}
 	
 	@Test

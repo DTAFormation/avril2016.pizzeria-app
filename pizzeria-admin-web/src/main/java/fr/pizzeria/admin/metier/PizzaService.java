@@ -59,12 +59,14 @@ public class PizzaService {
 		return em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)
 				.setParameter("code", code).getResultList();
 	}
+	
 	public void updatePizza(String code, Pizza pizzaAvecId) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
 		p.setDelFlag(true);
-		pizzaAvecId.setId(null);
+		Pizza newPizza = pizzaAvecId.copy();
+		newPizza.setId(null);
 		em.merge(p);
-		em.persist(pizzaAvecId);
+		em.persist(newPizza);
 	}
 
 	public void savePizza(Pizza pizzaSansId) {

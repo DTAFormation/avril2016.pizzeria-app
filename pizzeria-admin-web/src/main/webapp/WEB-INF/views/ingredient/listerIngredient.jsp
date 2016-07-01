@@ -20,16 +20,16 @@
 
 	<table class="table">
 		<tr>
-			<td>Id</td>
-			<td>Nom</td>
-			<td></td>
-			<td></td>
+			<th>Code</th>
+			<th>Nom</th>
+			<th></th>
+			<th></th>
 		</tr>
 
 		<c:forEach var="ingredient" items="${listeIngredients}">
 			<tr>
 				<td>
-					${ingredient.id}
+					${ingredient.code}
 				</td>
 				<td>
 					${ingredient.name}

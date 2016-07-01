@@ -207,4 +207,12 @@ public class Pizza {
 		return new EqualsBuilder().append(code, rhs.code).append(id, rhs.id).isEquals();
 	}
 
+	public Pizza copy() {
+		Pizza pizza = new Pizza(this.getId(), this.getCode(), this.getNom(), this.getPrix(), this.getCategorie(), this.getUrlImage());
+		for(Ingredient ing: this.ingredients) {
+			pizza.ingredients.add(ing);
+		}
+		return pizza;
+	}
+
 }
