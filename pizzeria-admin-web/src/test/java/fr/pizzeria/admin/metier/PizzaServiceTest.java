@@ -1,7 +1,8 @@
 package fr.pizzeria.admin.metier;
 
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -40,56 +41,56 @@ public class PizzaServiceTest {
 
 	@Test
 	public void testFindAll() {
-		Pizza p1 =new Pizza("test", "p1", new BigDecimal(11) , CategoriePizza.VIANDE );
-		Pizza p2 =new Pizza("test2", "p2", new BigDecimal(12) , CategoriePizza.VIANDE );
+		Pizza p1 = new Pizza("test", "p1", new BigDecimal(11), CategoriePizza.VIANDE);
+		Pizza p2 = new Pizza("test2", "p2", new BigDecimal(12), CategoriePizza.VIANDE);
 		service.savePizza(p1);
 		service.savePizza(p2);
-		//assertEquals(expected, actual);
-		
+		// assertEquals(expected, actual);
+
 	}
 
 	@Test
 	public void testFindOnePizza() {
 
-		Pizza p = new Pizza("test", "p1", new BigDecimal(11) , CategoriePizza.VIANDE);
-		when(em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)).thenReturn(query);
+		Pizza p = new Pizza("test", "p1", new BigDecimal(11), CategoriePizza.VIANDE);
+		when(em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)).thenReturn(query);
 		when(query.setParameter("code", "test")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(p);
 
 		Pizza p2 = service.findOnePizza("test");
-		
-		assertEquals(p.getCode(),p2.getCode());
-		assertEquals(p.getCategorie(),p2.getCategorie());
-		assertEquals(p.getPrix(),p2.getPrix());		
-		assertEquals(p.getNom(),p.getNom());
+
+		assertEquals(p.getCode(), p2.getCode());
+		assertEquals(p.getCategorie(), p2.getCategorie());
+		assertEquals(p.getPrix(), p2.getPrix());
+		assertEquals(p.getNom(), p.getNom());
 
 	}
 
 	@Test
 	public void testUpdatePizza() {
-		LOG.info("Etant donne un objet pizza");		
-		Pizza p = new Pizza("test", "p1", new BigDecimal(11) , CategoriePizza.VIANDE);
-		Pizza p2 = new Pizza("test", "p1", new BigDecimal(12) , CategoriePizza.VIANDE);
-		when(em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)).thenReturn(query);
+		LOG.info("Etant donne un objet pizza");
+		Pizza p = new Pizza("test", "p1", new BigDecimal(11), CategoriePizza.VIANDE);
+		Pizza p2 = new Pizza("test", "p1", new BigDecimal(12), CategoriePizza.VIANDE);
+		when(em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)).thenReturn(query);
 		when(query.setParameter("code", "test")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(p);
-		//service.savePizza(p);
+		// service.savePizza(p);
 		service.updatePizza("test", p2);
 		LOG.info("Alors 'pizza' a ete persiste");
 		verify(em).merge(p);
 		verify(em).persist(p2);
 
-		assertTrue(p.isDelFlag());
+		assertFalse(p.isActif());
 		LOG.info("FIN");
 	}
 
 	@Test
 	public void testSavePizza() {
-		LOG.info("Etant donne un objet ingredient");		
-		Pizza p = new Pizza("test", "p1", new BigDecimal(11) , CategoriePizza.VIANDE);
-		
+		LOG.info("Etant donne un objet ingredient");
+		Pizza p = new Pizza("test", "p1", new BigDecimal(11), CategoriePizza.VIANDE);
+
 		service.savePizza(p);
-		
+
 		LOG.info("Alors 'pizza' a ete persiste");
 		verify(em).persist(p);
 		LOG.info("FIN");
@@ -98,20 +99,20 @@ public class PizzaServiceTest {
 
 	@Test
 	public void testDeletePizza() {
-		LOG.info("Etant donne un objet pizza");		
-		Pizza pizza = new Pizza("test", "p1", new BigDecimal(11) , CategoriePizza.VIANDE);
-		when(em.createQuery("select p from Pizza p where p.code=:code and delFlag = 0", Pizza.class)).thenReturn(query);
+		LOG.info("Etant donne un objet pizza");
+		Pizza pizza = new Pizza("test", "p1", new BigDecimal(11), CategoriePizza.VIANDE);
+		when(em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)).thenReturn(query);
 		when(query.setParameter("code", "test")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(pizza);
 		LOG.info("Insertion de l'objet");
 		service.savePizza(pizza);
-		assertFalse(pizza.isDelFlag());
+		assertTrue(pizza.isActif());
 
 		service.deletePizza("test");
-		
-		LOG.info("Alors 'pizza' a ete modifie et is delFlag est modifié à true");
+
+		LOG.info("Alors 'pizza' a ete modifie et actif est modifié à false");
 		verify(em).merge(pizza);
-		assertTrue(pizza.isDelFlag());
+		assertFalse(pizza.isActif());
 		LOG.info("FIN");
 	}
 
