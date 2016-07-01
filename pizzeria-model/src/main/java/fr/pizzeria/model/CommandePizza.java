@@ -13,26 +13,24 @@ import javax.persistence.Table;
 public class CommandePizza {
 	@Id
 	private Integer commandeId;
-	
 	@Id
 	private Integer pizzaId;
-	
+
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "commande_id", referencedColumnName = "id")
 	private Commande commande;
-	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "pizza_id", referencedColumnName = "id")
 	private Pizza pizza;
-	
+
 	private int quantite;
-	
+
 	public CommandePizza(Commande commande, Pizza pizza, int quantite) {
 		this.commande = commande;
 		this.pizza = pizza;
 		this.quantite = quantite;
 	}
-	
+
 	public CommandePizza() {
 		// TODO Auto-generated constructor stub
 	}

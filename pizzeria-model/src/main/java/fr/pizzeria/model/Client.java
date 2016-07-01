@@ -11,19 +11,17 @@ import javax.persistence.PreUpdate;
 
 @Entity
 public class Client {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nom;
 	private String prenom;
 	private String email;
-	private boolean isActive = true;
+	private boolean actif = true;
 	private String adresse;
 	private String telephone;
 	private Date derniereModification;
-	
-	
+
 	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone) {
 		super();
 		this.id = id;
@@ -71,7 +69,6 @@ public class Client {
 		this.derniereModification = derniereModification;
 	}
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -104,12 +101,12 @@ public class Client {
 		this.email = email;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public boolean isActif() {
+		return actif;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 
 	@PrePersist

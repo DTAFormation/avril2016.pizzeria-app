@@ -58,8 +58,8 @@
 					<label for="ingredient">liste ingredients</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
-							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.name }<input
-								type="text" name="ingredient" value="${ ingredients.code }"
+							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }<input
+								type="text" ingredients.nom="ingredient" value="${ ingredients.code }"
 								hidden></li>
 						</c:forEach>
 					</ul>
@@ -69,8 +69,8 @@
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
 							<li id="li-${ingredients.code}"
-								onclick="addIngredient('${ingredients.code}', '${ ingredients.name }')"
-								class="list-group-item">${ ingredients.name }</li>
+								onclick="addIngredient('${ingredients.code}', '${ ingredients.nom }')"
+								class="list-group-item">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
 					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>
