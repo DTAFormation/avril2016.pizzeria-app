@@ -12,7 +12,7 @@ export class ConnexionController {
     return this.ClientService.login(this.client)
       .then(client => {
         if (client) {
-          this.$rootScope.$broadcast('event_connected')
+          this.$rootScope.$broadcast('EVENT_CONNECTED')
           this.$localStorage.client = client
           this.$location.path('/')
         }

@@ -10,9 +10,14 @@ export class NavbarController {
       return $location.path().indexOf(viewLocation) !== -1
     }
 
-    $rootScope.$on('event_connected', () => {
+    $rootScope.$on('EVENT_CONNECTED', () => {
       console.log('event connected recu !!!!!')
       this.logged = true
+    })
+
+    $rootScope.$on('EVENT_DISCONNECTED', () => {
+      console.log('event disonnected recu !!!!!')
+      this.logged = false
     })
 
     if ($localStorage.client) {
