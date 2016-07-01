@@ -8,6 +8,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Livreur" name="page" />
+	</jsp:include>
 	<h1>Liste des livreurs</h1>
 	<a href="<c:url value="/livreurs/newlivreur"/>" class="btn btn-primary">Nouveau Livreur</a>
 	<br>

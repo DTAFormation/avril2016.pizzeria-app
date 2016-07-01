@@ -8,6 +8,9 @@
 </jsp:include>
 
 <body class="container">
+	<jsp:include page="../layout/menu.jsp">
+		<jsp:param value="Utilisateur" name="page" />
+	</jsp:include>
 	<h1>Liste des utilisateurs</h1>
 	<br>
 	<a class="btn btn-primary" href="new">Nouvel Utilisateur</a>
