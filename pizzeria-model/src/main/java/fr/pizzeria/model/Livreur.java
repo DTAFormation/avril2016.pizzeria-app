@@ -21,8 +21,10 @@ public class Livreur {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.actif = true; 
+		this.actif = true;
+		this.code = genererCodeBrut();
 	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
