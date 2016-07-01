@@ -5,7 +5,7 @@ export class PanierController {
   constructor (PanierService) {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
     this.PanierService = PanierService
-    this.contenu = this.PanierService.$localStorage.panier
+    this.contenu = this.PanierService.pizzaPanier
 
   // DEBUG - Décommenter/recommenter cette section pour activer/désactiver, ainsi que l'import au début du fichier.
   // Contenu en dur du panier défini lors de chaque rechargement de page, et qui écrase le contenu en stockage.
@@ -43,7 +43,8 @@ export class PanierController {
   }
 
   deleteAllPizzas () {
-    return this.PanierService.deleteAllPizzas()
+    this.PanierService.deleteAllPizzas()
+    this.contenu = this.PanierService.pizzaPanier
   }
 
   findAllPizzas () {
