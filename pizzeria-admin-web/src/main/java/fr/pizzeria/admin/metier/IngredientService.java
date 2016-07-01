@@ -57,6 +57,9 @@ public class IngredientService {
 		
 		for( Pizza pizza : listPizzas){
 			List<Ingredient> listeIngredientsPizza = pizza.getIngredients();
+			if (!listeIngredientsPizza.contains(ing)){
+				continue;
+			}
 			listeIngredientsPizza.remove(ing);
 			pizzaService.updatePizza(pizza.getCode(), pizza);
 		}
