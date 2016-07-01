@@ -118,3 +118,10 @@ body.container-fluid {
 .container .info span .fa {
   color: #FF9966;
 }
+.panier{
+	position : fixed!important;
+  right: 15px;
+  top : 52px;
+  border: 1px solid black; 
+  padding: 15px;
+}

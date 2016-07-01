@@ -6,7 +6,7 @@ export class PanierController {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
     this.PanierService = PanierService
     this.contenu = this.PanierService.$localStorage.panier
-
+    this.totalCart = this.PanierService.$localStorage.cartValue;
   // DEBUG - Décommenter/recommenter cette section pour activer/désactiver, ainsi que l'import au début du fichier.
   // Contenu en dur du panier défini lors de chaque rechargement de page, et qui écrase le contenu en stockage.
   // Utile pour obtenir un panier pré-rempli pour tester l'affichage et les opérations nécessitant un panier déjà rempli.
@@ -28,6 +28,7 @@ export class PanierController {
 
   addPizza (pizza) {
     this.PanierService.addPizza(pizza)
+    this.totalCart+= pizza.prix
   }
 
   deletePizza (pizza) {
@@ -36,14 +37,19 @@ export class PanierController {
 
   incrementPizza (pizza) {
     this.PanierService.incrementPizza(pizza)
+    this.totalCart+= pizza.prix
   }
 
   decrementPizza (pizza) {
     this.PanierService.decrementPizza(pizza)
+    this.totalCart-= pizza.prix
+
   }
 
   deleteAllPizzas () {
+    this.totalCart=0
     return this.PanierService.deleteAllPizzas()
+
   }
 
   findAllPizzas () {
