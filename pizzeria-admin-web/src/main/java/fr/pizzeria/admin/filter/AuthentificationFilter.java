@@ -28,12 +28,11 @@ public class AuthentificationFilter implements Filter {
 
     boolean noFilter = Stream.of(NO_FILTER_URL).anyMatch(httpRequest.getRequestURI()::contains);
 
-    /*if (!noFilter && emailAuthentifie == null) {
+    if (!noFilter && emailAuthentifie == null) {
       httpResponse.sendRedirect(httpRequest.getServletContext().getContextPath() + AuthentificationController.URL);
     } else {
-    */
       chain.doFilter(req, resp);
-    //}
+    }
   }
 
   @Override
