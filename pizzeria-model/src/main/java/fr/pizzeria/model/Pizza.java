@@ -26,6 +26,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Entity
 public class Pizza {
 
+
 	private final static Map<String, String> FORMAT = new HashMap<String, String>();
 	private final static String AUTRE_FORMAT = "(%s)";
 
@@ -48,9 +49,14 @@ public class Pizza {
 	private CategoriePizza categorie;
 	private String urlImage;
 
+
 	@ManyToMany
+
+
+
 	@JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
 	private List<Ingredient> ingredients = new ArrayList<>();
+
 
 	private boolean actif = true;
 
@@ -75,6 +81,7 @@ public class Pizza {
 		this.id = id;
 	}
 
+
 	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, List<Ingredient> ingredients) {
 		this.code = code;
 		this.nom = nom;
@@ -85,11 +92,13 @@ public class Pizza {
 		this.ingredients = ingredients;
 	}
 
+
 	public boolean isActif() {
 		return actif;
 	}
 
 	public void setActif(boolean actif) {
+
 		this.actif = actif;
 	}
 
@@ -97,17 +106,21 @@ public class Pizza {
 		this.ingredients = nouveauxIngredients;
 	}
 
+
 	public List<Ingredient> getIngredients() {
 		return this.ingredients;
 	}
+
 
 	public void addIngredient(Ingredient newIngredient) {
 		this.ingredients.add(newIngredient);
 	}
 
+
 	public boolean deleteIngredient(Ingredient delIngredient) {
 		return this.ingredients.remove(delIngredient);
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -142,6 +155,7 @@ public class Pizza {
 		return prix;
 	}
 
+
 	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
@@ -165,6 +179,7 @@ public class Pizza {
 	@Override
 	public String toString() {
 		return Arrays.asList(this.getClass().getDeclaredFields()).stream().filter(field -> field.getAnnotation(ToString.class) != null).map(getValeurDuChamp()).collect(Collectors.joining(" "));
+
 	}
 
 	private Function<? super Field, ? extends String> getValeurDuChamp() {
@@ -201,6 +216,14 @@ public class Pizza {
 		}
 		Pizza rhs = (Pizza) obj;
 		return new EqualsBuilder().append(code, rhs.code).append(id, rhs.id).isEquals();
+	}
+
+	public Pizza copy() {
+		Pizza pizza = new Pizza(this.getId(), this.getCode(), this.getNom(), this.getPrix(), this.getCategorie(), this.getUrlImage());
+		for(Ingredient ing: this.ingredients) {
+			pizza.ingredients.add(ing);
+		}
+		return pizza;
 	}
 
 }
