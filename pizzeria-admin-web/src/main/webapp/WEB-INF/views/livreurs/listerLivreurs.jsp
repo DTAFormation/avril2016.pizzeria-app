@@ -12,7 +12,7 @@
 		<jsp:param value="Livreur" name="page" />
 	</jsp:include>
 	<h1>Liste des livreurs</h1>
-	<a href="<c:url value="/livreurs/newlivreur"/>" class="btn btn-primary">Nouveau Livreur</a>
+	<a href="<c:url value="/livreurs/newlivreur"/>" class="btn btn-primary">Nouveau livreur</a>
 	<br>
 	<c:if test="${msg != null}">
 		<div class="alert alert-danger" role="alert">${msg}</div>
@@ -20,22 +20,39 @@
 
 	<table class="table">
 		<tr>
-			<td>Image</td>
-			<td>Informations</td>
-			<td></td>
+			<td>Id / Code</td>
+			<td>Nom Prénom</td>
+			<td>Actions</td>
 		</tr>
 
 		<c:forEach var="livreur" items="${listeLivreurs}">
 		<tr>
 			<td>
+				${livreur.id} / ${livreur.code}
+			</td>
+			<td>
+				${livreur.nom} ${livreur.prenom}
+			</td>
+			<td>
+				<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a>
+				<form method="POST">
+					<input type="hidden" name="id" value="${livreur.id}">
+					<input type="hidden" name="action" value="supprimer">
+					<button type="submit" class="btn btn-danger">Supprimer</button>
+				</form>
+			</td>
+			
+			<%--
+			<!-- Ancienne version qui ne rentrait pas dans la structure de tableau ; réactiver si besoin, supprimer sinon. -->
+			<td>
 				<div class="row">
 					<div class="col-md-6">
-						 ${livreur.id}
+						 ${livreur.id} / ${livreur.code} 
 						<br> ${livreur.nom} ${livreur.prenom}
 						<br>
 					</div>
 					<div class="col-md-6">
-						<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Editer</a>
+						<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a>
 						<br>
 						<form method="POST">
 							<input type="hidden" name="id" value="${livreur.id}">
@@ -45,6 +62,8 @@
 					</div>
 				</div>
 			</td>
+			--%>
+			
 		</tr>
 		</c:forEach>
 	</table>

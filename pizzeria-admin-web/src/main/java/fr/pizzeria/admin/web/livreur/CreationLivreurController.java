@@ -48,19 +48,10 @@ public class CreationLivreurController extends HttpServlet {
 		if (isBlank(nom) || isBlank(prenom)) {
 			req.setAttribute("msgErreur", "Tout les champs sont obligatoires");
 			this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
-		}
-		else
-		{
-		 if(livreurService.findLivreur(nom, prenom).size()> 0)	
-		 {
-				req.setAttribute("msgErreur", "Ce livreur est déjà présent en base");
-				this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
-		}
-		 else{
-				Livreur newLivreur = new Livreur(nom, prenom);
-				livreurService.saveLivreur(newLivreur);
-				resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
-			}
+		} else {
+			Livreur newLivreur = new Livreur(nom, prenom);
+			livreurService.saveLivreur(newLivreur);
+			resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
 		}
 
 	}
