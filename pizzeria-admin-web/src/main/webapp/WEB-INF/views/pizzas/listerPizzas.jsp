@@ -25,6 +25,7 @@
 			<td>Nom</td>
 			<td>Prix</td>
 			<td>Code</td>
+			<td>Categorie</td>
 			<td>Ingredients</td>
 			<td></td>
 			<td></td>
@@ -37,6 +38,7 @@
 				<td>${pizza.nom}</td>
 				<td>${pizza.prix}€</td>
 				<td>${pizza.code}</td>
+				<td>${pizza.categorie}</td>
 				<td>
 					<ul>
 						<c:forEach var="ingredient" items="${pizza.ingredients}">

@@ -48,6 +48,7 @@ public class Pizza {
 	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	private String urlImage;
+	
 
 
 	@ManyToMany
