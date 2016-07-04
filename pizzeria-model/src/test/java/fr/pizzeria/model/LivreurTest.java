@@ -26,7 +26,13 @@ public class LivreurTest {
 	@Test
 	public void genererCode_tropCourt () {
 		Livreur l = new Livreur("WA", "Xi");
-		assertEquals("WAXI", l.genererCodeBrut());
+		assertEquals("WA-XI-", l.genererCodeBrut());
+		Livreur l2 = new Livreur("A", "H");
+		assertEquals("A--H--", l2.genererCodeBrut());
+		Livreur l3 = new Livreur("Ba", "H");
+		assertEquals("BA-H--", l3.genererCodeBrut());
+		Livreur l4 = new Livreur("bA", "h");
+		assertEquals("BA-H--", l4.genererCodeBrut());
 	}
 	
 	@Test

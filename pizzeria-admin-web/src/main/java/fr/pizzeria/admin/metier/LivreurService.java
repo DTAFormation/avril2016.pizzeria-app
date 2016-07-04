@@ -24,12 +24,6 @@ public class LivreurService {
 				.getSingleResult();
 	}
 	
-	public List<Livreur> findLivreurByCodePrefix (String code) {
-		return em.createQuery("select p from Livreur p where p.code=':code%'", Livreur.class)
-				.setParameter("code", code)
-				.getResultList();
-	}
-
 	public void updateLivreur(String id, String  nom, String prenom) {
 		Livreur livreur=findOneLivreur(id); // vérifie qu'un Livreur est présent
 		livreur.setNom(nom);
@@ -38,22 +32,13 @@ public class LivreurService {
 	}
 
 	public void saveLivreur(Livreur livreurSansId) {
-		List<Livreur> livreursDeMemeCode = findLivreurByCodePrefix(livreurSansId.getCode());
-		if (livreursDeMemeCode.size() > 0) {
-			// trouver le dernier ID libre
-			int max = 2;
-			int lgCodeBrut = livreurSansId.getCode().length();
-			int curCodeId;
-			for (Livreur l : livreursDeMemeCode) {
-				curCodeId = Integer.parseInt(l.getCode().substring(lgCodeBrut));
-				if (curCodeId > max) {
-					max = curCodeId;
-				}
-			}
-			max++;
-			livreurSansId.setCode(livreurSansId.getCode() + max);
-		}
 		em.persist(livreurSansId);
+		
+		// donner un code si absent
+		if (livreurSansId.getCode() == null) {
+			livreurSansId.setCode(livreurSansId.genererCodeBrut() + livreurSansId.getId());
+			em.merge(livreurSansId);
+		}
 	}
 
 	public void deleteLivreur(String id) {

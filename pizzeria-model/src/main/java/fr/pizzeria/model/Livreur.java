@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 public class Livreur {
 	
 	public static final String CODE_LIVREUR_PAR_DEFAUT = "DEFAUT"; 
+	public static final int NB_CARACTERES_NOM_PRENOM_CODE = 3;
+	public static final char CARACTERE_REMPLISSAGE_CODE = '-'; // caractère ajouté si un nom ou prénom est trop court
 	
 	public Livreur() {
 		this.actif = true;
@@ -22,7 +24,8 @@ public class Livreur {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.actif = true;
-		this.code = genererCodeBrut();
+		// génère la base du code ; l'opération de persistance ajoutera l'ID technique en suffixe
+		// this.code = genererCodeBrut();
 	}
 	
 	@Id
@@ -36,7 +39,7 @@ public class Livreur {
 	
 	
 	public String genererCodeBrut () {
-		// supprimer les accents
+		// supprimer les "accents" (en réalité, tous les diacritiques reconnus)
 		String nomStr = StringUtils.stripAccents(nom);
 		String prenomStr = StringUtils.stripAccents(prenom);
 		
@@ -44,16 +47,23 @@ public class Livreur {
 		nomStr = StringUtils.removePattern(nomStr, "[^A-Za-z]");
 		prenomStr = StringUtils.removePattern(prenomStr, "[^A-Za-z]");
 		
-		// prendre les 3 premiers caractères, ou tous les caractères s'il y en a moins
-		nomStr = nomStr.substring(0, (nomStr.length() > 2) ? 3 : nomStr.length());
-		prenomStr = prenomStr.substring(0, (prenomStr.length() > 2) ? 3 : prenomStr.length());
+		// prendre les NB_CARACTERES_NOM_PRENOM_CODE premiers caractères, ou tous les caractères s'il y en a moins
+		nomStr = nomStr.substring(0, (nomStr.length() > NB_CARACTERES_NOM_PRENOM_CODE-1) ? NB_CARACTERES_NOM_PRENOM_CODE : nomStr.length());
+		prenomStr = prenomStr.substring(0, (prenomStr.length() > NB_CARACTERES_NOM_PRENOM_CODE-1) ? NB_CARACTERES_NOM_PRENOM_CODE : prenomStr.length());
+		
 		
 		if ((nomStr + prenomStr).length() == 0) {
-			// la chaîne en sortie serait vide : retourner le code par défaut
+			// la chaîne en sortie serait vide / ne contiendrait que le caractère de remplissage : retourner le code par défaut
 			return CODE_LIVREUR_PAR_DEFAUT;
 		} else {
+			
+			// rajouter des caractères CARACTERE_REMPLISSAGE_CODE si la longueur est inférieure à NB_CARACTERES_NOM_PRENOM_CODE caractères
+			for (int i = nomStr.length() ; i < NB_CARACTERES_NOM_PRENOM_CODE ; i++) { nomStr += CARACTERE_REMPLISSAGE_CODE; }
+			for (int i = prenomStr.length() ; i < NB_CARACTERES_NOM_PRENOM_CODE ; i++) { prenomStr += CARACTERE_REMPLISSAGE_CODE; }
+			
 			// concaténer le nom et prénom, passer le tout en majuscules
 			return (nomStr + prenomStr).toUpperCase();
+			
 		}
 		
 	}

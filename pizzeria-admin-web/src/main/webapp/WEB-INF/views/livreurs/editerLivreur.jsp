@@ -25,6 +25,12 @@
 						id="id" name="id" value="${livreur.id}" readonly>
 				</div>
 			</c:if>
+			<c:if test="${livreur.code != null}">
+				<div class="form-group">
+					<label for="code">Code</label> <input type="text" class="form-control"
+						id="code" name="code" value="${livreur.code}" readonly>
+				</div>
+			</c:if>
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
 					id="nom" name="nom" value="${livreur.nom}"required>
