@@ -28,12 +28,12 @@ public class PizzaService {
 	 * @return
 	 */
 	public List<Pizza> findAll() {
-		return em.createQuery("select p from Pizza p where actif = true", Pizza.class).getResultList();
+		return em.createQuery("select p from Pizza p", Pizza.class).getResultList();
 	}
 
 
 	public List<Pizza> findAllWithIngredient() {
-		List<Pizza> pizzas = em.createQuery("select p from Pizza p where actif = true", Pizza.class).getResultList();
+		List<Pizza> pizzas = em.createQuery("select p from Pizza p", Pizza.class).getResultList();
 		for (Pizza pizza : pizzas) {
 			if (pizza.getIngredients().iterator().hasNext()) {
 				pizza.getIngredients().iterator().next();
@@ -43,13 +43,13 @@ public class PizzaService {
 	}
 
 	public Pizza findOnePizza(String code) {
-		return em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		return em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 	}
 
 
 	public Pizza findOnePizzaWithIngredients(String code) {
-		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 		// simulation de recupération des ingrédients (requetes)
 		if (pizza.getIngredients().iterator().hasNext()) {
@@ -60,7 +60,7 @@ public class PizzaService {
 
 
 	public List<Pizza> isCodeTaken(String code) {
-		return em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		return em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getResultList();
 	}
 
