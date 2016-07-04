@@ -12,7 +12,7 @@
 	</jsp:include>
 	<h1>
 		<c:out
-			value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }" />
+			value="${ (pizza != null && pizza.id != null) ? 'Éditer la pizza' : 'Créer une pizza' }" />
 	</h1>
 
 	<c:if test="${!empty msgErreur}">
@@ -54,39 +54,37 @@
 					required>
 			</div>
 			
-			
-			
-    <div class="form-group">
-    	<label>Categorie</label>
-        <select name="categorie" class="form-group_select">
-            <option value="VIANDE" <c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
-            <option value="SANS_VIANDE"<c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans Viande</option>
-            <option value="POISSON" <c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
-        </select>
-    </div>
-
-			
+			<div class="form-group">
+				<label>Categorie</label>
+				<select name="categorie" class="form-group_select">
+					<option value="VIANDE" <c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
+					<option value="SANS_VIANDE"<c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans Viande</option>
+					<option value="POISSON" <c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
+				</select>
+			</div>
 			
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredient">liste ingredients</label>
+					<label for="ingredient">Ingrédients dans la pizza</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
-							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
+							<li id="ingredient-${ ingredients.code }" class="list-group-item item-ingredient-pizza">${ ingredients.nom }
 							<input type="hidden" name="ingredient" value="${ ingredients.code }"></li>
 						</c:forEach>
 					</ul>
+					<p class="jumbotron">Cliquer sur un ingrédient pour le <strong>retirer</strong> de la pizza.</p>
 				</div>
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredients">liste de tout les ingredients</label>
+					<label for="ingredients">Ingrédients disponibles</label>
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
 							<li id="li-${ingredients.code}"
 								onclick="addIngredient('${ingredients.code}', '${ ingredients.nom }')"
-								class="list-group-item">${ ingredients.nom }</li>
+								class="list-group-item item-ingredient-pizza">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
-					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>
+					<p class="jumbotron">Cliquer sur un ingrédient pour l'<strong>ajouter</strong> à la pizza.</p>
+					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingrédient</a>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
@@ -95,13 +93,13 @@
 	</c:if>
 	<script type="text/javascript">
 		function addIngredient(code, name) {
-			var html = '<li id="ingredient-'+code+'" class="list-group-item">'
+			var html = '<li id="ingredient-' + code + '" class="list-group-item item-ingredient-pizza">'
 					+ name
 					+ '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
-				alert('cette ingredient est déjà présent sur cette pizza');
+				alert('Cet ingrédient est déjà présent sur cette pizza.');
 			}
 		}
 		document.getElementById('pizzaIngredient').addEventListener('click',
