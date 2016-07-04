@@ -12,7 +12,7 @@
 			<li <c:if test="${'Commande' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/commandes/list">Commande</a></li>
 			<li <c:if test="${'Pizza' == param.page}"> class="active"</c:if>><a
-				href="<%=request.getContextPath()%>/pizzas/list">Pizza</a></li>
+				href="<%=request.getContextPath()%>/pizzas/list/active">Pizza</a></li>
 			<li <c:if test="${'Ingredient' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/ingredients/list">Ingrédient</a></li>
 			<li <c:if test="${'Client' == param.page}"> class="active"</c:if>><a

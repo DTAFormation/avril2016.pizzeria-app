@@ -53,7 +53,7 @@ public class Pizza {
 	private List<Ingredient> ingredients = new ArrayList<>();
 
 	private boolean actif = true;
-
+	
 	public Pizza() {
 		// implémentation par défaut
 	}
@@ -88,7 +88,11 @@ public class Pizza {
 	public boolean isActif() {
 		return actif;
 	}
-
+	
+	public void toggleActif() {
+		this.setActif(!this.actif);
+	}
+	
 	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
