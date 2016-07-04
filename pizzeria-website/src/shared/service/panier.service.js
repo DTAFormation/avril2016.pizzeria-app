@@ -13,33 +13,32 @@ export class PanierService {
 
   addPizza (pizza) {
     var panier = this.findAllPizzas()
-    if (panier[pizza.id]) panier[pizza.id]['quantite']++
-    else panier[pizza.id] = {'quantite': 1}
-    this.$localStorage.panier = panier
-    this.getPizzaByPanier()
-    console.log(this.pizzaPanier)
-  }
-
-  deletePizza (id) {
-    var panier = this.findAllPizzas()
-    delete panier[id]
-    this.$localStorage.panier = panier
-    delete this.pizzaPanier[id]
-  }
-
-  incrementPizza (id) {
-    var panier = this.findAllPizzas()
-    if (panier[id]) panier[id]['quantite']++
+    if (panier[pizza.code]) panier[pizza.code]['quantite']++
+    else panier[pizza.code] = {'quantite': 1}
     this.$localStorage.panier = panier
     this.getPizzaByPanier()
   }
 
-  decrementPizza (id) {
+  deletePizza (code) {
     var panier = this.findAllPizzas()
-    if (panier[id]) {
-      panier[id]['quantite']--
-      if (panier[id]['quantite'] === 0) {
-        this.deletePizza(id)
+    delete panier[code]
+    this.$localStorage.panier = panier
+    delete this.pizzaPanier[code]
+  }
+
+  incrementPizza (code) {
+    var panier = this.findAllPizzas()
+    if (panier[code])  panier[code]['quantite']++
+    this.$localStorage.panier = panier
+    this.getPizzaByPanier()
+  }
+
+  decrementPizza (code) {
+    var panier = this.findAllPizzas()
+    if (panier[code]) {
+      panier[code]['quantite']--
+      if (panier[code]['quantite'] === 0) {
+        this.deletePizza(code)
       }
     }
     this.$localStorage.panier = panier
@@ -54,8 +53,8 @@ export class PanierService {
     this.allPizza
     .then(function(pizzas) {
       pizzas.map(pizza => {
-        if (panier[pizza.id]) {
-          this.pizzaPanier[pizza.id] = {'pizza': pizza, 'quantite': panier[pizza.id]['quantite']}
+        if (panier[pizza.code]) {
+          this.pizzaPanier[pizza.code] = {'pizza': pizza, 'quantite': panier[pizza.code]['quantite']}
         }
       })
     }.bind(this))
