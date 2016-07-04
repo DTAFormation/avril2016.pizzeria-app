@@ -1,4 +1,3 @@
-
 import { PizzasService } from './pizza.service'
 
 export class PanierService {
@@ -86,6 +85,9 @@ export class PanierService {
   findAllPizzas () {
     return this.$localStorage.panier
   }
+  findCartValue () {
+	    return this.$localStorage.cartValue
+	  }
 
   size () {
     return Object.keys(this.findAllPizzas()).length
