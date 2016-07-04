@@ -24,16 +24,23 @@ public class ClientResource {
 		return clientDao.findAll();
 	}
 
+	@RequestMapping(path = "/recherche", method = RequestMethod.POST)
+	public Client rechercheByEmail(@RequestBody String email) {
+
+		Client test = clientDao.findByEmail(email);
+		System.out.println(test);
+		System.out.println(email);
+		return clientDao.findByEmail(email);
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
-	public Client saveClient(@RequestBody Client client) {
+	public Client saveClient(@RequestBody Client client) throws Exception {
 
 		try {
 			return clientDao.save(client);
-
 		} catch (Exception e) {
+			throw new Exception("Client déjà présent");
 		}
-		return null;
-
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)

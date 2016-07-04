@@ -5,12 +5,13 @@
 
     <div class="form-group">
 
+
         <label for="email">Email :</label>
         <!--Email-->
-        <input ng-model="$ctrl.client.email" ng-model-options="{ updateOn : 'blur' }" required name="email" type="email" class="form-control"
-            id="email">
+        <input ng-model="$ctrl.client.email" required name="email" type="email" class="form-control"
+            id="email" ng-blur="$ctrl.rechercheClient()" >
         <p class="text-danger" ng-if="inscriptionClientForm.email.$invalid && inscriptionClientForm.email.$touched">Email obligatoire</p>
-
+         <p class="text-danger" ng-if="$ctrl.probleme">Email déjà lié à un client</p>
 
         <label for="motDePasse">Mot de passe :</label>
         <!--Mot de passe-->
