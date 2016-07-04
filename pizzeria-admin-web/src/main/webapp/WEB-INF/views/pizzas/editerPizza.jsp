@@ -49,7 +49,7 @@
 			</c:if>
 
 			<div class="form-group">
-				<label for="prix">Prix</label> <input type="text"
+				<label for="prix">Prix</label> <input type="number" min="0" max="1000000" step="0.01"
 					class="form-control" name="prix" id="prix" value="${pizza.prix}"
 					required>
 			</div>
@@ -58,9 +58,8 @@
 					<label for="ingredient">liste ingredients</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
-							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.name }<input
-								type="text" name="ingredient" value="${ ingredients.code }"
-								hidden></li>
+							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
+							<input type="hidden" name="ingredient" value="${ ingredients.code }"></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -69,8 +68,8 @@
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
 							<li id="li-${ingredients.code}"
-								onclick="addIngredient('${ingredients.code}', '${ ingredients.name }')"
-								class="list-group-item">${ ingredients.name }</li>
+								onclick="addIngredient('${ingredients.code}', '${ ingredients.nom }')"
+								class="list-group-item">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
 					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>

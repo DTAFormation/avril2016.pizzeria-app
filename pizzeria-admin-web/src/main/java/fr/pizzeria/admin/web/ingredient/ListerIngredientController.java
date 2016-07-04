@@ -17,7 +17,7 @@ import fr.pizzeria.admin.web.pizza.EditerPizzaController;
  * Contrôleur de la page Liste des ingredients.
  */
 @WebServlet("/ingredients/list")
-public class ListerIngredientController extends HttpServlet{
+public class ListerIngredientController extends HttpServlet {
 
 	private static final String VUE_LISTER_INGREDIENT = "/WEB-INF/views/ingredient/listerIngredient.jsp";
 	private static final String ACTION_EDITER = "editer";
@@ -39,20 +39,19 @@ public class ListerIngredientController extends HttpServlet{
 		String code = req.getParameter("code"); // identifiant de la pizza
 
 		switch (action) {
-
-		case ACTION_EDITER:
-			resp.sendRedirect(this.getServletContext().getContextPath() + EditerPizzaController.URL + "?code=" + code);
-			break;
-		case ACTION_SUPPRIMER:
-			ingredientService.deleteIngredient(code);
-			req.setAttribute("msg", "L'ingredient code = " + code + " a été supprimé");
-			doGet(req, resp);
-			break;
-		default:
-			req.setAttribute("msg", "Action inconnue");
-			resp.setStatus(400);
-			doGet(req, resp);
-			break;
+			case ACTION_EDITER:
+				resp.sendRedirect(this.getServletContext().getContextPath() + EditerPizzaController.URL + "?code=" + code);
+				break;
+			case ACTION_SUPPRIMER:
+				ingredientService.deleteIngredient(code);
+				req.setAttribute("msg", "L'ingredient code = " + code + " a été supprimé");
+				doGet(req, resp);
+				break;
+			default:
+				req.setAttribute("msg", "Action inconnue");
+				resp.setStatus(400);
+				doGet(req, resp);
+				break;
 		}
 	}
 }

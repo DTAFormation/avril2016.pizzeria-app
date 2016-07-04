@@ -19,30 +19,23 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Commande {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	private String numeroCommande;
-	
 	@Enumerated(EnumType.STRING)
 	private StatutCommande statut;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dateCommande;
-	
+	private boolean supprime = false;
+
 	@ManyToOne
 	private Livreur livreur;
-	
 	@ManyToOne
 	private Client client;
-	
-	private boolean delFlag = false; 
-	
 	@OneToMany(mappedBy = "commande", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<CommandePizza> pizzas = new ArrayList<>();
-	
+
 	public Commande(String numeroCommande, StatutCommande statut, Calendar dateCommande, Livreur livreur, Client client) {
 		this.numeroCommande = numeroCommande;
 		this.statut = statut;
@@ -50,7 +43,7 @@ public class Commande {
 		this.livreur = livreur;
 		this.client = client;
 	}
-	
+
 	public Commande(Integer id, String numeroCommande, StatutCommande statut, Calendar dateCommande, Livreur livreur, Client client) {
 		this.id = id;
 		this.numeroCommande = numeroCommande;
@@ -111,13 +104,13 @@ public class Commande {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
-	public boolean isDelFlag() {
-		return delFlag;
+
+	public boolean isSupprime() {
+		return supprime;
 	}
 
-	public void setDelFlag(boolean delFlag) {
-		this.delFlag = delFlag;
+	public void setSupprime(boolean supprime) {
+		this.supprime = supprime;
 	}
 
 	public List<CommandePizza> getPizzas() {
@@ -134,16 +127,14 @@ public class Commande {
 		commandePizza.setCommandeId(this.getId());
 		this.pizzas.add(commandePizza);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Commande [id=" + id + ", numeroCommande=" + numeroCommande + "]\n");
-		
+
 		sb.append("Pizza(s) : ");
-		this.pizzas.forEach(p -> {
-			sb.append("\n" + p.getPizza().toString() + " x" + p.getQuantite());
-		});
-		
+		this.pizzas.forEach(p -> sb.append("\n" + p.getPizza().toString() + " x" + p.getQuantite()));
+
 		return sb.toString();
 	}
 }
