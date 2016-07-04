@@ -81,7 +81,8 @@ public class PizzaService {
 
 	public void envoyeEmail() {
 		EMailService email = new EMailService();
-		email.send("perchaud.samuel@gmail.com", "testObjet", "testMessage");
+		email.send("antonin.monmarthe@googlemail.com", "testObjet", "Je suis ton père !");
 	}
-
+//antonin.monmarthe@googlemail.com perchaud.samuel@gmail.com
+	
 }

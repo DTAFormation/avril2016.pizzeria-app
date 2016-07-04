@@ -16,9 +16,10 @@
 			value="${ (client != null && client.id != null) ? 'Editer le client' : 'Créer un client' }" />
 	</h1>
 
-	
-	
-	<c:set var="urlToPost" value="${client.id != null ? '/clients/edit':  '/clients/new'}"/>
+
+
+	<c:set var="urlToPost"
+		value="${client.id != null ? '/clients/edit':  '/clients/new'}" />
 
 
 
@@ -44,8 +45,8 @@
 			<div class="form-group">
 				<label for="email">Email</label> <input type="email"
 					class="form-control" name="email" id="email"
-					value="${client.email}" required> 
-					
+					value="${client.email}" required>
+
 			</div>
 			<c:if test="${!empty msgErreur}">
 				<div class="alert alert-danger" role="alert">${msgErreur}</div>
@@ -54,7 +55,17 @@
 				<label for="telephone">Telephone</label> <input type="tel"
 					pattern="\d*" class="form-control" name="telephone" id="telephone"
 					value="${client.telephone}" required>
-			</div>	
+			</div>
+			<div class="form-group">
+				<label for="abonne">S'abonner à la newsletter ? <input type="checkbox"
+					 name="abonne" id="abonne"
+					(${client.abonne}?'checked':'') ></label>
+					${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }
+			</div>
+<!-- <label for="abonne">s'abonner a la newsletter ?</label> -->
+
+
+
 			<div class="form-group">
 				<label for="adresse">Adresse</label>
 				<textarea rows="10" cols="50" class="form-control" name="adresse"
@@ -62,7 +73,8 @@
 			</div>
 			<input type="hidden" name="oldEmail" value="${client.email}" />
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/clients/list"></c:url>" class="btn btn-primary">Retour</a>
+			<a href="<c:url value="/clients/list"></c:url>"
+				class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
 

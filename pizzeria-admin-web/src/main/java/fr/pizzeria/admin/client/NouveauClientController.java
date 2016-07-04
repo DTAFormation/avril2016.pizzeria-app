@@ -33,12 +33,13 @@ public class NouveauClientController extends HttpServlet {
 		String prenom = req.getParameter("prenom");
 		String adresse = req.getParameter("adresse");
 		String telephone = req.getParameter("telephone");
-
+		boolean abonne = req.getParameter("abonne")==null?false:true;  //null ou on
+		System.err.println(abonne);
 		if (isBlank(nom) || isBlank(prenom) || isBlank(email) || isBlank(adresse) || isBlank(telephone)) {
 			req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
 			this.getServletContext().getRequestDispatcher(VUE_NOUVEAU_CLIENT).forward(req, resp);
 		} else {
-			Client clientSansId = new Client(nom, prenom, email, adresse, telephone);
+			Client clientSansId = new Client(nom, prenom, email, adresse, telephone, abonne);
 			if (!clientService.isEmailTaken(email).isEmpty()) {
 				req.setAttribute("msgErreur", "l'email existe deja ");
 				req.setAttribute("client", clientSansId);

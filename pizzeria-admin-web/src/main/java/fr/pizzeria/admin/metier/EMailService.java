@@ -45,7 +45,7 @@ public class EMailService {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("test@DTA.fr"));
+			message.setFrom(new InternetAddress("killergame@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
 			message.setSubject(topic);
 			message.setText(textMessage);
