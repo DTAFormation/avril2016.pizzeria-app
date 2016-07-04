@@ -22,7 +22,8 @@ export class PanierService {
     this.$localStorage.cartValue += pizza.prix
     this.getPizzaByPanier()
     
-  }
+  } 
+  
 
   deletePizza (pizza) {
     var panier = this.findAllPizzas()
