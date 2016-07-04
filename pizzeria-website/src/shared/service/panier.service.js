@@ -25,8 +25,10 @@ export class PanierService {
 
   deletePizza (pizza) {
     var panier = this.findAllPizzas()
-    this.$localStorage.cartValue-= pizza.prix*panier[pizza.code]['quantite']
-
+    if(panier[pizza.code]) {
+      console.log(panier[pizza.code])
+      this.$localStorage.cartValue-= pizza.prix*panier[pizza.code]['quantite']
+    }
     delete panier[pizza.code]
     this.$localStorage.panier = panier
     delete this.pizzaPanier[pizza.code]
