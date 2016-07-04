@@ -134,7 +134,7 @@ public class ApplicationListener implements ServletContextListener {
 	private void initClients() {
 		clients.add(new Client("LeStalker", "Bob", "bobs@gmail.com", "5 rue lamer", "0612134565"));
 		clients.add(new Client("Rodriguez", "Robert", "polor@gmail.com", "18 rue pueblo", "0712134565"));
-		clients.add(new Client("HoldTheDoor", "Hodor", "dalec@gmail.com", "15 bd des anglais", "0612145565"));
+		clients.add(new Client("HoldTheDoor", "Hodor", "dalec@gmail.com", "15 bd des anglais", "0612145565", true));
 
 		clients.forEach(c -> {
 			clientService.saveClient(c);

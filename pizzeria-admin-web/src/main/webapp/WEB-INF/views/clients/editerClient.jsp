@@ -59,10 +59,9 @@
 			<div class="form-group">
 				<label for="abonne">S'abonner à la newsletter ? <input type="checkbox"
 					 name="abonne" id="abonne"
-					(${client.abonne}?'checked':'') ></label>
-					${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }
+					${ client.abonne ? 'checked' : '' }></label>
+					
 			</div>
-<!-- <label for="abonne">s'abonner a la newsletter ?</label> -->
 
 
 

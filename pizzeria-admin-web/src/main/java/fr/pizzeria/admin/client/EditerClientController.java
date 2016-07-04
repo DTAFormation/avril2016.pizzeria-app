@@ -58,6 +58,8 @@ public class EditerClientController extends HttpServlet {
 		String prenom = req.getParameter("prenom");
 		String adresse = req.getParameter("adresse");
 		String telephone = req.getParameter("telephone");
+		boolean abonne = req.getParameter("abonne")==null?false:true;  //null ou on
+
 
 		if (isBlank(nom) || isBlank(prenom) || isBlank(email) || isBlank(oldEmail) || isBlank(adresse)
 				|| isBlank(telephone)) {
@@ -65,7 +67,7 @@ public class EditerClientController extends HttpServlet {
 			req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
 			this.getServletContext().getRequestDispatcher(VUE_EDITER_CLIENT).forward(req, resp);
 		} else {
-			Client clientAvecId = new Client(Integer.valueOf(id), nom, prenom, email, adresse, telephone);
+			Client clientAvecId = new Client(Integer.valueOf(id), nom, prenom, email, adresse, telephone,abonne);
 
 			clientService.updateClient(oldEmail, clientAvecId);
 			resp.sendRedirect(this.getServletContext().getContextPath() + "/clients/list");

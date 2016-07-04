@@ -33,6 +33,26 @@ public class Client {
 		this.telephone = telephone;
 	}
 
+	/**
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param adresse
+	 * @param telephone
+	 * @param abonne
+	 */
+	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone, boolean abonne) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.abonne = abonne;
+	}
+
 	public Client(String nom, String prenom, String email, String adresse, String telephone) {
 		super();
 		this.nom = nom;

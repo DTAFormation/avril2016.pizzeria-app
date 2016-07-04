@@ -41,7 +41,7 @@
 				<td>${client.prenom}</td>
 				<td>${client.email}</td>
 				<td>${client.telephone}</td>
-				<td class="text-center"><input type="checkbox" name="abonne" (${client.abonne}?'checked':'') disabled ></td>
+				<td class="text-center"><input type="checkbox" name="abonne" ${ client.abonne ? 'checked' : '' } disabled ></td>
 				<td>${client.adresse}</td>
 				<td><a
 					href="<c:url value="/clients/edit?email=${client.email}"/>"

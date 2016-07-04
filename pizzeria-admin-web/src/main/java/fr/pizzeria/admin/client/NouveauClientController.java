@@ -34,7 +34,6 @@ public class NouveauClientController extends HttpServlet {
 		String adresse = req.getParameter("adresse");
 		String telephone = req.getParameter("telephone");
 		boolean abonne = req.getParameter("abonne")==null?false:true;  //null ou on
-		System.err.println(abonne);
 		if (isBlank(nom) || isBlank(prenom) || isBlank(email) || isBlank(adresse) || isBlank(telephone)) {
 			req.setAttribute("msgErreur", "Tous les paramètres sont obligatoires !");
 			this.getServletContext().getRequestDispatcher(VUE_NOUVEAU_CLIENT).forward(req, resp);
