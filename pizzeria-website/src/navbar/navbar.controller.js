@@ -7,7 +7,9 @@ export class NavbarController {
 
       // Recherche l'url de viewLocation dans $location.path()
       // return !$location.path().indexOf(viewLocation)
-      return $location.path().indexOf(viewLocation) !== -1
+      console.log('path', $location.path())
+      console.log('viewLocation', viewLocation)
+      return $location.path().indexOf(viewLocation) === 0
     }
 
     $rootScope.$on('EVENT_CONNECTED', () => {

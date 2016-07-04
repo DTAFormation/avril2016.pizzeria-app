@@ -3,27 +3,26 @@ describe('Test du NavbarController', function () {
   beforeEach(angular.mock.module('pizzeria-website'))
   var rootScope
   var ctrl
-  var localStorage
+  // var location
   /*, $navbarController*/
 
-  beforeEach(angular.mock.inject(function ($rootScope, $controller, $location, $localStorage) {
+  beforeEach(angular.mock.inject(function ($rootScope, $componentController, $location) {
     const scope = $rootScope.$new()
     rootScope = scope
-    localStorage = $localStorage
-    ctrl = $controller('NavbarController', {$location: 'http://localhost:9966/#/home', localStorage: null, $scope: scope})
-    // navbarController = $navbarController
+    // location = $location
+    ctrl = $componentController('navbarComponent', {$location, $scope: scope})
   }))
 
   it('should confirm that the view is active', function () {
-    let navbarCtrl = ctrl
-    // navbarCtrl.localStorage = null
-    // navbarCtrl.location = 'http://localhost:9966/#/home'
-    // navbarCtrl.rootScope = rootScope
-
+    console.log('iciii!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log('location : ', ctrl.$location)
+    // let navbarCtrl = ctrl
     var viewLocation = '/home'
-    var path = navbarCtrl.location.path()
-    expect(path).toBeDefined()
-    expect(path).toEqual(viewLocation)
+    
+    console.log('boolean', ctrl.isActive(viewLocation))
+    expect(ctrl.$location).toEqual('http://localhost:9876/#/home')
+    expect(ctrl.isActive(viewLocation)).toEqual(true)
+
   })
 
   it('should display links associated with account management', function () {
