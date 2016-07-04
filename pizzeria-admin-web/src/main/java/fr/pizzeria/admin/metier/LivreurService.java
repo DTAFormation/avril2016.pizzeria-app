@@ -15,11 +15,11 @@ public class LivreurService {
 
 
 	public List<Livreur> findAll() {
-		return em.createQuery("select p from Livreur p where p.actif = true", Livreur.class).getResultList();
+		return em.createQuery("select p from Livreur p", Livreur.class).getResultList();
 	}
 
 	public Livreur findOneLivreur(String id) {
-		return em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class)
+		return em.createQuery("select p from Livreur p where p.id=:id", Livreur.class)
 				.setParameter("id", Integer.parseInt(id))
 				.getSingleResult();
 	}
