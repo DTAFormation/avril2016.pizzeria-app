@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workingSetManager>
-<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1466609772610_0" label="pizzeria-parent" name="pizzeria-parent">
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/pizzeria-model" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/pizzeria-admin-web" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/pizzeria-web-api" type="4"/>
-</workingSet>
-</workingSetManager>
