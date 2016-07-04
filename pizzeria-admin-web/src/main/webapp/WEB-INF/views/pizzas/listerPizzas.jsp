@@ -36,7 +36,7 @@
 				<td><img src="<c:url value="${pizza.urlImage}"/>" width="150" height="120"></td>
 				<td>${pizza.id}</td>
 				<td>${pizza.nom}</td>
-				<td>${pizza.prix}€</td>
+				<td>${pizza.prix}&nbsp;€</td>
 				<td>${pizza.code}</td>
 				<td>${pizza.categorie.libelle}</td>
 				<td>
