@@ -42,6 +42,5 @@
 			<a href="<c:url value="/livreurs/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
-
 </body>
 </html>

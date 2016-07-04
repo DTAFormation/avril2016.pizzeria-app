@@ -52,17 +52,23 @@
 					<label for="ingredient">Liste des ingrédients dans la pizza :</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
-							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ingredients.nom}<input type="hidden" name="ingredient" value="${ingredients.code}"></li>
+							<li id="ingredient-${ ingredients.code }" class="list-group-item item-ingredient-pizza">${ingredients.nom}<input type="hidden" name="ingredient" value="${ingredients.code}"></li>
 						</c:forEach>
 					</ul>
+					<p class="jumbotron">
+						Cliquer sur un ingrédient pour le <strong>retirer</strong> de la pizza.
+					</p>
 				</div>
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredients">Liste de tous les ingrédients :</label>
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
-							<li id="li-${ingredients.code}" onclick="addIngredient('${ingredients.code}', '${ingredients.nom}')" class="list-group-item">${ingredients.nom}</li>
+							<li id="li-${ingredients.code}" onclick="addIngredient('${ingredients.code}', '${ingredients.nom}')" class="list-group-item item-ingredient-pizza">${ingredients.nom}</li>
 						</c:forEach>
 					</ul>
+					<p class="jumbotron">
+						Cliquer sur un ingrédient pour l'<strong>ajouter</strong> à la pizza.
+					</p>
 					<a class="btn btn-primary" href="<%=request.getContextPath()%>/ingredients/new">Nouvel ingrédient</a>
 				</div>
 			</div>
@@ -73,17 +79,16 @@
 
 	<script type="text/javascript">
 		function addIngredient(code, name) {
-			var html = '<li id="ingredient-'+code+'" class="list-group-item">' + name + '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
+			var html = '<li id="ingredient-' + code + '" class="list-group-item">' + name + '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
-				alert('Cet ingrédient est déjà présent sur cette pizza');
+				alert('Cet ingrédient est déjà présent sur cette pizza.');
 			}
 		}
 		document.getElementById('pizzaIngredient').addEventListener('click', function(evt) {
 			$("#" + evt.srcElement.attributes[0].nodeValue).remove();
 		}, false)
 	</script>
-
 </body>
 </html>

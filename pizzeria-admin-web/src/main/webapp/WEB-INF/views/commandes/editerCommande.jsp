@@ -88,6 +88,5 @@
 			<a href="<c:url value="/commandes/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
-
 </body>
 </html>

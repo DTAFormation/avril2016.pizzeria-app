@@ -47,6 +47,5 @@
 			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">retour</a>
 		</form>
 	</c:if>
-
 </body>
 </html>
