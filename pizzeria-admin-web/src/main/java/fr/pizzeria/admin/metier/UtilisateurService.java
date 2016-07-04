@@ -30,7 +30,10 @@ public class UtilisateurService {
 	}
 
 	public void updateUtilisateur(String email, Utilisateur utilisateurAvecId) {
-		findOneUtilisateur(email); // vérifie qu'un utilisateur est présent
+		Utilisateur utilisateur = findOneUtilisateur(email); // Vérifie qu'un utilisateur est présent
+		if (utilisateurAvecId.getMotDePasse() == null) {
+			utilisateurAvecId.setMotDePasse(utilisateur.getMotDePasse()); // Si l'utilisateur n'a pas changer son mot de passe
+		}
 		em.merge(utilisateurAvecId);
 	}
 
