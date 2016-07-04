@@ -58,7 +58,7 @@
 					<label for="ingredient">Ingrédients dans la pizza</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
-							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
+							<li id="ingredient-${ ingredients.code }" class="list-group-item item-ingredient-pizza">${ ingredients.nom }
 							<input type="hidden" name="ingredient" value="${ ingredients.code }"></li>
 						</c:forEach>
 					</ul>
@@ -81,7 +81,7 @@
 	</c:if>
 	<script type="text/javascript">
 		function addIngredient(code, name) {
-			var html = '<li id="ingredient-'+code+'" class="list-group-item item-ingredient-pizza">'
+			var html = '<li id="ingredient-' + code + '" class="list-group-item item-ingredient-pizza">'
 					+ name
 					+ '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
 			if (!document.getElementById('ingredient-' + code)) {
