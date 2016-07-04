@@ -74,6 +74,7 @@ public class EditerPizzaController extends HttpServlet {
         String urlImage = req.getParameter("urlImage");
         String prix = req.getParameter("prix");
         String[] ingredients = req.getParameterValues("ingredient");
+        String categorie = req.getParameter("categorie");
 
         if (isBlank(nom) || isBlank(urlImage) || isBlank(prix)) {
             req.setAttribute("pizza", this.pizzaService.findOnePizza(code));
@@ -81,7 +82,7 @@ public class EditerPizzaController extends HttpServlet {
             this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA)
                     .forward(req, resp);
         } else {
-            Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.VIANDE, urlImage);
+            Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categorie), urlImage);
             if ( ingredients != null ) {
 	            for (String ingredient : ingredients) {
 	            	pizzaAvecId.addIngredient(ingredientService.findOneIngredient(ingredient));

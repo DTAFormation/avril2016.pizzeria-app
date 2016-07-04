@@ -87,6 +87,8 @@ public class ApplicationListener implements ServletContextListener {
 		ingredients.put("BOE", new Ingredient("BOE", "boeuf"));
 		ingredients.put("MER", new Ingredient("MER", "merguez"));
 		ingredients.put("POU", new Ingredient("POU", "poulet"));
+		ingredients.put("SAU", new Ingredient("SAU","saumon"));
+		
 
 		ingredients.forEach((k, v) -> {
 			ingredientService.saveIngredient(v);
@@ -130,6 +132,16 @@ public class ApplicationListener implements ServletContextListener {
 		p4.addIngredient(ingredients.get("POU"));
 		pizzas.add(p4);
 
+		Pizza p5 = new Pizza("PEC", "Pecheur", new BigDecimal(15.00), CategoriePizza.POISSON);
+		p5.setUrlImage("/static/images/saumon.jpg");
+		p5.addIngredient(ingredients.get("TOM"));
+		p5.addIngredient(ingredients.get("CHE"));
+		p5.addIngredient(ingredients.get("CHA"));
+		p5.addIngredient(ingredients.get("SAU"));
+		p5.addIngredient(ingredients.get("MOZ"));
+		p5.addIngredient(ingredients.get("FRO"));
+		pizzas.add(p5);
+		
 		pizzas.forEach(p -> {
 			pizzaService.savePizza(p);
 		});
