@@ -24,12 +24,10 @@
     </div>
 
     <div class="form-group">
-        <label for="motDePasse">Mot de passe</label> <input type="password"
-                                                            class="form-control" name="motDePasse"
-                                                            id="motDePasse"
-                                                            value="">
+        <label for="motDePasse">Mot de passe</label>
+        <input type="password" class="form-control" name="motDePasse" id="motDePasse" value="">
     </div>
-
+    
     <button type="submit" class="btn btn-primary">Se connecter</button>
 </form>
 </body>
