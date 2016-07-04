@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.model.Livreur;
-import fr.pizzeria.model.Pizza;
 
 @WebServlet("/livreurs/edit")
 public class EditerLivreurController extends HttpServlet {
@@ -46,8 +45,7 @@ public class EditerLivreurController extends HttpServlet {
 
 	}
 
-	private void sendErrorLivreurInconnue(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	private void sendErrorLivreurInconnue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		resp.setStatus(400); // Bad Request
 		req.setAttribute("msgErreur", "id livreur inconnu");

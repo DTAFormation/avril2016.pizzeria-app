@@ -56,7 +56,7 @@ public class NouvellePizzaController extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 		} else {
 			Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categorie));
-			if ( ingredients != null ) {
+			if (ingredients != null) {
 				for (String ingredient : ingredients) {
 					pizzaSansId.addIngredient(ingredientService.findOneIngredient(ingredient));
 				}
@@ -66,9 +66,10 @@ public class NouvellePizzaController extends HttpServlet {
 			resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 		}
 	}
-	
+
 	/**
 	 * setter utiliser lors des tests du controller
+	 * 
 	 * @param pizzaService
 	 */
 	public void setPizzaService(PizzaService pizzaService) {
@@ -77,6 +78,7 @@ public class NouvellePizzaController extends HttpServlet {
 
 	/**
 	 * setter utiliser lors des tests du controller
+	 * 
 	 * @param pizzaService
 	 */
 	public void setIngredientService(IngredientService ingredientService) {

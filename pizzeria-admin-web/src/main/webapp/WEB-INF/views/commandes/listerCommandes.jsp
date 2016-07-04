@@ -36,8 +36,8 @@
 				<td>${commande.numeroCommande}</td>
 				<td>${commande.statut.libelle}</td>
 				<td><fmt:formatDate value="${commande.dateCommande.time}" type="both" dateStyle="short" timeStyle="short" /></td>
-				<td>${commande.livreur.prenom}${commande.livreur.nom}</td>
-				<td>${commande.client.prenom}${commande.client.nom}</td>
+				<td>${commande.livreur.prenom}&nbsp;${commande.livreur.nom}</td>
+				<td>${commande.client.prenom}&nbsp;${commande.client.nom}</td>
 				<td><a href="<c:url value="/commandes/edit?code=${commande.numeroCommande}"/>" class="btn btn-primary">Éditer</a></td>
 				<td>
 					<form method="POST">

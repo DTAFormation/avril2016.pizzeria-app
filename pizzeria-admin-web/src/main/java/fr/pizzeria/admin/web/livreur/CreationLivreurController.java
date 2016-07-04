@@ -26,7 +26,7 @@ public class CreationLivreurController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		req.setAttribute("livreur", new Livreur());
 		this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
 
 	}

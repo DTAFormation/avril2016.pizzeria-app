@@ -74,20 +74,20 @@ public class ApplicationListener implements ServletContextListener {
 	}
 
 	private void initIngredients() {
-		ingredients.put("CHA", new Ingredient("CHA", "champignon"));
-		ingredients.put("MOZ", new Ingredient("MOZ", "mozzarella"));
-		ingredients.put("TOM", new Ingredient("TOM", "tomate"));
-		ingredients.put("BAS", new Ingredient("BAS", "basilic"));
-		ingredients.put("HUI", new Ingredient("HUI", "huile d'olive"));
-		ingredients.put("JAM", new Ingredient("JAM", "jambon"));
-		ingredients.put("CHE", new Ingredient("CHE", "cheddar"));
-		ingredients.put("BLE", new Ingredient("BLE", "bleu"));
-		ingredients.put("COM", new Ingredient("COM", "compté"));
-		ingredients.put("BAR", new Ingredient("BAR", "barbecue"));
-		ingredients.put("BOE", new Ingredient("BOE", "boeuf"));
-		ingredients.put("MER", new Ingredient("MER", "merguez"));
-		ingredients.put("POU", new Ingredient("POU", "poulet"));
-		ingredients.put("SAU", new Ingredient("SAU", "saumon"));
+		ingredients.put("CHA", new Ingredient("CHA", "Champignon"));
+		ingredients.put("MOZ", new Ingredient("MOZ", "Mozzarella"));
+		ingredients.put("TOM", new Ingredient("TOM", "Tomate"));
+		ingredients.put("BAS", new Ingredient("BAS", "Basilic"));
+		ingredients.put("HUI", new Ingredient("HUI", "Huile d'olive"));
+		ingredients.put("JAM", new Ingredient("JAM", "Jambon"));
+		ingredients.put("CHE", new Ingredient("CHE", "Cheddar"));
+		ingredients.put("BLE", new Ingredient("BLE", "Bleu"));
+		ingredients.put("COM", new Ingredient("COM", "Comté"));
+		ingredients.put("BAR", new Ingredient("BAR", "Sauce barbecue"));
+		ingredients.put("BOE", new Ingredient("BOE", "Boeuf"));
+		ingredients.put("MER", new Ingredient("MER", "Merguez"));
+		ingredients.put("POU", new Ingredient("POU", "Poulet"));
+		ingredients.put("SAU", new Ingredient("SAU", "Saumon"));
 
 		ingredients.forEach((k, v) -> {
 			ingredientService.saveIngredient(v);
@@ -131,7 +131,7 @@ public class ApplicationListener implements ServletContextListener {
 		p4.addIngredient(ingredients.get("POU"));
 		pizzas.add(p4);
 
-		Pizza p5 = new Pizza("PEC", "Pecheur", new BigDecimal(15.00), CategoriePizza.POISSON);
+		Pizza p5 = new Pizza("PEC", "Pêcheur", new BigDecimal(15.00), CategoriePizza.POISSON);
 		p5.setUrlImage("/static/images/saumon.jpg");
 		p5.addIngredient(ingredients.get("TOM"));
 		p5.addIngredient(ingredients.get("CHE"));

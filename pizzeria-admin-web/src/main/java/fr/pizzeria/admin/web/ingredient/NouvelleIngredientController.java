@@ -23,7 +23,6 @@ public class NouvelleIngredientController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("ingredient", new Ingredient());
-		req.setAttribute("titre", "Créer un ingredient");
 		req.setAttribute("Referer", req.getHeader("Referer"));
 		this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_INGREDIENT).forward(req, resp);
 	}

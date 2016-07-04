@@ -4,7 +4,7 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid row">
 		<div class="navbar-header col-xs-2 ">
-			<span class="navbar-brand" href="#">The best Pizzeria</span>
+			<span class="navbar-brand" href="#">The Best Pizzeria</span>
 		</div>
 		<ul class="nav navbar-nav col-xs-8 ">
 			<li ${ ('Commandes' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/commandes/list">Commandes</a></li>
