@@ -2,11 +2,13 @@ import { PizzasService } from './pizza.service'
 
 export class PanierService {
 
-  constructor ($localStorage, $http) {
+  constructor ($localStorage, $http, $rootScope) {
     this.$localStorage = $localStorage
+    this.$rootScope = $rootScope
     if (!this.$localStorage.panier) this.$localStorage.panier = {}
-    var pizzaService = new PizzasService($http);
-    this.allPizza = pizzaService.findAllPizzas();
+    if (!this.$localStorage.cartValue) this.$localStorage.cartValue = 0
+    this.pizzaService = new PizzasService($http);
+    this.allPizza = this.pizzaService.findAllPizzas();
     this.pizzaPanier = {}
     this.getPizzaByPanier();
   }
@@ -16,29 +18,38 @@ export class PanierService {
     if (panier[pizza.code]) panier[pizza.code]['quantite']++
     else panier[pizza.code] = {'quantite': 1}
     this.$localStorage.panier = panier
+    this.$localStorage.cartValue += pizza.prix
+    this.getPizzaByPanier()
+    
+  }
+
+  deletePizza (pizza) {
+    var panier = this.findAllPizzas()
+    this.$localStorage.cartValue-= pizza.prix*panier[pizza.code]['quantite']
+
+    delete panier[pizza.code]
+    this.$localStorage.panier = panier
+    delete this.pizzaPanier[pizza.code]
+    this.$rootScope.$broadcast('EVENT_PRIX')
+  }
+
+  incrementPizza (pizza) {
+    var panier = this.findAllPizzas()
+    if (panier[pizza.code]) {
+      panier[pizza.code]['quantite']++
+      this.$localStorage.cartValue+=pizza.prix
+    }
+    this.$localStorage.panier = panier
     this.getPizzaByPanier()
   }
 
-  deletePizza (code) {
+  decrementPizza (pizza) {
     var panier = this.findAllPizzas()
-    delete panier[code]
-    this.$localStorage.panier = panier
-    delete this.pizzaPanier[code]
-  }
-
-  incrementPizza (code) {
-    var panier = this.findAllPizzas()
-    if (panier[code])  panier[code]['quantite']++
-    this.$localStorage.panier = panier
-    this.getPizzaByPanier()
-  }
-
-  decrementPizza (code) {
-    var panier = this.findAllPizzas()
-    if (panier[code]) {
-      panier[code]['quantite']--
-      if (panier[code]['quantite'] === 0) {
-        this.deletePizza(code)
+    if (panier[pizza.code]) {
+      panier[pizza.code]['quantite']--
+      this.$localStorage.cartValue-= pizza.prix
+      if (panier[pizza.code]['quantite'] === 0) {
+        this.deletePizza(pizza)
       }
     }
     this.$localStorage.panier = panier
@@ -58,11 +69,14 @@ export class PanierService {
         }
       })
     }.bind(this))
+    this.$rootScope.$broadcast('EVENT_PRIX')
   }
 
   // TODO : changer le nom (voir raison dans findAllPizzas() )
   deleteAllPizzas () {
     this.$localStorage.panier = {}
+    this.$localStorage.cartValue=0
+
     this.pizzaPanier = {}
   }
 
