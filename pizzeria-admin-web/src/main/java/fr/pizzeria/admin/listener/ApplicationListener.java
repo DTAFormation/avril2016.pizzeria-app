@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
@@ -55,12 +56,16 @@ public class ApplicationListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		initIngredients();
-		initPizzas();
-		initClients();
-		initLivreurs();
-		initUtilisateurs();
-		initCommandes();
+		ResourceBundle bundle = ResourceBundle.getBundle("application");
+		boolean dev = Boolean.parseBoolean(bundle.getString("prof.dev"));
+		if (dev) {
+			initIngredients();
+			initPizzas();
+			initClients();
+			initLivreurs();
+			initUtilisateurs();
+			initCommandes();
+		}
 	}
 
 	@Override
@@ -69,26 +74,26 @@ public class ApplicationListener implements ServletContextListener {
 	}
 
 	private void initIngredients() {
-		ingredients.put("CHA", new Ingredient("CHA","champignon"));
-		ingredients.put("MOZ", new Ingredient("MOZ","mozzarella"));
-		ingredients.put("TOM", new Ingredient("TOM","tomate"));
-		ingredients.put("BAS", new Ingredient("BAS","basilic"));
-		ingredients.put("HUI", new Ingredient("HUI","huile d'olive"));
-		ingredients.put("JAM", new Ingredient("JAM","jambon"));
-		ingredients.put("CHE", new Ingredient("CHE","cheddar"));
-		ingredients.put("BLE", new Ingredient("BLE","bleu"));
-		ingredients.put("COM", new Ingredient("COM","compté"));
-		ingredients.put("BAR", new Ingredient("BAR","barbecue"));
-		ingredients.put("BOE", new Ingredient("BOE","boeuf"));
-		ingredients.put("MER", new Ingredient("MER","merguez"));
-		ingredients.put("POU", new Ingredient("POU","poulet"));
+		ingredients.put("CHA", new Ingredient("CHA", "champignon"));
+		ingredients.put("MOZ", new Ingredient("MOZ", "mozzarella"));
+		ingredients.put("TOM", new Ingredient("TOM", "tomate"));
+		ingredients.put("BAS", new Ingredient("BAS", "basilic"));
+		ingredients.put("HUI", new Ingredient("HUI", "huile d'olive"));
+		ingredients.put("JAM", new Ingredient("JAM", "jambon"));
+		ingredients.put("CHE", new Ingredient("CHE", "cheddar"));
+		ingredients.put("BLE", new Ingredient("BLE", "bleu"));
+		ingredients.put("COM", new Ingredient("COM", "compté"));
+		ingredients.put("BAR", new Ingredient("BAR", "barbecue"));
+		ingredients.put("BOE", new Ingredient("BOE", "boeuf"));
+		ingredients.put("MER", new Ingredient("MER", "merguez"));
+		ingredients.put("POU", new Ingredient("POU", "poulet"));
 
 		ingredients.forEach((k, v) -> {
 			ingredientService.saveIngredient(v);
 		});
 	}
 
-	private void initPizzas()  {
+	private void initPizzas() {
 		Pizza p1 = new Pizza("MAR", "Margherita", new BigDecimal(12.50), CategoriePizza.SANS_VIANDE);
 		p1.setUrlImage("/static/images/margarita.jpg");
 		p1.addIngredient(ingredients.get("CHA"));
