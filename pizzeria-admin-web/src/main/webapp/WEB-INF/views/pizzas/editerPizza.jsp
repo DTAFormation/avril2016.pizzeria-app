@@ -53,6 +53,16 @@
 					class="form-control" name="prix" id="prix" value="${pizza.prix}"
 					required>
 			</div>
+			
+			<div class="form-group">
+				<label for="categorie">Catégorie</label>
+				<select name="categorie" class="form-group_select">
+					<option value="VIANDE" <c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
+					<option value="SANS_VIANDE"<c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans Viande</option>
+					<option value="POISSON" <c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
+				</select>
+			</div>
+			
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredient">Liste des ingrédients dans la pizza :</label>

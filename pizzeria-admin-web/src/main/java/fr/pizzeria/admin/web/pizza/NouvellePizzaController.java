@@ -39,6 +39,7 @@ public class NouvellePizzaController extends HttpServlet {
 		String prix = req.getParameter("prix");
 		String code = req.getParameter("code");
 		String[] ingredients = req.getParameterValues("ingredient");
+		String categorie = req.getParameter("categorie");
 
 		// TODO Ajouter le support de la catégorie
 		// String categorie = req.getParameter("categorie");
@@ -54,7 +55,7 @@ public class NouvellePizzaController extends HttpServlet {
 
 			this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 		} else {
-			Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.VIANDE);
+			Pizza pizzaSansId = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categorie));
 			if ( ingredients != null ) {
 				for (String ingredient : ingredients) {
 					pizzaSansId.addIngredient(ingredientService.findOneIngredient(ingredient));
