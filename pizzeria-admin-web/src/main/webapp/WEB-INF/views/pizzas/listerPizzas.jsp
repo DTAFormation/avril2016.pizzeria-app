@@ -25,7 +25,7 @@
 			<td>Nom</td>
 			<td>Prix</td>
 			<td>Code</td>
-			<td>Ingredients</td>
+			<td>Ingrédients</td>
 			<td></td>
 			<td></td>
 		</tr>

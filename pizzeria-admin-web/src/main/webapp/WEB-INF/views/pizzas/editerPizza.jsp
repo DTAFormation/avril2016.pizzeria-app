@@ -53,6 +53,7 @@
 					class="form-control" name="prix" id="prix" value="${pizza.prix}"
 					required>
 			</div>
+			
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredient">Ingrédients dans la pizza</label>
@@ -62,6 +63,7 @@
 							<input type="hidden" name="ingredient" value="${ ingredients.code }"></li>
 						</c:forEach>
 					</ul>
+					<p class="jumbotron">Cliquer sur un ingrédient pour le <strong>retirer</strong> de la pizza.</p>
 				</div>
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredients">Ingrédients disponibles</label>
@@ -72,6 +74,7 @@
 								class="list-group-item item-ingredient-pizza">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
+					<p class="jumbotron">Cliquer sur un ingrédient pour l'<strong>ajouter</strong> à la pizza.</p>
 					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingrédient</a>
 				</div>
 			</div>
