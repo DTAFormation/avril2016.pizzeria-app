@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -9,10 +8,11 @@
 
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Pizza" name="page" />
+		<jsp:param value="Pizzas" name="page" />
 	</jsp:include>
 	<h1>Liste des pizzas</h1>
 	<a class="btn btn-primary" href="new">Nouvelle Pizza</a>
+	<br>
 	<br>
 	<c:if test="${msg != null}">
 		<div class="alert alert-danger" role="alert">${msg}</div>
@@ -20,14 +20,14 @@
 
 	<table class="table">
 		<tr>
-			<td>Image</td>
-			<td>Id</td>
-			<td>Nom</td>
-			<td>Prix</td>
-			<td>Code</td>
-			<td>Ingredients</td>
-			<td></td>
-			<td></td>
+			<th>Image</th>
+			<th>Id</th>
+			<th>Nom</th>
+			<th>Prix</th>
+			<th>Code</th>
+			<th>Ingrédients</th>
+			<th></th>
+			<th></th>
 		</tr>
 
 		<c:forEach var="pizza" items="${listePizzas}">
@@ -44,12 +44,10 @@
 						</c:forEach>
 					</ul>
 				</td>
-				<td><a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>"
-					class="btn btn-primary">Editer</a></td>
+				<td><a href="<c:url value="/pizzas/edit?code=${pizza.code}"/>" class="btn btn-primary">Éditer</a></td>
 				<td>
 					<form method="POST">
-						<input type="hidden" name="code" value="${pizza.code}"> <input
-							type="hidden" name="action" value="supprimer">
+						<input type="hidden" name="code" value="${pizza.code}"> <input type="hidden" name="action" value="supprimer">
 						<button type="submit" class="btn btn-danger">Supprimer</button>
 					</form>
 				</td>

@@ -12,7 +12,7 @@
 
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Commande" name="page" />
+		<jsp:param value="Commandes" name="page" />
 	</jsp:include>
 	<c:set var="editPage"
 		value="${ (commande != null && commande.id != null) }" />

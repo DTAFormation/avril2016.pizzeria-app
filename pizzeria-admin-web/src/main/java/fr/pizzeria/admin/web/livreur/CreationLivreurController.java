@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.model.Livreur;
 
-@WebServlet("/livreurs/newlivreur")
+@WebServlet("/livreurs/new")
 public class CreationLivreurController extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(CreationLivreurController.class.getName());
@@ -32,8 +31,7 @@ public class CreationLivreurController extends HttpServlet {
 
 	}
 
-	private void sendErrorLivreurInconnue(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	private void sendErrorLivreurInconnue(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setStatus(400); // Bad Request
 		req.setAttribute("msgErreur", "id livreur inconnu");
 		this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);

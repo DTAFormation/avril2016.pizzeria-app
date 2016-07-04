@@ -8,7 +8,7 @@
 </jsp:include>
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Pizza" name="page" />
+		<jsp:param value="Pizzas" name="page" />
 	</jsp:include>
 	<h1>
 		<c:out
@@ -55,7 +55,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredient">liste ingredients</label>
+					<label for="ingredient">Liste des ingrédients dans la pizza :</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
 							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
@@ -64,7 +64,7 @@
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredients">liste de tout les ingredients</label>
+					<label for="ingredients">Liste de tous les ingrédients :</label>
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
 							<li id="li-${ingredients.code}"
@@ -72,7 +72,7 @@
 								class="list-group-item">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
-					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>
+					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingrédient</a>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
@@ -87,7 +87,7 @@
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
-				alert('cette ingredient est déjà présent sur cette pizza');
+				alert('Cet ingrédient est déjà présent sur cette pizza');
 			}
 		}
 		document.getElementById('pizzaIngredient').addEventListener('click',

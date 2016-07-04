@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="../layout/entete.jsp">
-	<jsp:param value="Page Editer Ingredient" name="title" />
+	<jsp:param value="Page Editer Ingrédient" name="title" />
 </jsp:include>
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Ingredient" name="page" />
+		<jsp:param value="Ingredients" name="page" />
 	</jsp:include>
 
 	<h1><c:out value="${ titre }"/></h1>

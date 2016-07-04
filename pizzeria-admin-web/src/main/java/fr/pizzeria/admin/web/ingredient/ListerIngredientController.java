@@ -44,7 +44,7 @@ public class ListerIngredientController extends HttpServlet {
 				break;
 			case ACTION_SUPPRIMER:
 				ingredientService.deleteIngredient(code);
-				req.setAttribute("msg", "L'ingredient code = " + code + " a été supprimé");
+				req.setAttribute("msg", "L'ingrédient code = " + code + " a été supprimé");
 				doGet(req, resp);
 				break;
 			default:

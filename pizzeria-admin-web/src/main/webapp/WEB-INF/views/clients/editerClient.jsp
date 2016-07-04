@@ -9,7 +9,7 @@
 </jsp:include>
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Client" name="page" />
+		<jsp:param value="Clients" name="page" />
 	</jsp:include>
 	<h1>
 		<c:out

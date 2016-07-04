@@ -7,7 +7,7 @@
 </jsp:include>
 <body class="container">
 	<jsp:include page="../layout/menu.jsp">
-		<jsp:param value="Livreur" name="page" />
+		<jsp:param value="Livreurs" name="page" />
 	</jsp:include>
 	<h1><c:out value="${ (livreur != null && livreur.id != null) ? 'Editer un livreur' : 'Créer un livreur' }"/></h1>
 
