@@ -6,8 +6,8 @@ export class PanierService {
     this.$localStorage = $localStorage
     if (!this.$localStorage.panier) this.$localStorage.panier = {}
     if (!this.$localStorage.cartValue) this.$localStorage.cartValue = 0
-    var pizzaService = new PizzasService($http);
-    this.allPizza = pizzaService.findAllPizzas();
+    this.pizzaService = new PizzasService($http);
+    this.allPizza = this.pizzaService.findAllPizzas();
     this.pizzaPanier = {}
     this.getPizzaByPanier();
   }
@@ -33,10 +33,12 @@ export class PanierService {
 
   incrementPizza (id) {
     var panier = this.findAllPizzas()
-    console.log('incrementPizza ' , panier[id]['pizza']['prix'])
     if (panier[id]) {
       panier[id]['quantite']++
-      this.$localStorage.cartValue+= panier[id]['pizza']['prix']
+      this.pizzaService.findOne(id).then(function(pizza){
+        console.log(pizza)
+        this.$localStorage.cartValue+=pizza.prix
+      }.bind(this))
     }
     this.$localStorage.panier = panier
     this.getPizzaByPanier()
