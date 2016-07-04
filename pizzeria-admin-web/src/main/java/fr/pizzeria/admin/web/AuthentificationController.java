@@ -28,19 +28,19 @@ public class AuthentificationController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher(VUE_LOGIN).forward(req, resp);
-
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String motDePasse = req.getParameter("motDePasse");
+		String url = req.getParameter("url");
 		Utilisateur utilisateur;
 		try {
 			utilisateur = userService.findOneUtilisateur(email);
 			if (utilisateur.getMotDePasse().equals(userService.encode(motDePasse))) {
 				req.getSession(true).setAttribute(AUTH_EMAIL, email);
-				resp.sendRedirect(req.getContextPath() + "/pizzas/list");
+				resp.sendRedirect(req.getContextPath() + ((url != null && !url.isEmpty()) ? url : "/pizzas/list"));
 			} else {
 				req.setAttribute("msgErreur", "Email ou Mot de passe incorret");
 				req.getRequestDispatcher(VUE_LOGIN).forward(req, resp);
@@ -53,6 +53,7 @@ public class AuthentificationController extends HttpServlet {
 
 	/**
 	 * utiliser pour les test
+	 * 
 	 * @param userService
 	 */
 	public void setUserService(UtilisateurService userService) {

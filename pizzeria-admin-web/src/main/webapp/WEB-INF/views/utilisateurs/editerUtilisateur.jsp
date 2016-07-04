@@ -15,14 +15,13 @@
 		<div class="alert alert-danger" role="alert">${msgErreur}</div>
 	</c:if>
 
-
 	<c:if test="${utilisateur != null}">
 		<form method="POST">
 
-			 <c:if test="${utilisateur.id != null}">
-				<div class="form-group">
-					 <input type="hidden" class="form-control"
-						id="id" name="id" value="${utilisateur.id}" >
+			<c:if test="${utilisateur.id != null}">
+				<div class="form-group hidden">
+				 	<input type="hidden" class="form-control"
+						id="id" name="id" value="${utilisateur.id}">
 				</div>
 			</c:if> 
 
@@ -30,45 +29,28 @@
 				<label for="nom">Nom</label> <input type="text" class="form-control"
 					id="nom" name="nom" value="${utilisateur.nom}">
 			</div>
-			
+
 			<div class="form-group">
 				<label for="nom">Prénom</label> <input type="text" class="form-control"
 					id="prenom" name="prenom" value="${utilisateur.prenom}">
 			</div>
-			
-			<c:choose>
-			    <c:when test="${utilisateur.id != null}">
-			        <div class="form-group">
-				        <label for="email">Email</label>
-				        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" readonly>
-				    </div>
-			    </c:when>    
-			    <c:otherwise>
-			        <div class="form-group">
-				        <label for="email">Email</label>
-				        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" required>
-				    </div>
-			    </c:otherwise>
-			</c:choose>
-			
-			<%-- 
-			<div class="form-group">
+
+	        <div class="form-group">
 		        <label for="email">Email</label>
-		        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}" required>
+		        <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}"
+		        	${ (utilisateur != null && utilisateur.id != null) ? 'readonly' : 'required' }>
 		    </div>
-		     --%>
-		
+
 		    <div class="form-group">
-		        <label for="motDePasse">Mot de passe</label> <input type="password"
-		                                                            class="form-control" name="motDePasse"
-		                                                            id="motDePasse"  
-		                                                            required>
+		        <label for="motDePasse">Mot de passe</label>
+		        <input type="password" class="form-control" name="motDePasse" id="motDePasse"
+		        	${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
 		    </div>
 		    
 		    <div class="form-group">
 		        <label for="confirmationMotDePasse">Confirmation Mot de passe</label> 
-		        <input type="password" class="form-control" name="confirmationMotDePasse"
-		                 id="confirmationMotDePasse" value="" required>
+		        <input type="password" class="form-control" name="confirmationMotDePasse" id="confirmationMotDePasse" value=""
+		        	${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
 		    </div>
 
 			<button type="submit" class="btn btn-primary">Valider</button>
