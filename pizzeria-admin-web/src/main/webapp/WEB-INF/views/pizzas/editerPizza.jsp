@@ -12,7 +12,7 @@
 	</jsp:include>
 	<h1>
 		<c:out
-			value="${ (pizza != null && pizza.id != null) ? 'Editer la pizza' : 'Créer une pizza' }" />
+			value="${ (pizza != null && pizza.id != null) ? 'Éditer la pizza' : 'Créer une pizza' }" />
 	</h1>
 
 	<c:if test="${!empty msgErreur}">
@@ -55,7 +55,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredient">liste ingredients</label>
+					<label for="ingredient">Ingrédients dans la pizza</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
 							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
@@ -64,15 +64,15 @@
 					</ul>
 				</div>
 				<div class="col-md-6 col-lg-6">
-					<label for="ingredients">liste de tout les ingredients</label>
+					<label for="ingredients">Ingrédients disponibles</label>
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
 							<li id="li-${ingredients.code}"
 								onclick="addIngredient('${ingredients.code}', '${ ingredients.nom }')"
-								class="list-group-item">${ ingredients.nom }</li>
+								class="list-group-item item-ingredient-pizza">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
-					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>
+					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingrédient</a>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
@@ -81,13 +81,13 @@
 	</c:if>
 	<script type="text/javascript">
 		function addIngredient(code, name) {
-			var html = '<li id="ingredient-'+code+'" class="list-group-item">'
+			var html = '<li id="ingredient-'+code+'" class="list-group-item item-ingredient-pizza">'
 					+ name
 					+ '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
-				alert('cette ingredient est déjà présent sur cette pizza');
+				alert('Cet ingrédient est déjà présent sur cette pizza.');
 			}
 		}
 		document.getElementById('pizzaIngredient').addEventListener('click',
