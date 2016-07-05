@@ -29,17 +29,21 @@ public class IngredientService {
 	 * @return
 	 */
 	public List<Ingredient> findAll() {
-		return em.createQuery("select i from Ingredient i where actif = true", Ingredient.class).getResultList();
+		return em.createQuery("select i from Ingredient i", Ingredient.class).getResultList();
 	}
 
 	public Ingredient findOneIngredient(String code) {
-		return em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)
+		return em.createQuery("select i from Ingredient i where i.code=:code", Ingredient.class)
 				.setParameter("code", code).getSingleResult();
 	}
 
 	public void updateIngredient(String code, Ingredient ingredientAvecCode) {
 		Ingredient ing = findOneIngredient(code); // vérifie qu'une pizza est présente
 		ing.setNom(ingredientAvecCode.getNom());
+		ing.setActif(ingredientAvecCode.getActif());
+		if(!ing.getActif()){
+			removeFromPizza(ing);
+		}
 		em.merge(ing);
 	}
 
@@ -54,8 +58,13 @@ public class IngredientService {
 	}
 
 	public void deleteIngredient(String code) {
-		List<Pizza> listPizzas = pizzaService.findAll();
 		Ingredient ing = findOneIngredient(code);
+		removeFromPizza(ing);
+		em.remove(ing);
+	}
+	
+	private void removeFromPizza(Ingredient ing){
+		List<Pizza> listPizzas = pizzaService.findAll();
 		
 		for( Pizza pizza : listPizzas){
 			List<Ingredient> listeIngredientsPizza = pizza.getIngredients();
@@ -65,9 +74,7 @@ public class IngredientService {
 			listeIngredientsPizza.remove(ing);
 			pizzaService.updatePizza(pizza.getCode(), pizza);
 		}
-
-		ing.setActif(false);
-		em.merge(ing);
+		
 	}
 
 	public void setEm(EntityManager em) {

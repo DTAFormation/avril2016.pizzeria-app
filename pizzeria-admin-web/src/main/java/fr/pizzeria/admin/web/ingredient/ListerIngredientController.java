@@ -12,16 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.admin.web.pizza.EditerPizzaController;
+import fr.pizzeria.model.Ingredient;
+import fr.pizzeria.model.Pizza;
 
 /**
  * Contrôleur de la page Liste des ingredients.
  */
-@WebServlet("/ingredients/list")
+@WebServlet({"/ingredients/list", "/ingredients/list/active", "/ingredients/list/inactive"})
 public class ListerIngredientController extends HttpServlet {
 
 	private static final String VUE_LISTER_INGREDIENT = "/WEB-INF/views/ingredient/listerIngredient.jsp";
 	private static final String ACTION_EDITER = "editer";
 	private static final String ACTION_SUPPRIMER = "supprimer";
+	private static final String PATH_ACTIF = "/ingredients/list/active";
+	private static final String PATH_INACTIF = "/ingredients/list/inactive";
+	private static final String PATH_ALL = "/ingredients/list";
+	private static final String ACTION_TOGGLE = "toggle";
+	private static final String ACTIVE_ATTIBUTE = "active";
 
 	@Inject
 	private IngredientService ingredientService;
@@ -29,6 +36,25 @@ public class ListerIngredientController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("listeIngredients", this.ingredientService.findAll());
+		String active;
+		String path = req.getServletPath();
+		switch (path) {
+		case PATH_ACTIF:
+			active = "active";
+			req.setAttribute(ACTIVE_ATTIBUTE, active);
+			break;
+		case PATH_INACTIF:
+			active = "inactive";
+			req.setAttribute(ACTIVE_ATTIBUTE, active);
+			break;
+		case PATH_ALL:
+			active = "toutes";
+			req.setAttribute(ACTIVE_ATTIBUTE, active);
+			break;
+		default:
+			active = "active";
+			req.setAttribute(ACTIVE_ATTIBUTE, active);
+		}
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_INGREDIENT);
 		dispatcher.forward(req, resp);
 	}
@@ -45,6 +71,14 @@ public class ListerIngredientController extends HttpServlet {
 			case ACTION_SUPPRIMER:
 				ingredientService.deleteIngredient(code);
 				req.setAttribute("msg", "L'ingredient code = " + code + " a été supprimé");
+				doGet(req, resp);
+				break;
+			case ACTION_TOGGLE:
+				Ingredient ingredient = ingredientService.findOneIngredient(code);
+				ingredient.toggleActif();
+				ingredientService.updateIngredient(code, ingredient);
+				String reponseString = ingredient.isActif()?"réactivé":"désactivé";
+				req.setAttribute("msg_success", "L'ingrédient " + ingredient.getNom() + " a bien été " + reponseString);
 				doGet(req, resp);
 				break;
 			default:
