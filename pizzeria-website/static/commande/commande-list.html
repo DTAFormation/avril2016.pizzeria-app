@@ -16,13 +16,13 @@
       <td>{{ commande.numeroCommande }}</td>
       <td>{{ commande.statut }}</td>
       <td>
-        <ul style="list-style-type: none" ng-repeat="pizza in commande.pizzas">
-          <li>{{ pizza.nom }}</li>
+        <ul style="list-style-type: none" ng-repeat="pizzaCmd in commande.pizzas">
+          <li>{{ pizzaCmd.pizza.nom }}</li>
         </ul>
       </td>
       <td>
-        <ul style="list-style-type: none" ng-repeat="pizza in commande.pizzas">
-          <li>{{ pizza.prix }} €</li>
+        <ul style="list-style-type: none" ng-repeat="pizzaCmd in commande.pizzas">
+          <li>{{ pizzaCmd.pizza.prix }} €</li>
         </ul>
       </td>
       <td>{{ commande.calculPrixTotal() }} €</td>

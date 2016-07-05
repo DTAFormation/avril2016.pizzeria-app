@@ -37,13 +37,22 @@ export class CommandeNewController {
         pizzas.push(this.panier[key].pizza)
       }
     })
+    
+    let commandesPizzas = []
+    Object.keys(this.panier).forEach(key => {
+      commandesPizzas.push({
+        pizzaId: this.panier[key].pizza.id,
+        quantite: this.panier[key].quantite
+      })
+    })
+
     let commande = new Commande({
       numeroCommande: 'CO-' + new Date().getTime(),
       dateCommande: new Date().getTime(),
       statut: 'NON_TRAITE',
       livreur: null,
       client: this.$localStorage.client,
-      pizzas: pizzas
+      pizzas: commandesPizzas
     })
 
     return this.commandesService.addOne(commande)

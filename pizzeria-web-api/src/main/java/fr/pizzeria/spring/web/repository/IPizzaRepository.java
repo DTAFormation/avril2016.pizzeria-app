@@ -6,4 +6,5 @@ import fr.pizzeria.model.Pizza;
 
 public interface IPizzaRepository extends JpaRepository<Pizza, Integer> {
 	Pizza findByCode(String code);
+	Pizza findById(Integer id);
 }

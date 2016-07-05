@@ -11,8 +11,8 @@ export class Commande {
 
   calculPrixTotal () {
     let prixTotal = 0
-    this.pizzas.forEach(pizza => {
-      prixTotal += pizza.prix
+    this.pizzas.forEach(p => {
+      prixTotal += p.pizza.prix
     })
     return prixTotal
   }
