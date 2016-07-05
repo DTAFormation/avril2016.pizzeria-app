@@ -7,6 +7,7 @@
     <title>Pizzeria | ${param.title}</title>
     <link rel="stylesheet" href="<c:url value="/static/bootstrap/css/bootstrap.css"/>">
     <link rel="stylesheet" href="<c:url value="/static/bootstrap/css/bootstrap-theme.css"/>">
+    <link rel="stylesheet" href="<c:url value="/static/css/pizzeria.css"/>">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 </head>
