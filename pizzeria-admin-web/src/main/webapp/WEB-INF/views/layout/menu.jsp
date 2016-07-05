@@ -18,7 +18,7 @@
 			<li <c:if test="${'Client' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/clients/list">Client</a></li>
 			<li <c:if test="${'Livreur' == param.page}"> class="active"</c:if>><a
-				href="<%=request.getContextPath()%>/livreurs/list">Livreur</a></li>
+				href="<%=request.getContextPath()%>/livreurs/list/active">Livreur</a></li>
 			<%-- <li
 				<c:if test="${'Statistique' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/statistiques">Statistique</a></li> --%>
