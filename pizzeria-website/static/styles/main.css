@@ -125,3 +125,7 @@ body.container-fluid {
   border: 1px solid black; 
   padding: 15px;
 }
+
+.search-input {
+  width:400px!important;
+}
