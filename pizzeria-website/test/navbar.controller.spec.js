@@ -57,6 +57,8 @@ describe('Test du NavbarController', function () {
         </div>
       </nav>
       `
+
+    
     expect(ctrl.logged).toBeDefined()
     expect(ctrl.logged).toEqual(false)
     expect(ctrl.navbar).toBeDefined()
