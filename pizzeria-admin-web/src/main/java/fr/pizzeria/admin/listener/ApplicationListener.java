@@ -48,6 +48,9 @@ public class ApplicationListener implements ServletContextListener {
 
 	@Inject
 	CommandeService commandeService;
+	
+	@Inject
+	BatchClientDel bcd;
 
 	private Map<String, Ingredient> ingredients = new HashMap<>();
 	private List<Livreur> livreurs = new ArrayList<>();
