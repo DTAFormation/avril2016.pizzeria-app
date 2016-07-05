@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <jsp:include page="../layout/entete.jsp">
 	<jsp:param value="Page Editer Pizza" name="title" />
 </jsp:include>
@@ -49,31 +55,37 @@
 			</c:if>
 
 			<div class="form-group">
-				<label for="prix">Prix</label> <input type="number" min="0" max="1000000" step="0.01"
-					class="form-control" name="prix" id="prix" value="${pizza.prix}"
-					required>
+				<label for="prix">Prix</label> <input type="number" min="0"
+					max="1000000" step="0.01" class="form-control" name="prix"
+					id="prix" value="${pizza.prix}" required>
 			</div>
-			
-			
-			
-    <div class="form-group">
-    	<label>Categorie</label>
-        <select name="categorie" class="form-group_select">
-            <option value="VIANDE" <c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
-            <option value="SANS_VIANDE"<c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans Viande</option>
-            <option value="POISSON" <c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
-        </select>
-    </div>
 
-			
-			
+
+
+			<div class="form-group">
+				<label>Categorie</label> <select name="categorie"
+					class="form-group_select">
+					<option value="VIANDE"
+						<c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
+					<option value="SANS_VIANDE"
+						<c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans
+						Viande</option>
+					<option value="POISSON"
+						<c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
+				</select>
+			</div>
+
+
+
 			<div class="form-group">
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredient">liste ingredients</label>
 					<ul id="pizzaIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${pizza.ingredients}">
 							<li id="ingredient-${ ingredients.code }" class="list-group-item">${ ingredients.nom }
-							<input type="hidden" name="ingredient" value="${ ingredients.code }"></li>
+								<input type="hidden" name="ingredient"
+								value="${ ingredients.code }">
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -86,29 +98,45 @@
 								class="list-group-item">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
-					<a class="btn btn-primary" href="<%=request.getContextPath() %>/ingredients/new">Nouvel ingredient</a>
+					<a class="btn btn-primary"
+						href="<%=request.getContextPath()%>/ingredients/new">Nouvel
+						ingredient</a>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Valider</button>
-			<a href="<c:url value="/pizzas/list"></c:url>" class="btn btn-primary">Retour</a>
+			<a href="<c:url value="/pizzas/list"></c:url>"
+				class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
+
+
+
+
+
+
+
 	<script type="text/javascript">
 		function addIngredient(code, name) {
 			var html = '<li id="ingredient-'+code+'" class="list-group-item">'
 					+ name
 					+ '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
+					
+
+	        var message = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
-			} else {
-				alert('cette ingredient est déjà présent sur cette pizza');
+			} 
+			else {
+                  message;
+				 //	alert('cette ingredient est déjà présent sur cette pizza');       
 			}
 		}
+
 		document.getElementById('pizzaIngredient').addEventListener('click',
 				function(evt) {
 					$("#" + evt.srcElement.attributes[0].nodeValue).remove();
 				}, false)
 	</script>
-
 </body>
 </html>
