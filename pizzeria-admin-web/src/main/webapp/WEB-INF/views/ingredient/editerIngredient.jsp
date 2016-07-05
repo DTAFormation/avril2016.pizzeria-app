@@ -34,7 +34,7 @@
 			</div>
 
 			<input name="Referer" type="hidden" value="${Referer}">
-			<button type="submit" class="btn btn-primary">Valider</button>
+			<button type="submit" class="btn btn-success">Valider</button>
 			<a href="<c:url value="/ingredients/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>

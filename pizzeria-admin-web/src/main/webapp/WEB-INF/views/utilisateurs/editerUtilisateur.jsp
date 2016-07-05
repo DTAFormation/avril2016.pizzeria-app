@@ -43,7 +43,7 @@
 				<label for="confirmationMotDePasse">Confirmation du mot de passe</label> <input type="password" class="form-control" name="confirmationMotDePasse" id="confirmationMotDePasse" value=""
 					${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
 			</div>
-			<button type="submit" class="btn btn-primary">Valider</button>
+			<button type="submit" class="btn btn-success">Valider</button>
 			<a href="<c:url value="/utilisateurs/list"/>" class="btn btn-primary">retour</a>
 		</form>
 	</c:if>

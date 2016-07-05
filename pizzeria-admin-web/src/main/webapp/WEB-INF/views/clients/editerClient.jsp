@@ -43,7 +43,7 @@
 				<textarea rows="10" cols="50" class="form-control" name="adresse" id="adresse" required><c:out value="${client.adresse}"></c:out></textarea>
 			</div>
 			<input type="hidden" name="oldEmail" value="${client.email}" />
-			<button type="submit" class="btn btn-primary">Valider</button>
+			<button type="submit" class="btn btn-success">Valider</button>
 			<a href="<c:url value="/clients/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>

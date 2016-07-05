@@ -84,7 +84,7 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<button type="submit" class="btn btn-primary">Valider</button>
+			<button type="submit" class="btn btn-success">Valider</button>
 			<a href="<c:url value="/commandes/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>

@@ -38,7 +38,7 @@
 				<label for="prenom">Prénom</label> <input type="text" class="form-control" name="prenom" id="prenom" value="${livreur.prenom}" required>
 			</div>
 
-			<button type="submit" class="btn btn-primary">Valider</button>
+			<button type="submit" class="btn btn-success">Valider</button>
 			<a href="<c:url value="/livreurs/list"></c:url>" class="btn btn-primary">Retour</a>
 		</form>
 	</c:if>
