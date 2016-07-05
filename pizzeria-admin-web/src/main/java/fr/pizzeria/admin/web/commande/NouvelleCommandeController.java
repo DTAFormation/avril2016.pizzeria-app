@@ -166,7 +166,11 @@ public class NouvelleCommandeController extends HttpServlet {
 	}
 
 	private int quantitePizzaCommandee(HttpServletRequest req, Pizza p) {
-		return Integer.parseInt(req.getParameter(p.getCode()));
+		String qte = req.getParameter(p.getCode());
+		if (qte.isEmpty()) {
+			return 0;
+		}
+		return Integer.parseInt(qte);
 	}
 
 	private boolean thereIsPizzaCommandee(List<Boolean> qteSupZero) {
