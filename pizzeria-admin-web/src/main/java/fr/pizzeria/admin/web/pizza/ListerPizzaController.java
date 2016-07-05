@@ -76,7 +76,6 @@ public class ListerPizzaController extends HttpServlet {
 			doGet(req, resp);
 			break;
 		case ACTION_TOGGLE:
-			System.out.println("updatepizza");
 			Pizza pizza = pizzaService.findOnePizzaWithIngredients(code);
 			pizza.toggleActif();
 			pizzaService.updatePizza(code, pizza);

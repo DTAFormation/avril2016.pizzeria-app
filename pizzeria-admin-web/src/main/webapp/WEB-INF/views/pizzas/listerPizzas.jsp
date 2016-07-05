@@ -26,6 +26,7 @@
 			<h1>Liste des pizzas - ${active}</h1>
 		</div>
 	</div>
+	
 	<div class="row">
 		<div class="col-xs-4">
 			<a class="btn btn-success"
@@ -92,11 +93,12 @@
 			<c:forEach var="pizza" items="${listePizzas}">
 				<c:if test="${!pizza.actif}">
 					<tr>
-						<td><img src="${pizza.urlImage}"></td>
+						<td><img src="<c:url value="${pizza.urlImage}"/>" width="150" height="120"></td>
 						<td>${pizza.id}</td>
 						<td>${pizza.nom}</td>
 						<td>${pizza.prix}€</td>
 						<td>${pizza.code}</td>
+						<td>${pizza.categorie}</td>
 						<td>
 							<ul>
 								<c:forEach var="ingredient" items="${pizza.ingredients}">

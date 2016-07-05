@@ -82,7 +82,7 @@ public class ListerLivreurController extends HttpServlet {
       case ACTION_TOGGLE:
     	  Livreur livreur = livreurService.findOneLivreur(id);
     	  livreur.toggleActif();
-    	  livreurService.updateLivreur(livreur.getId().toString(), livreur.getNom(), livreur.getPrenom());
+    	  livreurService.updateLivreur(livreur.getId().toString(), livreur.getNom(), livreur.getPrenom(), livreur.getActif());
       default:
         req.setAttribute("msg", "Action inconnue");
         resp.setStatus(400);

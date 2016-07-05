@@ -29,7 +29,7 @@ public class EditerLivreurController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String id = req.getParameter("id");
-
+		
 		if (id == null || id.isEmpty()) {
 			resp.setStatus(400); // Bad Request
 			this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
@@ -74,7 +74,7 @@ public class EditerLivreurController extends HttpServlet {
 
 			Livreur livreurAvecId = new Livreur(nom, prenom);
 
-			livreurService.updateLivreur(id, nom, prenom);
+			livreurService.updateLivreur(id, nom, prenom, livreurAvecId.getActif());
 			resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
 
 		}

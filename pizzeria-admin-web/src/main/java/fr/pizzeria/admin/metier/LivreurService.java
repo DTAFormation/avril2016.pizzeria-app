@@ -24,10 +24,11 @@ public class LivreurService {
 				.getSingleResult();
 	}
 	
-	public void updateLivreur(String id, String  nom, String prenom) {
+	public void updateLivreur(String id, String  nom, String prenom, boolean actif) {
 		Livreur livreur = findOneLivreur(id); // vérifie qu'un Livreur est présent
 		livreur.setNom(nom);
 		livreur.setPrenom(prenom);
+		livreur.setActif(actif);
 		em.merge(livreur);
 	}
 
@@ -43,8 +44,7 @@ public class LivreurService {
 
 	public void deleteLivreur(String id) {
 		Livreur livreur=findOneLivreur(id); // vérifie qu'un Livreur est présent
-		livreur.setActif(false);
-		em.merge(livreur);
+		em.remove(livreur);
 	}
 
 	public List<Livreur> findLivreur(String nom, String prenom) {
