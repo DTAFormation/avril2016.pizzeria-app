@@ -28,7 +28,7 @@
 
 	<div class="row">
 		<div class="col-xs-4">
-			<a class="btn btn-success" href="<%=request.getContextPath()%>/pizzas/new">Nouvelle Pizza</a>
+			<a class="btn btn-success" href="<%=request.getContextPath()%>/pizzas/new">Nouvelle pizza</a>
 		</div>
 		<div class="col-xs-8 btn-group">
 			<a href="<%=request.getContextPath()%>/pizzas/list/active" class="btn btn-default">Actives</a>
@@ -51,7 +51,7 @@
 			<th></th>
 		</tr>
 
-		<c:if test="${active == 'active' || active == 'toutes'}">
+		<c:if test="${active == 'Actives' || active == 'Toutes'}">
 			<c:forEach var="pizza" items="${listePizzas}">
 				<c:if test="${pizza.actif}">
 					<tr>
@@ -82,7 +82,7 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-		<c:if test="${active == 'inactive' || active == 'toutes'}">
+		<c:if test="${active == 'Inactives' || active == 'Toutes'}">
 			<c:forEach var="pizza" items="${listePizzas}">
 				<c:if test="${!pizza.actif}">
 					<tr>

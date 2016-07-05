@@ -42,19 +42,19 @@ public class ListerLivreurController extends HttpServlet {
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_LIVREURS);
 		switch (path) {
 			case PATH_ACTIF:
-				active = "actif";
+				active = "Actifs";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			case PATH_INACTIF:
-				active = "inactif";
+				active = "Inactifs";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			case PATH_ALL:
-				active = "tous";
+				active = "Tous";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			default:
-				active = "actif";
+				active = "Actifs";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 		}
 		dispatcher.forward(req, resp);

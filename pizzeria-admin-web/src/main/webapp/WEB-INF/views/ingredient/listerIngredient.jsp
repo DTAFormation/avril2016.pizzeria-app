@@ -46,7 +46,7 @@
 			<th>Nom</th>
 			<th></th>
 		</tr>
-		<c:if test="${active == 'active' || active == 'toutes'}">
+		<c:if test="${active == 'Actifs' || active == 'Tous'}">
 			<c:forEach var="ingredient" items="${listeIngredients}">
 				<c:if test="${ingredient.actif}">
 					<tr>
@@ -58,7 +58,7 @@
 								<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Éditer</a>
 								<form method="POST" class="btn-group">
 									<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="toggle">
-									<button type="submit" class="btn btn-danger">Désactiver</button>
+									<button type="submit" class="btn btn-warning">Désactiver</button>
 								</form>
 							</div>
 						</td>
@@ -66,7 +66,7 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-		<c:if test="${active == 'inactive' || active == 'toutes'}">
+		<c:if test="${active == 'Inactifs' || active == 'Tous'}">
 			<c:forEach var="ingredient" items="${listeIngredients}">
 				<c:if test="${!ingredient.actif}">
 					<tr>

@@ -40,19 +40,19 @@ public class ListerIngredientController extends HttpServlet {
 		String path = req.getServletPath();
 		switch (path) {
 		case PATH_ACTIF:
-			active = "active";
+			active = "Actifs";
 			req.setAttribute(ACTIVE_ATTIBUTE, active);
 			break;
 		case PATH_INACTIF:
-			active = "inactive";
+			active = "Inactifs";
 			req.setAttribute(ACTIVE_ATTIBUTE, active);
 			break;
 		case PATH_ALL:
-			active = "toutes";
+			active = "Tous";
 			req.setAttribute(ACTIVE_ATTIBUTE, active);
 			break;
 		default:
-			active = "active";
+			active = "Actifs";
 			req.setAttribute(ACTIVE_ATTIBUTE, active);
 		}
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_INGREDIENT);

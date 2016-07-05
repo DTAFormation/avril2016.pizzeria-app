@@ -10,13 +10,26 @@
 	<jsp:include page="../layout/menu.jsp">
 		<jsp:param value="Utilisateurs" name="page" />
 	</jsp:include>
-	<h1>Liste des utilisateurs</h1>
-	<a class="btn btn-primary" href="new">Nouvel Utilisateur</a>
+
+	<div class="row">
+		<c:if test="${msg != null}">
+			<div class="alert alert-danger" role="alert">${msg}</div>
+		</c:if>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>Liste des utilisateurs</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-4">
+			<a class="btn btn-success" href="<%=request.getContextPath()%>/clients/new">Nouvel utilisateur</a>
+		</div>
+	</div>
+
 	<br>
-	<br>
-	<c:if test="${msg != null}">
-		<div class="alert alert-danger" role="alert">${msg}</div>
-	</c:if>
 
 	<table class="table">
 		<tr>
@@ -25,7 +38,6 @@
 			<th>Prénom</th>
 			<th>Email</th>
 			<th></th>
-			<th></th>
 		</tr>
 		<c:forEach var="utilisateur" items="${listeUtilisateurs}">
 			<tr>
@@ -33,12 +45,14 @@
 				<td>${utilisateur.nom}</td>
 				<td>${utilisateur.prenom}</td>
 				<td>${utilisateur.email}</td>
-				<td><a href="<c:url value="/utilisateurs/edit?email=${utilisateur.email}"/>" class="btn btn-primary">Éditer</a>
 				<td>
-					<form method="POST">
-						<input type="hidden" name="email" value="${utilisateur.email}"> <input type="hidden" name="action" value="supprimer">
-						<button type="submit" class="btn btn-danger">Supprimer</button>
-					</form>
+					<div class="btn-group">
+						<a href="<c:url value="/utilisateurs/edit?email=${utilisateur.email}"/>" class="btn btn-primary">Éditer</a>
+						<form method="POST" class="btn-group">
+							<input type="hidden" name="email" value="${utilisateur.email}"> <input type="hidden" name="action" value="supprimer">
+							<button type="submit" class="btn btn-danger">Supprimer</button>
+						</form>
+					</div>
 				</td>
 			</tr>
 		</c:forEach>

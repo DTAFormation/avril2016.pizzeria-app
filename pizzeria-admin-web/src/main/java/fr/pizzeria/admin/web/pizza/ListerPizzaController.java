@@ -42,19 +42,19 @@ public class ListerPizzaController extends HttpServlet {
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_PIZZAS);
 		switch (path) {
 			case PATH_ACTIF:
-				active = "active";
+				active = "Actives";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			case PATH_INACTIF:
-				active = "inactive";
+				active = "Inactives";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			case PATH_ALL:
-				active = "toutes";
+				active = "Toutes";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 				break;
 			default:
-				active = "active";
+				active = "Actives";
 				req.setAttribute(ACTIVE_ATTIBUTE, active);
 		}
 		dispatcher.forward(req, resp);

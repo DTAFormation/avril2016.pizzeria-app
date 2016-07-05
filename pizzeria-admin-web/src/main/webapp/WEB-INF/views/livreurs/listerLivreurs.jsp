@@ -10,6 +10,7 @@
 	<jsp:include page="../layout/menu.jsp">
 		<jsp:param value="Livreurs" name="page" />
 	</jsp:include>
+
 	<div class="row">
 		<c:if test="${msg != null}">
 			<div class="alert alert-danger" role="alert">${msg}</div>
@@ -27,7 +28,7 @@
 
 	<div class="row">
 		<div class="col-xs-4">
-			<a class="btn btn-success" href="<%=request.getContextPath()%>/livreurs/new">Nouveau Livreur</a>
+			<a class="btn btn-success" href="<%=request.getContextPath()%>/livreurs/new">Nouveau livreur</a>
 		</div>
 		<div class="col-xs-8 btn-group">
 			<a href="<%=request.getContextPath()%>/livreurs/list/active" class="btn btn-default">Actifs</a>
@@ -48,7 +49,7 @@
 			<th></th>
 			<th></th>
 		</tr>
-		<c:if test="${active == 'actif' || active == 'tous'}">
+		<c:if test="${active == 'Actifs' || active == 'Tous'}">
 			<c:forEach var="livreur" items="${listeLivreurs}">
 				<c:if test="${livreur.actif}">
 					<tr>
@@ -69,7 +70,7 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-		<c:if test="${active ==  'inactif' || active == 'tous'}">
+		<c:if test="${active ==  'Inactifs' || active == 'Tous'}">
 			<c:forEach var="livreur" items="${listeLivreurs}">
 				<c:if test="${!livreur.actif}">
 					<tr>
