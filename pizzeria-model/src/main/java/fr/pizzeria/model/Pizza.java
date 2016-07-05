@@ -2,8 +2,10 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,7 +17,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -46,10 +50,29 @@ public class Pizza {
 	private CategoriePizza categorie;
 	private String urlImage;
 	private String description;
+	
+	@ManyToMany
+	@JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+	private List<Ingredient> ingredients = new ArrayList<>();
 
 	public Pizza() {
 		// implémentation par défaut
 	}
+
+	
+	
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage,
+			String description, List<Ingredient> ingredients) {
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.urlImage = urlImage;
+		this.description = description;
+		this.ingredients = ingredients;
+	}
+
+
 
 	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat, String description) {
 		this();
@@ -78,6 +101,7 @@ public class Pizza {
 		this.id = id;
 		this.description = description;
 	}
+
 	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage,
 			String description) {
 		this.code = code;
@@ -87,7 +111,7 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.description = description;
 	}
-	
+
 	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
 		this.code = code;
 		this.nom = nom;
@@ -96,6 +120,19 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.id = id;
 
+	}
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public Pizza addIngredient(Ingredient ingredient) {
+		this.ingredients.add(ingredient);
+		return this;
 	}
 
 	public Integer getId() {
