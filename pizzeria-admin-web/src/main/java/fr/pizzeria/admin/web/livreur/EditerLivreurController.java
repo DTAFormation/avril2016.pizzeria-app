@@ -72,7 +72,7 @@ public class EditerLivreurController extends HttpServlet {
 
 			Livreur livreurAvecId = new Livreur(nom, prenom);
 
-			livreurService.updateLivreur(id, nom, prenom);
+			livreurService.updateLivreur(id, nom, prenom, livreurAvecId.getActif());
 			resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
 
 		}

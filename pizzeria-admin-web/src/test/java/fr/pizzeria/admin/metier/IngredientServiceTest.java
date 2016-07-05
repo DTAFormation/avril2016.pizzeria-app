@@ -22,103 +22,101 @@ import fr.pizzeria.model.Ingredient;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IngredientServiceTest {
-	
-	private static final Logger LOG = Logger
-            .getLogger(IngredientServiceTest.class.getName());
-	
-	@Mock 
+
+	private static final Logger LOG = Logger.getLogger(IngredientServiceTest.class.getName());
+
+	@Mock
 	private EntityManager em;
-	
+
 	@Mock
 	private PizzaService pizzaService;
-	
+
 	@Mock
 	private TypedQuery<Ingredient> query;
-	
+
 	private IngredientService service;
-	
+
 	@Before
 	public void setUp() {
 		service = new IngredientService();
 
 		service.setPizzaService(pizzaService);
-		service.setEm(em);		
+		service.setEm(em);
 	}
-	
+
 	@Test
 	public void findOneIngredient() {
-		LOG.info("Etant donne un objet ingredient");		
+		LOG.info("Etant donne un objet ingredient");
 
-		Ingredient ingredient = new Ingredient("CHA","champignon");
+		Ingredient ingredient = new Ingredient("CHA", "champignon");
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
 
 		Ingredient newIngredient = service.findOneIngredient("CHA");
-		
+
 		LOG.info("Alors 'ingredient' a ete modifie");
-		assertEquals(ingredient,newIngredient);
-		
+		assertEquals(ingredient, newIngredient);
+
 		LOG.info("FIN");
 	}
-	
+
 	@Test
-	public void creerIngredient() {		
-		LOG.info("Etant donne un objet ingredient");		
-		Ingredient ingredient = new Ingredient("CHA","champignon");
-		
+	public void creerIngredient() {
+		LOG.info("Etant donne un objet ingredient");
+		Ingredient ingredient = new Ingredient("CHA", "champignon");
+
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenThrow(NoResultException.class);
-		
+
 		service.saveIngredient(ingredient);
-		
+
 		LOG.info("Alors 'ingredient' a ete persiste");
 		verify(em).persist(ingredient);
 		LOG.info("FIN");
 	}
-	
-	@Test
-	public void updateIngredient() {		
-		LOG.info("Etant donne un objet ingredient");		
 
-		Ingredient ingredient = new Ingredient("CHA","champignon");
+	@Test
+	public void updateIngredient() {
+		LOG.info("Etant donne un objet ingredient");
+
+		Ingredient ingredient = new Ingredient("CHA", "champignon");
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
-		
+
 		// Vérification des donnée de base
 		LOG.info("Insertion de l'objet");
 		service.saveIngredient(ingredient);
 		assertTrue(ingredient.isActif());
 		assertEquals(ingredient.getNom(), "champignon");
-		
-		
+
 		Ingredient ingredientAvecCode = new Ingredient("CHA", "des champignon");
 		service.updateIngredient("CHA", ingredientAvecCode);
-		
+
 		// Vérification des nouvelle données
 		LOG.info("Alors 'ingredient' a ete modifie");
 		assertEquals(ingredient.getNom(), "des champignon");
 		verify(em).merge(ingredient);
-		
+
 		LOG.info("FIN");
 	}
-	
+
 	@Test
-	public void supprimerIngredientVerifModifIsActive() {		
-		LOG.info("Etant donne un objet ingredient");		
-		Ingredient ingredient = new Ingredient("CHA","champignon");
+	public void supprimerIngredientVerifModifIsActive() {
+		LOG.info("Etant donne un objet ingredient");
+		Ingredient ingredient = new Ingredient("CHA", "champignon");
 		when(em.createQuery("select i from Ingredient i where i.code=:code and actif = true", Ingredient.class)).thenReturn(query);
 		when(query.setParameter("code", "CHA")).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(ingredient);
-		
+
 		LOG.info("Insertion de l'objet");
 		service.saveIngredient(ingredient);
 		assertTrue(ingredient.isActif());
-		
+
 		service.deleteIngredient("CHA");
-		
+
 		LOG.info("Alors 'ingredient' a ete modifie et is Active est modifié à false");
 		verify(em).merge(ingredient);
 		assertFalse(ingredient.isActif());

@@ -47,8 +47,7 @@ public class LivreurServiceTest {
 
 		Livreur livreur = new Livreur("Bové", "José");
 		String id = "1";
-		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class))
-				.thenReturn(query);
+		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class)).thenReturn(query);
 		when(query.setParameter("id", Integer.parseInt(id))).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(livreur);
 
@@ -77,14 +76,13 @@ public class LivreurServiceTest {
 
 		Livreur livreur = new Livreur("Bové", "José");
 		String id = "1";
-		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class))
-				.thenReturn(query);
+		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class)).thenReturn(query);
 		when(query.setParameter("id", Integer.parseInt(id))).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(livreur);
 
 		Livreur livreur2 = service.findOneLivreur(id);
 
-		service.updateLivreur(id, "Bovin", "José");
+		service.updateLivreur(id, "Bovin", "José", true);
 		// Vérification des nouvelle données
 		LOG.info("Alors 'livreur' a ete modifie");
 		assertEquals(livreur2.getNom(), "Bovin");
@@ -97,8 +95,7 @@ public class LivreurServiceTest {
 		LOG.info("Etant donne un objet livreur");
 		Livreur livreur = new Livreur("Bové", "José");
 		String id = "1";
-		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class))
-				.thenReturn(query);
+		when(em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class)).thenReturn(query);
 		when(query.setParameter("id", Integer.parseInt(id))).thenReturn(query);
 		when(query.getSingleResult()).thenReturn(livreur);
 
@@ -118,27 +115,24 @@ public class LivreurServiceTest {
 	public void findLivreurTest() {
 		LOG.info("Etant donne un livreur");
 
-
 		String nom = "Bovin";
 		String prenom = "José";
-		List<Livreur> livreurs= new ArrayList<>();
-		Livreur livreur1=new Livreur(nom,prenom);
-		Livreur livreur2=new Livreur("toto",prenom);
+		List<Livreur> livreurs = new ArrayList<>();
+		Livreur livreur1 = new Livreur(nom, prenom);
+		Livreur livreur2 = new Livreur("toto", prenom);
 		livreurs.add(livreur1);
 		livreurs.add(livreur2);
-		when(em.createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class))
-				.thenReturn(query);
+		when(em.createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class)).thenReturn(query);
 		when(query.setParameter("nom", nom)).thenReturn(query);
 		when(query.setParameter("prenom", prenom)).thenReturn(query);
 		when(query.getResultList()).thenReturn(livreurs);
 
 		int resultat = service.findLivreur(nom, prenom).size();
 		assertEquals(2, resultat);
-		
+
 		verify(em).createQuery("select p from Livreur p where p.nom=:nom and p.prenom=:prenom", Livreur.class);
 		verify(query).setParameter("nom", nom);
 		verify(query).setParameter("prenom", prenom);
 		LOG.info("FIN");
 	}
-
 }

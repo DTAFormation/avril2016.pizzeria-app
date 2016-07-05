@@ -95,6 +95,10 @@ public class Pizza {
 		this.actif = actif;
 	}
 
+	public void toggleActif() {
+		this.setActif(!this.actif);
+	}
+
 	public void setIngredients(List<Ingredient> nouveauxIngredients) {
 		this.ingredients = nouveauxIngredients;
 	}
@@ -213,5 +217,4 @@ public class Pizza {
 		}
 		return pizza;
 	}
-
 }
