@@ -56,14 +56,15 @@
 						<td>${livreur.code}</td>
 						<td>${livreur.nom}</td>
 						<td>${livreur.prenom}</td>
-						<td><a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a></td>
 						<td>
-							<form method="POST" class="col-xs-4 col-xs-offset-4">
-								<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="toggle">
-								<button type="submit" class="btn btn-warning">Désactiver</button>
-							</form>
+							<div class="btn-group">
+								<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-warning">Désactiver</button>
+								</form>
+							</div>
 						</td>
-						<td></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -76,18 +77,18 @@
 						<td>${livreur.code}</td>
 						<td>${livreur.nom}</td>
 						<td>${livreur.prenom}</td>
-						<td><a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a></td>
 						<td>
-							<form method="POST" class="col-xs-4">
-								<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="toggle">
-								<button type="submit" class="btn btn-success">Réactiver</button>
-							</form>
-						</td>
-						<td>
-							<form method="POST">
-								<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="supprimer">
-								<button type="submit" class="btn btn-danger">Supprimer</button>
-							</form>
+							<div class="btn-group">
+								<a href="<c:url value="/livreurs/edit?id=${livreur.id}"/>" class="btn btn-primary">Éditer</a>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-success">Réactiver</button>
+								</form>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="id" value="${livreur.id}"> <input type="hidden" name="action" value="supprimer">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
 						</td>
 					</tr>
 				</c:if>

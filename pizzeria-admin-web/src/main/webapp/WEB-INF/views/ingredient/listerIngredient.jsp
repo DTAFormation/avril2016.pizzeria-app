@@ -45,8 +45,6 @@
 			<th>Code</th>
 			<th>Nom</th>
 			<th></th>
-			<th></th>
-			<th></th>
 		</tr>
 		<c:if test="${active == 'active' || active == 'toutes'}">
 			<c:forEach var="ingredient" items="${listeIngredients}">
@@ -55,14 +53,15 @@
 						<td>${ingredient.id}</td>
 						<td>${ingredient.code}</td>
 						<td>${ingredient.nom}</td>
-						<td><a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Éditer</a></td>
 						<td>
-							<form method="POST" class="col-xs-4 col-xs-offset-4">
-								<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="toggle">
-								<button type="submit" class="btn btn-danger">Désactiver</button>
-							</form>
+							<div class="btn-group">
+								<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Éditer</a>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-danger">Désactiver</button>
+								</form>
+							</div>
 						</td>
-						<td></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -74,18 +73,18 @@
 						<td>${ingredient.id}</td>
 						<td>${ingredient.code}</td>
 						<td>${ingredient.nom}</td>
-						<td><a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Éditer</a></td>
 						<td>
-							<form method="POST" class="col-xs-4">
-								<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="toggle">
-								<button type="submit" class="btn btn-success">Réactiver</button>
-							</form>
-						</td>
-						<td>
-							<form method="POST">
-								<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="supprimer">
-								<button type="submit" class="btn btn-danger">Supprimer</button>
-							</form>
+							<div class="btn-group">
+								<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Éditer</a>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-success">Réactiver</button>
+								</form>
+								<form method="POST" class="btn-group">
+									<input type="hidden" name="code" value="${ingredient.code}"> <input type="hidden" name="action" value="supprimer">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
 						</td>
 					</tr>
 				</c:if>

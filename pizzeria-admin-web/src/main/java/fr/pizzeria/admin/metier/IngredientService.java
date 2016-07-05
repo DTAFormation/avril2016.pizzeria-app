@@ -38,8 +38,8 @@ public class IngredientService {
 	public void updateIngredient(String code, Ingredient ingredientAvecCode) {
 		Ingredient ing = findOneIngredient(code); // vérifie qu'une pizza est présente
 		ing.setNom(ingredientAvecCode.getNom());
-		ing.setActif(ingredientAvecCode.getActif());
-		if (!ing.getActif()) {
+		ing.setActif(ingredientAvecCode.isActif());
+		if (!ing.isActif()) {
 			removeFromPizza(ing);
 		}
 		em.merge(ing);
@@ -63,7 +63,6 @@ public class IngredientService {
 
 	private void removeFromPizza(Ingredient ing) {
 		List<Pizza> listPizzas = pizzaService.findAll();
-
 		for (Pizza pizza : listPizzas) {
 			List<Ingredient> listeIngredientsPizza = pizza.getIngredients();
 			if (!listeIngredientsPizza.contains(ing)) {

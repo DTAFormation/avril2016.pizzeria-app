@@ -37,10 +37,6 @@ public class Ingredient {
 		this.actif = actif;
 	}
 
-	public boolean getActif() {
-		return this.actif;
-	}
-
 	public void toggleActif() {
 		this.setActif(!this.actif);
 	}
