@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
-import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.Client;
@@ -113,13 +112,9 @@ public class NouvelleCommandeController extends HttpServlet {
 				throw new IllegalArgumentException("Format de la date incorrect !");
 			}
 
-			int livreurId = Integer.parseInt(livreurIdParam);
-			Livreur l = new Livreur();
-			l.setId(livreurId);
+			Livreur l = livreurService.findOneLivreur(livreurIdParam);
 
-			int clientId = Integer.parseInt(clientIdParam);
-			Client c = new Client();
-			c.setId(clientId);
+			Client c = clientService.findOneClientById(clientIdParam);
 
 			// Enregistrement de la commande
 			List<Boolean> qteSupZero = new ArrayList<>();
@@ -156,7 +151,9 @@ public class NouvelleCommandeController extends HttpServlet {
 				req.setAttribute("livreurs", livreursDisponibles);
 				req.setAttribute("clients", clients);
 				req.setAttribute("pizzas", pizzas);
-				this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_COMMANDE).forward(req, resp);
+				this.getServletContext()
+					.getRequestDispatcher(VUE_NOUVELLE_COMMANDE)
+					.forward(req, resp);
 			}
 		}
 	}
