@@ -44,7 +44,7 @@ public class ClientService {
 
 	}
 	public void hardDeleteClients() {
-		List<Client>clients= em.createQuery("select c from Client c where  isActive = 0", Client.class).getResultList();
+		List<Client>clients= em.createQuery("select c from Client c where  actif = false", Client.class).getResultList();
 				for (Client client : clients) {
 					System.out.println("client : "+client.getPrenom()+" "+ client.getNom());
 					em.remove(client);

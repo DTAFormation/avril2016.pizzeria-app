@@ -16,7 +16,8 @@ public class BatchClientDel {
 
 	}
 
-	@Schedule(minute = "*/1", hour = "*")
+	// @Schedule(minute = "*/1", hour = "*") // pour les tests, décommenter
+	@Schedule(month = "*/6")
 	public void batch() {
 		try {
 			cs.hardDeleteClients();

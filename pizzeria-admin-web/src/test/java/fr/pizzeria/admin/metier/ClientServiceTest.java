@@ -106,7 +106,7 @@ public class ClientServiceTest {
 		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
 		client.setActif(false);
 		clients.add(client);
-		when(em.createQuery("select c from Client c where  isActive = 0", Client.class))
+		when(em.createQuery("select c from Client c where  actif = false", Client.class))
 				.thenReturn(query);
 		when(query.getResultList()).thenReturn(clients);
 		service.hardDeleteClients();
