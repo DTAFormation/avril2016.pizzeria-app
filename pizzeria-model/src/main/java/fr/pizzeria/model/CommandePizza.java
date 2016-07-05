@@ -39,7 +39,7 @@ public class CommandePizza {
 		return commandeId;
 	}
 
-	public void setCommandeId(int commandeId) {
+	public void setCommandeId(Integer commandeId) {
 		this.commandeId = commandeId;
 	}
 
@@ -47,7 +47,7 @@ public class CommandePizza {
 		return pizzaId;
 	}
 
-	public void setPizzaId(int pizzaId) {
+	public void setPizzaId(Integer pizzaId) {
 		this.pizzaId = pizzaId;
 	}
 
@@ -74,4 +74,32 @@ public class CommandePizza {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((commande == null) ? 0 : commande.hashCode());
+		result = prime * result + ((commandeId == null) ? 0 : commandeId.hashCode());
+		result = prime * result + ((pizza == null) ? 0 : pizza.hashCode());
+		result = prime * result + ((pizzaId == null) ? 0 : pizzaId.hashCode());
+		result = prime * result + quantite;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CommandePizza other = (CommandePizza) obj;
+		if (quantite != other.quantite)
+			return false;
+		return true;
+	}
+	
+	
 }
