@@ -23,14 +23,14 @@
 		<form method="POST">
 			<c:if test="${pizza.id != null}">
 				<div class="form-group">
-					<label for="id">Id</label> <input type="text" class="form-control" id="id" name="id" value="${pizza.id}" readonly>
+					<label for="id">Id :</label> <input type="text" class="form-control" id="id" name="id" value="${pizza.id}" readonly>
 				</div>
 			</c:if>
 			<div class="form-group">
-				<label for="nom">Nom</label> <input type="text" class="form-control" id="nom" name="nom" value="${pizza.nom}" required>
+				<label for="nom">Nom :</label> <input type="text" class="form-control" id="nom" name="nom" value="${pizza.nom}" required>
 			</div>
 			<div class="form-group">
-				<label for="urlImage">URL Image</label> <input type="text" class="form-control" name="urlImage" id="urlImage" value="${pizza.urlImage}" required>
+				<label for="urlImage">URL Image :</label> <input type="text" class="form-control" name="urlImage" id="urlImage" value="${pizza.urlImage}" required>
 			</div>
 			<c:if test="${pizza.code == null}">
 				<div class="form-group">
@@ -38,10 +38,11 @@
 				</div>
 			</c:if>
 			<div class="form-group">
-				<label for="prix">Prix</label> <input type="number" min="0" max="1000000" step="0.01" class="form-control" name="prix" id="prix" value="${pizza.prix}" required>
+				<label for="prix">Prix :</label> <input type="number" min="0" max="1000000" step="0.01" class="form-control" name="prix" id="prix" value="${pizza.prix}" required>
 			</div>
 			<div class="form-group">
-				<label for="categorie">Catégorie</label> <select name="categorie" class="form-group_select">
+				<label for="categorie">Catégorie :</label>
+				<select name="categorie" class="form-control btn btn-default">
 					<option value="VIANDE" <c:if test="${pizza.categorie == 'VIANDE'}">selected</c:if>>Viande</option>
 					<option value="SANS_VIANDE" <c:if test="${pizza.categorie == 'SANS_VIANDE'}">selected</c:if>>Sans Viande</option>
 					<option value="POISSON" <c:if test="${pizza.categorie == 'POISSON'}">selected</c:if>>Poisson</option>
