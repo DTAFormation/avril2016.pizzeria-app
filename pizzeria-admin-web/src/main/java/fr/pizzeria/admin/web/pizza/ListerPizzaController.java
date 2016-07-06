@@ -66,7 +66,6 @@ public class ListerPizzaController extends HttpServlet {
 		String code = req.getParameter("code"); // identifiant de la pizza
 
 		switch (action) {
-
 			case ACTION_EDITER:
 				resp.sendRedirect(this.getServletContext().getContextPath() + EditerPizzaController.URL + "?code=" + code);
 				break;

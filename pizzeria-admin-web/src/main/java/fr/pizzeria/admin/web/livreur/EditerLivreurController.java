@@ -65,16 +65,10 @@ public class EditerLivreurController extends HttpServlet {
 		} else if (livreurService.findLivreur(nom, prenom).size() > 0) {
 			req.setAttribute("msgErreur", "Ce livreur est déjà présent en base");
 			this.getServletContext().getRequestDispatcher(VUE_EDITER_LIVREUR).forward(req, resp);
-
-		}
-
-		else {
-
+		} else {
 			Livreur livreurAvecId = new Livreur(nom, prenom);
-
-			livreurService.updateLivreur(id, nom, prenom, livreurAvecId.getActif());
+			livreurService.updateLivreur(id, nom, prenom, livreurAvecId.isActif());
 			resp.sendRedirect(this.getServletContext().getContextPath() + "/livreurs/list");
-
 		}
 	}
 

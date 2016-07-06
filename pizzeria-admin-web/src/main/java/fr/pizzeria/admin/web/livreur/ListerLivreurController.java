@@ -66,7 +66,6 @@ public class ListerLivreurController extends HttpServlet {
 		String id = req.getParameter("id"); // identifiant de la pizza
 
 		switch (action) {
-
 			case ACTION_EDITER:
 				resp.sendRedirect(this.getServletContext().getContextPath() + EditerLivreurController.URL + "?id=" + id);
 				break;
@@ -78,7 +77,11 @@ public class ListerLivreurController extends HttpServlet {
 			case ACTION_TOGGLE:
 				Livreur livreur = livreurService.findOneLivreur(id);
 				livreur.toggleActif();
-				livreurService.updateLivreur(livreur.getId().toString(), livreur.getNom(), livreur.getPrenom(), livreur.getActif());
+				livreurService.updateLivreur(livreur.getId().toString(), livreur.getNom(), livreur.getPrenom(), livreur.isActif());
+				String reponseString = livreur.isActif() ? "réactivée" : "désactivée";
+				req.setAttribute("msg_success", "Le livreur id = " + id + " a bien été " + reponseString);
+				doGet(req, resp);
+				break;
 			default:
 				req.setAttribute("msg", "Action inconnue");
 				resp.setStatus(400);

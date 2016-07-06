@@ -51,7 +51,7 @@
 			<th>Adresse</th>
 			<th></th>
 		</tr>
-		<c:if test="${active == 'active' || active == 'toutes'}">
+		<c:if test="${active == 'Actifs' || active == 'Tous'}">
 			<c:forEach var="client" items="${listeClients}">
 				<c:if test="${client.actif}">
 					<tr>
@@ -76,7 +76,7 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-		<c:if test="${active == 'inactive' || active == 'toutes'}">
+		<c:if test="${active == 'Inactifs' || active == 'Tous'}">
 			<c:forEach var="client" items="${listeClients}">
 				<c:if test="${!client.actif}">
 					<tr>

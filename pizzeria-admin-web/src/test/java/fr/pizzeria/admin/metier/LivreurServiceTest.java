@@ -101,13 +101,13 @@ public class LivreurServiceTest {
 
 		LOG.info("Insertion de l'objet");
 		service.saveLivreur(livreur);
-		assertTrue(livreur.getActif());
+		assertTrue(livreur.isActif());
 
 		service.deleteLivreur(id);
 
 		LOG.info("Alors 'ingredient' a ete modifie et is Active est modifié à false");
 		verify(em).merge(livreur);
-		assertFalse(livreur.getActif());
+		assertFalse(livreur.isActif());
 		LOG.info("FIN");
 	}
 

@@ -33,7 +33,7 @@ public class Livreur {
 	private String code;
 	private String nom;
 	private String prenom;
-	private Boolean actif;
+	private boolean actif = true;
 
 	public String genererCodeBrut() {
 		// supprimer les "accents" (en réalité, tous les diacritiques reconnus)
@@ -100,16 +100,16 @@ public class Livreur {
 		this.prenom = prenom;
 	}
 
-	public void toggleActif() {
-		this.setActif(!this.actif);
-	}
-
-	public Boolean getActif() {
+	public boolean isActif() {
 		return actif;
 	}
 
 	public void setActif(Boolean actif) {
 		this.actif = actif;
+	}
+
+	public void toggleActif() {
+		this.setActif(!this.actif);
 	}
 
 	@Override

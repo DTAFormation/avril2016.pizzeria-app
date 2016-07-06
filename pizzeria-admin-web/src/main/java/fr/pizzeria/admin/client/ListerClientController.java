@@ -40,21 +40,21 @@ public class ListerClientController extends HttpServlet {
 		String path = req.getServletPath();
 		String active;
 		switch (path) {
-		case PATH_ACTIF:
-			active = "active";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		case PATH_INACTIF:
-			active = "inactive";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		case PATH_ALL:
-			active = "toutes";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		default:
-			active = "active";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
+			case PATH_ACTIF:
+				active = "Actifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			case PATH_INACTIF:
+				active = "Inactifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			case PATH_ALL:
+				active = "Tous";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			default:
+				active = "Actifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
 		}
 		dispatcher.forward(req, resp);
 	}
@@ -65,29 +65,27 @@ public class ListerClientController extends HttpServlet {
 		String email = req.getParameter("email"); // identifiant du client
 
 		switch (action) {
-
-		case ACTION_EDITER:
-			resp.sendRedirect(
-					this.getServletContext().getContextPath() + EditerClientController.URL + "?email=" + email);
-			break;
-		case ACTION_SUPPRIMER:
-			clientService.deleteClient(email);
-			req.setAttribute("msg", "Le client email = " + email + " a été supprimé");
-			doGet(req, resp);
-			break;
-		case ACTION_TOGGLE:
-			Client client = clientService.findOneClient(email);
-			client.toggleActif();
-			clientService.updateClient(email, client);
-			String reponseString = client.isActif()?"réactivée":"désactivée";
-			req.setAttribute("msg_success", "Le client email = " + email + " a bien été " + reponseString);
-			doGet(req, resp);
-			break;
-		default:
-			req.setAttribute("msg", "Action inconnue");
-			resp.setStatus(400);
-			doGet(req, resp);
-			break;
+			case ACTION_EDITER:
+				resp.sendRedirect(this.getServletContext().getContextPath() + EditerClientController.URL + "?email=" + email);
+				break;
+			case ACTION_SUPPRIMER:
+				clientService.deleteClient(email);
+				req.setAttribute("msg", "Le client email = " + email + " a été supprimé");
+				doGet(req, resp);
+				break;
+			case ACTION_TOGGLE:
+				Client client = clientService.findOneClient(email);
+				client.toggleActif();
+				clientService.updateClient(email, client);
+				String reponseString = client.isActif() ? "réactivée" : "désactivée";
+				req.setAttribute("msg_success", "Le client email = " + email + " a bien été " + reponseString);
+				doGet(req, resp);
+				break;
+			default:
+				req.setAttribute("msg", "Action inconnue");
+				resp.setStatus(400);
+				doGet(req, resp);
+				break;
 		}
 	}
 }

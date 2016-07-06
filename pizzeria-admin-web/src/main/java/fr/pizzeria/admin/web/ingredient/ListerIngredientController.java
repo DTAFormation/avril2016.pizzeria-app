@@ -18,7 +18,7 @@ import fr.pizzeria.model.Pizza;
 /**
  * Contrôleur de la page Liste des ingredients.
  */
-@WebServlet({"/ingredients/list", "/ingredients/list/active", "/ingredients/list/inactive"})
+@WebServlet({ "/ingredients/list", "/ingredients/list/active", "/ingredients/list/inactive" })
 public class ListerIngredientController extends HttpServlet {
 
 	private static final String VUE_LISTER_INGREDIENT = "/WEB-INF/views/ingredient/listerIngredient.jsp";
@@ -39,21 +39,21 @@ public class ListerIngredientController extends HttpServlet {
 		String active;
 		String path = req.getServletPath();
 		switch (path) {
-		case PATH_ACTIF:
-			active = "Actifs";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		case PATH_INACTIF:
-			active = "Inactifs";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		case PATH_ALL:
-			active = "Tous";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
-			break;
-		default:
-			active = "Actifs";
-			req.setAttribute(ACTIVE_ATTIBUTE, active);
+			case PATH_ACTIF:
+				active = "Actifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			case PATH_INACTIF:
+				active = "Inactifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			case PATH_ALL:
+				active = "Tous";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
+				break;
+			default:
+				active = "Actifs";
+				req.setAttribute(ACTIVE_ATTIBUTE, active);
 		}
 		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(VUE_LISTER_INGREDIENT);
 		dispatcher.forward(req, resp);
@@ -77,7 +77,7 @@ public class ListerIngredientController extends HttpServlet {
 				Ingredient ingredient = ingredientService.findOneIngredient(code);
 				ingredient.toggleActif();
 				ingredientService.updateIngredient(code, ingredient);
-				String reponseString = ingredient.isActif()?"réactivé":"désactivé";
+				String reponseString = ingredient.isActif() ? "réactivé" : "désactivé";
 				req.setAttribute("msg_success", "L'ingrédient " + ingredient.getNom() + " a bien été " + reponseString);
 				doGet(req, resp);
 				break;
