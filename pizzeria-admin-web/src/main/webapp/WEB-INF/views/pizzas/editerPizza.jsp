@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="util" uri="http://pizzeria.dta/functions"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../layout/entete.jsp">
@@ -63,7 +65,7 @@
 					<label for="ingredients">Liste de tous les ingrédients :</label>
 					<ul id="allIngredient" class="list-group">
 						<c:forEach var="ingredients" items="${listeIngredient}">
-							<li id="li-${ingredients.code}" onclick="addIngredient('${ingredients.code}', '${ingredients.nom}')" class="list-group-item item-ingredient-pizza">${ingredients.nom}</li>
+							<li id="li-${ingredients.code}" onclick="addIngredient('${ingredients.code}', '${util:escapeJS(ingredients.nom)}')" class="list-group-item item-ingredient-pizza">${util:escapeHTML(ingredients.nom)}</li>
 						</c:forEach>
 					</ul>
 					<p class="jumbotron">
@@ -79,7 +81,7 @@
 
 	<script type="text/javascript">
 		function addIngredient(code, name) {
-			var html = '<li id="ingredient-' + code + '" class="list-group-item">' + name + '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
+			var html = '<li id="ingredient-' + code + '" class="list-group-item">' + name + '<input type="hidden" name="ingredient" value="' + code + '"></li>';
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
