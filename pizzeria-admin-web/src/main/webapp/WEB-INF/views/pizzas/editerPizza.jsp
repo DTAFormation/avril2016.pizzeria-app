@@ -36,7 +36,7 @@
 			</div>
 			<c:if test="${pizza.code == null}">
 				<div class="form-group">
-					<label for="code">Code</label> <input type="text" class="form-control" name="code" id="code" value="${pizza.code}" required>
+					<label for="code">Code :</label> <input type="text" class="form-control" name="code" id="code" value="${pizza.code}" required>
 				</div>
 			</c:if>
 			<div class="form-group">
