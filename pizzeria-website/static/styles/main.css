@@ -139,3 +139,8 @@ ul.contentPanier {
   max-height: 350px;
   overflow-y: auto; 
 }
+
+.search-input {
+  width:400px!important;
+}
+

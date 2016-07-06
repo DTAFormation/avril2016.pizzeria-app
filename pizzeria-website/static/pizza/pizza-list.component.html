@@ -1,25 +1,28 @@
+
+<input placeholder="Rechercher ..." ng-model="query" type="text"
+	class="form-control search-input">
+
 <table class="table table-striped" id="listePizza">
-  <thead>
-    <tr>
-      <th class="text-center">Image</th>
-      <th class="text-center">Nom</th>
-      <th class="text-center">Catégorie</th>
-      <th class="text-center">Prix</th>
-      <th></th>
-    </tr>
-    <tr class="text-center" ng-repeat="pizza in $ctrl.listePizzas">
-      <td>
-        <a href="#/pizzas/{{ pizza.code }}"><img ng-src="{{pizza.urlImage}}" width="80" height="60"></a>
-      </td>
-      <td>
-        <a href="#/pizzas/{{ pizza.code }}">{{ pizza.nom }}</a>
-      </td>
-      <td>{{ pizza.categorie }}</td>
-      <td>{{ pizza.prix }} €</td>
-      <td>
-        <a ng-click="$ctrl.addPizza(pizza)" class="btn btn-primary ">Ajouter au panier</a>
-        <a href="#/pizzas/{{ pizza.code }}" class="btn btn-warning ">Visualiser</a>
-      </td>
-    </tr>
-  </thead>
+	<thead>
+		<tr>
+			<th class="text-center">Image</th>
+			<th class="text-center"><a
+				ng-click="$ctrl.predicate='nom';reverse=!reverse">Nom</a></th>
+			<th class="text-center"><a
+				ng-click="$ctrl.predicate='categorie';reverse=!reverse">Catégorie</a></th>
+			<th class="text-center"><a
+				ng-click="$ctrl.predicate='prix';reverse=!reverse">Prix</a></th>
+			<th></th>
+		</tr>
+		<tr class="text-center" ng-repeat="pizza in $ctrl.listePizzas| orderBy:$ctrl.predicate:reverse  | filter:{nom:query} track by $index"">
+			<td><a href="#/pizzas/{{ pizza.code }}"><img
+					ng-src="{{pizza.urlImage}}" width="80" height="60"></a></td>
+			<td><a href="#/pizzas/{{ pizza.code }}">{{ pizza.nom }}</a></td>
+			<td>{{ pizza.categorie }}</td>
+			<td>{{ pizza.prix }} €</td>
+			<td><a ng-click="$ctrl.addPizza(pizza)" class="btn btn-primary ">Ajouter
+					au panier</a> <a href="#/pizzas/{{ pizza.code }}"
+				class="btn btn-warning ">Visualiser</a></td>
+		</tr>
+	</thead>
 </table>
