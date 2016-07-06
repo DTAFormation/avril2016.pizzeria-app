@@ -14,6 +14,7 @@
 			<li ${ ('Livreurs' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/livreurs/list/active">Livreurs</a></li>
 			<%-- <li ${ ('Statistiques' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/statistiques">Statistiques</a></li> --%>
 			<li ${ ('Utilisateurs' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/utilisateurs/list">Utilisateurs</a></li>
+			<li ${ ('Newsletter' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/newsletter">Newsletter</a></li>
 		</ul>
 		<div class="navbar-text navbar-right col-xs-2">
 			${sessionScope.auth_email} <a id="logout" href="<%=request.getContextPath()%>/logout" class="navbar-link"> <span class="glyphicon glyphicon-log-out"></span></a>

@@ -39,6 +39,7 @@
 			<th>Prénom</th>
 			<th>Email</th>
 			<th>Téléphone</th>
+			<th>Abonné</th>
 			<th>Adresse</th>
 			<th></th>
 		</tr>
@@ -50,6 +51,7 @@
 				<td>${client.prenom}</td>
 				<td>${client.email}</td>
 				<td>${client.telephone}</td>
+				<td class="text-center"><input type="checkbox" name="abonne" ${ client.abonne ? 'checked' : '' } disabled></td>
 				<td>${client.adresse}</td>
 				<td>
 					<div class="btn-group">

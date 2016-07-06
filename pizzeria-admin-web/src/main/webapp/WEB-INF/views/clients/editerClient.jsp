@@ -39,6 +39,9 @@
 				<label for="telephone">Téléphone</label> <input type="tel" pattern="\d*" class="form-control" name="telephone" id="telephone" value="${client.telephone}" required>
 			</div>
 			<div class="form-group">
+				<label for="abonne">S'abonner à la newsletter ?</label> <input type="checkbox" name="abonne" id="abonne" ${ client.abonne ? 'checked' : '' }>
+			</div>
+			<div class="form-group">
 				<label for="adresse">Adresse</label>
 				<textarea rows="10" cols="50" class="form-control" name="adresse" id="adresse" required><c:out value="${client.adresse}"></c:out></textarea>
 			</div>

@@ -21,6 +21,7 @@ public class Client {
 	private String adresse;
 	private String telephone;
 	private Date dateDerniereModification;
+	private boolean abonne;
 
 	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone) {
 		super();
@@ -32,6 +33,26 @@ public class Client {
 		this.telephone = telephone;
 	}
 
+	/**
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param adresse
+	 * @param telephone
+	 * @param abonne
+	 */
+	public Client(Integer id, String nom, String prenom, String email, String adresse, String telephone, boolean abonne) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.abonne = abonne;
+	}
+
 	public Client(String nom, String prenom, String email, String adresse, String telephone) {
 		super();
 		this.nom = nom;
@@ -39,6 +60,17 @@ public class Client {
 		this.email = email;
 		this.adresse = adresse;
 		this.telephone = telephone;
+	}
+	
+	public Client(String nom, String prenom, String email, String adresse, String telephone, boolean abonne) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.actif = actif;
+		this.adresse = adresse;
+		this.telephone = telephone;
+		this.abonne = abonne;
 	}
 
 	public Client() {
@@ -113,6 +145,14 @@ public class Client {
 	@PreUpdate
 	public void onPersist() {
 		this.dateDerniereModification = new Date();
+	}
+
+	public boolean isAbonne() {
+		return abonne;
+	}
+
+	public void setAbonne(boolean abonne) {
+		this.abonne = abonne;
 	}
 
 }
