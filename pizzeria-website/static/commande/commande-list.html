@@ -3,12 +3,13 @@
     <tr>
       <th class="text-center" rowspan="2">Numéro commande</th>
       <th class="text-center" rowspan="2">Statut</th>
-      <th class="text-center" colspan="2">Pizzas</th>
+      <th class="text-center" colspan="3">Pizzas</th>
       <th class="text-center" rowspan="2">Prix total</th>
     </tr>
     <tr>
       <th class="text-center">Nom</th>
       <th class="text-center">Prix</th>
+      <th class="text-center">Quantité</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,11 @@
       <td>
         <ul style="list-style-type: none" ng-repeat="pizzaCmd in commande.pizzas">
           <li>{{ pizzaCmd.pizza.prix }} €</li>
+        </ul>
+      </td>
+      <td>
+        <ul style="list-style-type: none" ng-repeat="pizzaCmd in commande.pizzas">
+          <li>{{ pizzaCmd.quantite }}</li>
         </ul>
       </td>
       <td>{{ commande.calculPrixTotal() }} €</td>
