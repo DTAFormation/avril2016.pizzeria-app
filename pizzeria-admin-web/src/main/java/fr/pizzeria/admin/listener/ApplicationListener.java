@@ -201,10 +201,19 @@ public class ApplicationListener implements ServletContextListener {
 
 		c1.addPizza(pizzas.get(0), 2);
 		c1.addPizza(pizzas.get(1), 3);
+		c1.addPizza(pizzas.get(2), 0);
+		c1.addPizza(pizzas.get(3), 0);
+		c1.addPizza(pizzas.get(4), 0);
+		c2.addPizza(pizzas.get(0), 0);
 		c2.addPizza(pizzas.get(1), 5);
 		c2.addPizza(pizzas.get(2), 1);
 		c2.addPizza(pizzas.get(3), 2);
+		c2.addPizza(pizzas.get(4), 0);
+		c3.addPizza(pizzas.get(0), 2);
+		c3.addPizza(pizzas.get(1), 0);
 		c3.addPizza(pizzas.get(2), 2);
+		c3.addPizza(pizzas.get(3), 0);
+		c3.addPizza(pizzas.get(4), 0);
 
 		commandes.forEach(c -> {
 			commandeService.updateCommande(c.getNumeroCommande(), c);
