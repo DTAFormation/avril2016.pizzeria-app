@@ -23,13 +23,16 @@
 	<c:if test="${pizza != null}">
 		<form method="POST">
 
+			<%-- Propriété pour indiquer que la pizza est active ou non. --%>
+			<input type="hidden" class="form-control" id="actif" name="actif" value="${pizza.actif}" readonly>
+			
 			<c:if test="${pizza.id != null}">
 				<div class="form-group">
 					<label for="id">Id</label> <input type="text" class="form-control"
 						id="id" name="id" value="${pizza.id}" readonly>
 				</div>
 			</c:if>
-
+			
 			<div class="form-group">
 				<label for="nom">Nom</label> <input type="text" class="form-control"
 					id="nom" name="nom" value="${pizza.nom}" required>
