@@ -2,11 +2,16 @@
 
 export class PanierController {
 
-  constructor (PanierService) {
+  constructor (PanierService, $rootScope) {
     // Chaque ligne contient un objet avec la structure { 'pizza': (objet pizza ici), 'quantite': (entier nb de pizzas de la pizza fournie) }
     this.PanierService = PanierService
-    this.contenu = this.PanierService.$localStorage.panier
+    this.totalCart = this.PanierService.$localStorage.cartValue;
+    this.contenu = this.PanierService.pizzaPanier
 
+    $rootScope.$on('EVENT_PRIX', () => {
+      this.totalCart = this.PanierService.$localStorage.cartValue;
+      this.contenu = this.PanierService.pizzaPanier
+    })
   // DEBUG - Décommenter/recommenter cette section pour activer/désactiver, ainsi que l'import au début du fichier.
   // Contenu en dur du panier défini lors de chaque rechargement de page, et qui écrase le contenu en stockage.
   // Utile pour obtenir un panier pré-rempli pour tester l'affichage et les opérations nécessitant un panier déjà rempli.
@@ -26,10 +31,6 @@ export class PanierController {
     return this.size() === 0
   }
 
-  addPizza (pizza) {
-    this.PanierService.addPizza(pizza)
-  }
-
   deletePizza (pizza) {
     this.PanierService.deletePizza(pizza)
   }
@@ -43,7 +44,8 @@ export class PanierController {
   }
 
   deleteAllPizzas () {
-    return this.PanierService.deleteAllPizzas()
+    this.totalCart=0
+    this.PanierService.deleteAllPizzas()
   }
 
   findAllPizzas () {
@@ -72,4 +74,4 @@ export class PanierController {
 
 }
 
-PanierController.$inject = ['PanierService']
+PanierController.$inject = ['PanierService','$rootScope']

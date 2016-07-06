@@ -1,18 +1,19 @@
 <!-- TODO - Renommer en panier.component.html -->
-<div class="container-fluid col-xs-2" style="border: 1px solid black; padding: 15px;">
-  <h2>Panier <button ng-if="!$ctrl.isEmpty()" ng-click="$ctrl.deleteAllPizzas()" class="btn btn-danger glyphicon glyphicon-trash"></button></h2>
+<div class="container-fluid col-xs-2 panier">
+  <h2>Panier <button ng-if="!$ctrl.isEmpty()" ng-click="$ctrl.deleteAllPizzas()" confirm="Voulez-vous vider votre panier ?" class="btn btn-danger glyphicon glyphicon-trash"></button></h2>
 
-  <p ng-if="$ctrl.isEmpty()" style="width: 100%; height: 200px; overflow-y: auto; font-style: italic;">Panier vide</p>
+  <p class="contentPanier" ng-if="$ctrl.isEmpty()" >Panier vide</p>
 
-  <ul class="list-group" ng-if="!$ctrl.isEmpty()" style="width: 100%; height: 200px; overflow-y: auto;">
+  <ul class="list-group contentPanier" ng-if="!$ctrl.isEmpty()">
     <li class="list-group-item" ng-repeat="ligne in $ctrl.contenu track by $index">
-      <a href class="btn btn-danger" ng-click="$ctrl.deletePizza(ligne.pizza.id)">X</a> {{ ligne.pizza.nom }}
+      <a href class="btn btn-danger" ng-click="$ctrl.deletePizza(ligne.pizza)">X</a> {{ ligne.pizza.nom }}
       <span class="badge">
-	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.decrementPizza(ligne.pizza.id)">-</a>
+	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.decrementPizza(ligne.pizza)">-</a>
 	      {{ ligne.quantite }}
-	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.incrementPizza(ligne.pizza.id)">+</a>
+	      <a href class="btn btn-xs btn-info" ng-click="$ctrl.incrementPizza(ligne.pizza)">+</a>
       </span>
     </li>
   </ul>
+  <p ng-if="!$ctrl.isEmpty()">total : {{$ctrl.totalCart}} </p>
   <a href="#/commandes/new" class="btn btn-primary col-xs-12">Commander</a>
 </div>

@@ -118,3 +118,29 @@ body.container-fluid {
 .container .info span .fa {
   color: #FF9966;
 }
+.panier{
+	position : fixed!important;
+  right: 15px;
+  top : 52px;
+  border: 1px solid black; 
+  padding: 15px;
+}
+
+p.contentPanier {
+  width: 100%; 
+  max-height: 50px;
+  height: 200px; 
+  overflow-y: auto; 
+  font-style: italic;
+}
+
+ul.contentPanier {
+  width: 100%; 
+  max-height: 350px;
+  overflow-y: auto; 
+}
+
+.search-input {
+  width:400px!important;
+}
+

@@ -43,7 +43,19 @@ describe('Test du PizzaListController', function () {
     var panier = ctrl.panierService.findAllPizzas()
     expect(panier[1].quantite).toEqual(1)
   })
-
+it('should update the cart value', function () {
+    var pizza = new Pizza({
+      'nom': 'Royale',
+      'code': 'royale',
+      'prix': 12,
+      'categorie': 'VIANDE',
+      'urlImage': 'http://placehold.it/150x150',
+      'id': 1
+    })
+    ctrl.addPizza(pizza)
+    var cart = ctrl.panierService.findCartValue()
+    expect(cart).toEqual(pizza.prix)
+  })
   it('should increase quantity', function () {
     var pizza = new Pizza({
       'nom': 'Royale',
