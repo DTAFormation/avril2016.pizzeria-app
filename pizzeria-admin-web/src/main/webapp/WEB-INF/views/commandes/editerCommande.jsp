@@ -27,36 +27,36 @@
 				<input type="hidden" name="id" value="${commande.id}">
 			</c:if>
 			<div class="form-group">
-				<label for="nom">Numéro</label> <input type="text" class="form-control" id="nom" name="numero" value="${commande.numeroCommande}" placeholder="Numéro de la commande (Chaîne de caractères)"
+				<label for="nom">Numéro :</label> <input type="text" class="form-control" id="nom" name="numero" value="${commande.numeroCommande}" placeholder="Numéro de la commande (Chaîne de caractères)"
 					<c:if test="${editPage}">readonly</c:if> required autofocus>
 			</div>
 			<div class="form-group">
-				<label for="statut">Statut</label> <select name="statut" id="statut" class="form-control">
+				<label for="statut">Statut :</label> <select name="statut" id="statut" class="form-control">
 					<c:forEach var="statut" items="${statuts}">
 						<option value="${statut}" <c:if test="${commande.statut == statut}">selected</c:if>>${statut.libelle}</option>
 					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="date">Date</label> <input type="datetime-local" class="form-control" name="date" id="date"
+				<label for="date">Date :</label> <input type="datetime-local" class="form-control" name="date" id="date"
 					value="<fmt:formatDate value="${commande.dateCommande.time}" pattern="yyyy-MM-dd"/>T<fmt:formatDate value="${commande.dateCommande.time}" pattern="HH:mm"/>" required>
 			</div>
 			<div class="form-group">
-				<label for="livreur">Livreur</label> <select name="livreur" id="livreur" class="form-control">
+				<label for="livreur">Livreur :</label> <select name="livreur" id="livreur" class="form-control">
 					<c:forEach var="livreur" items="${livreurs}">
 						<option value="${livreur.id}" <c:if test="${commande.livreur.id == livreur.id}">selected</c:if>>${livreur.prenom}&nbsp;${livreur.nom}</option>
 					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="client">Client</label> <select name="client" id="client" class="form-control">
+				<label for="client">Client :</label> <select name="client" id="client" class="form-control">
 					<c:forEach var="client" items="${clients}">
 						<option value="${client.id}" <c:if test="${commande.client.id == client.id}">selected</c:if>>${client.prenom}&nbsp;${client.nom}</option>
 					</c:forEach>
 				</select>
 			</div>
 			<div class="form-group">
-				<label>Pizzas</label>
+				<label>Pizzas :</label>
 				<c:choose>
 					<c:when test="${editPage}">
 						<c:forEach var="pizzaCmd" items="${commande.pizzas}">

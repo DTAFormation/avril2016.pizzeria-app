@@ -23,14 +23,14 @@
 		<form method="POST">
 			<c:if test="${ingredient.id != null}">
 				<div class="form-group">
-					<label for="id">Id</label> <input type="text" class="form-control" id="id" name="id" value="${ingredient.id}" readonly>
+					<label for="id">Id :</label> <input type="text" class="form-control" id="id" name="id" value="${ingredient.id}" readonly>
 				</div>
 			</c:if>
 			<div class="form-group">
-				<label for="code">Code</label> <input type="text" class="form-control" id="code" name="code" value="${ingredient.code}" required>
+				<label for="code">Code :</label> <input type="text" class="form-control" id="code" name="code" value="${ingredient.code}" required>
 			</div>
 			<div class="form-group">
-				<label for="name">Nom</label> <input type="text" class="form-control" id="name" name="nom" value="${ingredient.nom}" required>
+				<label for="name">Nom :</label> <input type="text" class="form-control" id="name" name="nom" value="${ingredient.nom}" required>
 			</div>
 
 			<input name="Referer" type="hidden" value="${Referer}">

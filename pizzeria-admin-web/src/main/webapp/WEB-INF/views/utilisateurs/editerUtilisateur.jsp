@@ -27,20 +27,20 @@
 				</div>
 			</c:if>
 			<div class="form-group">
-				<label for="nom">Nom</label> <input type="text" class="form-control" id="nom" name="nom" value="${utilisateur.nom}">
+				<label for="nom">Nom :</label> <input type="text" class="form-control" id="nom" name="nom" value="${utilisateur.nom}">
 			</div>
 			<div class="form-group">
-				<label for="nom">Prénom</label> <input type="text" class="form-control" id="prenom" name="prenom" value="${utilisateur.prenom}">
+				<label for="nom">Prénom :</label> <input type="text" class="form-control" id="prenom" name="prenom" value="${utilisateur.prenom}">
 			</div>
 			<div class="form-group">
-				<label for="email">Email</label> <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}"
+				<label for="email">Email :</label> <input type="email" class="form-control" id="email" name="email" value="${utilisateur.email}"
 					${ (utilisateur != null && utilisateur.id != null) ? 'readonly' : 'required' }>
 			</div>
 			<div class="form-group">
-				<label for="motDePasse">Mot de passe</label> <input type="password" class="form-control" name="motDePasse" id="motDePasse" ${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
+				<label for="motDePasse">Mot de passe :</label> <input type="password" class="form-control" name="motDePasse" id="motDePasse" ${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
 			</div>
 			<div class="form-group">
-				<label for="confirmationMotDePasse">Confirmation du mot de passe</label> <input type="password" class="form-control" name="confirmationMotDePasse" id="confirmationMotDePasse" value=""
+				<label for="confirmationMotDePasse">Confirmation du mot de passe :</label> <input type="password" class="form-control" name="confirmationMotDePasse" id="confirmationMotDePasse" value=""
 					${ (utilisateur != null && utilisateur.id != null) ? '' : 'required' }>
 			</div>
 			<button type="submit" class="btn btn-success">Valider</button>

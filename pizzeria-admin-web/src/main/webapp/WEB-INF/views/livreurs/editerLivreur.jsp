@@ -23,19 +23,19 @@
 		<form method="POST">
 			<c:if test="${livreur.id != null}">
 				<div class="form-group">
-					<label for="id">Id</label> <input type="text" class="form-control" id="id" name="id" value="${livreur.id}" readonly>
+					<label for="id">Id :</label> <input type="text" class="form-control" id="id" name="id" value="${livreur.id}" readonly>
 				</div>
 			</c:if>
 			<c:if test="${livreur.code != null}">
 				<div class="form-group">
-					<label for="code">Code</label> <input type="text" class="form-control" id="code" name="code" value="${livreur.code}" readonly>
+					<label for="code">Code :</label> <input type="text" class="form-control" id="code" name="code" value="${livreur.code}" readonly>
 				</div>
 			</c:if>
 			<div class="form-group">
-				<label for="nom">Nom</label> <input type="text" class="form-control" id="nom" name="nom" value="${livreur.nom}" required>
+				<label for="nom">Nom :</label> <input type="text" class="form-control" id="nom" name="nom" value="${livreur.nom}" required>
 			</div>
 			<div class="form-group">
-				<label for="prenom">Prénom</label> <input type="text" class="form-control" name="prenom" id="prenom" value="${livreur.prenom}" required>
+				<label for="prenom">Prénom :</label> <input type="text" class="form-control" name="prenom" id="prenom" value="${livreur.prenom}" required>
 			</div>
 
 			<button type="submit" class="btn btn-success">Valider</button>
