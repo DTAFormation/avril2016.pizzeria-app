@@ -15,19 +15,20 @@ public class LivreurService {
 
 
 	public List<Livreur> findAll() {
-		return em.createQuery("select p from Livreur p where p.actif = true", Livreur.class).getResultList();
+		return em.createQuery("select p from Livreur p", Livreur.class).getResultList();
 	}
 
 	public Livreur findOneLivreur(String id) {
-		return em.createQuery("select p from Livreur p where p.id=:id and p.actif = true", Livreur.class)
+		return em.createQuery("select p from Livreur p where p.id=:id", Livreur.class)
 				.setParameter("id", Integer.parseInt(id))
 				.getSingleResult();
 	}
 	
-	public void updateLivreur(String id, String  nom, String prenom) {
+	public void updateLivreur(String id, String  nom, String prenom, boolean actif) {
 		Livreur livreur = findOneLivreur(id); // vérifie qu'un Livreur est présent
 		livreur.setNom(nom);
 		livreur.setPrenom(prenom);
+		livreur.setActif(actif);
 		em.merge(livreur);
 	}
 
@@ -43,8 +44,7 @@ public class LivreurService {
 
 	public void deleteLivreur(String id) {
 		Livreur livreur=findOneLivreur(id); // vérifie qu'un Livreur est présent
-		livreur.setActif(false);
-		em.merge(livreur);
+		em.remove(livreur);
 	}
 
 	public List<Livreur> findLivreur(String nom, String prenom) {

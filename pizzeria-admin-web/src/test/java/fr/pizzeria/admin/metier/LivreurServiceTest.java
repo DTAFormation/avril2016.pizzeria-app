@@ -84,7 +84,7 @@ public class LivreurServiceTest {
 
 		Livreur livreur2 = service.findOneLivreur(id);
 
-		service.updateLivreur(id, "Bovin", "José");
+		service.updateLivreur(id, "Bovin", "José", true);
 		// Vérification des nouvelle données
 		LOG.info("Alors 'livreur' a ete modifie");
 		assertEquals(livreur2.getNom(), "Bovin");

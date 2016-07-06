@@ -94,6 +94,9 @@ public class Livreur {
 		this.prenom = prenom;
 	}
 	
+	public void toggleActif() {
+		this.setActif(!this.actif);
+	}
 	
 	public Boolean getActif() {
 		return actif;

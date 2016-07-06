@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.model.Livreur;
 
-@WebServlet("/livreurs/newlivreur")
+@WebServlet("/livreurs/new")
 public class CreationLivreurController extends HttpServlet {
 
 	private static final Logger LOG = Logger.getLogger(CreationLivreurController.class.getName());

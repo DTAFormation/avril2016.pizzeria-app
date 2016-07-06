@@ -1,6 +1,5 @@
 package fr.pizzeria.admin.metier;
 
-import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Pizza;
 
 import java.util.List;
@@ -29,12 +28,12 @@ public class PizzaService {
 	 * @return
 	 */
 	public List<Pizza> findAll() {
-		return em.createQuery("select p from Pizza p where actif = true", Pizza.class).getResultList();
+		return em.createQuery("select p from Pizza p", Pizza.class).getResultList();
 	}
 
 
 	public List<Pizza> findAllWithIngredient() {
-		List<Pizza> pizzas = em.createQuery("select p from Pizza p where actif = true", Pizza.class).getResultList();
+		List<Pizza> pizzas = em.createQuery("select p from Pizza p", Pizza.class).getResultList();
 		for (Pizza pizza : pizzas) {
 			if (pizza.getIngredients().iterator().hasNext()) {
 				pizza.getIngredients().iterator().next();
@@ -44,13 +43,13 @@ public class PizzaService {
 	}
 
 	public Pizza findOnePizza(String code) {
-		return em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		return em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 	}
 
 
 	public Pizza findOnePizzaWithIngredients(String code) {
-		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		Pizza pizza = em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getSingleResult();
 		// simulation de recupération des ingrédients (requetes)
 		if (pizza.getIngredients().iterator().hasNext()) {
@@ -61,30 +60,23 @@ public class PizzaService {
 
 
 	public List<Pizza> isCodeTaken(String code) {
-		return em.createQuery("select p from Pizza p where p.code=:code and actif = true", Pizza.class)
+		return em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
 				.setParameter("code", code).getResultList();
 	}
 
 
-	public void updatePizza(String code, Pizza pizzaAvecId) {
+	public void updatePizza(String code, Pizza pizza) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
-
-
-		p.setActif(false);
-		Pizza newPizza = pizzaAvecId.copy();
-		newPizza.setId(null);
+		p = pizza;
 		em.merge(p);
-		em.persist(newPizza);
 	}
 
-	public void savePizza(Pizza pizzaSansId) {
-		em.persist(pizzaSansId);
+	public void savePizza(Pizza pizza) {
+		em.persist(pizza);
 	}
 
 	public void deletePizza(String code) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
-
-		p.setActif(false);
-		em.merge(p);
+		em.remove(p);
 	}
 }

@@ -11,42 +11,100 @@
 	<jsp:include page="../layout/menu.jsp">
 		<jsp:param value="Ingredient" name="page" />
 	</jsp:include>
-	<h1>Liste des ingredients</h1>
-	<a class="btn btn-primary" href="new">Nouvel ingredient</a>
+	
+	<div class="row">
+		<c:if test="${msg != null}">
+			<div class="alert alert-danger" role="alert">${msg}</div>
+		</c:if>
+		<c:if test="${msg_success != null}">
+			<div class="alert alert-success" role="alert">${msg_success}</div>
+		</c:if>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>Liste des ingredients - ${active}</h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-4">
+			<a class="btn btn-success"
+				href="<%=request.getContextPath()%>/ingredients/new">Nouvel ingredient</a>
+		</div>
+		<div class="col-xs-8 btn-group">
+			<a href="<%=request.getContextPath()%>/ingredients/list/active"
+				class="btn btn-default">Actives</a> <a
+				href="<%=request.getContextPath()%>/ingredients/list/inactive"
+				class="btn btn-default">Inactives</a> <a
+				href="<%=request.getContextPath()%>/ingredients/list"
+				class="btn btn-default">Toutes</a>
+		</div>
+	</div>
+	
 	<br>
-	<c:if test="${msg != null}">
-		<div class="alert alert-danger" role="alert">${msg}</div>
-	</c:if>
 
 	<table class="table">
 		<tr>
 			<th>Code</th>
 			<th>Nom</th>
 			<th></th>
-			<th></th>
 		</tr>
-
-		<c:forEach var="ingredient" items="${listeIngredients}">
-			<tr>
-				<td>
-					${ingredient.code}
-				</td>
-				<td>
-					${ingredient.nom}
-				</td>
-				<td>			
-					<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="btn btn-primary">Editer</a> 			
-				</td>
-				<td>
-					<form method="POST">
-						<input type="hidden" name="code" value="${ingredient.code}">
-						<input type="hidden" name="action" value="supprimer">
-						<button type="submit" class="btn btn-danger">Supprimer</button>
-					</form>
-				</td>
-			</tr>
-		</c:forEach>
-
+	
+		<c:if test="${active == 'active' || active == 'toutes'}">
+			<c:forEach var="ingredient" items="${listeIngredients}">
+				<c:if test="${ingredient.actif}">
+					<tr>
+						<td>
+							${ingredient.code}
+						</td>
+						<td>
+							${ingredient.nom}
+						</td>			 			
+						<td>
+							<div class="row">
+								<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>" class="col-xs-4 btn btn-primary">Editer</a>
+								<form method="POST" class="col-xs-4 col-xs-offset-4">
+									<input type="hidden" name="code" value="${ingredient.code}">
+									<input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-danger">Désactiver</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		</c:if>
+		<c:if test="${active == 'inactive' || active == 'toutes'}">
+			<c:forEach var="ingredient" items="${listeIngredients}">
+				<c:if test="${!ingredient.actif}">
+					<tr>
+						<td>
+							${ingredient.code}
+						</td>
+						<td>
+							${ingredient.nom}
+						</td>
+						<td>
+							<div class="row">
+								<a href="<c:url value="/ingredients/edit?code=${ingredient.code}"/>"
+									class="col-xs-4 btn btn-primary">Editer</a>
+								<form method="POST" class="col-xs-4">
+									<input type="hidden" name="code" value="${ingredient.code}">
+									<input type="hidden" name="action" value="toggle">
+									<button type="submit" class="btn btn-success">Réactiver</button>
+								</form>
+								<form method="POST" class="col-xs-4 ">
+									<input type="hidden" name="code" value="${ingredient.code}">
+									<input type="hidden" name="action" value="supprimer">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		</c:if>
 	</table>
 </body>
 </html>
