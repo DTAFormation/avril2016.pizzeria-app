@@ -21,6 +21,8 @@
 		<div class="alert alert-danger" role="alert">${msgErreur}</div>
 	</c:if>
 
+	<div id="alert"></div>
+
 	<c:if test="${pizza != null}">
 		<form method="POST">
 			<c:if test="${pizza.id != null}">
@@ -85,7 +87,9 @@
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
 			} else {
-				alert('Cet ingrédient est déjà présent sur cette pizza.');
+				var modalBody = '<div class="alert alert-danger fade in" role="alert" id="myAlert">' + '<button type="button" class="close" data-dismiss="alert">'
+						+ '<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span></button>"Attention ! Cet ingrédient est déjà présent sur cette pizza."</div>'
+				$("#alert").append(modalBody);
 			}
 		}
 		document.getElementById('pizzaIngredient').addEventListener('click', function(evt) {
