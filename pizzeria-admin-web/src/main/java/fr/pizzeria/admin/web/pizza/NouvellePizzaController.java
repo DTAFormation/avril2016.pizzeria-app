@@ -29,7 +29,6 @@ public class NouvellePizzaController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("pizza", new Pizza());
 		req.setAttribute("listeIngredient", ingredientService.findAll());
-		pizzaService.envoyeEmail();
 		this.getServletContext().getRequestDispatcher(VUE_NOUVELLE_PIZZA).forward(req, resp);
 	}
 

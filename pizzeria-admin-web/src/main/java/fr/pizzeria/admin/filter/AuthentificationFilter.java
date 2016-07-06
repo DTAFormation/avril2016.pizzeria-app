@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class AuthentificationFilter implements Filter {
 
   private static final String[] NO_FILTER_URL = {"/api", "/login", "/static"};

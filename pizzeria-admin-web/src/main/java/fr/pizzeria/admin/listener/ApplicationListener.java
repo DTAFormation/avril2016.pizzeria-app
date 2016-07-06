@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebListener;
 
 import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
+import fr.pizzeria.admin.metier.EMailService;
 import fr.pizzeria.admin.metier.IngredientService;
 import fr.pizzeria.admin.metier.LivreurService;
 import fr.pizzeria.admin.metier.PizzaService;
@@ -33,6 +34,9 @@ public class ApplicationListener implements ServletContextListener {
 	@Inject
 	PizzaService pizzaService;
 
+	@Inject
+	EMailService eMailService;
+	
 	@Inject
 	ClientService clientService;
 
@@ -61,7 +65,6 @@ public class ApplicationListener implements ServletContextListener {
 		initLivreurs();
 		initUtilisateurs();
 		initCommandes();
-		pizzaService.envoyeEmail();
 	}
 
 	@Override
@@ -132,9 +135,9 @@ public class ApplicationListener implements ServletContextListener {
 	}
 
 	private void initClients() {
-		clients.add(new Client("LeStalker", "Bob", "bobs@gmail.com", "5 rue lamer", "0612134565"));
-		clients.add(new Client("Rodriguez", "Robert", "polor@gmail.com", "18 rue pueblo", "0712134565"));
-		clients.add(new Client("HoldTheDoor", "Hodor", "dalec@gmail.com", "15 bd des anglais", "0612145565", true));
+		clients.add(new Client("LeStalker", "Bob", "test1@googlemail.com", "5 rue lamer", "0612134565", true));
+		clients.add(new Client("Rodriguez", "Robert", "test2@gmail.com", "18 rue pueblo", "0712134565"));
+		clients.add(new Client("HoldTheDoor", "Hodor", "test3@gmail.com", "15 bd des anglais", "0612145565", true));
 
 		clients.forEach(c -> {
 			clientService.saveClient(c);

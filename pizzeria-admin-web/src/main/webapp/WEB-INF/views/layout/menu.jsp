@@ -25,11 +25,14 @@
 			<li
 				<c:if test="${'Utilisateur' == param.page}"> class="active"</c:if>><a
 				href="<%=request.getContextPath()%>/utilisateurs/list">Utilisateur</a></li>
+			<li
+				<c:if test="${'Newsletter' == param.page}"> class="active"</c:if>><a
+				href="<%=request.getContextPath()%>/newsletter">Newsletter</a></li>
 
 		</ul>
 		<div class="navbar-text navbar-right col-xs-2">
-			${sessionScope.auth_email} <a id="logout" href="<%=request.getContextPath()%>/logout"
-				class="navbar-link"><span
+			${sessionScope.auth_email} <a id="logout"
+				href="<%=request.getContextPath()%>/logout" class="navbar-link"><span
 				class="glyphicon glyphicon-log-out"></span></a>
 		</div>
 
@@ -40,9 +43,10 @@
 	document.getElementById('logout').addEventListener('click',
 			function(evt) {
 				$.ajax({
-					url : '<%=request.getContextPath()%>/login',
-					type : 'DELETE',
+					url : '<%=request.getContextPath()%>
+	/login',
+			type : 'DELETE',
 
-				});
-			}, false)
+		});
+	}, false)
 </script>

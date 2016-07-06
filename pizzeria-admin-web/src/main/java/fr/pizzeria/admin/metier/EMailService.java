@@ -1,31 +1,57 @@
 package fr.pizzeria.admin.metier;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.ConnectException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import fr.pizzeria.model.Client;
+
 @Stateless
 public class EMailService {
 
-	// @Resource(name = "java:/Email")
 	private Session session;
+
+	@Inject
+	ClientService clientService;
+
+
+	public void envoyeEmail(String adresseMail, String pizza) {
+		String value = String.format("<!DOCTYPE html>"
+				+ "Bonjour cher client !"
+				+ "<br>"
+				+ "Nous avons le plaisir de vous proposer cette semaine une promotion exeptionnelle ! "
+				+ "<br>"
+				+ "La pizza <strong>%s</strong> est à moitié prix !"
+				+ "<br>"
+				+ "Venez vite à notre pizzeria pour en profiter.",pizza);
+		send(adresseMail, "promotion de la semaine", value);
+
+
+	}
+
+	public void envoyeEmailPromotionPizza(String pizza) {
+		List<Client> clients = clientService.findAll();
+		System.err.println("Liste des clients :" + clients);
+		for (Client client : clients) {
+			System.err.println("EMail du client :" + client.getEmail());
+			if (client.isAbonne()) {
+				envoyeEmail(client.getEmail(), pizza);
+			}
+
+		}
+
+	}
 
 	public void send(String addresses, String topic, String textMessage) {
 
@@ -34,21 +60,13 @@ public class EMailService {
 		prop.put("mail.smtp.port", "25");
 
 		Session session = Session.getDefaultInstance(prop, null);
-//		session.getProperties().put("mail.smtp.host", "aspmx.l.google.com");
-//		session.getProperties().put("mail.smtp.port", "25");
-		System.out.println(session);
-		// new javax.mail.Authenticator() {
-		// protected PasswordAuthentication getPasswordAuthentication() {
-		// return new PasswordAuthentication("username", "password");
-		// }
-		// });
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("killergame@gmail.com"));
+			message.setFrom(new InternetAddress("newsletter@DTA.fr"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
 			message.setSubject(topic);
-			message.setText(textMessage);
+			message.setContent(textMessage, "text/html; charset=utf-8");
 			message.setSentDate(new Date());
 			Transport.send(message);
 
