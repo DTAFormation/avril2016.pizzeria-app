@@ -41,7 +41,7 @@ describe('Test du PizzaListController', function () {
     })
     ctrl.addPizza(pizza)
     var panier = ctrl.panierService.findAllPizzas()
-    expect(panier[1].quantite).toEqual(1)
+    expect(panier['royale'].quantite).toEqual(1)
   })
 it('should update the cart value', function () {
     var pizza = new Pizza({
@@ -68,6 +68,6 @@ it('should update the cart value', function () {
     ctrl.addPizza(pizza)
     ctrl.addPizza(pizza)
     var panier = ctrl.panierService.findAllPizzas()
-    expect(panier[1].quantite).toEqual(2)
+    expect(panier['royale'].quantite).toEqual(2)
   })
 })
