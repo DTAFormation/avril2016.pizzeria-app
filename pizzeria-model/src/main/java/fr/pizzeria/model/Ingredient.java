@@ -20,7 +20,7 @@ public class Ingredient {
 		// default construct
 	}
 
-	public Ingredient(Double prix, String code, String name) {
+	public Ingredient(String code, String name, Double prix) {
 		this.prix = prix;
 		this.code = code;
 		this.name = name;

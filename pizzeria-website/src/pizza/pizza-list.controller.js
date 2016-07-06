@@ -18,6 +18,7 @@ export class PizzaListController {
           ctrl.listePizzas = []
           data.forEach((item) => {
             ctrl.listePizzas.push(item)
+            console.log(item)
           })
         })
   }

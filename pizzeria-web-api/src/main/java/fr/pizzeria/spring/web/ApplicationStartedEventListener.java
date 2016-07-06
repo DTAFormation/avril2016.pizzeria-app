@@ -12,16 +12,17 @@ import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.spring.web.repository.IClientRepository;
+import fr.pizzeria.spring.web.repository.IIngredientRepository;
 import fr.pizzeria.spring.web.repository.IPizzaRepository;
 
 @Component
 public class ApplicationStartedEventListener {
 
 	@Autowired
-	public ApplicationStartedEventListener(IPizzaRepository pizzaDao, IClientRepository clientDao) {
+	public ApplicationStartedEventListener(IPizzaRepository pizzaDao, IClientRepository clientDao, IIngredientRepository ingredientDao) {
 		super();
 		System.err.println("bean ApplicationStartedEventListener");
-		initPizzas(pizzaDao);
+		initPizzas(pizzaDao, ingredientDao);
 		initClient(clientDao);
 	}
 
@@ -39,14 +40,20 @@ public class ApplicationStartedEventListener {
 
 	}
 
-	public void initPizzas(IPizzaRepository pizzaDao) {
+	public void initPizzas(IPizzaRepository pizzaDao, IIngredientRepository ingredientDao) {
 		List<Pizza> pizzas = new ArrayList<>();
 		System.err.println("test init");
-		Ingredient saumon = new Ingredient(3, "SAM", "saumon");
-		Ingredient fromage = new Ingredient(1, "FRO", "fromage");
-		Ingredient tomate = new Ingredient(2, "TOM", "tomate");
-		Ingredient oeuf = new Ingredient(2, "OEU", "oeuf");
-		Ingredient poulet = new Ingredient(2, "POU", "poulet");
+		Ingredient saumon = new Ingredient("SAM", "saumon", 3.0);
+		Ingredient fromage = new Ingredient("FRO", "fromage", 1.0);
+		Ingredient tomate = new Ingredient("TOM", "tomate", 2.0);
+		Ingredient oeuf = new Ingredient("OEU", "oeuf", 2.0);
+		Ingredient poulet = new Ingredient("POU", "poulet", 2.0);
+		ingredientDao.save(saumon);
+		ingredientDao.save(fromage);
+		ingredientDao.save(tomate);
+		ingredientDao.save(oeuf);
+		ingredientDao.save(poulet);
+		
 		
 		Pizza pizza1 = new Pizza("Fro", "4 Fromages", new BigDecimal("15.00"), CategoriePizza.VIANDE,
 				"images/4fromages.jpg",
