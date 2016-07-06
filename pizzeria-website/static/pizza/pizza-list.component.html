@@ -1,25 +1,28 @@
-<table class="table table-striped" id="listePizza">
-  <thead>
-    <tr>
-      <th class="text-center">Image</th>
-      <th class="text-center">Nom</th>
-      <th class="text-center">Catégorie</th>
-      <th class="text-center">Prix</th>
-      <th></th>
-    </tr>
-    <tr class="text-center" ng-repeat="pizza in $ctrl.listePizzas">
-      <td>
-        <a href="#/pizzas/{{ pizza.code }}"><img ng-src="{{pizza.urlImage}}" width="80" height="60"></a>
-      </td>
-      <td>
-        <a href="#/pizzas/{{ pizza.code }}">{{ pizza.nom }}</a>
-      </td>
-      <td>{{ pizza.categorie }}</td>
-      <td>{{ pizza.prix }} €</td>
-      <td>
-        <a ng-click="$ctrl.addPizza(pizza)" class="btn btn-primary ">Ajouter au panier</a>
-        <a href="#/pizzas/{{ pizza.code }}" class="btn btn-warning ">Visualiser</a>
-      </td>
-    </tr>
-  </thead>
-</table>
+<div id="recherche" class="recherche">
+<input placeholder="Rechercher ..." ng-model="query" type="text"
+	class="form-control search-input">
+trié par : <a ng-click="$ctrl.predicate='nom';reverse=!reverse">Nom</a> - 
+					<a ng-click="$ctrl.predicate='categorie';reverse=!reverse">Catégorie</a> - 
+					<a ng-click="$ctrl.predicate='prix';reverse=!reverse">Prix</a>
+</div>
+<div class="row row-flex row-flex-wrap" >
+	<div class="col-sm-6 col-md-3" ng-repeat="pizza in $ctrl.listePizzas| orderBy:$ctrl.predicate:reverse  | filter:{nom:query} track by $index">
+		<div class="thumbnail">
+			<img ng-src="{{pizza.urlImage}}" alt="...">
+			<div class="caption">
+				<h3><a href="#/pizzas/{{ pizza.code }}">{{ pizza.nom }}</a></h3> 
+				<p>({{pizza.categorie}})</p>
+				<p>{{ pizza.description }}</p>
+				<p ng-if="pizza.ingredients">ingredient :
+					<ul>
+						<li ng-repeat="ingredient in pizza.ingredients">{{ingredient.name}}</li>
+					</ul>
+				</p>
+				<p>prix : {{ pizza.prix }} €</p>
+				<p class="button-modifier-panier"><a ng-click="$ctrl.addPizza(pizza)" class="btn btn-primary ">Ajouter
+					au panier</a> <a href="#/pizzas/{{ pizza.code }}"
+				class="btn btn-warning ">Visualiser</a></p>
+			</div>
+		</div>
+	</div>
+</div>
