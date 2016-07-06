@@ -9,6 +9,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <jsp:include page="../layout/entete.jsp">
 	<jsp:param value="Page Editer Pizza" name="title" />
 </jsp:include>
@@ -25,6 +26,7 @@
 		<div class="alert alert-danger" role="alert">${msgErreur}</div>
 	</c:if>
 
+	<div id="alert"></div>
 
 	<c:if test="${pizza != null}">
 		<form method="POST">
@@ -89,6 +91,8 @@
 						</c:forEach>
 					</ul>
 				</div>
+
+
 				<div class="col-md-6 col-lg-6">
 					<label for="ingredients">liste de tout les ingredients</label>
 					<ul id="allIngredient" class="list-group">
@@ -98,20 +102,21 @@
 								class="list-group-item">${ ingredients.nom }</li>
 						</c:forEach>
 					</ul>
+
 					<a class="btn btn-primary"
 						href="<%=request.getContextPath()%>/ingredients/new">Nouvel
 						ingredient</a>
 				</div>
 			</div>
+
+
 			<button type="submit" class="btn btn-primary">Valider</button>
 			<a href="<c:url value="/pizzas/list"></c:url>"
 				class="btn btn-primary">Retour</a>
+
+
 		</form>
 	</c:if>
-
-
-
-
 
 
 
@@ -120,16 +125,15 @@
 			var html = '<li id="ingredient-'+code+'" class="list-group-item">'
 					+ name
 					+ '<input type="text" name="ingredient" value="'+code+'" hidden></li>';
-					
-
-	        var message = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 
 			if (!document.getElementById('ingredient-' + code)) {
 				$("#pizzaIngredient").append(html);
-			} 
-			else {
-                  message;
-				 //	alert('cette ingredient est déjà présent sur cette pizza');       
+			} else {
+				var modalBody = '<div class="alert alert-danger fade in" role="alert" id="myAlert">'
+						+ '<button type="button" class="close" data-dismiss="alert">'
+						+ '<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span></button>"Attention ! Cet ingredient est déjà présent sur cette pizza."</div>'
+
+				$("#alert").append(modalBody);
 			}
 		}
 
@@ -138,5 +142,7 @@
 					$("#" + evt.srcElement.attributes[0].nodeValue).remove();
 				}, false)
 	</script>
+
 </body>
 </html>
+
