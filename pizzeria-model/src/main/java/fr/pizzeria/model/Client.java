@@ -61,7 +61,7 @@ public class Client {
 		this.adresse = adresse;
 		this.telephone = telephone;
 	}
-	
+
 	public Client(String nom, String prenom, String email, String adresse, String telephone, boolean abonne) {
 		super();
 		this.nom = nom;
@@ -141,10 +141,8 @@ public class Client {
 		this.actif = actif;
 	}
 
-	@PrePersist
-	@PreUpdate
-	public void onPersist() {
-		this.dateDerniereModification = new Date();
+	public void toggleActif() {
+		this.setActif(!this.actif);
 	}
 
 	public boolean isAbonne() {
@@ -155,4 +153,73 @@ public class Client {
 		this.abonne = abonne;
 	}
 
+	@PrePersist
+	@PreUpdate
+	public void onPersist() {
+		this.dateDerniereModification = new Date();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (actif ? 1231 : 1237);
+		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
+		result = prime * result + ((dateDerniereModification == null) ? 0 : dateDerniereModification.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (actif != other.actif)
+			return false;
+		if (adresse == null) {
+			if (other.adresse != null)
+				return false;
+		} else if (!adresse.equals(other.adresse))
+			return false;
+		if (dateDerniereModification == null) {
+			if (other.dateDerniereModification != null)
+				return false;
+		} else if (!dateDerniereModification.equals(other.dateDerniereModification))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (telephone == null) {
+			if (other.telephone != null)
+				return false;
+		} else if (!telephone.equals(other.telephone))
+			return false;
+		return true;
+	}
 }

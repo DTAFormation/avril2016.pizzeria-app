@@ -100,5 +100,19 @@ public class ClientServiceTest {
 		verify(em).merge(client);
 		assertFalse(client.isActif());
 	}
+	@Test
+	public void hardDeleteClients(){
+		List<Client> clients = new ArrayList<>();
+		Client client = new Client(1, "test", "test", "test@test.fr", "10 av aa", "00000000");
+		client.setActif(false);
+		clients.add(client);
+		when(em.createQuery("select c from Client c where  actif = false", Client.class))
+				.thenReturn(query);
+		when(query.getResultList()).thenReturn(clients);
+		service.hardDeleteClients();
+
+		verify(em).remove(client);
+		assertFalse(client.isActif());
+	}
 
 }

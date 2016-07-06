@@ -76,6 +76,16 @@ public class Pizza {
 		this.id = id;
 	}
 
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, Boolean actif) {
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.urlImage = urlImage;
+		this.id = id;
+		this.actif = actif;
+	}
+	
 	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, List<Ingredient> ingredients) {
 		this.code = code;
 		this.nom = nom;
@@ -84,6 +94,17 @@ public class Pizza {
 		this.urlImage = urlImage;
 		this.id = id;
 		this.ingredients = ingredients;
+	}
+
+	public Pizza(Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage, List<Ingredient> ingredients, Boolean actif) {
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.urlImage = urlImage;
+		this.id = id;
+		this.ingredients = ingredients;
+		this.actif = actif;
 	}
 
 	public boolean isActif() {

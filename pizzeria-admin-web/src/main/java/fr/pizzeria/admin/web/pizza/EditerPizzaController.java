@@ -69,6 +69,7 @@ public class EditerPizzaController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String id = req.getParameter("id");
+        String actif = req.getParameter("actif");
         String code = req.getParameter("code");
         String nom = req.getParameter("nom");
         String urlImage = req.getParameter("urlImage");
@@ -82,7 +83,8 @@ public class EditerPizzaController extends HttpServlet {
             this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA)
                     .forward(req, resp);
         } else {
-            Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categorie), urlImage);
+            Pizza pizzaAvecId = new Pizza(Integer.valueOf(id), code, nom, new BigDecimal(prix), CategoriePizza.valueOf(categorie), urlImage, Boolean.valueOf(actif));
+            
             if ( ingredients != null ) {
 	            for (String ingredient : ingredients) {
 	            	pizzaAvecId.addIngredient(ingredientService.findOneIngredient(ingredient));

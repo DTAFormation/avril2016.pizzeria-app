@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.pizzeria.model.Client;
+import fr.pizzeria.model.Livreur;
 
 @Stateless
 public class ClientService {
@@ -15,20 +16,23 @@ public class ClientService {
 	protected EntityManager em;
 
 	public List<Client> findAll() {
-		return em.createQuery("select c from Client c where actif = true", Client.class).getResultList();
+		return em.createQuery("select c from Client c", Client.class).getResultList();
 	}
 
 	public Client findOneClient(String email) {
-		return em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class)
+		return em.createQuery("select c from Client c where c.email=:email", Client.class)
 				.setParameter("email", email).getSingleResult();
+	}
+	
+	public Client findOneClientById(String id) {
+		return em.createQuery("select c from Client c where c.id=:id", Client.class)
+				.setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
 
 	public void updateClient(String oldEmail, Client clientAvecId) {
-		Client oldClient = findOneClient(oldEmail); // vérifie qu'une pizza est présente
-		oldClient.setActif(false);
-		clientAvecId.setId(null);
+		Client oldClient = findOneClient(oldEmail);
+		oldClient = clientAvecId;
 		em.merge(oldClient);
-		em.persist(clientAvecId);
 	}
 
 	public void saveClient(Client clientSansId) {
@@ -38,12 +42,16 @@ public class ClientService {
 	public void deleteClient(String email) {
 		Client c = findOneClient(email);
 		if (c != null) {
-			c.setActif(false);
-			em.merge(c);
+			em.remove(c);
 		}
-
 	}
-
+	public void hardDeleteClients() {
+		List<Client>clients= em.createQuery("select c from Client c where  actif = false", Client.class).getResultList();
+				for (Client client : clients) {
+					System.out.println("client : "+client.getPrenom()+" "+ client.getNom());
+					em.remove(client);
+				}
+	}
 	public void setEm(EntityManager em2) {
 		this.em = em2;
 	}

@@ -63,11 +63,8 @@ public class PizzaService {
 
 	public void updatePizza(String code, Pizza pizza) {
 		Pizza p = findOnePizza(code); // vérifie qu'une pizza est présente
-		p.setActif(false);
-		Pizza newPizza = pizza.copy();
-		newPizza.setId(null);
+		p = pizza;
 		em.merge(p);
-		em.persist(newPizza);
 	}
 
 	public void savePizza(Pizza pizza) {

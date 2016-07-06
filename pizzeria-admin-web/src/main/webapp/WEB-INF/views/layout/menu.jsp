@@ -10,7 +10,7 @@
 			<li ${ ('Commandes' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/commandes/list">Commandes</a></li>
 			<li ${ ('Pizzas' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/pizzas/list/active">Pizzas</a></li>
 			<li ${ ('Ingredients' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/ingredients/list/active">Ingrédients</a></li>
-			<li ${ ('Clients' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/clients/list">Clients</a></li>
+			<li ${ ('Clients' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/clients/list/active">Clients</a></li>
 			<li ${ ('Livreurs' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/livreurs/list/active">Livreurs</a></li>
 			<%-- <li ${ ('Statistiques' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/statistiques">Statistiques</a></li> --%>
 			<li ${ ('Utilisateurs' == param.page) ? 'class="active"' : '' }><a href="<%=request.getContextPath()%>/utilisateurs/list">Utilisateurs</a></li>

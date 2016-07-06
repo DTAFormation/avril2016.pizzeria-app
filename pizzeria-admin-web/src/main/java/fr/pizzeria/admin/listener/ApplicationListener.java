@@ -13,6 +13,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import fr.pizzeria.admin.batch.BatchClientDel;
 import fr.pizzeria.admin.metier.ClientService;
 import fr.pizzeria.admin.metier.CommandeService;
 import fr.pizzeria.admin.metier.EMailService;
@@ -37,7 +38,7 @@ public class ApplicationListener implements ServletContextListener {
 
 	@Inject
 	EMailService eMailService;
-	
+
 	@Inject
 	ClientService clientService;
 
@@ -52,6 +53,9 @@ public class ApplicationListener implements ServletContextListener {
 
 	@Inject
 	CommandeService commandeService;
+
+	@Inject
+	BatchClientDel bcd;
 
 	private Map<String, Ingredient> ingredients = new HashMap<>();
 	private List<Livreur> livreurs = new ArrayList<>();
