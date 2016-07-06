@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.pizzeria.model.Ingredient;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.spring.web.repository.IPizzaRepository;
 
