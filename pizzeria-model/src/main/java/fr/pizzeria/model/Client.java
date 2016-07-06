@@ -108,6 +108,10 @@ public class Client {
 	public void setActif(boolean actif) {
 		this.actif = actif;
 	}
+	
+	public void toggleActif() {
+		this.setActif(!this.actif);
+	}
 
 	@PrePersist
 	@PreUpdate

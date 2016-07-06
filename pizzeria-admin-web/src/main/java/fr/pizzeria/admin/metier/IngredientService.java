@@ -42,7 +42,7 @@ public class IngredientService {
 		ing.setNom(ingredientAvecCode.getNom());
 		ing.setActif(ingredientAvecCode.getActif());
 		if(!ing.getActif()){
-			removeFromPizza(ing);
+			disablePizza(ing);
 		}
 		em.merge(ing);
 	}
@@ -63,6 +63,19 @@ public class IngredientService {
 		em.remove(ing);
 	}
 	
+	private void disablePizza(Ingredient ing){
+		List<Pizza> listPizzas = pizzaService.findAll();
+		
+		for( Pizza pizza : listPizzas){
+			List<Ingredient> listeIngredientsPizza = pizza.getIngredients();
+			if (!listeIngredientsPizza.contains(ing)){
+				continue;
+			}
+			pizza.setActif(false);
+			pizzaService.updatePizza(pizza.getCode(), pizza);
+		}
+	}
+	
 	private void removeFromPizza(Ingredient ing){
 		List<Pizza> listPizzas = pizzaService.findAll();
 		
@@ -74,7 +87,6 @@ public class IngredientService {
 			listeIngredientsPizza.remove(ing);
 			pizzaService.updatePizza(pizza.getCode(), pizza);
 		}
-		
 	}
 
 	public void setEm(EntityManager em) {
