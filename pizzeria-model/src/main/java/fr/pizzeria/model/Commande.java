@@ -137,4 +137,67 @@ public class Commande {
 
 		return sb.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((client == null) ? 0 : client.hashCode());
+		result = prime * result + ((dateCommande == null) ? 0 : dateCommande.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((livreur == null) ? 0 : livreur.hashCode());
+		result = prime * result + ((numeroCommande == null) ? 0 : numeroCommande.hashCode());
+		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
+		result = prime * result + ((statut == null) ? 0 : statut.hashCode());
+		result = prime * result + (supprime ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Commande other = (Commande) obj;
+		if (client == null) {
+			if (other.client != null)
+				return false;
+		} else if (!client.equals(other.client))
+			return false;
+		if (dateCommande == null) {
+			if (other.dateCommande != null)
+				return false;
+		} else if (!dateCommande.equals(other.dateCommande))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (livreur == null) {
+			if (other.livreur != null)
+				return false;
+		} else if (!livreur.equals(other.livreur))
+			return false;
+		if (numeroCommande == null) {
+			if (other.numeroCommande != null)
+				return false;
+		} else if (!numeroCommande.equals(other.numeroCommande))
+			return false;
+		if (pizzas == null) {
+			if (other.pizzas != null)
+				return false;
+		} else if (!pizzas.equals(other.pizzas))
+			return false;
+		if (statut != other.statut)
+			return false;
+		if (supprime != other.supprime)
+			return false;
+		return true;
+	}
+	
+	
 }

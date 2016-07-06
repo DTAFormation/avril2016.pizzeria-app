@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.pizzeria.model.Client;
+import fr.pizzeria.model.Livreur;
 
 @Stateless
 public class ClientService {
@@ -21,6 +22,11 @@ public class ClientService {
 	public Client findOneClient(String email) {
 		return em.createQuery("select c from Client c where c.email=:email and actif = true", Client.class)
 				.setParameter("email", email).getSingleResult();
+	}
+	
+	public Client findOneClientById(String id) {
+		return em.createQuery("select c from Client c where c.id=:id and c.actif = true", Client.class)
+				.setParameter("id", Integer.parseInt(id)).getSingleResult();
 	}
 
 	public void updateClient(String oldEmail, Client clientAvecId) {
@@ -43,7 +49,13 @@ public class ClientService {
 		}
 
 	}
-
+	public void hardDeleteClients() {
+		List<Client>clients= em.createQuery("select c from Client c where  actif = false", Client.class).getResultList();
+				for (Client client : clients) {
+					System.out.println("client : "+client.getPrenom()+" "+ client.getNom());
+					em.remove(client);
+				}
+	}
 	public void setEm(EntityManager em2) {
 		this.em = em2;
 	}
