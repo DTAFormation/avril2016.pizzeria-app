@@ -49,7 +49,7 @@ export class CommandeNewController {
     let commande = new Commande({
       numeroCommande: 'CO-' + new Date().getTime(),
       dateCommande: new Date().getTime(),
-      statut: 'NON_TRAITE',
+      statut: 'Non traitée',
       livreur: null,
       client: this.$localStorage.client,
       pizzas: commandesPizzas

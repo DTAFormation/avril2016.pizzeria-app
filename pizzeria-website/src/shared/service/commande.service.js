@@ -10,7 +10,9 @@ export class CommandesService {
   findAllCommandesClient( clientId ) {
     return this.$http.get(COMMANDE_RESOURCE_URL + '/' + clientId)
       .then(response => response.data)
-      .then(commandes => commandes.map(commande => new Commande(commande)));
+      .then(commandes => { 
+        return commandes.map(commande => new Commande(commande))
+      })
   }
 
   addOne (commande) {
